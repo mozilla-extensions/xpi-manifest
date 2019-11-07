@@ -1,0 +1,31 @@
+# This Source Code Form is subject to the terms of the Mozilla Public
+# License, v. 2.0. If a copy of the MPL was not distributed with this
+# file, You can obtain one at http://mozilla.org/MPL/2.0/.
+---
+loader: taskgraph.loader.transform:loader
+
+transforms:
+    - xpi_taskgraph.release_notifications:transforms
+    - taskgraph.transforms.task:transforms
+
+job-defaults:
+    name: release-notify-started
+    description: Sends email to the notify list telling release was started.
+    run-on-tasks-for: ["action"]
+    worker-type: succeed
+    worker:
+        implementation: succeed
+
+jobs:
+    build:
+        attributes:
+            shipping-phase: build
+        notifications:
+            subject: "{config[params][xpi_name]} release build starting"
+            message: "{config[params][xpi_name]} release build is starting on revision {config[params][xpi_revision]}"
+    promote:
+        attributes:
+            shipping-phase: promote
+        notifications:
+            subject: "{config[params][xpi_name]} release promotion starting"
+            message: "{config[params][xpi_name]} release promotion is starting on revision {config[params][xpi_revision]}"

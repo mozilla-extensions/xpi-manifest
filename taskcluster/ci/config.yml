@@ -1,0 +1,113 @@
+---
+trust-domain: xpi
+treeherder:
+    group-names:
+        'I': 'Docker Image Builds'
+        'B': 'Builds'
+        'T': 'Tests'
+        'Ds': 'Development Signing'
+        'Rs': 'Release Signing'
+
+task-priority: lowest
+
+taskgraph:
+    register: xpi_taskgraph:register
+    repositories:
+        # This is the manifest repo
+        # string: for a source repo, this should match the `repo-prefix`
+        #         in `xpi-manifest.yml`
+        xpi:
+            # string: the name of the repo, for humans
+            name: "XPI manifest"
+            # regex: to match the base name of the repo
+            project-regex: xpi-manifest
+            # string: the repo url. Use `git@github.com:org/repo` for private
+            #         repositories.
+            default-repository: https://github.com/mozilla-extensions/xpi-manifest
+            # string: which branch is primary; should be `master`
+            default-ref: master
+            # enum: hg or git; should be `git`
+            type: git
+        private:
+            name: "Private repo test"
+            project-regex: test-xpi-private$
+            default-repository: git@github.com:escapewindow/test-xpi-private
+            default-ref: master
+            type: git
+        template:
+            name: "template repo test"
+            project-regex: test-xpi-public$
+            default-repository: https://github.com/escapewindow/test-xpi-public
+            default-ref: master
+            type: git
+    cached-task-prefix: xpi.xpi-manifest
+
+workers:
+    aliases:
+        b-linux:
+            provisioner: xpi-{level}
+            implementation: docker-worker
+            os: linux
+            worker-type: 'b-linux'
+        images:
+            provisioner: xpi-{level}
+            implementation: docker-worker
+            os: linux
+            worker-type: 'images'
+        dep-signing:
+            provisioner: scriptworker-prov-v1
+            implementation: scriptworker-signing
+            os: scriptworker
+            worker-type: xpi-t-signing
+        signing:
+            provisioner: scriptworker-prov-v1
+            implementation: scriptworker-signing
+            os: scriptworker
+            worker-type:
+                by-level:
+                    "3": xpi-3-signing
+                    default: xpi-t-signing
+
+github_clone_secret: project/xpi/xpi-github-clone-ssh
+
+scriptworker:
+    scope-prefix: project:xpi:releng
+    signing-format:
+        by-xpi-type:
+            standard:
+                by-kind:
+                    dep-signing: extension_rsa_dep
+                    release-signing:
+                        by-level:
+                            "3": extension_rsa
+                            default: extension_rsa_dep
+            system:
+                by-kind:
+                    dep-signing: systemaddon_rsa_dep
+                    release-signing:
+                        by-level:
+                            "3": systemaddon_rsa_rel
+                            default: systemaddon_rsa_dep
+
+release-promotion:
+    flavors:
+        build:
+            target-tasks-method: build_xpi
+            rebuild-kinds:
+                - build
+                - test
+                - dep-signing
+        promote:
+            target-tasks-method: promote_xpi
+    notifications:
+        # configure privileged webextension email addresses for
+        # notifications
+        standard:
+            by-phase:
+                build: [aki+priv-webext-build@mozilla.com]
+                promote: [aki+priv-webext-promote@mozilla.com]
+        # configure system addons email addresses for notifications
+        system:
+            by-phase:
+                build: [aki+system-addons-build@mozilla.com]
+                promote: [aki+system-addons-promote@mozilla.com]

@@ -1,0 +1,41 @@
+---
+xpis:
+    # string: short-xpi-name-for-machines. Required. This must be unique.
+  - name: template-example
+    # string: Longer description of the xpi, for humans. Optional.
+    description: Test template repo with on-push/on-pr automation
+    # Alphanumeric string that corresponds to a key in
+    # taskcluster.ci.config.taskgraph.repositories . Required.
+    repo-prefix: template
+    # boolean: enable releases of this xpi or disable them. Optional.
+    #          Defaults to `true`.
+    active: true
+    # boolean: whether this is a private Github repository. Optional.
+    #          Defaults to `false`.
+    private-repo: false
+    # string: path, relative to the root of the repository, where
+    #            the xpi package.json lives. Optional. Defaults to the
+    #            root of the repository.
+    directory: one
+    # list of strings: A list of paths of xpis generated. Required.
+    artifacts:
+      - dist/multipreffer-2.0.zip
+    # enum: `standard` means privileged webextension; `system` means
+    #       system addon. Required.
+    addon-type: standard
+    # enum: `npm` for `npm install` or `yarn` for
+    #       `yarn install --frozen-lockfile`. Optional. Defaults to `yarn`.
+    install-type: npm
+    # string: the symbol for treeherder, if/when we use treeherder. Optional.
+    #         Defaults to the `name` value.
+    treeherder-symbol: template-example
+  - name: private-multipreffer
+    description: Private repo multipreffer
+    repo-prefix: private
+    active: true
+    private-repo: true
+    artifacts:
+      - dist/multipreffer-2.0.zip
+    addon-type: standard
+    install-type: npm
+    treeherder-symbol: private-helper

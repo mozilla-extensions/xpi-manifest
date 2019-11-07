@@ -1,0 +1,29 @@
+# This Source Code Form is subject to the terms of the Mozilla Public
+# License, v. 2.0. If a copy of the MPL was not distributed with this
+# file, You can obtain one at http://mozilla.org/MPL/2.0/.
+---
+loader: xpi_taskgraph.single_dep:loader
+
+transforms:
+    - xpi_taskgraph.release_notifications:transforms
+    - taskgraph.transforms.task:transforms
+
+kind-dependencies:
+    - dep-signing
+    - release-signing
+
+job-template:
+    name: release-notify-completed
+    description: Sends email to the notify list telling release was completed.
+    run-on-tasks-for: ["action"]
+    worker-type: succeed
+    worker:
+        implementation: succeed
+    notifications:
+        by-phase:
+            build:
+                subject: "{config[params][xpi_name]} release build completed"
+                message: "{config[params][xpi_name]} release build is completed on revision {config[params][xpi_revision]}"
+            promote:
+                subject: "{config[params][xpi_name]} release promotion completed"
+                message: "{config[params][xpi_name]} release promotion is completed on revision {config[params][xpi_revision]}"
