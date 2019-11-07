@@ -27,9 +27,6 @@ RUN mkdir /builds && \
 COPY build.py /usr/local/bin/build.py
 COPY test.py /usr/local/bin/test.py
 
-RUN apt-get update && apt-get install -y --force-yes --no-install-recommends \
-    mercurial
-
 ENV SHELL=/bin/bash \
     HOME=/builds/worker \
     PATH=/builds/worker/.local/bin:$PATH
