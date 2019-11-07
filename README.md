@@ -1,0 +1,1 @@
+# XPI manifest repo
