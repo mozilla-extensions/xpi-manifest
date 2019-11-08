@@ -27,7 +27,7 @@ def add_signing_indexes(config, task, variant):
     )
     subs["trust-domain"] = config.graph_config["trust-domain"]
     subs["variant"] = variant
-    xpi_name =  task.get("payload", {}).get("env", {}).get("XPI_NAME")
+    xpi_name =  task.get("extra", {}).get("xpi-name")
     if xpi_name:
         subs["name"] = xpi_name
         for tpl in SIGNING_ROUTE_TEMPLATES:
