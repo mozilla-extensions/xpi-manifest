@@ -27,16 +27,12 @@ def add_signing_indexes(config, task, variant):
     )
     subs["trust-domain"] = config.graph_config["trust-domain"]
     subs["variant"] = variant
-    subs["name"] = task.get("payload", {}).get("env", {}).get("XPI_NAME", "unknown")
-
-    for tpl in SIGNING_ROUTE_TEMPLATES:
-        routes.append(tpl.format(**subs))
+    xpi_name =  task.get("payload", {}).get("env", {}).get("XPI_NAME")
+    if xpi_name:
+        subs["name"] = xpi_name
+        for tpl in SIGNING_ROUTE_TEMPLATES:
+            routes.append(tpl.format(**subs))
     return task
-
-
-@index_builder("dep-signing")
-def add_dep_signing_indexes(config, task):
-    return add_signing_indexes(config, task, "dep-signing")
 
 
 @index_builder("release-signing")
