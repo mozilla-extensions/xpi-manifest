@@ -35,6 +35,11 @@ def add_signing_indexes(config, task, variant):
     return task
 
 
+@index_builder("dep-signing")
+def add_dep_signing_indexes(config, task):
+    return add_signing_indexes(config, task, "dep-signing")
+
+
 @index_builder("release-signing")
 def add_release_signing_indexes(config, task):
     return add_signing_indexes(config, task, "release-signing")
