@@ -9,7 +9,7 @@ import time
 from taskgraph.transforms.task import index_builder
 
 SIGNING_ROUTE_TEMPLATES = [
-    "index.{trust-domain}.v2.{project}.{name}.{variant}.{build_date}.revision.{head_rev}",
+    "index.{trust-domain}.v2.{project}.{name}.{variant}.revision.{revision}",
     "index.{trust-domain}.v2.{project}.{name}.{variant}.{build_date}.latest",
     "index.{trust-domain}.v2.{project}.{name}.{variant}.latest",
 ]
@@ -26,6 +26,7 @@ def add_signing_indexes(config, task, variant):
         "%Y.%m.%d", time.gmtime(config.params["build_date"])
     )
     subs["trust-domain"] = config.graph_config["trust-domain"]
+    subs["revision"] = config.params.get("xpi_revision") or "unknown"
     subs["variant"] = variant
     xpi_name =  task.get("extra", {}).get("xpi-name")
     if xpi_name:
