@@ -41,7 +41,7 @@ def tasks_from_manifest(config, jobs):
                 run['cwd'] = '{checkout}/%s' % xpi_config['directory']
             if xpi_revision:
                 checkout_config['head_rev'] = xpi_revision
-            task["label"] = "build-{}".format(xpi_config["name"])
+            task["label"] = "{}-{}".format(config.kind, xpi_config["name"])
             task["treeherder"]["symbol"] = "B({})".format(
                 xpi_config.get("treeherder-symbol", xpi_config["name"])
             )

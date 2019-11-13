@@ -22,4 +22,4 @@ job-template:
     worker:
         signing-type: dep-signing
         max-run-time: 3600
-    run-on-tasks-for: ['github-push', 'action']
+    run-on-tasks-for: ['action']
