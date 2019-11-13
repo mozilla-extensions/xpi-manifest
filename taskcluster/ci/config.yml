@@ -1,12 +1,5 @@
 ---
 trust-domain: xpi
-treeherder:
-    group-names:
-        'I': 'Docker Image Builds'
-        'B': 'Builds'
-        'T': 'Tests'
-        'Ds': 'Development Signing'
-        'Rs': 'Release Signing'
 
 task-priority: lowest
 

@@ -26,9 +26,6 @@ xpis:
     # enum: `npm` for `npm install` or `yarn` for
     #       `yarn install --frozen-lockfile`. Optional. Defaults to `yarn`.
     install-type: npm
-    # string: the symbol for treeherder, if/when we use treeherder. Optional.
-    #         Defaults to the `name` value.
-    treeherder-symbol: template-example
   - name: private-multipreffer
     description: Private repo multipreffer
     repo-prefix: private
@@ -38,4 +35,3 @@ xpis:
       - dist/multipreffer-2.0.zip
     addon-type: standard
     install-type: npm
-    treeherder-symbol: private-helper

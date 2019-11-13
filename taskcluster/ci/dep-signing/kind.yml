@@ -16,8 +16,6 @@ job-template:
     description: Development-sign XPI
     index:
         type: dep-signing
-    treeherder:
-        groupSymbol: Ds
     worker-type: dep-signing
     worker:
         signing-type: dep-signing

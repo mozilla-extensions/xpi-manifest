@@ -14,11 +14,6 @@ transforms:
 
 job-template:
     description: Test XPI
-    treeherder:
-        kind: test
-        symbol: T
-        tier: 2
-        platform: linux64/opt
     worker-type: b-linux
     worker:
         docker-image: {in-tree: node-latest}

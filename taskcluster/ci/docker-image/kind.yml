@@ -11,10 +11,7 @@ transforms:
     - taskgraph.transforms.task:transforms
 
 jobs:
-    base:
-        symbol: I(base)
     node-latest:
         definition: node
         args:
             NODE_VERSION: "latest"
-        symbol: I(node)

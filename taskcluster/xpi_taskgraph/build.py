@@ -42,9 +42,6 @@ def tasks_from_manifest(config, jobs):
             if xpi_revision:
                 checkout_config['head_rev'] = xpi_revision
             task["label"] = "{}-{}".format(config.kind, xpi_config["name"])
-            task["treeherder"]["symbol"] = "B({})".format(
-                xpi_config.get("treeherder-symbol", xpi_config["name"])
-            )
             env["XPI_NAME"] = xpi_config["name"]
             task.setdefault("extra", {})["xpi-name"] = xpi_config["name"]
             env["XPI_TYPE"] = xpi_config["addon-type"]

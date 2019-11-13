@@ -19,8 +19,6 @@ job-template:
     attributes:
         shipping-phase: promote
     run-on-tasks-for: [action]
-    treeherder:
-        groupSymbol: Rs
     worker-type:
         by-level:
             '3': signing

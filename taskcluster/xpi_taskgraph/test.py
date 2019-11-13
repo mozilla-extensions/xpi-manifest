@@ -46,9 +46,6 @@ def test_tasks_from_manifest(config, tasks):
         if xpi_revision:
             checkout_config['head_rev'] = xpi_revision
         task["label"] = "test-{}".format(xpi_name)
-        task["treeherder"]["symbol"] = "T({})".format(
-            xpi_config.get("treeherder-symbol", xpi_config["name"])
-        )
         if xpi_config.get("private-repo"):
             checkout_config['ssh_secret_name'] = config.graph_config["github_clone_secret"]
             artifact_prefix = "xpi/build"

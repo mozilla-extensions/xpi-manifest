@@ -134,10 +134,6 @@ tasks:
                       routes:
                           $flatten:
                               - checks
-                              - $if: 'tasks_for != "github-pull-request"'
-                                then:
-                                    - "tc-treeherder.v2.${project}.${head_sha}"
-                                else: []
                               - $if: 'tasks_for == "github-push"'
                                 then:
                                     - "index.${trustDomain}.v2.${project}.revision.${head_sha}.taskgraph.decision"
@@ -251,22 +247,6 @@ tasks:
 
                       extra:
                           $merge:
-                              - treeherder:
-                                    $merge:
-                                        - machine:
-                                              platform: gecko-decision
-                                        - $if: 'tasks_for in ["github-push", "github-pull-request"]'
-                                          then:
-                                              symbol: D
-                                          else:
-                                              $if: 'tasks_for == "action"'
-                                              then:
-                                                  groupName: 'action-callback'
-                                                  groupSymbol: AC
-                                                  symbol: "${action.symbol}"
-                                              else:
-                                                  groupSymbol: cron
-                                                  symbol: "${cron.job_symbol}"
                               - $if: 'tasks_for == "action"'
                                 then:
                                     parent: '${action.taskGroupId}'

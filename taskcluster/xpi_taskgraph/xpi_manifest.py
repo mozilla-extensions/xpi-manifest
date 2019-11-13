@@ -38,7 +38,6 @@ base_schema = Schema(
                 Required("artifacts"): [basestring],
                 Required("addon-type"): Any("system", "standard"),
                 Optional("install-type"): Any("npm", "yarn"),
-                Optional("treeherder-symbol"): basestring,
             }
         ]
     }
