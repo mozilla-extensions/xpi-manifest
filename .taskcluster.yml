@@ -7,7 +7,7 @@ tasks:
     - $let:
           taskgraph:
               branch: taskgraph
-              revision: 8724fdf41562f6eea82d1b905072d4a7c1f5ebbf
+              revision: d302e95cc988706ba746bfecbf1dae31090d212f
           trustDomain: xpi
       in:
           $if: 'tasks_for in ["github-pull-request", "github-push", "action", "cron"]'
