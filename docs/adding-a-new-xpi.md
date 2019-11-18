@@ -2,7 +2,7 @@
 
 ## Creating the repo
 
-During this testing phase, the test template source repo is https://github.com/escapewindow/test-xpi-public . At some point we'll move this to a permanent location and set this up as a github template repo.
+During this testing phase, the test template source repo is https://github.com/mozilla-extensions/xpi-template . At some point we'll move this to a permanent location and set this up as a github template repo.
 
 The files we need are:
 
@@ -24,7 +24,7 @@ Ideally we can add some sort of regex or wildcard for all future repos underneat
 
 ### Private repos
 
-To enable cloning private repos, uncomment the `github_clone_secret` line in the source repo's [taskcluster/ci/config.yml](https://github.com/escapewindow/test-xpi-public/blob/735cf30/taskcluster/ci/config.yml#L24-L25). This will move the artifact generated into `xpi/build/...` rather than `public/build/...`, and you will need Taskcluster scopes to be able to download the build. The logs will remain public for anyone viewing the task, however.
+To enable cloning private repos, uncomment the `github_clone_secret` line in the source repo's [taskcluster/ci/config.yml](https://github.com/mozilla-extensions/xpi-template/blob/f31e31ca2b2baaf9a60cf684c2bd463ce6c97473/taskcluster/ci/config.yml#L20-L21). This will move the artifact generated into `xpi/build/...` rather than `public/build/...`, and you will need Taskcluster scopes to be able to download the build. The logs will remain public for anyone viewing the task, however.
 
 ## Using taskcluster CI automation
 
