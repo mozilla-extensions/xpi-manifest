@@ -2,7 +2,7 @@
 
 ## Creating the repo
 
-During this testing phase, the test template source repo is https://github.com/mozilla-extensions/xpi-template . At some point we'll move this to a permanent location and set this up as a github template repo.
+First, create a repository under the `mozilla-extensions` github organization. The template source repo is https://github.com/mozilla-extensions/xpi-template .
 
 The files we need are:
 
