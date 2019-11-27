@@ -14,14 +14,6 @@ The files we need are:
 
 though other files may be helpful as well, e.g. `README.md`, `.gitignore`, `eslintrc.js`.
 
-## Enabling taskcluster CI automation
-
-We currently require a patch like [this](https://hg.mozilla.org/ci/ci-configuration/rev/b3ddb3eca07cd6864bc5fe8dcc46980c5420662a) to enable taskcluster CI automation for on-push and pull request in this repo.
-
-We use [phabricator](https://moz-conduit.readthedocs.io/en/latest/phabricator-user.html#) to submit patches for review.
-
-Ideally we can add some sort of regex or wildcard for all future repos underneath the new github organization, and avoid having to write a ci-configuration patch per new repo.
-
 ### Private repos
 
 To enable cloning private repos, uncomment the `github_clone_secret` line in the source repo's [taskcluster/ci/config.yml](https://github.com/mozilla-extensions/xpi-template/blob/f31e31ca2b2baaf9a60cf684c2bd463ce6c97473/taskcluster/ci/config.yml#L20-L21). This will move the artifact generated into `xpi/build/...` rather than `public/build/...`, and you will need Taskcluster scopes to be able to download the build. The logs will remain public for anyone viewing the task, however.
