@@ -2,7 +2,7 @@
 
 ## Creating the repo
 
-During this testing phase, the test template source repo is https://github.com/mozilla-extensions/xpi-template . At some point we'll move this to a permanent location and set this up as a github template repo.
+First, create a repository under the `mozilla-extensions` github organization. The template source repo is https://github.com/mozilla-extensions/xpi-template .
 
 The files we need are:
 
@@ -13,14 +13,6 @@ The files we need are:
     taskcluster/*
 
 though other files may be helpful as well, e.g. `README.md`, `.gitignore`, `eslintrc.js`.
-
-## Enabling taskcluster CI automation
-
-We currently require a patch like [this](https://hg.mozilla.org/ci/ci-configuration/rev/b3ddb3eca07cd6864bc5fe8dcc46980c5420662a) to enable taskcluster CI automation for on-push and pull request in this repo.
-
-We use [phabricator](https://moz-conduit.readthedocs.io/en/latest/phabricator-user.html#) to submit patches for review.
-
-Ideally we can add some sort of regex or wildcard for all future repos underneath the new github organization, and avoid having to write a ci-configuration patch per new repo.
 
 ### Private repos
 
