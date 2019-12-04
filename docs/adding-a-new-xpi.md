@@ -14,9 +14,15 @@ The files we need are:
 
 though other files may be helpful as well, e.g. `README.md`, `.gitignore`, `eslintrc.js`.
 
+### Branch protection
+
+We will use the `master` branch as the main branch for releasing XPIs. It's important to set branch protection for the `master` branch, and get code review for the source. Foxsec will be auditing the repositories in the `mozilla-extensions` organization for compliance.
+
 ### Private repos
 
 To enable cloning private repos, uncomment the `github_clone_secret` line in the source repo's [taskcluster/ci/config.yml](https://github.com/mozilla-extensions/xpi-template/blob/f31e31ca2b2baaf9a60cf684c2bd463ce6c97473/taskcluster/ci/config.yml#L20-L21). This will move the artifact generated into `xpi/build/...` rather than `public/build/...`, and you will need Taskcluster scopes to be able to download the build. The logs will remain public for anyone viewing the task, however.
+
+Please also invite `moz-releng-automation` to be a read-only collaborator in the repo, so ship-it can access the revision information.
 
 ## Using taskcluster CI automation
 
