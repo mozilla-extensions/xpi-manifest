@@ -48,12 +48,12 @@ workers:
             os: linux
             worker-type: 'images'
         dep-signing:
-            provisioner: scriptworker-prov-v1
+            provisioner: scriptworker-k8s
             implementation: scriptworker-signing
             os: scriptworker
             worker-type: xpi-t-signing
         signing:
-            provisioner: scriptworker-prov-v1
+            provisioner: scriptworker-k8s
             implementation: scriptworker-signing
             os: scriptworker
             worker-type:
@@ -67,20 +67,8 @@ scriptworker:
     scope-prefix: project:xpi:releng
     signing-format:
         by-xpi-type:
-            standard:
-                by-kind:
-                    dep-signing: extension_rsa_dep
-                    release-signing:
-                        by-level:
-                            "3": extension_rsa
-                            default: extension_rsa_dep
-            system:
-                by-kind:
-                    dep-signing: systemaddon_rsa_dep
-                    release-signing:
-                        by-level:
-                            "3": systemaddon_rsa_rel
-                            default: systemaddon_rsa_dep
+            standard: privileged_webextension
+            system: system_addon
 
 release-promotion:
     flavors:
