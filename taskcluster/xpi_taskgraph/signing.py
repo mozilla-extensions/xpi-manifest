@@ -16,11 +16,8 @@ from taskgraph.util.keyed_by import evaluate_keyed_by
 transforms = TransformSequence()
 
 KNOWN_FORMATS = (
-    "extension_rsa",
-    "extension_rsa_dep",
-    "extension_rsa_rel",
-    "systemaddon_rsa_dep",
-    "systemaddon_rsa_rel",
+    "privileged_webextension",
+    "system_addon",
 )
 
 
