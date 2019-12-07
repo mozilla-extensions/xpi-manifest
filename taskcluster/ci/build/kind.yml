@@ -23,6 +23,7 @@ jobs:
     release:
         attributes:
             shipping-phase: build
+            code-review: true
         run:
             using: run-task
             cwd: '{checkout}'
