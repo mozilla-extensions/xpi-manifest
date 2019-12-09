@@ -33,6 +33,12 @@ taskgraph:
             default-repository: https://github.com/escapewindow/test-xpi-public
             default-ref: master
             type: git
+        normandydevtools:
+            name: "Normandy Devtools"
+            project-regex: normandy-devtools$
+            default-repository: https://github.com/mozilla-extensions/normandy-devtools
+            default-ref: master
+            type: git
     cached-task-prefix: xpi
 
 workers:

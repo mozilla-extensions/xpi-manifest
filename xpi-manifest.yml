@@ -35,3 +35,12 @@ xpis:
       - dist/multipreffer-2.0.zip
     addon-type: standard
     install-type: npm
+  - name: normandy-devtools
+    description: Normandy Devtools
+    repo-prefix: normandydevtools
+    active: true
+    private-repo: false
+    artifacts:
+      - web-ext-artifacts/normandy-devtools-0.8.0.zip
+    addon-type: standard
+    install-type: yarn
