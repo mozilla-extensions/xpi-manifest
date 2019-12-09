@@ -21,16 +21,16 @@ taskgraph:
             default-ref: master
             # enum: hg or git; should be `git`
             type: git
-        private:
-            name: "Private repo test"
-            project-regex: test-xpi-private$
-            default-repository: git@github.com:escapewindow/test-xpi-private
-            default-ref: master
-            type: git
         template:
             name: "template repo test"
             project-regex: test-xpi-public$
             default-repository: https://github.com/escapewindow/test-xpi-public
+            default-ref: master
+            type: git
+        normandydevtools:
+            name: "Normandy Devtools"
+            project-regex: normandy-devtools$
+            default-repository: https://github.com/mozilla-extensions/normandy-devtools
             default-ref: master
             type: git
     cached-task-prefix: xpi
