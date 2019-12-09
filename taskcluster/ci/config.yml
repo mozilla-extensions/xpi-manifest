@@ -21,12 +21,6 @@ taskgraph:
             default-ref: master
             # enum: hg or git; should be `git`
             type: git
-        private:
-            name: "Private repo test"
-            project-regex: test-xpi-private$
-            default-repository: git@github.com:escapewindow/test-xpi-private
-            default-ref: master
-            type: git
         template:
             name: "template repo test"
             project-regex: test-xpi-public$

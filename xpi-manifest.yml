@@ -26,15 +26,6 @@ xpis:
     # enum: `npm` for `npm install` or `yarn` for
     #       `yarn install --frozen-lockfile`. Optional. Defaults to `yarn`.
     install-type: npm
-  - name: private-multipreffer
-    description: Private repo multipreffer
-    repo-prefix: private
-    active: true
-    private-repo: true
-    artifacts:
-      - dist/multipreffer-2.0.zip
-    addon-type: standard
-    install-type: npm
   - name: normandy-devtools
     description: Normandy Devtools
     repo-prefix: normandydevtools
