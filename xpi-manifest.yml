@@ -20,9 +20,9 @@ xpis:
     # list of strings: A list of paths of xpis generated. Required.
     artifacts:
       - dist/multipreffer-2.0.zip
-    # enum: `standard` means privileged webextension; `system` means
+    # enum: `privileged` means privileged webextension; `system` means
     #       system addon. Required.
-    addon-type: standard
+    addon-type: privileged
     # enum: `npm` for `npm install` or `yarn` for
     #       `yarn install --frozen-lockfile`. Optional. Defaults to `yarn`.
     install-type: npm
@@ -33,5 +33,5 @@ xpis:
     private-repo: false
     artifacts:
       - web-ext-artifacts/normandy-devtools-0.8.0.zip
-    addon-type: standard
+    addon-type: privileged
     install-type: yarn

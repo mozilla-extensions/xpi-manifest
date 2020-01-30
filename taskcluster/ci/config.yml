@@ -67,7 +67,7 @@ scriptworker:
     scope-prefix: project:xpi:releng
     signing-format:
         by-xpi-type:
-            standard: privileged_webextension
+            privileged: privileged_webextension
             system: system_addon
 
 release-promotion:
@@ -83,7 +83,7 @@ release-promotion:
     notifications:
         # configure privileged webextension email addresses for
         # notifications
-        standard:
+        privileged:
             by-phase:
                 build: [aki+priv-webext-build@mozilla.com]
                 promote: [aki+priv-webext-promote@mozilla.com]
