@@ -32,6 +32,6 @@ xpis:
     active: true
     private-repo: false
     artifacts:
-      - web-ext-artifacts/normandy-devtools-1.0.0.zip
+      - web-ext-artifacts/normandy-devtools.zip
     addon-type: privileged
     install-type: yarn
