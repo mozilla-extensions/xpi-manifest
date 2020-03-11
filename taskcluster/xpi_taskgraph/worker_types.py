@@ -54,35 +54,14 @@ def build_scriptworker_signing_payload(config, task, task_def):
 
 
 @payload_builder(
-    "scriptworker-pushapk",
+    "shipit-shipped",
     schema={
-        Required("upstream-artifacts"): [
-            {
-                Required("taskId"): taskref_or_string,
-                Required("taskType"): text_type,
-                Required("paths"): [text_type],
-            }
-        ],
-        Required("channel"): text_type,
-        Required("commit"): bool,
-        Required("product"): text_type,
-        Required("dep"): bool,
+        Required("release-name"): text_type,
     },
 )
 def build_push_apk_payload(config, task, task_def):
     worker = task["worker"]
 
-    task_def["tags"]["worker-implementation"] = "scriptworker"
-
     task_def["payload"] = {
-        "commit": worker["commit"],
-        "upstreamArtifacts": worker["upstream-artifacts"],
-        "channel": worker["channel"],
+        "release_name": worker['release-name'],
     }
-
-    scope_prefix = config.graph_config["scriptworker"]["scope-prefix"]
-    task_def["scopes"].append(
-        "{}:googleplay:product:{}{}".format(
-            scope_prefix, worker["product"], ":dep" if worker["dep"] else ""
-        )
-    )

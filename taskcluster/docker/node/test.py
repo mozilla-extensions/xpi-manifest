@@ -65,9 +65,15 @@ def main():
     else:
         run_command(["npm", "install"])
 
-    commands = ["test"]
+    commands = []
     if len(sys.argv) != 1:
         commands = sys.argv[1:]
+    else:
+        package_info = get_package_info()
+        if "test" in package_info.get("scripts", {}):
+            commands = ["test"]
+        else:
+            print("No `test` target in package.json; noop")
 
     for command in commands:
         run_command(["yarn", command])

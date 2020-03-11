@@ -60,6 +60,14 @@ workers:
                 by-level:
                     "3": xpi-3-signing
                     default: xpi-t-signing
+        shipit:
+            provisioner: scriptworker-k8s
+            implementation: scriptworker-shipit
+            os: scriptworker
+            worker-type:
+                by-level:
+                    "3": xpi-3-shipit
+                    default: xpi-1-shipit
 
 github_clone_secret: project/xpi/xpi-github-clone-ssh
 

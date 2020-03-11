@@ -1,0 +1,30 @@
+# This Source Code Form is subject to the terms of the Mozilla Public
+# License, v. 2.0. If a copy of the MPL was not distributed with this
+# file, You can obtain one at http://mozilla.org/MPL/2.0/.
+---
+loader: xpi_taskgraph.single_dep:loader
+
+transforms:
+    - xpi_taskgraph.release_mark_as_shipped:transforms
+    - taskgraph.transforms.task:transforms
+
+kind-dependencies:
+    - release-signing
+
+job-template:
+    name: release-mark-as-shipped
+    description: mark release as shipped in Ship-It
+    run-on-tasks-for: ["action"]
+    worker-type: shipit
+    worker:
+        implementation: shipit-shipped
+    scopes:
+        by-level:
+            "3":
+                - project:xpi:releng:ship-it:server:production
+                - project:xpi:releng:ship-it:action:mark-as-shipped
+            default:
+                - project:xpi:releng:ship-it:server:staging
+                - project:xpi:releng:ship-it:action:mark-as-shipped
+    attributes:
+        shipping-phase: promote
