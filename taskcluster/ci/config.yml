@@ -33,6 +33,12 @@ taskgraph:
             default-repository: https://github.com/mozilla-extensions/normandy-devtools
             default-ref: master
             type: git
+        remotesettingsdevtools:
+            name: "Remote Settings Devtools"
+            project-regex: remote-settings-devtools$
+            default-repository: https://github.com/mozilla-extensions/remote-settings-devtools
+            default-ref: master
+            type: git
     cached-task-prefix: xpi
 
 workers:
