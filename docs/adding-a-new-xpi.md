@@ -14,6 +14,19 @@ The files we need are:
 
 though other files may be helpful as well, e.g. `README.md`, `.gitignore`, `eslintrc.js`.
 
+### Existing repos
+
+If your repo is already existing, let's move it to the `mozilla-extensions` Github organization (`Settings -> Options -> Transfer Ownership`).
+Then copy over the above files into your repo. You can either do this by cloning the `xpi-template` repo and copying the files over and `git add`ing them, or by adding a new git remote and merging the two heads:
+
+```
+# in your repo clone
+git remote add template https://github.com/mozilla-extensions/xpi-template
+git fetch template
+git merge --allow-unrelated-histories template/master
+# fix conflicts, commit result
+```
+
 ### Branch protection
 
 We will use the `master` branch as the main branch for releasing XPIs. It's important to set branch protection for the `master` branch, and get code review for the source. Foxsec will be auditing the repositories in the `mozilla-extensions` organization for compliance.
