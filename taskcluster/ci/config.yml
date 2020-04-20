@@ -39,6 +39,12 @@ taskgraph:
             default-repository: https://github.com/mozilla-extensions/remote-settings-devtools
             default-ref: master
             type: git
+        searchenginedevtools:
+            name: "Search Engine Devtools"
+            project-regex: searchengine-devtools$
+            default-repository: https://github.com/mozilla-extensions/searchengine-devtools
+            default-ref: master
+            type: git
     cached-task-prefix: xpi
 
 workers:
