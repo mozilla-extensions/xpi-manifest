@@ -16,7 +16,7 @@ In the future, we could add additional tasks here, or additional phases, as need
 
 ## Configuring email notifications
 
-These are configured per addon-type (privileged webextension vs system addon) and per phase (build or promote), in the xpi manifest repo's [`taskcluster/ci/config.yml`](../taskcluster/ci/config.yml), under `release-promotion.notifications`.
+These are configured per addon-type (privileged webextension vs system addon) and per phase (build or promote), in the `xpi-manifest` repository's [`taskcluster/ci/config.yml`](../taskcluster/ci/config.yml), under `release-promotion.notifications`.
 
 You may want to add a +comment (e.g. `email+system-addon-release-builds@m.c` for easier filtering.
 
@@ -29,7 +29,7 @@ When we want a release build:
   - Connect to VPN
   - Connect to ship-it
   - Choose XPI out of the projects to build
-  - Choose a xpi manifest revision. You probably want the latest.
+  - Choose a `xpi-manifest` repository revision. You probably want the latest.
   - Choose a xpi to build. Currently private-repo xpis aren't available, but we'll add support for them.
   - Choose a source repo revision. You probably want the latest.
   - Click `Start tracking it`.
