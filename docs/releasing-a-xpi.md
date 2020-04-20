@@ -32,10 +32,11 @@ When we want a release build:
   - Choose a xpi manifest revision. You probably want the latest.
   - Choose a xpi to build. Currently private-repo xpis aren't available, but we'll add support for them.
   - Choose a source repo revision. You probably want the latest.
+  - Click `Start tracking it`.
   - Click `Doo Eet`. This will create the release, but not schedule it.
   - Click the `Build` on the progress bar for the appropriate row (this will be labeled with the XPI name, version, build number).
   - Once the build graph is scheduled, the `Build` will be a link to the build graph.
-  - Once the build graph is finished, the first half of the progress bar will be green.
+  - Once the build graph is created, the first half of the progress bar will be green, monitor the build graph for all the jobs to go green, or check email if you're getting notifications.
   - QA can then download the build from the build task (unsigned) or the dep-signing task (signed with the developer key).
 
 At this point QA, developers, or project managers may request changes.
@@ -49,3 +50,4 @@ When we're ready to sign off on shipping this xpi:
 
   - Click on the `Promote` portion of the progress bar, and sign off.
   - When we have the quorum of signoffs, we'll schedule the promote graph, and we'll get a release-signed xpi.
+  - Again, the promote button becomes a link to the build graph, wait until they are all finished. The signed xpi can be found as an artifact on the `release-signing-...` task.
