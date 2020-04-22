@@ -94,11 +94,11 @@ Once Taskcluster CI automation is enabled, we'll generate a decision task and ta
 
 ## Enabling releases
 
-To enable releases for your new repo, go to the xpi manifest repo (this one).
+To enable releases for your new repo, go to the `xpi-manifest` repository (this one).
 
-The source repository must be added to `taskgraph.repositories` in the xpi manifest repo's [taskcluster/ci/config.yml](../taskcluster/ci/config.yml). If this is the first xpi in your source repo, you need to add it.
+The source repository must be added to `taskgraph.repositories` in the `xpi-manifest` repository's [taskcluster/ci/config.yml](../taskcluster/ci/config.yml). If this is the first xpi in your source repo, you need to add it.
 
-Then, the xpi needs to be added to the [xpi manifest](../xpi-manifest.yml). The `repo-prefix` will refer to the repository key name under `taskgraph.repositories` in the xpi manifest repo's `taskcluster/ci/config.yml`.
+Then, the xpi needs to be added to the [xpi manifest](../xpi-manifest.yml). The `repo-prefix` will refer to the repository key name under `taskgraph.repositories` in the `xpi-manifest` repository's `taskcluster/ci/config.yml`.
 
 The commit should run sanity checks on pull request and push; make sure the decision task goes green.
 
