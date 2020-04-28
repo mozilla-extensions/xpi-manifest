@@ -13,7 +13,7 @@ job-defaults:
     description: Build XPI from source code.
     worker-type: b-linux
     worker:
-        docker-image: {in-tree: node-latest}
+        docker-image: {in-tree: node-14}
         max-run-time: 7200
         chain-of-trust: true
     run:

@@ -16,7 +16,7 @@ job-template:
     description: Test XPI
     worker-type: b-linux
     worker:
-        docker-image: {in-tree: node-latest}
+        docker-image: {in-tree: node-14}
         max-run-time: 7200
     run:
         using: run-task
