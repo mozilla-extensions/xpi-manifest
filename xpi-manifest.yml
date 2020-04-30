@@ -22,7 +22,7 @@ xpis:
     branch: master
     # list of strings: A list of paths of xpis generated. Required.
     artifacts:
-      - dist/multipreffer-2.0.zip
+      - multipreffer-one.xpi
     # enum: `privileged` means privileged webextension; `system` means
     #       system addon. Required.
     addon-type: privileged
