@@ -35,6 +35,16 @@ xpis:
       - web-ext-artifacts/normandy-devtools.zip
     addon-type: privileged
     install-type: yarn
+  - name: normandy-devtools-1.x
+    description: Normandy Devtools
+    repo-prefix: normandydevtools
+    active: true
+    private-repo: false
+    branch: 1.x
+    artifacts:
+      - web-ext-artifacts/normandy-devtools.zip
+    addon-type: privileged
+    install-type: yarn
   - name: remote-settings-devtools
     description: Remote Settings Devtools
     repo-prefix: remotesettingsdevtools

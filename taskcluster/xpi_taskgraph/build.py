@@ -37,6 +37,8 @@ def tasks_from_manifest(config, jobs):
             checkout_config = checkout.setdefault(xpi_config['repo-prefix'], {})
             env['REPO_PREFIX'] = xpi_config['repo-prefix']
             checkout_config['path'] = '/builds/worker/checkouts/src'
+            if 'branch' in xpi_config:
+                checkout_config['head_ref'] = xpi_config['branch']
             if 'directory' in xpi_config:
                 run['cwd'] = '{checkout}/%s' % xpi_config['directory']
             if xpi_revision:

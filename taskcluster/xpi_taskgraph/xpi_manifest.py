@@ -35,6 +35,7 @@ base_schema = Schema(
                 Optional("directory"): basestring,
                 Optional("active"): bool,
                 Optional("private-repo"): bool,
+                Optional("branch"): basestring,
                 Required("artifacts"): [basestring],
                 Required("addon-type"): Any("system", "privileged"),
                 Optional("install-type"): Any("npm", "yarn"),
