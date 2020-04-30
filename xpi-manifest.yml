@@ -17,6 +17,9 @@ xpis:
     #            the xpi package.json lives. Optional. Defaults to the
     #            root of the repository.
     directory: one
+    # string: branch name. Optional. Defaults to the default-ref in
+    #         taskcluster.ci.config.taskgraph.repositories .
+    branch: master
     # list of strings: A list of paths of xpis generated. Required.
     artifacts:
       - dist/multipreffer-2.0.zip
