@@ -2,15 +2,12 @@
 
 ## Creating the repo
 
-First, create a repository under the `mozilla-extensions` github organization. The template source repo is https://github.com/mozilla-extensions/xpi-template .
+First, create a repository under the `mozilla-extensions` github organization. Next, copy in the `.taskcluster.yml` from https://github.com/mozilla-extensions/xpi-template/blob/master/.taskcluster.yml .
 
-The files we need are:
+Other files we need are
 
-    .cron.yml
-    .taskcluster.yml
     CODE_OF_CONDUCT.md
     LICENSE
-    taskcluster/*
 
 though other files may be helpful as well, e.g. `README.md`, `.gitignore`, `eslintrc.js`.
 
@@ -34,6 +31,12 @@ We will use the `master` branch as the main branch for releasing XPIs. It's impo
 The github repository rules are [here](https://wiki.mozilla.org/GitHub/Repository_Security).
 
 When creating the repository, email [secops+github@mozilla.com](mailto:secops+github@mozilla.com) about adding the new repository to its checks.
+
+### Enable signing on push
+
+To enable signing on push, find the `xpiSigningType` in `.taskcluster.yml`, and set it to the appropriate addon type.
+
+We [may move this setting to `package.json`](https://github.com/mozilla-extensions/xpi-manifest/issues/33) in the future.
 
 ### Private repos
 
