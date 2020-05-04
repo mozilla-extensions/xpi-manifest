@@ -106,10 +106,14 @@ def main():
     if 'XPI_ARTIFACTS' in os.environ:
         xpi_artifacts = os.environ["XPI_ARTIFACTS"].split(";")
     else:
-        xpi_artifacts = glob.glob('*.xpi')
+        xpi_artifacts = glob.glob('*.xpi') + glob.glob("**/*.xpi")
 
+    all_paths = []
     for artifact in xpi_artifacts:
         target_path = os.path.join(artifact_dir, os.path.basename(artifact))
+        if target_path in all_paths:
+            raise Exception("{} already exists!".format(target_path))
+        all_paths.append(target_path)
         if not os.path.exists(artifact):
             raise Exception("Missing artifact {}".format(artifact))
         test_is_subdir(os.getcwd(), artifact)
