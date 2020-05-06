@@ -1,8 +1,12 @@
 # Adding a new xpi
 
-## Creating the repo
+First, create a repository under the `mozilla-extensions` github organization.
 
-First, create a repository under the `mozilla-extensions` github organization. Next, copy in the `.taskcluster.yml` from https://github.com/mozilla-extensions/xpi-template/blob/master/.taskcluster.yml .
+## Creating a public repo
+
+The template source repo is https://github.com/mozilla-extensions/xpi-template .
+
+Copy in the `.taskcluster.yml` from https://github.com/mozilla-extensions/xpi-template/blob/master/.taskcluster.yml .
 
 Other files we need are
 
@@ -37,12 +41,6 @@ When creating the repository, email [secops+github@mozilla.com](mailto:secops+gi
 To enable signing on push, find the `xpiSigningType` in `.taskcluster.yml`, and set it to the appropriate addon type.
 
 We [may move this setting to `package.json`](https://github.com/mozilla-extensions/xpi-manifest/issues/33) in the future.
-
-### Private repos
-
-To enable cloning private repos, uncomment the `github_clone_secret` line in the source repo's [taskcluster/ci/config.yml](https://github.com/mozilla-extensions/xpi-template/blob/f31e31ca2b2baaf9a60cf684c2bd463ce6c97473/taskcluster/ci/config.yml#L20-L21). This will move the artifact generated into `xpi/build/...` rather than `public/build/...`, and you will need Taskcluster scopes to be able to download the build. The logs will remain public for anyone viewing the task, however.
-
-Please also invite `moz-releng-automation` to be a read-only collaborator in the repo, so ship-it can access the revision information.
 
 ## Using taskcluster CI automation
 
@@ -94,6 +92,14 @@ Once Taskcluster CI automation is enabled, we'll generate a decision task and ta
     - The `test` script will be run in release build graphs. All test or lint scripts will be run on push or PR.
 
     - Similar to the builds, these tests will only be scheduled when `.taskcluster.yml`, a file under `taskcluster/`, or a file under the package directory have been changed since the previous test run.
+
+## Private repos
+
+Please invite `moz-releng-automation` to be a read-only collaborator in the repo, so ship-it can access the revision information.
+
+**NOTE**: CI doesn't work on private repos! Builds will happen in release builds.
+
+Branch protection won't work either. We'll essentially use the limited access to the repository as a security measure.
 
 ## Enabling releases
 
