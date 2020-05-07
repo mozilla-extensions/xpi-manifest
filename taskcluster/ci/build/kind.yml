@@ -24,6 +24,9 @@ jobs:
         attributes:
             shipping-phase: build
             code-review: true
+        worker:
+            env:
+                MOZ_RELEASE_BUILD: '1'
         run:
             using: run-task
             cwd: '{checkout}'
