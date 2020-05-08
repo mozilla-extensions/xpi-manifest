@@ -197,10 +197,9 @@ tasks:
                           features:
                               taskclusterProxy: true
                               chainOfTrust: true
-                          # Note: This task is built server side without the context or tooling that
-                          # exist in tree so we must hard code the hash
-                          image:
-                              mozillareleases/taskgraph:decision-bd477b55732fc5f5d55a78e6162355af8bc81805b415a9ea8dbe42c020f840db
+
+                          image: mozillareleases/taskgraph:decision-21bef1bc0f11e62c7a23384584f9f8f0d96e95eef192e5bb599fc82ba55c81a7@sha256:d29af306b09cd00a63f982e8caeb53dbec7efd7bb3ae64ce3cef9cd889b750e6
+
 
                           maxRunTime: 1800
 
