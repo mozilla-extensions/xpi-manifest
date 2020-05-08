@@ -2,12 +2,12 @@
 version: 1
 reporting: checks-v1
 policy:
-    pullRequests: public
+    pullRequests: collaborators
 tasks:
     - $let:
           taskgraph:
               branch: taskgraph
-              revision: 50ab604215b79ded4cfb9565fa8a9165b90bfd59
+              revision: 7dde9ce7740068d7b73218976343a28fc99be847
           trustDomain: xpi
       in:
           $if: 'tasks_for in ["github-pull-request", "github-push", "action", "cron"]'
