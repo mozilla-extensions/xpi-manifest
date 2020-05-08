@@ -45,6 +45,12 @@ taskgraph:
             default-repository: https://github.com/mozilla-extensions/searchengine-devtools
             default-ref: master
             type: git
+        httpsupgradestudyv2:
+            name: "HTTPS Upgrade Study (v2)"
+            project-regex: https-upgrade-study-v2$
+            default-repository: git@github.com:mozilla-extensions/https-upgrade-study-v2
+            default-ref: master
+            type: git
     cached-task-prefix: xpi
 
 workers:
