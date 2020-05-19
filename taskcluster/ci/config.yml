@@ -95,6 +95,7 @@ scriptworker:
         by-xpi-type:
             privileged: privileged_webextension
             system: system_addon
+            mozillaonline-privileged: privileged_webextension
 
 release-promotion:
     flavors:
@@ -118,3 +119,9 @@ release-promotion:
             by-phase:
                 build: [aki+system-addons-build@mozilla.com]
                 promote: [aki+system-addons-promote@mozilla.com]
+        # configure mozillaonline-privileged webextension email addresses for
+        # notifications
+        mozillaonline-privileged:
+            by-phase:
+                build: [aki+mozillaonline-priv-webext-build@mozilla.com]
+                promote: [aki+mozillaonline-priv-webext-promote@mozilla.com]
