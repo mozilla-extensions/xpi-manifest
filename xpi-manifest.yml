@@ -75,3 +75,12 @@ xpis:
       - build/https_upgrade.xpi
     addon-type: privileged
     install-type: npm
+  - name: cpmanager
+    description: MozillaOnline cpmanager
+    repo-prefix: cpmanager
+    active: true
+    private-repo: true
+    artifacts:
+      - web-ext-artifacts/cpmanager.xpi
+    addon-type: mozillaonline-privileged
+    install-type: npm
