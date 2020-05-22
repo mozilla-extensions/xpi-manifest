@@ -98,10 +98,10 @@ def main():
 
     if os.environ.get("XPI_INSTALL_TYPE", "yarn") == "yarn":
         run_command(["yarn", "install", "--frozen-lockfile"])
-        run_command(["yarn", "build"])
     else:
         run_command(["npm", "install"])
-        run_command(["npm", "run-script", "build"])
+
+    run_command(["yarn", "build"])
 
     if 'XPI_ARTIFACTS' in os.environ:
         xpi_artifacts = os.environ["XPI_ARTIFACTS"].split(";")
