@@ -51,6 +51,12 @@ taskgraph:
             default-repository: git@github.com:mozilla-extensions/https-upgrade-study-v2
             default-ref: master
             type: git
+        cpmanager:
+            name: "MozillaOnline cpmanager"
+            project-regex: cpmanager$
+            default-repository: git@github.com:mozilla-extensions/cpmanager
+            default-ref: master
+            type: git
     cached-task-prefix: xpi
 
 workers:
