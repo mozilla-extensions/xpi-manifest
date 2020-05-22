@@ -83,4 +83,4 @@ xpis:
     artifacts:
       - web-ext-artifacts/cpmanager.xpi
     addon-type: mozillaonline-privileged
-    install-type: npm
+    install-type: yarn
