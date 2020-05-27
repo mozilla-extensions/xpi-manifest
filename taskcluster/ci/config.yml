@@ -57,9 +57,9 @@ taskgraph:
             default-repository: git@github.com:mozilla-extensions/cpmanager
             default-ref: master
             type: git
-        httpsupgradestudyv2:
+        pioneerv2example:
             name: "Pioneer v2 Example"
-            project-regex: pioneer-v2-example$
+            project-regex: pioneerv2example$
             default-repository: git@github.com:mozilla-extensions/pioneer-v2-example
             default-ref: master
             type: git
