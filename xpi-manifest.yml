@@ -84,3 +84,12 @@ xpis:
       - web-ext-artifacts/cpmanager.xpi
     addon-type: mozillaonline-privileged
     install-type: npm
+  - name: pioneer-v2-example
+    description: Pioneer v2 Example
+    repo-prefix: pioneer-v2-example
+    active: true
+    private-repo: true
+    artifacts:
+      - web-ext-artifacts/pioneer-v2-example.xpi
+    addon-type: privileged
+    install-type: npm
