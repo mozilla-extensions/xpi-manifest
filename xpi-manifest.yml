@@ -86,7 +86,7 @@ xpis:
     install-type: npm
   - name: pioneerv2example
     description: Pioneer v2 Example
-    repo-prefix: pioneer-v2-example
+    repo-prefix: pioneerv2example
     active: true
     private-repo: true
     artifacts:
