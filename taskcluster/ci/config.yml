@@ -57,6 +57,13 @@ taskgraph:
             default-repository: git@github.com:mozilla-extensions/cpmanager
             default-ref: master
             type: git
+        pioneerv2example:
+            name: "Pioneer v2 Example"
+            project-regex: pioneerv2example$
+            default-repository: git@github.com:mozilla-extensions/pioneer-v2-example
+            default-ref: master
+            type: git
+
     cached-task-prefix: xpi
 
 workers:
