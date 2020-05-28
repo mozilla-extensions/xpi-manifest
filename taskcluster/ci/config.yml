@@ -125,16 +125,38 @@ release-promotion:
         # notifications
         privileged:
             by-phase:
-                build: [aki+priv-webext-build@mozilla.com]
-                promote: [aki+priv-webext-promote@mozilla.com]
+                build:
+                    - "aki+priv-webext-build@mozilla.com"
+                    - "rdalal+priv-webext-build@mozilla.com"
+                    - "awagner+priv-webext-build@mozilla.com"
+                    - "mcooper+priv-webext-build@mozilla.com"
+                promote:
+                    - "aki+priv-webext-promote@mozilla.com"
+                    - "rdalal+priv-webext-promote@mozilla.com"
+                    - "awagner+priv-webext-promote@mozilla.com"
+                    - "mcooper+priv-webext-promote@mozilla.com"
         # configure system addons email addresses for notifications
         system:
             by-phase:
-                build: [aki+system-addons-build@mozilla.com]
-                promote: [aki+system-addons-promote@mozilla.com]
+                build:
+                    - "aki+system-addons-build@mozilla.com"
+                    - "rdalal+system-addons-build@mozilla.com"
+                    - "mcooper+system-addons-build@mozilla.com"
+                promote:
+                    - "aki+system-addons-promote@mozilla.com"
+                    - "rdalal+system-addons-promote@mozilla.com"
+                    - "mcooper+system-addons-promote@mozilla.com"
         # configure mozillaonline-privileged webextension email addresses for
         # notifications
         mozillaonline-privileged:
             by-phase:
-                build: [aki+mozillaonline-priv-webext-build@mozilla.com]
-                promote: [aki+mozillaonline-priv-webext-promote@mozilla.com]
+                build:
+                    - "aki+mozillaonline-priv-webext-build@mozilla.com"
+                    - "hectorz+mozillaonline-priv-webext-build@mozilla.com"
+                    - "mkaply+mozillaonline-priv-webext-build@mozilla.com"
+                    - "awagner+mozillaonline-priv-webext-build@mozilla.com"
+                promote:
+                    - "aki+mozillaonline-priv-webext-promote@mozilla.com"
+                    - "hectorz+mozillaonline-priv-webext-promote@mozilla.com"
+                    - "mkaply+mozillaonline-priv-webext-promote@mozilla.com"
+                    - "awagner+mozillaonline-priv-webext-promote@mozilla.com"
