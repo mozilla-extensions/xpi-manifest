@@ -62,3 +62,4 @@ System addon admin | `:rdalal` and `:mythmon` (+releng as backups) | system | Tw
 MozillaOnline privileged webextension team | mozilla-online team (+releng as backups) | mozillaonline-privileged | One of each (team and admin) need to sign off on `mozillaonline-privileged` xpis.
 MozillaOnline privileged webextension admin | `:theone` and `:mkaply` (+releng as backups) | mozillaonline-privileged | One of each (team and admin) need to sign off on `mozillaonline-privileged` xpis.
 
+Releng should only step in to expedite when requested, and only to unblock urgent requests. If releng signs off, that release should be audited by the appropriate team(s) later.
