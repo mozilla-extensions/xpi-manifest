@@ -20,7 +20,7 @@ In the future, we could add additional tasks here, or additional phases, as need
 
 These are configured per addon-type (privileged webextension vs system addon) and per phase (build or promote), in the `xpi-manifest` repository's [`taskcluster/ci/config.yml`](../taskcluster/ci/config.yml), under `release-promotion.notifications`.
 
-You may want to add a +comment (e.g. `email+system-addon-release-builds@m.c` for easier filtering.
+LDAP-controlled mail lists are preferred over individual emails. You may want to add a +comment (e.g. `email+system-addon-release-builds@m.c` for easier filtering.
 
 ## Kicking off the release
 
