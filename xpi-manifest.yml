@@ -84,6 +84,15 @@ xpis:
       - web-ext-artifacts/cpmanager.xpi
     addon-type: mozillaonline-privileged
     install-type: npm
+  - name: cehomepage
+    description: MozillaOnline cehomepage
+    repo-prefix: cehomepage
+    active: true
+    private-repo: true
+    artifacts:
+      - web-ext-artifacts/cehomepage.xpi
+    addon-type: mozillaonline-privileged
+    install-type: npm
   - name: pioneerv2example
     description: Pioneer v2 Example
     repo-prefix: pioneerv2example

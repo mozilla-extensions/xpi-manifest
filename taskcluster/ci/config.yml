@@ -57,6 +57,12 @@ taskgraph:
             default-repository: git@github.com:mozilla-extensions/cpmanager
             default-ref: master
             type: git
+        cehomepage:
+            name: "MozillaOnline cehomepage"
+            project-regex: cehomepage$
+            default-repository: git@github.com:mozilla-extensions/cehomepage
+            default-ref: master
+            type: git
         pioneerv2example:
             name: "Pioneer v2 Example"
             project-regex: pioneerv2example$
