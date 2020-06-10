@@ -69,6 +69,12 @@ taskgraph:
             default-repository: git@github.com:mozilla-extensions/pioneer-v2-example
             default-ref: master
             type: git
+        chinanewtab:
+            name: "MozillaOnline China New Tab"
+            project-regex: china-newtab$
+            default-repository: https://github.com/mozilla-extensions/china-newtab
+            default-ref: master
+            type: git
 
     cached-task-prefix: xpi
 
