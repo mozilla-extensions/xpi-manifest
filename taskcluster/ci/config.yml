@@ -78,7 +78,7 @@ taskgraph:
         loginstudy:
             name: "Login Study"
             project-regex: login-study$
-            default-repository: https://github.com/mozilla-extensions/login-study
+            default-repository: git@github.com:mozilla-extensions/login-study
             default-ref: master
             type: git
 
