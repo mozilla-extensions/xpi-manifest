@@ -1,0 +1,10 @@
+---
+description: Search Engine Devtools
+repo-prefix: searchenginedevtools
+active: true
+private-repo: false
+artifacts:
+  - web-ext-artifacts/searchengine-devtools.xpi
+addon-type: privileged
+install-type: npm
+additional-emails: ["standard8@mozilla.com", "dharvey@mozilla.com"]

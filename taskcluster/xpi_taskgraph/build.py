@@ -25,10 +25,10 @@ def tasks_from_manifest(config, jobs):
     if xpi_name:
         xpi_revision = config.params.get("xpi_revision")
     for job in jobs:
-        for xpi_config in manifest.get("xpis", []):
+        for xpi_config in manifest.values():
             if not xpi_config.get("active"):
                 continue
-            if xpi_name and xpi_config["name"] != xpi_name:
+            if xpi_name and xpi_config["manifest_name"] != xpi_name:
                 continue
             task = deepcopy(job)
             env = task.setdefault("worker", {}).setdefault("env", {})
@@ -43,9 +43,9 @@ def tasks_from_manifest(config, jobs):
                 run['cwd'] = '{checkout}/%s' % xpi_config['directory']
             if xpi_revision:
                 checkout_config['head_rev'] = xpi_revision
-            task["label"] = "{}-{}".format(config.kind, xpi_config["name"])
-            env["XPI_NAME"] = xpi_config["name"]
-            task.setdefault("extra", {})["xpi-name"] = xpi_config["name"]
+            task["label"] = "{}-{}".format(config.kind, xpi_config["manifest_name"])
+            env["XPI_NAME"] = xpi_config["manifest_name"]
+            task.setdefault("extra", {})["xpi-name"] = xpi_config["manifest_name"]
             env["XPI_TYPE"] = xpi_config["addon-type"]
             if xpi_config.get("private-repo"):
                 checkout_config['ssh_secret_name'] = config.graph_config["github_clone_secret"]

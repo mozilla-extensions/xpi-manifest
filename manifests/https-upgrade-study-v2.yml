@@ -1,0 +1,9 @@
+---
+description: HTTPS Upgrade Study (v2)
+repo-prefix: httpsupgradestudyv2
+active: true
+private-repo: true
+artifacts:
+  - build/https_upgrade.xpi
+addon-type: normandy-privileged
+install-type: npm

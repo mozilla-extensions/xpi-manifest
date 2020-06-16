@@ -1,0 +1,9 @@
+---
+description: MozillaOnline cehomepage
+repo-prefix: cehomepage
+active: true
+private-repo: true
+artifacts:
+  - web-ext-artifacts/cehomepage.xpi
+addon-type: mozillaonline-privileged
+install-type: npm

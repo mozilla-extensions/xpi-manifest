@@ -1,0 +1,8 @@
+description: DoH Resolver Usage Study
+repo-prefix: dohresolverusagestudy
+active: true
+private-repo: false
+artifacts:
+  - web-ext-artifacts/doh-resolver-usage-study.xpi
+addon-type: normandy-privileged
+install-type: npm

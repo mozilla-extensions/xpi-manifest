@@ -1,0 +1,7 @@
+description: Firefox Quick Suggest Calculator
+repo-prefix: quicksuggestcalculator
+active: true
+artifacts:
+  - web-ext-artifacts/firefox-quick-suggest-calculator.xpi
+addon-type: normandy-privileged
+install-type: npm

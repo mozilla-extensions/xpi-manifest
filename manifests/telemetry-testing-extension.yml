@@ -1,0 +1,8 @@
+description: Extension for testing telemetry APIs
+repo-prefix: telemetrytestingextension
+active: true
+private-repo: false
+artifacts:
+  - web-ext-artifacts/dynamic-probe-telemetry-extension.xpi
+addon-type: privileged
+install-type: npm
