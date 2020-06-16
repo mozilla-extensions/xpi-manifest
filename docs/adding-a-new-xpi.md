@@ -42,7 +42,7 @@ We [may move this setting to `package.json`](https://github.com/mozilla-extensio
 
 To enable cloning private repos, set the `privateRepo` line in the source repo's [.taskcluster.yml](https://github.com/mozilla-extensions/xpi-template/blob/7dbfdd814e67d8f92508052073db468438fdd5b1/.taskcluster.yml#L9) to `true`. This will move the artifact generated into `xpi/build/...` rather than `public/build/...` You will need to log in to taskcluster as a MoCo user to download those artifacts. The logs will remain public for anyone viewing the task, however.
 
-Please also invite `moz-releng-automation` to be a read-only collaborator in the repo, so ship-it can access the revision information.
+Please also invite `mozilla-extensions/private-repo` to be a read-only collaborator in the repo, so ship-it can access the revision information.
 
 ## Using taskcluster CI automation
 
