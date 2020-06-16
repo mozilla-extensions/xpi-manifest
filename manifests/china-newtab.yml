@@ -1,0 +1,9 @@
+---
+description: MozillaOnline China New Tab
+repo-prefix: chinanewtab
+active: true
+private-repo: false
+artifacts:
+  - web-ext-artifacts/china-newtab.xpi
+addon-type: mozillaonline-privileged
+install-type: npm

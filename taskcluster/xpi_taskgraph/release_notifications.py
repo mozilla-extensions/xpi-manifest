@@ -11,7 +11,7 @@ from taskgraph.transforms.base import TransformSequence
 from taskgraph.util.keyed_by import evaluate_keyed_by
 from taskgraph.util.schema import resolve_keyed_by
 
-from xpi_taskgraph.xpi_manifest import get_xpi_config
+from xpi_taskgraph.xpi_manifest import get_manifest
 
 
 transforms = TransformSequence()
@@ -24,6 +24,7 @@ def add_notifications(config, jobs):
     shipping_phase = config.params.get("shipping_phase")
     if not all([xpi_name, xpi_revision, shipping_phase]):
         return
+    manifest = get_manifest()
 
     for job in jobs:
         if "primary-dependency" in job:
@@ -38,7 +39,7 @@ def add_notifications(config, jobs):
         if job.get("attributes", {}).get("shipping-phase") != shipping_phase:
             continue
         job['label'] = '{}-{}'.format(config.kind, shipping_phase)
-        xpi_config = get_xpi_config(xpi_name)
+        xpi_config = manifest[xpi_name]
         xpi_type = xpi_config['addon-type']
 
         emails = evaluate_keyed_by(

@@ -28,13 +28,9 @@ def test_tasks_from_manifest(config, tasks):
         xpi_name = dep.task["extra"]["xpi-name"]
         xpi_revision = config.params.get('xpi_revision')
         task.setdefault("extra", {})["xpi-name"] = xpi_name
-        for xpi_config in manifest.get("xpis", []):
-            if not xpi_config.get("active"):
-                continue
-            if xpi_config["name"] == xpi_name:
-                break
-        else:
-            raise Exception("Can't determine the upstream xpi_config for {}!".format(xpi_name))
+        xpi_config = manifest[xpi_name]
+        if not xpi_config.get("active"):
+            continue
         env = task.setdefault("worker", {}).setdefault("env", {})
         run = task.setdefault("run", {})
         checkout = run.setdefault("checkout", {})
