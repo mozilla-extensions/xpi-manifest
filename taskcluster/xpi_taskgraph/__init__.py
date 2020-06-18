@@ -13,11 +13,12 @@ def register(graph_config):
     the process.
     """
     _import_modules([
+        "loader",
         "parameters",
-        "release_notifications",
         "release_promotion",
         "routes",
         "target",
+        "transforms",
         "worker_types",
     ])
 
