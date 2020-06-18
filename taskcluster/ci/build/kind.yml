@@ -5,7 +5,7 @@
 loader: taskgraph.loader.transform:loader
 
 transforms:
-    - xpi_taskgraph.build:transforms
+    - xpi_taskgraph.transforms.build:transforms
     - taskgraph.transforms.job:transforms
     - taskgraph.transforms.task:transforms
 
