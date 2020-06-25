@@ -44,7 +44,7 @@ def add_notifications(config, jobs):
         emails = evaluate_keyed_by(
             config.graph_config['release-promotion']['notifications'][xpi_type],
             'email', dict(phase=shipping_phase, )
-        )
+        ) + xpi_config.get("additional-emails", [])
         notifications = evaluate_keyed_by(
             job.pop('notifications'),
             'notification config', dict(phase=shipping_phase, )

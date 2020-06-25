@@ -34,6 +34,7 @@ base_schema = Schema(
                 Required("repo-prefix"): basestring,
                 Optional("directory"): basestring,
                 Optional("active"): bool,
+                Optional("additional-emails"): [basestring],
                 Optional("private-repo"): bool,
                 Optional("branch"): basestring,
                 Required("artifacts"): [basestring],

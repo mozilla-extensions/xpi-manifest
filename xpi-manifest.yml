@@ -13,6 +13,8 @@ xpis:
     # boolean: whether this is a private Github repository. Optional.
     #          Defaults to `false`.
     private-repo: false
+    # array: any additional emails to notify for this addon.
+    additional-emails: []
     # string: path, relative to the root of the repository, where
     #            the xpi package.json lives. Optional. Defaults to the
     #            root of the repository.
