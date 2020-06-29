@@ -81,6 +81,12 @@ taskgraph:
             default-repository: git@github.com:mozilla-extensions/login-study
             default-ref: master
             type: git
+        webcompat:
+            name: "Web Compat"
+            project-regex: webcompat-addon$
+            default-repository: https://github.com/mozilla-extensions/webcompat-addon
+            default-ref: master
+            type: git
 
     cached-task-prefix: xpi
 
