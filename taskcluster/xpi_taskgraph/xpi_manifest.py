@@ -49,13 +49,13 @@ base_schema = Schema(
 def check_manifest(xpi_config, graph_config):
     if xpi_config["repo-prefix"] not in graph_config["taskgraph"]["repositories"]:
         raise Exception(
-            "{} repo-prefix not in graph_config!".format(xpi_config["name"])
+            "{} repo-prefix not in graph_config!".format(xpi_config["manifest_name"])
         )
     # No '-' allowed in repo-prefixes
     if "-" in xpi_config["repo-prefix"]:
         raise Exception(
             "{} repo-prefix contains a '-': {}".format(
-                xpi_config["name"], xpi_config["repo-prefix"]
+                xpi_config["manifest_name"], xpi_config["repo-prefix"]
             )
         )
 
