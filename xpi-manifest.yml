@@ -132,3 +132,12 @@ xpis:
       - web-ext-artifacts/webcompat.xpi
     addon-type: system
     install-type: npm
+  - name: secure-proxy
+    description: Secure-Proxy
+    repo-prefix: secure-proxy
+    active: true
+    private-repo: false
+    artifacts:
+      - dist/secure-proxy.xpi
+    addon-type: privileged
+    install-type: npm
