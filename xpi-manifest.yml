@@ -134,7 +134,7 @@ xpis:
     install-type: npm
   - name: secure-proxy
     description: Secure-Proxy
-    repo-prefix: secure-proxy
+    repo-prefix: secureproxy
     active: true
     private-repo: false
     artifacts:
