@@ -138,6 +138,6 @@ xpis:
     active: true
     private-repo: false
     artifacts:
-      - web-ext-artifacts/secure-proxy.xpi
+      - dist/secure-proxy.xpi
     addon-type: privileged
     install-type: npm
