@@ -87,6 +87,12 @@ taskgraph:
             default-repository: https://github.com/mozilla-extensions/webcompat-addon
             default-ref: master
             type: git
+        secureproxy:
+            name: "Secure-Proxy"
+            project-regex: secure-proxy$
+            default-repository: https://github.com/mozilla-extensions/secure-proxy
+            default-ref: master
+            type: git
 
     cached-task-prefix: xpi
 
