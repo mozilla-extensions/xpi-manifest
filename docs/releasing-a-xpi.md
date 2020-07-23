@@ -29,9 +29,13 @@ We'll use ship-it for this. This isn't quite ready yet. You'll need LDAP perms a
 ### Starting the build phase
 
   - [Connect to VPN](https://mana.mozilla.org/wiki/display/IT/Mozilla+VPN)
-  - Connect to ship-it
+  - [Connect to ship-it](https://shipit.mozilla-releng.net/)
+    - If ship-it website says that you are not using the VPN, try a different VPN endpoint.
+    - If you are unable to open the ship-it website, check if you have the "vpn_cloudops_shipit" permission in your [LDAP account](https://firefox-ci-tc.services.mozilla.com/profile). In case you don't have this permission, file a bugzilla bug like this: [Bug 1651095](https://bugzilla.mozilla.org/show_bug.cgi?id=1651095). When that permission is set, disconnect and reconnect to the VPN.
   - Look at the `XPI Releases` to see if the release is already configured.
   - If we want to configure a new release, choose `New XPI Release`.
+    - If your extension is privileged, you must be added to the XPI_PRIVILEGED_BUILD_GROUP user list. Contact the addon-pipeline team.
+    - If you don't see your extension listed, you probably skipped [this section of the "adding a new xpi" docs](https://github.com/mozilla-extensions/xpi-manifest/blob/master/docs/adding-a-new-xpi.md#enabling-releases).
   - Choose a `xpi-manifest` repository revision. You probably want the latest. We may make this default to the latest revision on `xpi-manifest/master` at some point.
   - Choose a xpi to build.
   - Choose a source repo revision. You probably want the latest. This revision currently needs to be a recent revision on the release branch (generally `master`).
