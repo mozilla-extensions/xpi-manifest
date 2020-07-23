@@ -141,3 +141,15 @@ xpis:
       - dist/secure-proxy.xpi
     addon-type: privileged
     install-type: npm
+  - name: firefox-voice
+    description: Firefox Voice
+    additional-emails:
+      - ibicking@mozilla.com
+    repo-prefix: firefoxvoice
+    active: true
+    private-repo: false
+    branch: prod
+    artifacts:
+      - web-ext-artifacts/firefox-voice.xpi
+    addon-type: privileged
+    install-type: yarn
