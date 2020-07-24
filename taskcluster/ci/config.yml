@@ -93,6 +93,12 @@ taskgraph:
             default-repository: https://github.com/mozilla-extensions/secure-proxy
             default-ref: master
             type: git
+        firefoxvoice:
+            name: "Firefox Voice"
+            project-regex: firefox-voice$
+            default-repository: https://github.com/mozilla-extensions/firefox-voice
+            default-ref: prod
+            type: git
 
     cached-task-prefix: xpi
 
