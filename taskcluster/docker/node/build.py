@@ -84,6 +84,9 @@ def main():
 
     package_info = get_package_info()
 
+    # normandy-devtools uses git tag information in their webpack
+    run_command(["git", "fetch", "-t", "--all"])
+
     revision = get_output(["git", "rev-parse", "HEAD"])
 
     build_manifest = {
