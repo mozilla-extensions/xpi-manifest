@@ -10,10 +10,10 @@ RUN echo "deb http://deb.debian.org/debian testing main" >> /etc/apt/sources.lis
 RUN apt-get update -qq \
     && apt-get remove -y python3 \
     && apt-get install -y zip \
-    && apt-get install -y python3.7 \
+    && apt-get install -y python3.8 \
     && apt-get clean
 
-RUN rm /usr/bin/python3 && ln -s /usr/bin/python3.7 /usr/bin/python3
+RUN rm /usr/bin/python3 && ln -s /usr/bin/python3.8 /usr/bin/python3
 
 # Add worker user
 RUN mkdir /builds && \
