@@ -148,9 +148,10 @@ scriptworker:
     scope-prefix: project:xpi:releng
     signing-format:
         by-xpi-type:
-            privileged: privileged_webextension
-            system: system_addon
+            amo-privileged: privileged_webextension
             mozillaonline-privileged: privileged_webextension
+            normandy-privileged: privileged_webextension
+            system: system_addon
 
 release-promotion:
     flavors:
@@ -163,31 +164,20 @@ release-promotion:
         promote:
             target-tasks-method: promote_xpi
     notifications:
-        # configure privileged webextension email addresses for
+        # configure amo-privileged webextension email addresses for
         # notifications
-        privileged:
+        amo-privileged:
             by-phase:
                 build:
-                    - "aki+priv-webext-build@mozilla.com"
-                    - "rdalal+priv-webext-build@mozilla.com"
-                    - "awagner+priv-webext-build@mozilla.com"
-                    - "mcooper+priv-webext-build@mozilla.com"
+                    - "aki+amo-priv-webext-build@mozilla.com"
+                    - "rdalal+amo-priv-webext-build@mozilla.com"
+                    - "awagner+amo-priv-webext-build@mozilla.com"
+                    - "mcooper+amo-priv-webext-build@mozilla.com"
                 promote:
-                    - "aki+priv-webext-promote@mozilla.com"
-                    - "rdalal+priv-webext-promote@mozilla.com"
-                    - "awagner+priv-webext-promote@mozilla.com"
-                    - "mcooper+priv-webext-promote@mozilla.com"
-        # configure system addons email addresses for notifications
-        system:
-            by-phase:
-                build:
-                    - "aki+system-addons-build@mozilla.com"
-                    - "rdalal+system-addons-build@mozilla.com"
-                    - "mcooper+system-addons-build@mozilla.com"
-                promote:
-                    - "aki+system-addons-promote@mozilla.com"
-                    - "rdalal+system-addons-promote@mozilla.com"
-                    - "mcooper+system-addons-promote@mozilla.com"
+                    - "aki+amo-priv-webext-promote@mozilla.com"
+                    - "rdalal+amo-priv-webext-promote@mozilla.com"
+                    - "awagner+amo-priv-webext-promote@mozilla.com"
+                    - "mcooper+amo-priv-webext-promote@mozilla.com"
         # configure mozillaonline-privileged webextension email addresses for
         # notifications
         mozillaonline-privileged:
@@ -202,3 +192,26 @@ release-promotion:
                     - "hectorz+mozillaonline-priv-webext-promote@mozilla.com"
                     - "mkaply+mozillaonline-priv-webext-promote@mozilla.com"
                     - "awagner+mozillaonline-priv-webext-promote@mozilla.com"
+        # configure normandy-privileged webextension email addresses for
+        # notifications
+        normandy-privileged:
+            by-phase:
+                build:
+                    - "aki+normandy-priv-webext-build@mozilla.com"
+                    - "rdalal+normandy-priv-webext-build@mozilla.com"
+                    - "mcooper+normandy-priv-webext-build@mozilla.com"
+                promote:
+                    - "aki+normandy-priv-webext-promote@mozilla.com"
+                    - "rdalal+normandy-priv-webext-promote@mozilla.com"
+                    - "mcooper+normandy-priv-webext-promote@mozilla.com"
+        # configure system addons email addresses for notifications
+        system:
+            by-phase:
+                build:
+                    - "aki+system-addons-build@mozilla.com"
+                    - "rdalal+system-addons-build@mozilla.com"
+                    - "mcooper+system-addons-build@mozilla.com"
+                promote:
+                    - "aki+system-addons-promote@mozilla.com"
+                    - "rdalal+system-addons-promote@mozilla.com"
+                    - "mcooper+system-addons-promote@mozilla.com"

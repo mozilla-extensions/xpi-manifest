@@ -25,9 +25,12 @@ xpis:
     # list of strings: A list of paths of xpis generated. Required.
     artifacts:
       - multipreffer-one.xpi
-    # enum: `privileged` means privileged webextension; `system` means
-    #       system addon. Required.
-    addon-type: privileged
+    # enum: `system` means system add-on.
+    #       `amo-privileged` means AMO or self-hosted privileged add-on.
+    #       `mozillaonline-privileged` means Mozilla China add-on.
+    #       `normandy-privileged` means normandy add-on.
+    #       Required.
+    addon-type: system
     # enum: `npm` for `npm install` or `yarn` for
     #       `yarn install --frozen-lockfile`. Optional. Defaults to `yarn`.
     install-type: npm
@@ -39,7 +42,7 @@ xpis:
     branch: main
     artifacts:
       - web-ext-artifacts/normandy-devtools.xpi
-    addon-type: privileged
+    addon-type: amo-privileged
     install-type: yarn
   - name: normandy-devtools-1.x
     description: Normandy Devtools
@@ -49,7 +52,7 @@ xpis:
     branch: 1.x-minimal
     artifacts:
       - web-ext-artifacts/normandy-devtools.zip
-    addon-type: privileged
+    addon-type: amo-privileged
     install-type: yarn
   - name: remote-settings-devtools
     description: Remote Settings Devtools
@@ -58,7 +61,7 @@ xpis:
     private-repo: false
     artifacts:
       - web-ext-artifacts/remote-settings-devtools.xpi
-    addon-type: privileged
+    addon-type: amo-privileged
     install-type: yarn
   - name: searchengine-devtools
     description: Search Engine Devtools
@@ -67,7 +70,7 @@ xpis:
     private-repo: false
     artifacts:
       - web-ext-artifacts/searchengine-devtools.xpi
-    addon-type: privileged
+    addon-type: amo-privileged
     install-type: npm
   - name: https-upgrade-study-v2
     description: HTTPS Upgrade Study (v2)
@@ -76,7 +79,7 @@ xpis:
     private-repo: true
     artifacts:
       - build/https_upgrade.xpi
-    addon-type: privileged
+    addon-type: normandy-privileged
     install-type: npm
   - name: cpmanager
     description: MozillaOnline cpmanager
@@ -103,7 +106,7 @@ xpis:
     private-repo: true
     artifacts:
       - web-ext-artifacts/pioneer-v2-example.xpi
-    addon-type: privileged
+    addon-type: amo-privileged
     install-type: npm
   - name: china-newtab
     description: MozillaOnline China New Tab
@@ -121,7 +124,7 @@ xpis:
     private-repo: true
     artifacts:
       - web-ext-artifacts/login-study.xpi
-    addon-type: privileged
+    addon-type: normandy-privileged
     install-type: yarn
   - name: webcompat
     description: Web Compat
@@ -139,7 +142,7 @@ xpis:
     private-repo: false
     artifacts:
       - dist/secure-proxy.xpi
-    addon-type: privileged
+    addon-type: amo-privileged
     install-type: npm
   - name: firefox-voice
     description: Firefox Voice
@@ -151,7 +154,7 @@ xpis:
     branch: prod
     artifacts:
       - web-ext-artifacts/firefox-voice.xpi
-    addon-type: privileged
+    addon-type: amo-privileged
     install-type: yarn
   - name: doh-resolver-usage-study
     description: DoH Resolver Usage Study
