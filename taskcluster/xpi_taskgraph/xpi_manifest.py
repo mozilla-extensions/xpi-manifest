@@ -38,7 +38,7 @@ base_schema = Schema(
                 Optional("private-repo"): bool,
                 Optional("branch"): basestring,
                 Required("artifacts"): [basestring],
-                Required("addon-type"): Any("amo-privileged",
+                Required("addon-type"): Any("hosted-privileged",
                                             "mozillaonline-privileged",
                                             "normandy-privileged",
                                             "system",

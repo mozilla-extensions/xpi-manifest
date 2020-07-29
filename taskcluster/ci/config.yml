@@ -148,7 +148,7 @@ scriptworker:
     scope-prefix: project:xpi:releng
     signing-format:
         by-xpi-type:
-            amo-privileged: privileged_webextension
+            hosted-privileged: privileged_webextension
             mozillaonline-privileged: privileged_webextension
             normandy-privileged: privileged_webextension
             system: system_addon
@@ -165,18 +165,18 @@ release-promotion:
         promote:
             target-tasks-method: promote_xpi
     notifications:
-        # configure amo-privileged webextension email addresses for
+        # configure hosted-privileged webextension email addresses for
         # notifications
-        amo-privileged:
+        hosted-privileged:
             by-phase:
                 build:
-                    - "aki+amo-priv-webext-build@mozilla.com"
-                    - "awagner+amo-priv-webext-build@mozilla.com"
-                    - "pkewisch+amo-priv-webext-build@mozilla.com"
+                    - "aki+hosted-priv-webext-build@mozilla.com"
+                    - "awagner+hosted-priv-webext-build@mozilla.com"
+                    - "pkewisch+hosted-priv-webext-build@mozilla.com"
                 promote:
-                    - "aki+amo-priv-webext-promote@mozilla.com"
-                    - "awagner+amo-priv-webext-promote@mozilla.com"
-                    - "pkewisch+amo-priv-webext-build@mozilla.com"
+                    - "aki+hosted-priv-webext-promote@mozilla.com"
+                    - "awagner+hosted-priv-webext-promote@mozilla.com"
+                    - "pkewisch+hosted-priv-webext-build@mozilla.com"
         # configure mozillaonline-privileged webextension email addresses for
         # notifications
         mozillaonline-privileged:
