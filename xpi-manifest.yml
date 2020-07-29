@@ -30,7 +30,7 @@ xpis:
     #       `mozillaonline-privileged` means Mozilla China add-on.
     #       `normandy-privileged` means normandy add-on.
     #       Required.
-    addon-type: system
+    addon-type: normandy-privileged
     # enum: `npm` for `npm install` or `yarn` for
     #       `yarn install --frozen-lockfile`. Optional. Defaults to `yarn`.
     install-type: npm

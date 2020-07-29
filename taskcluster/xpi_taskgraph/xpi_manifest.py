@@ -41,7 +41,8 @@ base_schema = Schema(
                 Required("addon-type"): Any("amo-privileged",
                                             "mozillaonline-privileged",
                                             "normandy-privileged",
-                                            "system"),
+                                            "system",
+                                            "privileged"),
                 Optional("install-type"): Any("npm", "yarn"),
             }
         ]

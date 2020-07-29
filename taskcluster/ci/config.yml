@@ -152,6 +152,7 @@ scriptworker:
             mozillaonline-privileged: privileged_webextension
             normandy-privileged: privileged_webextension
             system: system_addon
+            privileged: privileged_webextension
 
 release-promotion:
     flavors:
@@ -170,14 +171,12 @@ release-promotion:
             by-phase:
                 build:
                     - "aki+amo-priv-webext-build@mozilla.com"
-                    - "rdalal+amo-priv-webext-build@mozilla.com"
                     - "awagner+amo-priv-webext-build@mozilla.com"
-                    - "mcooper+amo-priv-webext-build@mozilla.com"
+                    - "pkewisch+amo-priv-webext-build@mozilla.com"
                 promote:
                     - "aki+amo-priv-webext-promote@mozilla.com"
-                    - "rdalal+amo-priv-webext-promote@mozilla.com"
                     - "awagner+amo-priv-webext-promote@mozilla.com"
-                    - "mcooper+amo-priv-webext-promote@mozilla.com"
+                    - "pkewisch+amo-priv-webext-build@mozilla.com"
         # configure mozillaonline-privileged webextension email addresses for
         # notifications
         mozillaonline-privileged:
@@ -215,3 +214,17 @@ release-promotion:
                     - "aki+system-addons-promote@mozilla.com"
                     - "rdalal+system-addons-promote@mozilla.com"
                     - "mcooper+system-addons-promote@mozilla.com"
+        # Deprecated 'privileged' add-ons email addresses for notifications
+        # To be removed when it's no longer used by source repositories
+        privileged:
+            by-phase:
+                build:
+                    - "aki+priv-webext-build@mozilla.com"
+                    - "rdalal+priv-webext-build@mozilla.com"
+                    - "awagner+priv-webext-build@mozilla.com"
+                    - "mcooper+priv-webext-build@mozilla.com"
+                promote:
+                    - "aki+priv-webext-promote@mozilla.com"
+                    - "rdalal+priv-webext-promote@mozilla.com"
+                    - "awagner+priv-webext-promote@mozilla.com"
+                    - "mcooper+priv-webext-promote@mozilla.com" 
