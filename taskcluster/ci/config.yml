@@ -99,6 +99,12 @@ taskgraph:
             default-repository: https://github.com/mozilla-extensions/firefox-voice
             default-ref: prod
             type: git
+        dohresolverusagestudy:
+            name: "DoH Resolver Usage Study"
+            project-regex: doh-resolver-usage-study$
+            default-repository: git@github.com:mozilla-extensions/doh-resolver-usage-study
+            default-ref: master
+            type: git
 
     cached-task-prefix: xpi
 
