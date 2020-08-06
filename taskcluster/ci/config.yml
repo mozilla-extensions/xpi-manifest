@@ -148,9 +148,9 @@ scriptworker:
     scope-prefix: project:xpi:releng
     signing-format:
         by-xpi-type:
-            hosted-privileged: privileged_webextension
             mozillaonline-privileged: privileged_webextension
             normandy-privileged: privileged_webextension
+            privileged: privileged_webextension
             system: system_addon
 
 release-promotion:
@@ -164,18 +164,6 @@ release-promotion:
         promote:
             target-tasks-method: promote_xpi
     notifications:
-        # configure hosted-privileged webextension email addresses for
-        # notifications
-        hosted-privileged:
-            by-phase:
-                build:
-                    - "aki+hosted-priv-webext-build@mozilla.com"
-                    - "awagner+hosted-priv-webext-build@mozilla.com"
-                    - "pkewisch+hosted-priv-webext-build@mozilla.com"
-                promote:
-                    - "aki+hosted-priv-webext-promote@mozilla.com"
-                    - "awagner+hosted-priv-webext-promote@mozilla.com"
-                    - "pkewisch+hosted-priv-webext-build@mozilla.com"
         # configure mozillaonline-privileged webextension email addresses for
         # notifications
         mozillaonline-privileged:
@@ -202,6 +190,17 @@ release-promotion:
                     - "aki+normandy-priv-webext-promote@mozilla.com"
                     - "rdalal+normandy-priv-webext-promote@mozilla.com"
                     - "mcooper+normandy-priv-webext-promote@mozilla.com"
+        # configure privileged webextension email addresses for notifications
+        privileged:
+            by-phase:
+                build:
+                    - "aki+hosted-priv-webext-build@mozilla.com"
+                    - "awagner+hosted-priv-webext-build@mozilla.com"
+                    - "pkewisch+hosted-priv-webext-build@mozilla.com"
+                promote:
+                    - "aki+hosted-priv-webext-promote@mozilla.com"
+                    - "awagner+hosted-priv-webext-promote@mozilla.com"
+                    - "pkewisch+hosted-priv-webext-build@mozilla.com"
         # configure system addons email addresses for notifications
         system:
             by-phase:
