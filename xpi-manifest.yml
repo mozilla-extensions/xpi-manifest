@@ -25,9 +25,12 @@ xpis:
     # list of strings: A list of paths of xpis generated. Required.
     artifacts:
       - multipreffer-one.xpi
-    # enum: `privileged` means privileged webextension; `system` means
-    #       system addon. Required.
-    addon-type: privileged
+    # enum: `system` means system add-on.
+    #       `privileged` means AMO or self-hosted privileged add-on.
+    #       `mozillaonline-privileged` means Mozilla China add-on.
+    #       `normandy-privileged` means normandy add-on.
+    #       Required.
+    addon-type: normandy-privileged
     # enum: `npm` for `npm install` or `yarn` for
     #       `yarn install --frozen-lockfile`. Optional. Defaults to `yarn`.
     install-type: npm
@@ -76,7 +79,7 @@ xpis:
     private-repo: true
     artifacts:
       - build/https_upgrade.xpi
-    addon-type: privileged
+    addon-type: normandy-privileged
     install-type: npm
   - name: cpmanager
     description: MozillaOnline cpmanager
@@ -121,7 +124,7 @@ xpis:
     private-repo: true
     artifacts:
       - web-ext-artifacts/login-study.xpi
-    addon-type: privileged
+    addon-type: normandy-privileged
     install-type: yarn
   - name: webcompat
     description: Web Compat
@@ -160,5 +163,5 @@ xpis:
     private-repo: false
     artifacts:
       - web-ext-artifacts/doh-resolver-usage-study.xpi
-    addon-type: privileged
+    addon-type: normandy-privileged
     install-type: npm
