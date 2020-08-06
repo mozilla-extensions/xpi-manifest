@@ -61,7 +61,8 @@ If we need a new release build:
 
 | Group name | Who | Type of xpi | Notes |
 | ---------- | --- | ----------- | ----- |
-Privileged webextension admin | product-delivery team (+releng as backups) | privileged | Two of these are required to sign off on `privileged` xpis.
+Privileged webextension admin | Add-on Review team | privileged | Two are required to sign off on `privileged` xpis, with one being a member of the Add-on Review team.
+Privileged normandy admin | releng | normandy-privileged | Two are required to sign off on `normandy-privileged` xpis.
 System addon admin | `:rdalal` and `:mythmon` (+releng as backups) | system | Two of these are required to sign off on `system` xpis.
 MozillaOnline privileged webextension team | mozilla-online team (+releng as backups) | mozillaonline-privileged | One of each (team and admin) need to sign off on `mozillaonline-privileged` xpis.
 MozillaOnline privileged webextension admin | `:theone` and `:mkaply` (+releng as backups) | mozillaonline-privileged | One of each (team and admin) need to sign off on `mozillaonline-privileged` xpis.
