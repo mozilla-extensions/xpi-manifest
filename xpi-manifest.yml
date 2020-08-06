@@ -163,5 +163,5 @@ xpis:
     private-repo: false
     artifacts:
       - web-ext-artifacts/doh-resolver-usage-study.xpi
-    addon-type: privileged
+    addon-type: normandy-privileged
     install-type: npm

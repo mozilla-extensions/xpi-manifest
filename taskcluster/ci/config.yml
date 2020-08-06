@@ -194,13 +194,9 @@ release-promotion:
         privileged:
             by-phase:
                 build:
-                    - "aki+priv-webext-build@mozilla.com"
-                    - "awagner+priv-webext-build@mozilla.com"
-                    - "pkewisch+priv-webext-build@mozilla.com"
+                    - "privileged-addon-reviewers+shipit-build@mozilla.com"
                 promote:
-                    - "aki+priv-webext-promote@mozilla.com"
-                    - "awagner+priv-webext-promote@mozilla.com"
-                    - "pkewisch+priv-webext-build@mozilla.com"
+                    - "privileged-addon-reviewers+shipit-promote@mozilla.com"
         # configure system addons email addresses for notifications
         system:
             by-phase:
