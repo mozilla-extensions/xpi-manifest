@@ -165,3 +165,12 @@ xpis:
       - web-ext-artifacts/doh-resolver-usage-study.xpi
     addon-type: normandy-privileged
     install-type: npm
+  - name: dnssec-interference-study
+    description: DNSSEC Interference Study
+    repo-prefix: dnssecinterferencestudy
+    active: true
+    private-repo: false
+    artifacts:
+      - web-ext-artifacts/dnssec-interference-study.xpi
+    addon-type: normandy-privileged
+    install-type: npm
