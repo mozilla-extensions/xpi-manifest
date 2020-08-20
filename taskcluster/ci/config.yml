@@ -105,6 +105,12 @@ taskgraph:
             default-repository: https://github.com/mozilla-extensions/doh-resolver-usage-study
             default-ref: master
             type: git
+        dnssecinterferencestudy:
+            name: "DNSSEC Interference Study"
+            project-regex: dnssec-interference-study$
+            default-repository: https://github.com/mozilla-extensions/dnssec-interference
+            default-ref: master
+            type: git
 
     cached-task-prefix: xpi
 
