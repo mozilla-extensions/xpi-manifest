@@ -44,6 +44,7 @@ xpis:
       - web-ext-artifacts/normandy-devtools.xpi
     addon-type: privileged
     install-type: yarn
+    additional-emails: ["mcooper@mozilla.com", "rdalal@mozilla.com", "ttran@mozilla.com"]
   - name: normandy-devtools-1.x
     description: Normandy Devtools
     repo-prefix: normandydevtools
