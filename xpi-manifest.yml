@@ -73,6 +73,7 @@ xpis:
       - web-ext-artifacts/searchengine-devtools.xpi
     addon-type: privileged
     install-type: npm
+    additional-emails: ["standard8@mozilla.com", "dharvey@mozilla.com"]
   - name: https-upgrade-study-v2
     description: HTTPS Upgrade Study (v2)
     repo-prefix: httpsupgradestudyv2
