@@ -176,7 +176,7 @@ xpis:
       - web-ext-artifacts/dnssec-interference-study.xpi
     addon-type: normandy-privileged
     install-type: npm
-    - name: news-disinformation-study
+  - name: news-disinformation-study
     description: Princeton News Disinformation Study
     repo-prefix: newsdisinformationstudy
     active: true
