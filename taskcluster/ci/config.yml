@@ -114,7 +114,7 @@ taskgraph:
         newsdisinformationstudy:
             name: "Princeton News Disinfo Study"
             project-regex: newsdisinformationstudy$
-            default-repository: git@github.com:mozilla-extensions/news-disinformation-study
+            default-repository: https://github.com/mozilla-extensions/news-disinformation-study
             default-ref: master
             type: git
 
