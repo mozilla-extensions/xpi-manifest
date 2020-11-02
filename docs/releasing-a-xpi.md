@@ -28,9 +28,10 @@ We'll use ship-it for this. This isn't quite ready yet. You'll need LDAP perms a
 
 ### Starting the build phase
 
-  - [Connect to VPN](https://mana.mozilla.org/wiki/display/IT/Mozilla+VPN)
+  - [Connect to VPN](https://mana.mozilla.org/wiki/display/IT/Mozilla+Corporate+VPN)
   - [Connect to ship-it](https://shipit.mozilla-releng.net/)
     - If ship-it website says that you are not using the VPN, try a different VPN endpoint.
+      - Berlin's endpoint has not been added yet, [Bug 1651234](https://bugzilla.mozilla.org/show_bug.cgi?id=1651234)
     - If you are unable to open the ship-it website, check if you have the "vpn_cloudops_shipit" permission in your [LDAP account](https://firefox-ci-tc.services.mozilla.com/profile). In case you don't have this permission, file a bugzilla bug like this: [Bug 1651095](https://bugzilla.mozilla.org/show_bug.cgi?id=1651095). When that permission is set, disconnect and reconnect to the VPN.
   - Look at the `XPI Releases` to see if the release is already configured.
   - If we want to configure a new release, choose `New XPI Release`.
