@@ -191,6 +191,6 @@ xpis:
     active: true
     private-repo: false
     artifacts:
-      - web-ext-artifacts/ion-core-addon.xpi
+      - web-ext-artifacts/ion_core.xpi
     addon-type: privileged
     install-type: npm
