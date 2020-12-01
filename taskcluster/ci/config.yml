@@ -117,6 +117,12 @@ taskgraph:
             default-repository: https://github.com/mozilla-extensions/news-disinformation-study
             default-ref: master
             type: git
+        ioncoreaddon:
+            name: "Ion Core Add-on"
+            project-regex: ioncoreaddon$
+            default-repository: https://github.com/mozilla-extensions/ion-core-addon
+            default-ref: master
+            type: git
 
     cached-task-prefix: xpi
 
