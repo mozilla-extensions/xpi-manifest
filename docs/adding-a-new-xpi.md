@@ -58,6 +58,7 @@ Once Taskcluster CI automation is enabled, we'll generate a decision task and ta
         ./xpis/one/package.json
         ./xpis/two/package.json
         ./three/package.json
+        ./not-an-addon/package.json
         ./package.json
         ```
 
@@ -70,7 +71,7 @@ Once Taskcluster CI automation is enabled, we'll generate a decision task and ta
 
         doesn't (duplicate `one` package directory names). A package directory at the root of the repository will be named `src`.
 
-    - We create a build task per package directory. These will only be scheduled when `.taskcluster.yml`, a file under `taskcluster/`, or a file under the package directory have been changed since the previous build.
+    - We create a build task per package directory. These will only be scheduled when `.taskcluster.yml`, a file under `taskcluster/`, or a file under the package directory have been changed since the previous build. Note that if the directory containing the `package.json` also contains a `dontbuild` file, then no task is generated for that package directory (to support repository having a `package.json` file that is not related to an addon).
 
   - We read `package.json` and create a test task per entry in `scripts` that starts with `test`. It will also create a test task for the `lint` target, if it exists. (These test names must be either alphanumeric, or only include the special characters `:_-`).
 
