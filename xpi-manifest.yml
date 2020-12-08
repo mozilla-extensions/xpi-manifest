@@ -194,3 +194,12 @@ xpis:
       - web-ext-artifacts/ion_core.xpi
     addon-type: privileged
     install-type: npm
+  - name: telemetry-testing-extension
+    description: Extension for testing telemetry APIs
+    repo-prefix: dynamic-probe-telemetry-extension
+    active: true
+    private-repo: false
+    artifacts:
+      - web-ext-artifacts/dynamic-probe-telemetry-extension.xpi
+    addon-type: privileged
+    install-type: npm
