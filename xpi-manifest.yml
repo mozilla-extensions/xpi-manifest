@@ -196,7 +196,7 @@ xpis:
     install-type: npm
   - name: telemetry-testing-extension
     description: Extension for testing telemetry APIs
-    repo-prefix: dynamic-probe-telemetry-extension
+    repo-prefix: telemetrytestingextension
     active: true
     private-repo: false
     artifacts:

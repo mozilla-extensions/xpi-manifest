@@ -127,7 +127,7 @@ taskgraph:
             name: "Telemetry testing extension"
             project-regex: telemetrytestingextension$
             default-repository: https://github.com/mozilla-extensions/dynamic-probe-telemetry-extension
-            default-ref: master
+            default-ref: main
             type: git
 
     cached-task-prefix: xpi
