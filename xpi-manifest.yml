@@ -203,3 +203,12 @@ xpis:
       - web-ext-artifacts/dynamic-probe-telemetry-extension.xpi
     addon-type: privileged
     install-type: npm
+  - name:  firefox-quick-suggest-weather
+    description: Firefox Quick Suggest Weather
+    repo-prefix: quicksuggestweather
+    active: true
+    private-repo: true
+    artifacts:
+      - web-ext-artifacts/firefox-quick-suggest-weather.xpi
+    addon-type: privileged
+    install-type: npm
