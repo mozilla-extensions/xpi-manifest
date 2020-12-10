@@ -132,7 +132,7 @@ taskgraph:
         quicksuggestweather:
             name: "Firefox Quick Suggest Weather"
             project-regex:  firefox-quick-suggest-weather$
-            default-repository: https://github.com/mozilla-extensions/firefox-quick-suggest-weather
+            default-repository: git@github.com:mozilla-extensions/firefox-quick-suggest-weather
             default-ref: master
             type: git
 
