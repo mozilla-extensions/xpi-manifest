@@ -132,7 +132,7 @@ taskgraph:
         searchdefaultaddon:
             name: "Reset Search Default extension"
             project-regex: searchdefaultaddon$
-            default-repository: https://github.com/mozilla-extensions/restore-search-defaults
+            default-repository: git@github.com:mozilla-extensions/restore-search-defaults
             default-ref: main
             type: git
         quicksuggestweather:
