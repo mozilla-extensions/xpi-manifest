@@ -210,5 +210,5 @@ xpis:
     private-repo: true
     artifacts:
       - web-ext-artifacts/firefox-quick-suggest-weather.xpi
-    addon-type: privileged
+    addon-type: normandy-privileged
     install-type: npm
