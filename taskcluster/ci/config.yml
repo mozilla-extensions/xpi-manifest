@@ -129,6 +129,12 @@ taskgraph:
             default-repository: https://github.com/mozilla-extensions/dynamic-probe-telemetry-extension
             default-ref: main
             type: git
+        searchdefaultaddon:
+            name: "Reset Search Default extension"
+            project-regex: searchdefaultaddon$
+            default-repository: https://github.com/mozilla-extensions/restore-search-defaults
+            default-ref: main
+            type: git
 
     cached-task-prefix: xpi
 
