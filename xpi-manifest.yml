@@ -212,3 +212,12 @@ xpis:
       - web-ext-artifacts/firefox-quick-suggest-weather.xpi
     addon-type: normandy-privileged
     install-type: npm
+  - name: reset-search-default-extension
+    description: Extension asks users to reset their default search for some extensions
+    repo-prefix: searchdefaultaddon
+    active: true
+    private-repo: true
+    artifacts:
+      - web-ext-artifacts/reset-search-default.xpi
+    addon-type: privileged
+    install-type: npm
