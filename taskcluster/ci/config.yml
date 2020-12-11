@@ -134,6 +134,11 @@ taskgraph:
             project-regex: searchdefaultaddon$
             default-repository: https://github.com/mozilla-extensions/restore-search-defaults
             default-ref: main
+        quicksuggestweather:
+            name: "Firefox Quick Suggest Weather"
+            project-regex:  firefox-quick-suggest-weather$
+            default-repository: git@github.com:mozilla-extensions/firefox-quick-suggest-weather
+            default-ref: master
             type: git
 
     cached-task-prefix: xpi
