@@ -129,6 +129,12 @@ taskgraph:
             default-repository: https://github.com/mozilla-extensions/dynamic-probe-telemetry-extension
             default-ref: main
             type: git
+        quicksuggestweather:
+            name: "Firefox Quick Suggest Weather"
+            project-regex:  firefox-quick-suggest-weather$
+            default-repository: git@github.com:mozilla-extensions/firefox-quick-suggest-weather
+            default-ref: master
+            type: git
 
     cached-task-prefix: xpi
 
