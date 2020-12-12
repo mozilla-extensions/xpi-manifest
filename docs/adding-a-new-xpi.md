@@ -98,12 +98,84 @@ Once Taskcluster CI automation is enabled, we'll generate a decision task and ta
 
 ## Enabling releases
 
-To enable releases for your new repo, go to the `xpi-manifest` repository (this one).
+To enable releases for your new repo, go to the [`xpi-manifest`](https://github.com/mozilla-extensions/xpi-manifest) repository.
 
-The source repository must be added to `taskgraph.repositories` in the `xpi-manifest` repository's [taskcluster/ci/config.yml](../taskcluster/ci/config.yml). If this is the first xpi in your source repo, you need to add it.
+1. Add the source repository to [`taskgraph.repositories`](https://github.com/mozilla-extensions/xpi-manifest/blob/master/taskcluster/ci/config.yml#L8-L23) in the `xpi-manifest` repository's [taskcluster/ci/config.yml](../taskcluster/ci/config.yml). If this is the first xpi in your source repo, you need to add it. Public repos will look like this:
 
-Then, the xpi needs to be added to the [xpi manifest](../xpi-manifest.yml). The `repo-prefix` will refer to the repository key name under `taskgraph.repositories` in the `xpi-manifest` repository's `taskcluster/ci/config.yml`.
+    ```yaml
+        normandydevtools:  # This needs to not have any _ or -
+            name: "Normandy Devtools"
+            project-regex: normandy-devtools$
+            # https url
+            default-repository: https://github.com/mozilla-extensions/normandy-devtools
+            # this may be `master` on older repos
+            default-ref: main
+            type: git
+    ```
 
-The commit should run sanity checks on pull request and push; make sure the decision task goes green.
+    Private repos will look like this:
+
+    ```yaml
+    loginstudy:  # This needs to not have any _ or -
+        name: "Login Study"
+        project-regex: login-study$
+        # ssh repo url
+        default-repository: git@github.com:mozilla-extensions/login-study
+        # this may be `main` on newer repos
+        default-ref: master
+        type: git
+    ```
+
+2. Add the xpi to the [xpi manifest](../xpi-manifest.yml). This will look like:
+
+    ```yaml
+    # string: short-xpi-name-for-machines. Required. This must be unique.
+    - name: normandy-devtools
+
+      # string: Longer description of the xpi, for humans. Optional.
+      description: Normandy Devtools
+
+      # Alphanumeric string that corresponds to the key you added to config.yaml above.
+      # Needs to not include _ or - . Required.
+      repo-prefix: normandydevtools
+
+      # boolean: enable releases of this xpi or disable them. Optional.
+      #          Defaults to `true`.
+      active: true
+
+      # boolean: whether this is a private Github repository. Optional.
+      #          Defaults to `false`.
+      private-repo: false
+
+      # string: path, relative to the root of the repository, where
+      #            the xpi package.json lives. Optional. Defaults to the
+      #            root of the repository.
+      # directory: packagejson/directory/path
+
+      # string: branch name. Optional. Defaults to the default-ref in
+      #         taskcluster.ci.config.taskgraph.repositories .
+      branch: main
+
+      # list of strings: A list of paths of xpis generated. Required.
+      artifacts:
+        - web-ext-artifacts/normandy-devtools.xpi
+
+      # enum: `system` means system add-on.
+      #       `privileged` means AMO or self-hosted privileged add-on.
+      #       `mozillaonline-privileged` means Mozilla China add-on.
+      #       `normandy-privileged` means normandy add-on.
+      #       Required.
+      addon-type: privileged
+
+      # enum: `npm` for `npm install` or `yarn` for
+      #       `yarn install --frozen-lockfile`. Optional. Defaults to `yarn`.
+      install-type: yarn
+
+      # array: any additional email addresses to notify when this addon is
+      #        built or promoted. Optional.
+      additional-emails: ["mcooper@mozilla.com", "rdalal@mozilla.com", "ttran@mozilla.com"]
+    ```
+
+The PR should run sanity checks on pull request and push; make sure the decision task and the build for your addon goes green.
 
 To run the release, see [Releasing a XPI](releasing-a-xpi.md).
