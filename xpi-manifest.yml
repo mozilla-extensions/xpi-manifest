@@ -218,6 +218,6 @@ xpis:
     active: true
     private-repo: true
     artifacts:
-      - web-ext-artifacts/reset-search-default.xpi
+      - web-ext-artifacts/reset-search-defaults.xpi
     addon-type: privileged
     install-type: npm
