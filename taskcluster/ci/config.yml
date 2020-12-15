@@ -147,6 +147,12 @@ taskgraph:
             default-repository: git@github.com:mozilla-extensions/firefox-quick-suggest-adm
             default-ref: master
             type: git
+        quicksuggestcalculator:
+            name: "Firefox Quick Suggest Calculator"
+            project-regex:  firefox-quick-suggest-calculator$
+            default-repository: https://github.com/mozilla-extensions/firefox-quick-suggest-calculator.git
+            default-ref: master
+            type: git
 
     cached-task-prefix: xpi
 
