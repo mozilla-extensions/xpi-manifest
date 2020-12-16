@@ -178,4 +178,8 @@ To enable releases for your new repo, go to the [`xpi-manifest`](https://github.
 
 The PR should run sanity checks on pull request and push; make sure the decision task and the build for your addon goes green.
 
-To run the release, see [Releasing a XPI](releasing-a-xpi.md).
+Taskcluster will automatically generate a build for you signed with the
+staging root, see [Testing a XPI](testing-a-xpi.md) for details on how
+to QA.
+
+After you are satisfied with your testing, see [Releasing a XPI](releasing-a-xpi.md) to learn how to produce the final production build.
