@@ -221,6 +221,14 @@ xpis:
       - web-ext-artifacts/firefox-quick-suggest-adm.xpi
     addon-type: normandy-privileged
     install-type: npm
+  - name:  firefox-quick-suggest-calculator
+    description: Firefox Quick Suggest Calculator
+    repo-prefix: quicksuggestcalculator
+    active: true
+    artifacts:
+      - web-ext-artifacts/firefox-quick-suggest-calculator.xpi
+    addon-type: normandy-privileged
+    install-type: npm
   - name: reset-search-default-extension
     description: Extension asks users to reset their default search for some extensions
     repo-prefix: searchdefaultaddon
