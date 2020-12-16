@@ -141,6 +141,12 @@ taskgraph:
             default-repository: git@github.com:mozilla-extensions/firefox-quick-suggest-weather
             default-ref: master
             type: git
+        quicksuggestadm:
+            name: "Firefox Quick Suggest Adm"
+            project-regex:  firefox-quick-suggest-adm$
+            default-repository: git@github.com:mozilla-extensions/firefox-quick-suggest-adm
+            default-ref: master
+            type: git
 
     cached-task-prefix: xpi
 
