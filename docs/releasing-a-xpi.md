@@ -56,9 +56,16 @@ If we need a new release build:
 
 ### Signoffs
 
-  - Click on the `Promote` portion of the progress bar, and sign off as the appropriate user type. See below.
+  - Once the build is complete, it will need to be signed off by two of the groups listed below; via the Promote button.
+  - The relevant groups are automatically notified.
+    - You will be also notified if you are listed in the additional-emails section for your xpi in the [xpi manifest](https://github.com/mozilla-extensions/xpi-manifest/blob/master/xpi-manifest.yml)
   - When we have the quorum of signoffs, we'll schedule the promote graph, and we'll get a release-signed xpi.
   - Again, the promote button becomes a link to the build graph, wait until they are all finished. The signed xpi can be found as an artifact on the `release-signing-...` task.
+
+If you need to expedite the release:
+
+  - Try pinging the relevant teams via the #addons-pipeline channel on Slack.
+  - Releng should only step in to expedite when requested, and only to unblock urgent requests. If releng signs off, that release should be audited by the appropriate team(s) later.
 
 | Group name | Who | Type of xpi | Notes |
 | ---------- | --- | ----------- | ----- |
@@ -68,5 +75,3 @@ Normandy privileged admin | Normandy review team (+releng as backups) | normandy
 System addon admin | `:rdalal` and `:mythmon` (+releng as backups) | system | Two of these are required to sign off on `system` xpis.
 MozillaOnline privileged webextension team | mozilla-online team (+releng as backups) | mozillaonline-privileged | One of each (team and admin) need to sign off on `mozillaonline-privileged` xpis.
 MozillaOnline privileged webextension admin | `:theone` and `:mkaply` (+releng as backups) | mozillaonline-privileged | One of each (team and admin) need to sign off on `mozillaonline-privileged` xpis.
-
-Releng should only step in to expedite when requested, and only to unblock urgent requests. If releng signs off, that release should be audited by the appropriate team(s) later.
