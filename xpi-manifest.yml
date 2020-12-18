@@ -185,9 +185,9 @@ xpis:
       - web-ext-artifacts/news-disinformation-study.xpi
     addon-type: privileged
     install-type: npm
-  - name: ion-core-addon
-    description: Ion Core Add-on
-    repo-prefix: ioncoreaddon
+  - name: rally-core-addon
+    description: Rally Core Add-on
+    repo-prefix: rallycoreaddon
     active: true
     private-repo: false
     artifacts:
