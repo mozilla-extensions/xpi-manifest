@@ -237,5 +237,5 @@ xpis:
     branch: main
     artifacts:
       - web-ext-artifacts/reset-search-defaults.xpi
-    addon-type: privileged
+    addon-type: system
     install-type: npm
