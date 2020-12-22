@@ -12,7 +12,7 @@ Once you are happy with your changes and push to the
 github.com/mozilla-extensions repo, taskcluster will run any
 `build` and `test` targets specified in your `package.json`.
 
-Additionally, taskcluster will create a "dep-signed" build, which
+Additionally, taskcluster will create a ["dep-signed"](https://wiki.mozilla.org/Add-ons/Extension_Signing) (development signed) build, which
 uses the staging root.
 
 ## QA the XPI signed with the staging root
