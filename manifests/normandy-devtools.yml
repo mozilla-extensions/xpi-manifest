@@ -1,0 +1,11 @@
+---
+description: Normandy Devtools
+repo-prefix: normandydevtools
+active: true
+private-repo: false
+branch: main
+artifacts:
+  - web-ext-artifacts/normandy-devtools.xpi
+addon-type: privileged
+install-type: yarn
+additional-emails: ["mcooper@mozilla.com", "rdalal@mozilla.com", "ttran@mozilla.com"]

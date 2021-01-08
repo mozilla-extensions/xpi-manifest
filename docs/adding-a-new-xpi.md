@@ -38,6 +38,8 @@ When creating the repository, email [secops+github@mozilla.com](mailto:secops+gi
 
 To enable signing on push, set the [`xpiSigningType` in `.taskcluster.yml`](https://github.com/mozilla-extensions/xpi-template/blob/7dbfdd814e67d8f92508052073db468438fdd5b1/.taskcluster.yml#L10-L13) to the appropriate addon type.
 
+This currently assumes that the xpi will be named `{name}.xpi`, where `{name}` is the `name` in `package.json`.
+
 We [may move this setting to `package.json`](https://github.com/mozilla-extensions/xpi-manifest/issues/33) in the future.
 
 ### Private repos
@@ -135,55 +137,7 @@ To enable releases for your new repo, go to the [`xpi-manifest`](https://github.
         type: git
     ```
 
-2. Add the xpi to the [xpi manifest](../xpi-manifest.yml). This will look like:
-
-    ```yaml
-    # string: short-xpi-name-for-machines. Required. This must be unique.
-    - name: normandy-devtools
-
-      # string: Longer description of the xpi, for humans. Optional.
-      description: Normandy Devtools
-
-      # Alphanumeric string that corresponds to the key you added to config.yaml above.
-      # Needs to not include _ or - . Required.
-      repo-prefix: normandydevtools
-
-      # boolean: enable releases of this xpi or disable them. Optional.
-      #          Defaults to `true`.
-      active: true
-
-      # boolean: whether this is a private Github repository. Optional.
-      #          Defaults to `false`.
-      private-repo: false
-
-      # string: path, relative to the root of the repository, where
-      #            the xpi package.json lives. Optional. Defaults to the
-      #            root of the repository.
-      # directory: packagejson/directory/path
-
-      # string: branch name. Optional. Defaults to the default-ref in
-      #         taskcluster.ci.config.taskgraph.repositories .
-      branch: main
-
-      # list of strings: A list of paths of xpis generated. Required.
-      artifacts:
-        - web-ext-artifacts/normandy-devtools.xpi
-
-      # enum: `system` means system add-on.
-      #       `privileged` means AMO or self-hosted privileged add-on.
-      #       `mozillaonline-privileged` means Mozilla China add-on.
-      #       `normandy-privileged` means normandy add-on.
-      #       Required.
-      addon-type: privileged
-
-      # enum: `npm` for `npm install` or `yarn` for
-      #       `yarn install --frozen-lockfile`. Optional. Defaults to `yarn`.
-      install-type: yarn
-
-      # array: any additional email addresses to notify when this addon is
-      #        built or promoted. Optional.
-      additional-emails: ["mcooper@mozilla.com", "rdalal@mozilla.com", "ttran@mozilla.com"]
-    ```
+2. Add the xpi to the [xpi manifest directory](../manifests/). Copy [manifests/template-example.yml.template](https://github.com/mozilla-extensions/xpi-manifest/blob/master/manifests/template-example.yml.template) to `manifests/{name}.yml`, where `{name}` is the name of your addon. Then edit: the `repo-prefix` will refer to the repository key name under `taskgraph.repositories` in the `xpi-manifest` repository's `taskcluster/ci/config.yml`.
 
 The PR should run sanity checks on pull request and push; make sure the decision task and the build for your addon goes green.
 

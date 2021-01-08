@@ -7,6 +7,7 @@
 from __future__ import absolute_import, print_function, unicode_literals
 
 from copy import deepcopy
+import glob
 import json
 import os
 import time
@@ -22,74 +23,55 @@ from voluptuous import ALLOW_EXTRA, Optional, Required, Schema, Any
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(__file__)))
 ROOT = os.path.join(BASE_DIR, "taskcluster", "ci")
-MANIFEST_PATH = os.path.join(BASE_DIR, "xpi-manifest.yml")
+MANIFEST_DIR = os.path.join(BASE_DIR, "manifests")
 
 
 base_schema = Schema(
     {
-        Required("xpis"): [
-            {
-                Required("name"): basestring,
-                Optional("description"): basestring,
-                Required("repo-prefix"): basestring,
-                Optional("directory"): basestring,
-                Optional("active"): bool,
-                Optional("additional-emails"): [basestring],
-                Optional("private-repo"): bool,
-                Optional("branch"): basestring,
-                Required("artifacts"): [basestring],
-                Required("addon-type"): Any("mozillaonline-privileged",
-                                            "normandy-privileged",
-                                            "privileged",
-                                            "system"),
-                Optional("install-type"): Any("npm", "yarn"),
-            }
-        ]
+        Required("manifest_name"): basestring,
+        Optional("description"): basestring,
+        Required("repo-prefix"): basestring,
+        Optional("directory"): basestring,
+        Optional("active"): bool,
+        Optional("additional-emails"): [basestring],
+        Optional("private-repo"): bool,
+        Optional("branch"): basestring,
+        Required("artifacts"): [basestring],
+        Required("addon-type"): Any("mozillaonline-privileged",
+                                    "normandy-privileged",
+                                    "privileged",
+                                    "system"),
+        Optional("install-type"): Any("npm", "yarn"),
     }
 )
 
 
-def check_manifest(manifest, graph_config):
-    xpi_names = []
-    for xpi_config in manifest["xpis"]:
-        # Every xpi_config has a '-' in it
-        if xpi_config["repo-prefix"] not in graph_config["taskgraph"]["repositories"]:
-            raise Exception(
-                "{} repo-prefix not in graph_config!".format(xpi_config["name"])
+def check_manifest(xpi_config, graph_config):
+    if xpi_config["repo-prefix"] not in graph_config["taskgraph"]["repositories"]:
+        raise Exception(
+            "{} repo-prefix not in graph_config!".format(xpi_config["manifest_name"])
+        )
+    # No '-' allowed in repo-prefixes
+    if "-" in xpi_config["repo-prefix"]:
+        raise Exception(
+            "{} repo-prefix contains a '-': {}".format(
+                xpi_config["manifest_name"], xpi_config["repo-prefix"]
             )
-        # No '-' allowed in repo-prefixes
-        if "-" in xpi_config["repo-prefix"]:
-            raise Exception(
-                "{} repo-prefix contains a '-': {}".format(
-                    xpi_config["name"], xpi_config["repo-prefix"]
-                )
-            )
-        xpi_names.append(xpi_config["name"])
-    # check for duplicate xpi names
-    duplicate_xpi_names = set(
-        [name for name in set(xpi_names) if xpi_names.count(name) > 1]
-    )
-    if duplicate_xpi_names:
-        raise Exception("Duplicate xpi names! {}".format(duplicate_xpi_names))
+        )
 
 
 @memoize
 def get_manifest():
-    rw_manifest = yaml.load_yaml(MANIFEST_PATH)
+    manifest_paths = glob.glob(os.path.join(MANIFEST_DIR, "*.yml"))
+    all_manifests = {}
     graph_config = load_graph_config(ROOT)
-    validate_schema(base_schema, deepcopy(rw_manifest), "Invalid manifest:")
-    check_manifest(deepcopy(rw_manifest), graph_config)
-    # TODO make read-only recursively
-    return ReadOnlyDict(rw_manifest)
-
-
-def get_xpi_config(xpi_name):
-    manifest = get_manifest()
-    xpi_configs = [xpi for xpi in manifest["xpis"] if xpi["name"] == xpi_name]
-    if len(xpi_configs) != 1:
-        raise Exception(
-            "Unable to find a single xpi matching name {}: found {}".format(
-                input.xpi_name, len(xpi_configs)
-            )
-        )
-    return xpi_configs[0]
+    for path in manifest_paths:
+        rw_manifest = yaml.load_yaml(path)
+        manifest_name = os.path.basename(path).replace(".yml", "")
+        rw_manifest["manifest_name"] = manifest_name
+        validate_schema(base_schema, deepcopy(rw_manifest), "Invalid manifest:")
+        check_manifest(deepcopy(rw_manifest), graph_config)
+        rw_manifest["artifacts"] = tuple(rw_manifest["artifacts"])
+        assert manifest_name not in all_manifests
+        all_manifests[manifest_name] = ReadOnlyDict(rw_manifest)
+    return ReadOnlyDict(all_manifests)

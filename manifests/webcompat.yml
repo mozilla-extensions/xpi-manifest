@@ -1,0 +1,8 @@
+description: Web Compat
+repo-prefix: webcompat
+active: true
+private-repo: false
+artifacts:
+  - web-ext-artifacts/webcompat.xpi
+addon-type: system
+install-type: npm

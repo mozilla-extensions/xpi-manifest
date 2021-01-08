@@ -2,10 +2,10 @@
 # License, v. 2.0. If a copy of the MPL was not distributed with this
 # file, You can obtain one at http://mozilla.org/MPL/2.0/.
 ---
-loader: xpi_taskgraph.single_dep:loader
+loader: xpi_taskgraph.loader.single_dep:loader
 
 transforms:
-    - xpi_taskgraph.release_notifications:transforms
+    - xpi_taskgraph.transforms.release_notifications:transforms
     - taskgraph.transforms.task:transforms
 
 kind-dependencies:

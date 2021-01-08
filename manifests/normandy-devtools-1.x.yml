@@ -1,0 +1,10 @@
+---
+description: Normandy Devtools
+repo-prefix: normandydevtools
+active: true
+private-repo: false
+branch: 1.x-minimal
+artifacts:
+  - web-ext-artifacts/normandy-devtools.zip
+addon-type: privileged
+install-type: yarn

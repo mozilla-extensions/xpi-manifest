@@ -5,7 +5,7 @@
 loader: taskgraph.loader.transform:loader
 
 transforms:
-    - xpi_taskgraph.release_notifications:transforms
+    - xpi_taskgraph.transforms.release_notifications:transforms
     - taskgraph.transforms.task:transforms
 
 job-defaults:

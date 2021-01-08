@@ -61,9 +61,7 @@ def is_release_promotion_available(parameters):
                 'title': 'The XPI to promote',
                 'default': 'FILLMEIN',
                 'description': ('The XPI to promote.'),
-                'enum': sorted(
-                    [xpi["name"] for xpi in XPI_MANIFEST["xpis"]]
-                ),
+                'enum': sorted(XPI_MANIFEST.keys()),
             },
             'revision': {
                 'type': 'string',
