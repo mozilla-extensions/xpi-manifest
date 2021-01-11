@@ -3,6 +3,6 @@ repo-prefix: rallycoreaddon
 active: true
 private-repo: false
 artifacts:
-  - web-ext-artifacts/ion_core.xpi
+  - web-ext-artifacts/rally_core.xpi
 addon-type: privileged
 install-type: npm
