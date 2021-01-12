@@ -146,6 +146,10 @@ def release_promotion_action(parameters, graph_config, input, task_group_id, tas
     parameters['xpi_revision'] = input.get('revision', 'master')
     parameters['shipping_phase'] = input['release_promotion_flavor']
 
+    # We blow away `tasks_for` when we load the on-push decision task's
+    # parameters.yml. Let's set this back to `action`.
+    parameters['tasks_for'] = "action"
+
     if input.get('version'):
         parameters['version'] = input['version']
 
