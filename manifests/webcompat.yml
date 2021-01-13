@@ -2,6 +2,7 @@ description: Web Compat
 repo-prefix: webcompat
 active: true
 private-repo: false
+branch: main
 artifacts:
   - web-ext-artifacts/webcompat.xpi
 addon-type: system
