@@ -32,7 +32,7 @@ What if I don't want to move my repository into mozilla-extensions?
 
 First, we need to make sure we meet the following requirements:
 
-- The repo needs to follow the security guidelines: branch protections, reviews, limit who is an admin. Private repos will need to invite the `mozilla-extensions/private-repo` team to enable automation.
+- The repo needs to follow the security guidelines: branch protections, reviews, limit who is an admin. Private repos will need to invite both `moz-releng-automation` and `moz-releng-automation-stage` to enable automation.
 - The repo cannot be in the `mozilla` github organization.
 - The repo needs to be long-lived. If this addon is not going to be active in a year, we should follow the standard practices.
 
@@ -45,7 +45,7 @@ Then we'll follow these steps:
 
 ### Branch protection
 
-We will use the `master` branch as the main branch for releasing XPIs. It's important to set [branch protection](https://docs.github.com/en/free-pro-team@latest/github/administering-a-repository/configuring-protected-branches) for the `master` branch, and get code review for the source. [SecOps](https://mana.mozilla.org/wiki/display/SVCOPS/Firefox+Operations+Security) will be auditing the repositories in the `mozilla-extensions` organization for compliance.
+We will use the specified branch(es) as the branch for releasing XPIs. It's important to set [branch protection](https://docs.github.com/en/free-pro-team@latest/github/administering-a-repository/configuring-protected-branches) for any release branch, and get code review for the source. [SecOps](https://mana.mozilla.org/wiki/display/SVCOPS/Firefox+Operations+Security) will be auditing the repositories in the `mozilla-extensions` organization for compliance.
 
 The github repository rules are [here](https://wiki.mozilla.org/GitHub/Repository_Security).
 
