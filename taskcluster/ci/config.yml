@@ -120,8 +120,8 @@ taskgraph:
         rallycoreaddon:
             name: "Rally Core Add-on"
             project-regex: rallycoreaddon$
-            default-repository: https://github.com/mozilla-extensions/rally-core-addon
-            default-ref: master
+            default-repository: https://github.com/mozilla-rally/rally-core-addon
+            default-ref: release
             type: git
         telemetrytestingextension:
             name: "Telemetry testing extension"
