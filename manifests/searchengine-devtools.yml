@@ -1,6 +1,7 @@
 ---
 description: Search Engine Devtools
 repo-prefix: searchenginedevtools
+branch: main
 active: true
 private-repo: false
 artifacts:
