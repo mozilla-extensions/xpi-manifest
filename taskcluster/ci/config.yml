@@ -153,6 +153,12 @@ taskgraph:
             default-repository: https://github.com/mozilla-extensions/firefox-quick-suggest-calculator.git
             default-ref: master
             type: git
+        bergamotbrowserextension:
+            name: "Bergamot Browser Extension"
+            project-regex: bergamot-browser-extension$
+            default-repository: https://github.com/mozilla-extensions/bergamot-browser-extension
+            default-ref: main
+            type: git
 
     cached-task-prefix: xpi
 
