@@ -5,7 +5,7 @@ active: true
 private-repo: false
 additional-emails: ["anatal-all@mozilla.com"]
 directory: extension
-branch: main
+branch: ci-and-e2e-tests
 artifacts:
   - extension/dist/firefox/native-ui/translation_mozilla.org.xpi
 addon-type: normandy-privileged
