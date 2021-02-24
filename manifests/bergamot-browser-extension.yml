@@ -3,7 +3,7 @@ description: Bergamot Browser Extension
 repo-prefix: bergamotbrowserextension
 active: true
 private-repo: false
-additional-emails: ["maml@mozilla.com"]
+additional-emails: ["anatal-all@mozilla.com"]
 directory: extension
 branch: main
 artifacts:
