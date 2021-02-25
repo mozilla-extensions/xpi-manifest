@@ -7,6 +7,6 @@ additional-emails: ["anatal-all@mozilla.com"]
 directory: extension
 branch: ci-and-e2e-tests
 artifacts:
-  - extension/dist/firefox/native-ui/translation_mozilla.org.xpi
+  - dist/firefox/native-ui/translation_mozilla.org.xpi
 addon-type: normandy-privileged
 install-type: yarn
