@@ -7,6 +7,6 @@ additional-emails: ["anatal-all@mozilla.com"]
 directory: extension
 branch: ci-and-e2e-tests
 artifacts:
-  - dist/firefox/native-ui/translation_mozilla.org.xpi
+  - build/bergamot-browser-extension.xpi
 addon-type: normandy-privileged
 install-type: yarn
