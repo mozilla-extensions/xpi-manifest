@@ -43,7 +43,7 @@ taskgraph:
             name: "Search Engine Devtools"
             project-regex: searchengine-devtools$
             default-repository: https://github.com/mozilla-extensions/searchengine-devtools
-            default-ref: master
+            default-ref: main
             type: git
         httpsupgradestudyv2:
             name: "HTTPS Upgrade Study (v2)"
