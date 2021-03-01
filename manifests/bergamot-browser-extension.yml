@@ -5,7 +5,7 @@ active: true
 private-repo: false
 additional-emails: ["anatal-all@mozilla.com"]
 directory: extension
-branch: ci-and-e2e-tests
+branch: main
 artifacts:
   - build/bergamot-browser-extension.xpi
 addon-type: normandy-privileged
