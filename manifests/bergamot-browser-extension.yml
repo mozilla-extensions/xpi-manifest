@@ -4,7 +4,6 @@ repo-prefix: bergamotbrowserextension
 active: true
 private-repo: false
 additional-emails: ["anatal-all@mozilla.com"]
-directory: extension
 branch: main
 artifacts:
   - build/bergamot-browser-extension.xpi
