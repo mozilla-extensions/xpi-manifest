@@ -23,8 +23,8 @@ taskgraph:
             type: git
         template:
             name: "template repo test"
-            project-regex: test-xpi-public$
-            default-repository: https://github.com/escapewindow/test-xpi-public
+            project-regex: staging-xpi-public$
+            default-repository: https://github.com/mozilla-releng/staging-xpi-public
             default-ref: master
             type: git
         normandydevtools:
