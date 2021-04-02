@@ -17,7 +17,7 @@ from xpi_taskgraph.xpi_manifest import get_manifest
 
 RELEASE_PROMOTION_PROJECTS = (
     "https://github.com/mozilla-extensions/xpi-manifest",
-    "https://github.com/escapewindow/xpi-manifest",
+    "https://github.com/mozilla-releng/staging-xpi-manifest",
 )
 
 XPI_MANIFEST = get_manifest()
