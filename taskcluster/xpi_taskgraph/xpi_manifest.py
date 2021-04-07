@@ -36,6 +36,7 @@ base_schema = Schema(
         Optional("additional-emails"): [basestring],
         Optional("private-repo"): bool,
         Optional("branch"): basestring,
+        Optional("docker-image"): basestring,
         Required("artifacts"): [basestring],
         Required("addon-type"): Any("mozillaonline-privileged",
                                     "normandy-privileged",
