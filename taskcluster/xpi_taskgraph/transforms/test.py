@@ -50,8 +50,11 @@ def test_tasks_from_manifest(config, tasks):
             task["worker"]["taskcluster-proxy"] = True
         else:
             artifact_prefix = "public/build"
-        env["ARTIFACT_PREFIX"] = artifact_prefix
 
+        if "docker-image" in xpi_config:
+            task["worker"]["docker-image"]["in-tree"] = xpi_config["docker-image"]
+
+        env["ARTIFACT_PREFIX"] = artifact_prefix
         paths = []
         for artifact in xpi_config["artifacts"]:
             artifact_name = "{}/{}".format(
