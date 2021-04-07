@@ -19,7 +19,3 @@ jobs:
         definition: node
         args:
             NODE_VERSION: "14.0.0"
-    node-15:
-        definition: node
-        args:
-            NODE_VERSION: "15.0.0"

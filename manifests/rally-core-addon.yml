@@ -7,4 +7,3 @@ artifacts:
   - web-ext-artifacts/rally_core.xpi
 addon-type: privileged
 install-type: npm
-docker-image: node-15

@@ -57,10 +57,6 @@ def tasks_from_manifest(config, jobs):
                 env["XPI_INSTALL_TYPE"] = xpi_config["install-type"]
             task.setdefault("attributes", {})["addon-type"] = xpi_config["addon-type"]
             task.setdefault("attributes", {})["xpis"] = {}
-
-            if "docker-image" in xpi_config:
-                task["worker"]["docker-image"]["in-tree"] = xpi_config["docker-image"]
-
             artifacts = task.setdefault("worker", {}).setdefault("artifacts", [])
             for artifact in xpi_config["artifacts"]:
                 artifact_name = "{}/{}".format(
