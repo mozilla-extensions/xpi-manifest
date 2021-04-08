@@ -71,7 +71,7 @@ Once Taskcluster CI automation is enabled, you will see a decision task (and rel
 
   - Find all `package.json` files in the repository. The directory that `package.json` lives in is the package directory.
 
-    - Look for either `yarn.lock` or `package-lock.json` in the package directory. This determines whether the task will install dependencies via `yarn install --frozen-lockfile` or `npm install`.
+    - Look for either `yarn.lock` or `package-lock.json` in the package directory. This determines whether the task will install dependencies via `yarn install --frozen-lockfile` or `npm install` (see below for custom tooling).
 
     - The package directories must have unique names per repository. So a layout like
 
@@ -123,6 +123,32 @@ Once Taskcluster CI automation is enabled, you will see a decision task (and rel
       - `.taskcluster.yml`
       - a file under `taskcluster/`
       - or a file under the package directory have been changed since the previous test run.
+
+  - Custom tooling needs - If you need extra npm's installed or a different version of node, here are some options
+    - in `package.json` add or modify a `devDependencies` section
+    ```
+    {
+          "devDependencies": {
+            "superawesomepackage": "^3.1.4",
+            ...
+          }
+    }
+    ```
+    - in `package.json` you can specify a `docker-image` ([existing choices](https://github.com/mozilla-extensions/xpi-manifest/blob/master/taskcluster/ci/docker-image/kind.yml) or add a new one):
+    ```
+    {
+        ...
+        "docker-image": "node-15",
+        ...
+    }
+    ```
+    If you do this, you can edit your `manifest.yml` file and add the same thing:
+    ```
+    active: true
+    install-type: npm
+    docker-image: node-15
+    ...
+    ```
 
 ## Enabling releases
 
