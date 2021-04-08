@@ -43,6 +43,8 @@ def test_tasks_from_manifest(config, tasks):
             run['cwd'] = '{checkout}/%s' % xpi_config['directory']
         if xpi_revision:
             checkout_config['head_rev'] = xpi_revision
+        if "docker-image" in xpi_config:
+            task["worker"]["docker-image"]["in-tree"] = xpi_config["docker-image"]
         task["label"] = "test-{}".format(xpi_name)
         if xpi_config.get("private-repo"):
             checkout_config['ssh_secret_name'] = config.graph_config["github_clone_secret"]
@@ -51,7 +53,6 @@ def test_tasks_from_manifest(config, tasks):
         else:
             artifact_prefix = "public/build"
         env["ARTIFACT_PREFIX"] = artifact_prefix
-
         paths = []
         for artifact in xpi_config["artifacts"]:
             artifact_name = "{}/{}".format(
