@@ -5,5 +5,5 @@ branch: main
 private-repo: false
 artifacts:
   - web-ext-artifacts/dynamic-probe-telemetry-extension.xpi
-addon-type: privileged
+addon-type: normandy-privileged
 install-type: npm
