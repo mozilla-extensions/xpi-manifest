@@ -16,7 +16,7 @@ from voluptuous import (
 
 # Please keep this list sorted and in sync with taskcluster/docs/parameters.rst
 xpi_schema = {
-    Optional('shipping_phase'): Any("build", "promote", None),
+    Optional('shipping_phase'): Any("build", "promote", "ship", None),
     Optional('xpi_name'): Any(basestring, None),
     Optional('xpi_revision'): Any(basestring, None),
 }

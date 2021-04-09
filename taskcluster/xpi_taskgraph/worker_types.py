@@ -65,3 +65,34 @@ def build_push_apk_payload(config, task, task_def):
     task_def["payload"] = {
         "release_name": worker['release-name'],
     }
+
+
+# NOTE: copied scriptworker-github from fenix w/few modifications
+@payload_builder(
+    "scriptworker-github",
+    schema={
+        Required("artifact-map"): [object],
+        Required("action"): text_type,
+        Required("git-tag"): text_type,
+        Required("git-revision"): text_type,
+        Required("github-project"): text_type,
+        Required("release-name"): text_type,
+    },
+)
+def build_github_release_payload(config, task, task_def):
+    worker = task["worker"]
+
+    task_def["tags"]["worker-implementation"] = "scriptworker"
+
+    task_def["payload"] = {
+        "artifactMap": worker["artifact-map"],
+        "gitTag": worker["git-tag"],
+        "gitRevision": worker["git-revision"],
+        "releaseName": worker["release-name"],
+    }
+
+    scope_prefix = config.graph_config["scriptworker"]["scope-prefix"]
+    task_def["scopes"].extend([
+        "{}:github:project:{}".format(scope_prefix, worker["github-project"]),
+        "{}:github:action:{}".format(scope_prefix, worker["action"]),
+    ])

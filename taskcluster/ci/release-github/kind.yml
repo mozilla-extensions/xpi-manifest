@@ -1,0 +1,23 @@
+# This Source Code Form is subject to the terms of the Mozilla Public
+# License, v. 2.0. If a copy of the MPL was not distributed with this
+# file, You can obtain one at http://mozilla.org/MPL/2.0/.
+---
+loader: xpi_taskgraph.loader.single_dep:loader
+
+transforms:
+    - xpi_taskgraph.transforms.release_github:transforms
+    - taskgraph.transforms.task:transforms
+
+kind-dependencies:
+    - release-signing
+
+job-template:
+    name: release-github
+    description: upload release artifacts to github and publish
+    run-on-tasks-for: ["action"]
+    worker-type: github
+    worker:
+        action: release
+        github-project: xpi-manifest
+    attributes:
+        shipping-phase: ship
