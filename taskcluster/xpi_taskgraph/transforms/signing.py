@@ -55,6 +55,7 @@ def build_signing_task(config, tasks):
             scopes.append(
                 "queue:get-artifact:{}/*".format(dep.task["payload"]["env"]["ARTIFACT_PREFIX"].rstrip('/'))
             )
+
         paths = dep.attributes["xpis"].values()
         format = evaluate_keyed_by(
             config.graph_config["scriptworker"]["signing-format"],
@@ -75,6 +76,7 @@ def build_signing_task(config, tasks):
             }
         ]
         task.setdefault("extra", {})["xpi-name"] = dep.task["extra"]["xpi-name"]
+        task["extra"]["artifact_prefix"] = dep.task["payload"]["env"]["ARTIFACT_PREFIX"]
         del task["primary-dependency"]
         yield task
 
