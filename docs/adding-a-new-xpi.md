@@ -163,3 +163,22 @@ staging root, see [Testing a XPI](testing-a-xpi.md) for details on how
 to QA.
 
 After you are satisfied with your testing, see [Releasing a XPI](releasing-a-xpi.md) to learn how to produce the final production build.
+
+## custom tooling needs
+If you need extra npm's installed or a different version of node, it will be documented here.  What we currently have available is a way to specify a custom docker image:
+
+ in `package.json` you can specify a `docker-image` ([existing choices](https://github.com/mozilla-extensions/xpi-manifest/blob/master/taskcluster/ci/docker-image/kind.yml) or add a new one):
+```
+{
+    ...
+    "docker-image": "node-15",
+    ...
+}
+```
+To do this for release automation, you can edit your `manifest.yml` file and add the same thing:
+```
+active: true
+install-type: npm
+docker-image: node-15
+...
+```
