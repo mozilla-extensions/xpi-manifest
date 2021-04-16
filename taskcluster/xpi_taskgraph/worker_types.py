@@ -71,6 +71,13 @@ def build_push_apk_payload(config, task, task_def):
 @payload_builder(
     "scriptworker-github",
     schema={
+        Required("upstream-artifacts"): [
+            {
+                Required("taskId"): taskref_or_string,
+                Required("taskType"): text_type,
+                Required("paths"): [text_type],
+            }
+        ],
         Required("artifact-map"): [object],
         Required("action"): text_type,
         Required("git-tag"): text_type,
@@ -89,6 +96,7 @@ def build_github_release_payload(config, task, task_def):
         "gitTag": worker["git-tag"],
         "gitRevision": worker["git-revision"],
         "releaseName": worker["release-name"],
+        "upstreamArtifacts": worker["upstream-artifacts"],
     }
 
     scope_prefix = config.graph_config["scriptworker"]["scope-prefix"]
