@@ -12,15 +12,17 @@ def register(graph_config):
     Import all modules that are siblings of this one, triggering decorators in
     the process.
     """
-    _import_modules([
-        "loader",
-        "parameters",
-        "release_promotion",
-        "routes",
-        "target",
-        "transforms",
-        "worker_types",
-    ])
+    _import_modules(
+        [
+            "loader",
+            "parameters",
+            "release_promotion",
+            "routes",
+            "target",
+            "transforms",
+            "worker_types",
+        ]
+    )
 
 
 def _import_modules(modules):

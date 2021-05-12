@@ -7,18 +7,14 @@
 from __future__ import absolute_import, print_function, unicode_literals
 
 from taskgraph.parameters import extend_parameters_schema
-from voluptuous import (
-    Any,
-    Optional,
-    Required,
-)
+from voluptuous import Any, Optional, Required
 
 
 # Please keep this list sorted and in sync with taskcluster/docs/parameters.rst
 xpi_schema = {
-    Optional('shipping_phase'): Any("build", "promote", "ship", None),
-    Optional('xpi_name'): Any(basestring, None),
-    Optional('xpi_revision'): Any(basestring, None),
+    Optional("shipping_phase"): Any("build", "promote", "ship", None),
+    Optional("xpi_name"): Any(basestring, None),
+    Optional("xpi_revision"): Any(basestring, None),
 }
 
 extend_parameters_schema(xpi_schema)

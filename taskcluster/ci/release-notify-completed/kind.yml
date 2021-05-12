@@ -11,6 +11,7 @@ transforms:
 kind-dependencies:
     - dep-signing
     - release-signing
+    - release-mark-as-shipped
 
 job-template:
     name: release-notify-completed

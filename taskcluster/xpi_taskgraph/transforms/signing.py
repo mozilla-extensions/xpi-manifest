@@ -15,10 +15,7 @@ from taskgraph.util.keyed_by import evaluate_keyed_by
 
 transforms = TransformSequence()
 
-KNOWN_FORMATS = (
-    "privileged_webextension",
-    "system_addon",
-)
+KNOWN_FORMATS = ("privileged_webextension", "system_addon")
 
 
 @transforms.add
@@ -37,10 +34,7 @@ def define_signing_flags(config, tasks):
 
         for key in ("worker-type", "worker.signing-type"):
             resolve_keyed_by(
-                task,
-                key,
-                item_name=task["name"],
-                level=config.params["level"],
+                task, key, item_name=task["name"], level=config.params["level"]
             )
         yield task
 
@@ -51,9 +45,11 @@ def build_signing_task(config, tasks):
         dep = task["primary-dependency"]
         task["dependencies"] = {"build": dep.label}
         if not dep.task["payload"]["env"]["ARTIFACT_PREFIX"].startswith("public"):
-            scopes = task.setdefault('scopes', [])
+            scopes = task.setdefault("scopes", [])
             scopes.append(
-                "queue:get-artifact:{}/*".format(dep.task["payload"]["env"]["ARTIFACT_PREFIX"].rstrip('/'))
+                "queue:get-artifact:{}/*".format(
+                    dep.task["payload"]["env"]["ARTIFACT_PREFIX"].rstrip("/")
+                )
             )
 
         paths = dep.attributes["xpis"].values()
@@ -64,7 +60,7 @@ def build_signing_task(config, tasks):
                 "xpi-type": task["attributes"]["addon-type"],
                 "kind": config.kind,
                 "level": config.params["level"],
-            }
+            },
         )
         assert format in KNOWN_FORMATS
         task["worker"]["upstream-artifacts"] = [
@@ -82,4 +78,4 @@ def build_signing_task(config, tasks):
 
 
 def _get_dependent_job_name_without_its_kind(dependent_job):
-    return dependent_job.label[len(dependent_job.kind) + 1:]
+    return dependent_job.label[len(dependent_job.kind) + 1 :]

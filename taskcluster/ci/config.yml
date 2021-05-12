@@ -13,7 +13,7 @@ taskgraph:
             # string: the name of the repo, for humans
             name: "XPI manifest"
             # regex: to match the base name of the repo
-            project-regex: xpi-manifest
+            project-regex: xpi-manifest$
             # string: the repo url. Use `git@github.com:org/repo` for private
             #         repositories.
             default-repository: https://github.com/mozilla-extensions/xpi-manifest
@@ -21,10 +21,16 @@ taskgraph:
             default-ref: master
             # enum: hg or git; should be `git`
             type: git
-        template:
-            name: "template repo test"
+        stagingpublic:
+            name: "Releng staging repo test"
             project-regex: staging-xpi-public$
             default-repository: https://github.com/mozilla-releng/staging-xpi-public
+            default-ref: master
+            type: git
+        stagingprivate:
+            name: "Releng staging private repo test"
+            project-regex: staging-xpi-private$
+            default-repository: git@github.com:mozilla-releng/staging-xpi-private
             default-ref: master
             type: git
         normandydevtools:
@@ -183,7 +189,6 @@ workers:
             provisioner: scriptworker-k8s
             implementation: scriptworker-github
             os: scriptworker
-            # TODO: need to create xpi-3-github and xpi-1-github
             worker-type: 'xpi-{level}-github'
         signing:
             provisioner: scriptworker-k8s
