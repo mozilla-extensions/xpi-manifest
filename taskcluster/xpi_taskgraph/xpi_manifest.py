@@ -38,11 +38,13 @@ base_schema = Schema(
         Optional("branch"): basestring,
         Optional("docker-image"): basestring,
         Required("artifacts"): [basestring],
-        Required("addon-type"): Any("mozillaonline-privileged",
-                                    "normandy-privileged",
-                                    "privileged",
-                                    "system"),
+        Required("addon-type"): Any(
+            "mozillaonline-privileged", "normandy-privileged", "privileged", "system"
+        ),
         Optional("install-type"): Any("npm", "yarn"),
+        Optional("enable-github-release"): bool,
+        Optional("release-tag"): basestring,
+        Optional("release-name"): basestring,
     }
 )
 

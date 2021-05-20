@@ -38,40 +38,30 @@ def add_notifications(config, jobs):
             job.setdefault("dependencies", {}).update({"signing": dep.label})
         if job.get("attributes", {}).get("shipping-phase") != shipping_phase:
             continue
-        job['label'] = '{}-{}'.format(config.kind, shipping_phase)
+        job["label"] = "{}-{}".format(config.kind, shipping_phase)
         xpi_config = manifest[xpi_name]
-        xpi_type = xpi_config['addon-type']
+        xpi_type = xpi_config["addon-type"]
 
         emails = evaluate_keyed_by(
-            config.graph_config['release-promotion']['notifications'][xpi_type],
-            'email', dict(phase=shipping_phase, )
+            config.graph_config["release-promotion"]["notifications"][xpi_type],
+            "email",
+            dict(phase=shipping_phase),
         ) + xpi_config.get("additional-emails", [])
         notifications = evaluate_keyed_by(
-            job.pop('notifications'),
-            'notification config', dict(phase=shipping_phase, )
+            job.pop("notifications"), "notification config", dict(phase=shipping_phase)
         )
-        format_kwargs = dict(
-            config=config.__dict__,
-        )
-        subject = notifications['subject'].format(**format_kwargs)
-        message = notifications['message'].format(**format_kwargs)
+        format_kwargs = dict(config=config.__dict__)
+        subject = notifications["subject"].format(**format_kwargs)
+        message = notifications["message"].format(**format_kwargs)
 
         # We only send mail on success to avoid messages like 'blah is in the
         # candidates dir' when cancelling graphs, dummy job failure, etc
-        job.setdefault('routes', []).extend(
-            ['notify.email.{}.on-completed'.format(email) for email in emails]
+        job.setdefault("routes", []).extend(
+            ["notify.email.{}.on-completed".format(email) for email in emails]
         )
 
-        job.setdefault('extra', {}).update(
-            {
-               'notify': {
-                   'email': {
-                        'subject': subject,
-                    }
-                }
-            }
-        )
+        job.setdefault("extra", {}).update({"notify": {"email": {"subject": subject}}})
         if message:
-            job['extra']['notify']['email']['content'] = message
+            job["extra"]["notify"]["email"]["content"] = message
 
         yield job

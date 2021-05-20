@@ -26,7 +26,7 @@ def test_tasks_from_manifest(config, tasks):
         task["attributes"] = dep.attributes.copy()
         task["dependencies"] = {"build": dep.label}
         xpi_name = dep.task["extra"]["xpi-name"]
-        xpi_revision = config.params.get('xpi_revision')
+        xpi_revision = config.params.get("xpi_revision")
         task.setdefault("extra", {})["xpi-name"] = xpi_name
         xpi_config = manifest[xpi_name]
         if not xpi_config.get("active"):
@@ -34,20 +34,22 @@ def test_tasks_from_manifest(config, tasks):
         env = task.setdefault("worker", {}).setdefault("env", {})
         run = task.setdefault("run", {})
         checkout = run.setdefault("checkout", {})
-        checkout_config = checkout.setdefault(xpi_config['repo-prefix'], {})
-        env['REPO_PREFIX'] = xpi_config['repo-prefix']
-        checkout_config['path'] = '/builds/worker/checkouts/src'
-        if 'branch' in xpi_config:
-            checkout_config['head_ref'] = xpi_config['branch']
-        if 'directory' in xpi_config:
-            run['cwd'] = '{checkout}/%s' % xpi_config['directory']
+        checkout_config = checkout.setdefault(xpi_config["repo-prefix"], {})
+        env["REPO_PREFIX"] = xpi_config["repo-prefix"]
+        checkout_config["path"] = "/builds/worker/checkouts/src"
+        if "branch" in xpi_config:
+            checkout_config["head_ref"] = xpi_config["branch"]
+        if "directory" in xpi_config:
+            run["cwd"] = "{checkout}/%s" % xpi_config["directory"]
         if xpi_revision:
-            checkout_config['head_rev'] = xpi_revision
+            checkout_config["head_rev"] = xpi_revision
         if "docker-image" in xpi_config:
             task["worker"]["docker-image"]["in-tree"] = xpi_config["docker-image"]
         task["label"] = "test-{}".format(xpi_name)
         if xpi_config.get("private-repo"):
-            checkout_config['ssh_secret_name'] = config.graph_config["github_clone_secret"]
+            checkout_config["ssh_secret_name"] = config.graph_config[
+                "github_clone_secret"
+            ]
             artifact_prefix = "xpi/build"
             task["worker"]["taskcluster-proxy"] = True
         else:
@@ -55,13 +57,9 @@ def test_tasks_from_manifest(config, tasks):
         env["ARTIFACT_PREFIX"] = artifact_prefix
         paths = []
         for artifact in xpi_config["artifacts"]:
-            artifact_name = "{}/{}".format(
-                artifact_prefix, os.path.basename(artifact)
-            )
+            artifact_name = "{}/{}".format(artifact_prefix, os.path.basename(artifact))
             paths.append(artifact_name)
-        upstreamArtifacts = [
-            {"taskId": "<build>", "paths": paths},
-        ]
+        upstreamArtifacts = [{"taskId": "<build>", "paths": paths}]
         env["XPI_UPSTREAM_URLS"] = json.dumps(upstreamArtifacts)
 
         yield task

@@ -29,3 +29,9 @@ jobs:
         notifications:
             subject: "{config[params][xpi_name]} release promotion starting"
             message: "{config[params][xpi_name]} release promotion is starting on revision {config[params][xpi_revision]}"
+    ship:
+        attributes:
+            shipping-phase: ship
+        notifications:
+            subject: "{config[params][xpi_name]} release starting to ship"
+            message: "{config[params][xpi_name]} release is starting to ship on revision {config[params][xpi_revision]}"

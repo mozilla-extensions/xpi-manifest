@@ -13,7 +13,7 @@ taskgraph:
             # string: the name of the repo, for humans
             name: "XPI manifest"
             # regex: to match the base name of the repo
-            project-regex: xpi-manifest
+            project-regex: xpi-manifest$
             # string: the repo url. Use `git@github.com:org/repo` for private
             #         repositories.
             default-repository: https://github.com/mozilla-extensions/xpi-manifest
@@ -21,10 +21,16 @@ taskgraph:
             default-ref: master
             # enum: hg or git; should be `git`
             type: git
-        template:
-            name: "template repo test"
+        stagingpublic:
+            name: "Releng staging repo test"
             project-regex: staging-xpi-public$
             default-repository: https://github.com/mozilla-releng/staging-xpi-public
+            default-ref: master
+            type: git
+        stagingprivate:
+            name: "Releng staging private repo test"
+            project-regex: staging-xpi-private$
+            default-repository: git@github.com:mozilla-releng/staging-xpi-private
             default-ref: master
             type: git
         normandydevtools:
@@ -179,6 +185,11 @@ workers:
             implementation: scriptworker-signing
             os: scriptworker
             worker-type: xpi-t-signing
+        github:
+            provisioner: scriptworker-k8s
+            implementation: scriptworker-github
+            os: scriptworker
+            worker-type: 'xpi-{level}-github'
         signing:
             provisioner: scriptworker-k8s
             implementation: scriptworker-signing
@@ -217,6 +228,8 @@ release-promotion:
                 - dep-signing
         promote:
             target-tasks-method: promote_xpi
+        ship:
+            target-tasks-method: ship_xpi
     notifications:
         # configure mozillaonline-privileged webextension email addresses for
         # notifications
@@ -232,6 +245,11 @@ release-promotion:
                     - "hectorz+mozillaonline-priv-webext-promote@mozilla.com"
                     - "mkaply+mozillaonline-priv-webext-promote@mozilla.com"
                     - "awagner+mozillaonline-priv-webext-promote@mozilla.com"
+                ship:
+                    - "aki+mozillaonline-priv-webext-ship@mozilla.com"
+                    - "hectorz+mozillaonline-priv-webext-ship@mozilla.com"
+                    - "mkaply+mozillaonline-priv-webext-ship@mozilla.com"
+                    - "awagner+mozillaonline-priv-webext-ship@mozilla.com"
         # configure normandy-privileged webextension email addresses for
         # notifications
         normandy-privileged:
@@ -244,6 +262,10 @@ release-promotion:
                     - "aki+normandy-priv-webext-promote@mozilla.com"
                     - "rdalal+normandy-priv-webext-promote@mozilla.com"
                     - "mcooper+normandy-priv-webext-promote@mozilla.com"
+                ship:
+                    - "aki+normandy-priv-webext-ship@mozilla.com"
+                    - "rdalal+normandy-priv-webext-ship@mozilla.com"
+                    - "mcooper+normandy-priv-webext-ship@mozilla.com"
         # configure privileged webextension email addresses for notifications
         privileged:
             by-phase:
@@ -251,6 +273,8 @@ release-promotion:
                     - "privileged-addon-reviewers+shipit-build@mozilla.com"
                 promote:
                     - "privileged-addon-reviewers+shipit-promote@mozilla.com"
+                ship:
+                    - "privileged-addon-reviewers+shipit-ship@mozilla.com"
         # configure system addons email addresses for notifications
         system:
             by-phase:
@@ -262,3 +286,7 @@ release-promotion:
                     - "aki+system-addons-promote@mozilla.com"
                     - "rdalal+system-addons-promote@mozilla.com"
                     - "mcooper+system-addons-promote@mozilla.com"
+                ship:
+                    - "aki+system-addons-ship@mozilla.com"
+                    - "rdalal+system-addons-ship@mozilla.com"
+                    - "mcooper+system-addons-ship@mozilla.com"

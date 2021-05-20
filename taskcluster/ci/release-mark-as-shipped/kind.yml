@@ -27,4 +27,4 @@ job-template:
                 - project:xpi:releng:ship-it:server:staging
                 - project:xpi:releng:ship-it:action:mark-as-shipped
     attributes:
-        shipping-phase: promote
+        shipping-phase: ship

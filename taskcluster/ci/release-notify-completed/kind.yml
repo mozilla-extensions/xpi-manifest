@@ -11,6 +11,7 @@ transforms:
 kind-dependencies:
     - dep-signing
     - release-signing
+    - release-mark-as-shipped
 
 job-template:
     name: release-notify-completed
@@ -27,3 +28,6 @@ job-template:
             promote:
                 subject: "{config[params][xpi_name]} release promotion completed"
                 message: "{config[params][xpi_name]} release promotion is completed on revision {config[params][xpi_revision]}"
+            ship:
+                subject: "{config[params][xpi_name]} release shipped"
+                message: "{config[params][xpi_name]} release is shipped on revision {config[params][xpi_revision]}"

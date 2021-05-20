@@ -34,21 +34,23 @@ def tasks_from_manifest(config, jobs):
             env = task.setdefault("worker", {}).setdefault("env", {})
             run = task.setdefault("run", {})
             checkout = run.setdefault("checkout", {})
-            checkout_config = checkout.setdefault(xpi_config['repo-prefix'], {})
-            env['REPO_PREFIX'] = xpi_config['repo-prefix']
-            checkout_config['path'] = '/builds/worker/checkouts/src'
-            if 'branch' in xpi_config:
-                checkout_config['head_ref'] = xpi_config['branch']
-            if 'directory' in xpi_config:
-                run['cwd'] = '{checkout}/%s' % xpi_config['directory']
+            checkout_config = checkout.setdefault(xpi_config["repo-prefix"], {})
+            env["REPO_PREFIX"] = xpi_config["repo-prefix"]
+            checkout_config["path"] = "/builds/worker/checkouts/src"
+            if "branch" in xpi_config:
+                checkout_config["head_ref"] = xpi_config["branch"]
+            if "directory" in xpi_config:
+                run["cwd"] = "{checkout}/%s" % xpi_config["directory"]
             if xpi_revision:
-                checkout_config['head_rev'] = xpi_revision
+                checkout_config["head_rev"] = xpi_revision
             task["label"] = "{}-{}".format(config.kind, xpi_config["manifest_name"])
             env["XPI_NAME"] = xpi_config["manifest_name"]
             task.setdefault("extra", {})["xpi-name"] = xpi_config["manifest_name"]
             env["XPI_TYPE"] = xpi_config["addon-type"]
             if xpi_config.get("private-repo"):
-                checkout_config['ssh_secret_name'] = config.graph_config["github_clone_secret"]
+                checkout_config["ssh_secret_name"] = config.graph_config[
+                    "github_clone_secret"
+                ]
                 artifact_prefix = "xpi/build"
             else:
                 artifact_prefix = "public/build"
@@ -66,11 +68,13 @@ def tasks_from_manifest(config, jobs):
                 artifact_name = "{}/{}".format(
                     artifact_prefix, os.path.basename(artifact)
                 )
-                artifacts.append({
-                    "type": "directory",
-                    "name": artifact_prefix,
-                    "path": "/builds/worker/artifacts",
-                })
+                artifacts.append(
+                    {
+                        "type": "directory",
+                        "name": artifact_prefix,
+                        "path": "/builds/worker/artifacts",
+                    }
+                )
                 task["attributes"]["xpis"][artifact] = artifact_name
             env["XPI_ARTIFACTS"] = ";".join(xpi_config["artifacts"])
 
