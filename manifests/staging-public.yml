@@ -1,0 +1,42 @@
+---
+# string: Longer description of the xpi, for humans. Optional.
+description: Test template repo with on-push/on-pr automation
+# Alphanumeric string that corresponds to a key in
+# taskcluster.ci.config.taskgraph.repositories . Required.
+repo-prefix: stagingpublic
+# boolean: enable releases of this xpi or disable them. Optional.
+#          Defaults to `true`.
+active: true
+# boolean: whether this is a private Github repository. Optional.
+#          Defaults to `false`.
+private-repo: false
+# array: any additional emails to notify for this addon.
+additional-emails: []
+# string: path, relative to the root of the repository, where
+#            the xpi package.json lives. Optional. Defaults to the
+#            root of the repository.
+directory: one
+# string: branch name. Optional. Defaults to the default-ref in
+#         taskcluster.ci.config.taskgraph.repositories .
+branch: master
+# list of strings: A list of paths of xpis generated. Required.
+artifacts:
+  - multipreffer-one.xpi
+# enum: `system` means system add-on.
+#       `privileged` means AMO or self-hosted privileged add-on.
+#       `mozillaonline-privileged` means Mozilla China add-on.
+#       `normandy-privileged` means normandy add-on.
+#       Required.
+addon-type: normandy-privileged
+# enum: `npm` for `npm install` or `yarn` for
+#       `yarn install --frozen-lockfile`. Optional. Defaults to `yarn`.
+install-type: npm
+# boolean: true == release artifact to github,
+#          false == manually release artifact
+enable-github-release: True
+# string: branch name. Optional. Defaults to {version} from the
+#         addon repo.
+release-tag: 3.1.4
+# string: branch name. Optional. Defaults to:
+#         {xpi_name}-{version}-build{build_number}
+release-name: stagingrelease
