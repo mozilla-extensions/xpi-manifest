@@ -159,6 +159,13 @@ taskgraph:
             default-repository: https://github.com/mozilla-extensions/firefox-quick-suggest-calculator.git
             default-ref: master
             type: git
+        balrogdryrun:
+            name: "Balrog Dry Run"
+            project-regex:  balrog-dryrun$
+            default-repository: https://github.com/mozilla-extensions/balrog-dryrun.git
+            default-ref: main
+            type: git
+
 
     cached-task-prefix: xpi
 
