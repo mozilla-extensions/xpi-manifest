@@ -101,6 +101,14 @@ def is_release_promotion_available(parameters):
                 "description": ("The expected version to promote."),
                 "default": "",
             },
+            "additional_shipit_emails": {
+                "type": "array",
+                "description": (
+                    "Optional: an array of email strings that "
+                    " should be notified when releases change status"
+                ),
+                "default": [],
+            },
         },
         "required": ["release_promotion_flavor", "xpi_name", "build_number"],
     },
@@ -163,6 +171,8 @@ def release_promotion_action(parameters, graph_config, input, task_group_id, tas
 
     if input.get("version"):
         parameters["version"] = input["version"]
+
+    parameters["additional_shipit_emails"] = input.get("additional_shipit_emails", [])
 
     # make parameters read-only
     parameters = Parameters(**parameters)
