@@ -257,15 +257,12 @@ release-promotion:
             by-phase:
                 build:
                     - "aki+normandy-priv-webext-build@mozilla.com"
-                    - "rdalal+normandy-priv-webext-build@mozilla.com"
                     - "mcooper+normandy-priv-webext-build@mozilla.com"
                 promote:
                     - "aki+normandy-priv-webext-promote@mozilla.com"
-                    - "rdalal+normandy-priv-webext-promote@mozilla.com"
                     - "mcooper+normandy-priv-webext-promote@mozilla.com"
                 ship:
                     - "aki+normandy-priv-webext-ship@mozilla.com"
-                    - "rdalal+normandy-priv-webext-ship@mozilla.com"
                     - "mcooper+normandy-priv-webext-ship@mozilla.com"
         # configure privileged webextension email addresses for notifications
         privileged:
@@ -281,13 +278,13 @@ release-promotion:
             by-phase:
                 build:
                     - "aki+system-addons-build@mozilla.com"
-                    - "rdalal+system-addons-build@mozilla.com"
-                    - "mcooper+system-addons-build@mozilla.com"
+                    - "awagner+system-addons-build@mozilla.com"
+                    - "pkewisch+system-addons-build@mozilla.com"
                 promote:
                     - "aki+system-addons-promote@mozilla.com"
-                    - "rdalal+system-addons-promote@mozilla.com"
-                    - "mcooper+system-addons-promote@mozilla.com"
+                    - "awagner+system-addons-promote@mozilla.com"
+                    - "pkewisch+system-addons-promote@mozilla.com"
                 ship:
                     - "aki+system-addons-ship@mozilla.com"
-                    - "rdalal+system-addons-ship@mozilla.com"
-                    - "mcooper+system-addons-ship@mozilla.com"
+                    - "awagner+system-addons-ship@mozilla.com"
+                    - "pkewisch+system-addons-ship@mozilla.com"

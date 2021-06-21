@@ -84,6 +84,6 @@ If you need to expedite the release:
 Add-on Review Team | Add-on Review team | privileged | One of each (Add-on Review Team and Privileged webextension admin) is required to sign off on `privileged` xpis.
 Privileged webextension admin | Add-on Review team (+releng as backups) | privileged | One of each (Add-on Review Team and Privileged webextension admin) is required to sign off on `privileged` xpis.
 Normandy privileged admin | Normandy review team (+releng as backups) | normandy-privileged | Two are required to sign off on `normandy-privileged` xpis.
-System addon admin | `:rdalal` and `:mythmon` (+releng as backups) | system | Two of these are required to sign off on `system` xpis.
+System addon admin | Add-on Review team (+releng as backups) | system | Two of these are required to sign off on `system` xpis.
 MozillaOnline privileged webextension team | mozilla-online team (+releng as backups) | mozillaonline-privileged | One of each (team and admin) need to sign off on `mozillaonline-privileged` xpis.
 MozillaOnline privileged webextension admin | `:theone` and `:mkaply` (+releng as backups) | mozillaonline-privileged | One of each (team and admin) need to sign off on `mozillaonline-privileged` xpis.
