@@ -105,7 +105,7 @@ def is_release_promotion_available(parameters):
                 "type": "array",
                 "description": (
                     "Optional: an array of email strings that "
-                    " should be notified when releases change status"
+                    "should be notified when releases change status"
                 ),
                 "default": [],
             },

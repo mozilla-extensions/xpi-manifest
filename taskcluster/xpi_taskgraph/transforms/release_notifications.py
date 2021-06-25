@@ -22,7 +22,7 @@ def add_notifications(config, jobs):
     xpi_name = config.params.get("xpi_name")
     xpi_revision = config.params.get("xpi_revision")
     shipping_phase = config.params.get("shipping_phase")
-    additional_shipit_emails = config.params.get("additional_shipit_emails")
+    additional_shipit_emails = config.params.get("additional_shipit_emails", [])
 
     if not all([xpi_name, xpi_revision, shipping_phase]):
         return
