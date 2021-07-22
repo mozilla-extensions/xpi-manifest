@@ -12,10 +12,10 @@ from voluptuous import Any, Optional, Required
 
 # Please keep this list sorted
 xpi_schema = {
-    Optional("additional_shipit_emails"): Any([basestring], None),
+    Optional("additional_shipit_emails"): Any([str], None),
     Optional("shipping_phase"): Any("build", "promote", "ship", None),
-    Optional("xpi_name"): Any(basestring, None),
-    Optional("xpi_revision"): Any(basestring, None),
+    Optional("xpi_name"): Any(str, None),
+    Optional("xpi_revision"): Any(str, None),
 }
 
 extend_parameters_schema(xpi_schema)

@@ -52,7 +52,7 @@ def build_signing_task(config, tasks):
                 )
             )
 
-        paths = dep.attributes["xpis"].values()
+        paths = list(dep.attributes["xpis"].values())
         format = evaluate_keyed_by(
             config.graph_config["scriptworker"]["signing-format"],
             "signing-format",

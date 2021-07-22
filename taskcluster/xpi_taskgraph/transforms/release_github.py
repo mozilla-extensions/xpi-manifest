@@ -89,7 +89,7 @@ def build_worker_definition(config, jobs):
             {
                 "taskId": {"task-reference": "<release-signing>"},
                 "taskType": "signing",
-                "paths": dep.attributes["xpis"].values(),
+                "paths": list(dep.attributes["xpis"].values()),
             }
         ]
 
