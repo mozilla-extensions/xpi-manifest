@@ -5,7 +5,6 @@
 Build the cached_task digest to prevent rerunning tasks if the code hasn't changed.
 """
 
-from __future__ import absolute_import, print_function, unicode_literals
 
 import hashlib
 import json
@@ -71,10 +70,10 @@ def build_cache(config, tasks):
                 elif os.path.isfile(resource):
                     digest_data.append(hash_path(path))
                 else:
-                    raise Exception("Unknown resource {}".format(resource))
+                    raise Exception(f"Unknown resource {resource}")
             cache_name = task["name"].replace(":", "-")
             task["cache"] = {
-                "type": "xpi-manifest.v1.{}".format(config.kind),
+                "type": f"xpi-manifest.v1.{config.kind}",
                 "name": cache_name,
                 "digest-data": digest_data,
             }

@@ -1,5 +1,4 @@
 #!/usr/bin/env python
-from __future__ import print_function
 
 import functools
 import hashlib
@@ -14,7 +13,7 @@ def test_is_subdir(parent_dir, target_dir):
     p1 = Path(os.path.realpath(parent_dir))
     p2 = Path(os.path.realpath(target_dir))
     if p1 not in p2.parents:
-        raise Exception("{} is not under {}!".format(target_dir, parent_dir))
+        raise Exception(f"{target_dir} is not under {parent_dir}!")
 
 
 def test_var_set(varnames):
@@ -22,32 +21,32 @@ def test_var_set(varnames):
     errors = []
     for varname in varnames:
         if varname not in os.environ:
-            errors.append(("error: {} is not set".format(varname)))
+            errors.append(f"error: {varname} is not set")
     if errors:
         print("\n".join(errors))
         sys.exit(1)
 
 
 def run_command(command, **kwargs):
-    print("Running {} ...".format(command))
+    print(f"Running {command} ...")
     subprocess.check_call(command, **kwargs)
 
 
 def get_output(command, **kwargs):
-    print("Getting output from {} ...".format(command))
+    print(f"Getting output from {command} ...")
     return subprocess.check_output(command, **kwargs)
 
 
 def get_package_info():
     if not os.path.exists("package.json"):
-        raise Exception("Can't find package.json in {}!".format(os.getcwd()))
+        raise Exception(f"Can't find package.json in {os.getcwd()}!")
     with open("package.json") as fh:
         contents = json.load(fh)
     return contents
 
 
 def cd(path):
-    print("Changing directory to {} ...".format(path))
+    print(f"Changing directory to {path} ...")
     os.chdir(path)
 
 

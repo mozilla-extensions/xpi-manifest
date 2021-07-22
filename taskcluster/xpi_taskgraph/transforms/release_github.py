@@ -5,7 +5,6 @@
 Apply some defaults and minor modifications to the jobs defined in the github_release
 kind.
 """
-from __future__ import absolute_import, print_function, unicode_literals
 
 from taskgraph.config import load_graph_config
 from taskgraph.transforms.base import TransformSequence

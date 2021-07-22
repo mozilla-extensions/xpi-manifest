@@ -2,10 +2,6 @@
 # License, v. 2.0. If a copy of the MPL was not distributed with this
 # file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
-from __future__ import absolute_import, print_function, unicode_literals
-
-from six import text_type
-
 from voluptuous import Required
 
 from taskgraph.util.schema import taskref_or_string
@@ -17,18 +13,18 @@ from taskgraph.transforms.task import payload_builder
     schema={
         # the maximum time to run, in seconds
         Required("max-run-time"): int,
-        Required("signing-type"): text_type,
+        Required("signing-type"): str,
         # list of artifact URLs for the artifacts that should be signed
         Required("upstream-artifacts"): [
             {
                 # taskId of the task with the artifact
                 Required("taskId"): taskref_or_string,
                 # type of signing task (for CoT)
-                Required("taskType"): text_type,
+                Required("taskType"): str,
                 # Paths to the artifacts to sign
-                Required("paths"): [text_type],
+                Required("paths"): [str],
                 # Signing formats to use on each of the paths
-                Required("formats"): [text_type],
+                Required("formats"): [str],
             }
         ],
     },
@@ -53,7 +49,7 @@ def build_scriptworker_signing_payload(config, task, task_def):
     )
 
 
-@payload_builder("shipit-shipped", schema={Required("release-name"): text_type})
+@payload_builder("shipit-shipped", schema={Required("release-name"): str})
 def build_push_apk_payload(config, task, task_def):
     worker = task["worker"]
 
@@ -67,17 +63,17 @@ def build_push_apk_payload(config, task, task_def):
         Required("upstream-artifacts"): [
             {
                 Required("taskId"): taskref_or_string,
-                Required("taskType"): text_type,
-                Required("paths"): [text_type],
+                Required("taskType"): str,
+                Required("paths"): [str],
             }
         ],
         Required("artifact-map"): [object],
-        Required("action"): text_type,
-        Required("git-tag"): text_type,
-        Required("git-revision"): text_type,
-        Required("github-project"): text_type,
+        Required("action"): str,
+        Required("git-tag"): str,
+        Required("git-revision"): str,
+        Required("github-project"): str,
         Required("is-prerelease"): bool,
-        Required("release-name"): text_type,
+        Required("release-name"): str,
     },
 )
 def build_github_release_payload(config, task, task_def):

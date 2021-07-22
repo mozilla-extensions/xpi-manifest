@@ -5,7 +5,6 @@
 Add notifications via taskcluster-notify for release tasks
 """
 
-from __future__ import absolute_import, print_function, unicode_literals
 
 from taskgraph.transforms.base import TransformSequence
 from taskgraph.util.keyed_by import evaluate_keyed_by
@@ -40,7 +39,7 @@ def add_notifications(config, jobs):
             job.setdefault("dependencies", {}).update({"signing": dep.label})
         if job.get("attributes", {}).get("shipping-phase") != shipping_phase:
             continue
-        job["label"] = "{}-{}".format(config.kind, shipping_phase)
+        job["label"] = f"{config.kind}-{shipping_phase}"
         xpi_config = manifest[xpi_name]
         xpi_type = xpi_config["addon-type"]
 
@@ -63,7 +62,7 @@ def add_notifications(config, jobs):
         # We only send mail on success to avoid messages like 'blah is in the
         # candidates dir' when cancelling graphs, dummy job failure, etc
         job.setdefault("routes", []).extend(
-            ["notify.email.{}.on-completed".format(email) for email in emails]
+            [f"notify.email.{email}.on-completed" for email in emails]
         )
 
         job.setdefault("extra", {}).update({"notify": {"email": {"subject": subject}}})
