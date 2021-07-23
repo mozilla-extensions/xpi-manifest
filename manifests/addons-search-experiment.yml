@@ -1,0 +1,9 @@
+description: Search experiment by the add-ons team
+repo-prefix: addonssearchexperiment
+active: true
+private-repo: false
+branch: main
+artifacts:
+  - web-ext-artifacts/addons-search-experiment.xpi
+addon-type: system
+install-type: yarn
