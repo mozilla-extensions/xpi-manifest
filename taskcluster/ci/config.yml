@@ -165,6 +165,12 @@ taskgraph:
             default-repository: https://github.com/mozilla-extensions/balrog-dryrun.git
             default-ref: main
             type: git
+        addonssearchexperiment:
+            name: "Add-ons Search Experiment extension"
+            project-regex: addonssearchexperiment$
+            default-repository: https://github.com/mozilla-extensions/addons-search-experiment
+            default-ref: main
+            type: git
 
 
     cached-task-prefix: xpi
