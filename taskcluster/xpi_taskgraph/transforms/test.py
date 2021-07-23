@@ -6,7 +6,6 @@ Apply some defaults and minor modifications to the jobs defined in the build
 kind.
 """
 
-from __future__ import absolute_import, print_function, unicode_literals
 from copy import deepcopy
 import json
 import os
@@ -45,7 +44,7 @@ def test_tasks_from_manifest(config, tasks):
             checkout_config["head_rev"] = xpi_revision
         if "docker-image" in xpi_config:
             task["worker"]["docker-image"]["in-tree"] = xpi_config["docker-image"]
-        task["label"] = "test-{}".format(xpi_name)
+        task["label"] = f"test-{xpi_name}"
         if xpi_config.get("private-repo"):
             checkout_config["ssh_secret_name"] = config.graph_config[
                 "github_clone_secret"
@@ -57,7 +56,7 @@ def test_tasks_from_manifest(config, tasks):
         env["ARTIFACT_PREFIX"] = artifact_prefix
         paths = []
         for artifact in xpi_config["artifacts"]:
-            artifact_name = "{}/{}".format(artifact_prefix, os.path.basename(artifact))
+            artifact_name = f"{artifact_prefix}/{os.path.basename(artifact)}"
             paths.append(artifact_name)
         upstreamArtifacts = [{"taskId": "<build>", "paths": paths}]
         env["XPI_UPSTREAM_URLS"] = json.dumps(upstreamArtifacts)

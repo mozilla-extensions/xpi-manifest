@@ -1,5 +1,4 @@
 #!/usr/bin/env python
-from __future__ import print_function
 
 import functools
 import glob
@@ -16,7 +15,7 @@ def test_is_subdir(parent_dir, target_dir):
     p1 = Path(os.path.realpath(parent_dir))
     p2 = Path(os.path.realpath(target_dir))
     if p1 not in p2.parents:
-        raise Exception("{} is not under {}!".format(target_dir, parent_dir))
+        raise Exception(f"{target_dir} is not under {parent_dir}!")
 
 
 def test_var_set(varnames):
@@ -24,37 +23,37 @@ def test_var_set(varnames):
     errors = []
     for varname in varnames:
         if varname not in os.environ:
-            errors.append(("error: {} is not set".format(varname)))
+            errors.append(f"error: {varname} is not set")
     if errors:
         print("\n".join(errors))
         sys.exit(1)
 
 
 def run_command(command, **kwargs):
-    print("Running {} ...".format(command))
+    print(f"Running {command} ...")
     subprocess.check_call(command, **kwargs)
 
 
 def get_output(command, **kwargs):
-    print("Getting output from {} ...".format(command))
+    print(f"Getting output from {command} ...")
     return subprocess.check_output(command, **kwargs)
 
 
 def get_package_info():
     if not os.path.exists("package.json"):
-        raise Exception("Can't find package.json in {}!".format(os.getcwd()))
+        raise Exception(f"Can't find package.json in {os.getcwd()}!")
     with open("package.json") as fh:
         contents = json.load(fh)
     return contents
 
 
 def cd(path):
-    print("Changing directory to {} ...".format(path))
+    print(f"Changing directory to {path} ...")
     os.chdir(path)
 
 
 def mkdir(path):
-    print("mkdir {}".format(path))
+    print(f"mkdir {path}")
     os.makedirs(path, exist_ok=True)
 
 
@@ -76,7 +75,7 @@ def main():
     xpi_name = os.environ["XPI_NAME"]
     xpi_type = os.environ.get("XPI_TYPE")
     repo_prefix = os.environ.get("REPO_PREFIX", "xpi")
-    head_repo_env_var = "{}_HEAD_REPOSITORY".format(repo_prefix.upper())
+    head_repo_env_var = f"{repo_prefix.upper()}_HEAD_REPOSITORY"
     test_var_set([head_repo_env_var])
 
     artifact_dir = "/builds/worker/artifacts"
@@ -112,12 +111,12 @@ def main():
     for artifact in xpi_artifacts:
         target_path = os.path.join(artifact_dir, os.path.basename(artifact))
         if target_path in all_paths:
-            raise Exception("{} already exists!".format(target_path))
+            raise Exception(f"{target_path} already exists!")
         all_paths.append(target_path)
         if not os.path.exists(artifact):
-            raise Exception("Missing artifact {}".format(artifact))
+            raise Exception(f"Missing artifact {artifact}")
         test_is_subdir(os.getcwd(), artifact)
-        print("Copying {} to {}".format(artifact, target_path))
+        print(f"Copying {artifact} to {target_path}")
         path = os.path.join(artifact_prefix, os.path.basename(target_path))
         artifact_info = {
             "path": os.path.join(artifact_prefix, os.path.basename(artifact)),

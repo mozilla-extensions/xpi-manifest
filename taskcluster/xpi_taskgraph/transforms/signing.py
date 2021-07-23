@@ -6,7 +6,6 @@ Apply some defaults and minor modifications to the jobs defined in the build
 kind.
 """
 
-from __future__ import absolute_import, print_function, unicode_literals
 
 from taskgraph.transforms.base import TransformSequence
 from taskgraph.util.schema import resolve_keyed_by
@@ -52,7 +51,7 @@ def build_signing_task(config, tasks):
                 )
             )
 
-        paths = dep.attributes["xpis"].values()
+        paths = list(dep.attributes["xpis"].values())
         format = evaluate_keyed_by(
             config.graph_config["scriptworker"]["signing-format"],
             "signing-format",
