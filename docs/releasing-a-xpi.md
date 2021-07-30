@@ -66,13 +66,13 @@ If we need a new release build:
 
   - Once the build is complete, it will need to be signed off by two of the groups listed below; via the Promote button.
   - The relevant groups are automatically notified.
-    - You will be also notified if you are listed in the additional-emails section for your xpi in the [xpi manifest](https://github.com/mozilla-extensions/xpi-manifest/blob/master/xpi-manifest.yml)
+    - You will be also notified if you are listed in the additional-emails section for your xpi in the [xpi manifest](https://github.com/mozilla-extensions/xpi-manifest/blob/master/manifests/)
   - When we have the quorum of signoffs, we'll schedule the promote graph, and we'll get a release-signed xpi.
   - Again, the promote button becomes a link to the build graph, wait until they are all finished. The signed xpi can be found as an artifact on the `release-signing-...` task.
   - Once the promote phase is complete, the next phase is to Ship which will need to be signed off by one of two of the groups listed below; via the Ship button.
   - The relevant groups are automatically notified.
-    - You will be also notified if you are listed in the additional-emails section for your xpi in the [xpi manifest](https://github.com/mozilla-extensions/xpi-manifest/blob/master/xpi-manifest.yml)
-  - When we have the quorum of signoffs, we'll schedule the ship graph, and we'll get a upload the release-signed xpi to github.
+    - You will be also notified if you are listed in the additional-emails section for your xpi in the [xpi manifest](https://github.com/mozilla-extensions/xpi-manifest/blob/master/manifests/)
+  - When we have the quorum of signoffs, we'll schedule the ship graph, and we'll upload the release-signed xpi to github.
   - Again, the ship button becomes a link to the build graph, wait until they are all finished.
 If you need to expedite the release:
 
