@@ -15,6 +15,10 @@ jobs:
         definition: node
         args:
             NODE_VERSION: "latest"
+    node-lts-latest:
+        definition: node
+        args:
+            NODE_VERSION: "lts"
     node-14:
         definition: node
         args:
