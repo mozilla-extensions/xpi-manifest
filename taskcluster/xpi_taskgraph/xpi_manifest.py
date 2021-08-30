@@ -36,7 +36,7 @@ base_schema = Schema(
         Optional("docker-image"): str,
         Required("artifacts"): [str],
         Required("addon-type"): Any(
-            "mozillaonline-privileged", "normandy-privileged", "privileged", "system"
+            "mozillaonline-privileged", "privileged", "system"
         ),
         Optional("install-type"): Any("npm", "yarn"),
         Optional("enable-github-release"): bool,

@@ -1,8 +1,0 @@
-description: Firefox Quick Suggest Adm
-repo-prefix: quicksuggestadm
-active: true
-private-repo: true
-artifacts:
-  - web-ext-artifacts/firefox-quick-suggest-adm.xpi
-addon-type: normandy-privileged
-install-type: npm

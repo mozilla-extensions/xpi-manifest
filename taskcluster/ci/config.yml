@@ -51,12 +51,6 @@ taskgraph:
             default-repository: https://github.com/mozilla-extensions/searchengine-devtools
             default-ref: main
             type: git
-        httpsupgradestudyv2:
-            name: "HTTPS Upgrade Study (v2)"
-            project-regex: https-upgrade-study-v2$
-            default-repository: git@github.com:mozilla-extensions/https-upgrade-study-v2
-            default-ref: master
-            type: git
         cpmanager:
             name: "MozillaOnline cpmanager"
             project-regex: cpmanager$
@@ -81,12 +75,6 @@ taskgraph:
             default-repository: https://github.com/mozilla-extensions/china-newtab
             default-ref: master
             type: git
-        loginstudy:
-            name: "Login Study"
-            project-regex: login-study$
-            default-repository: git@github.com:mozilla-extensions/login-study
-            default-ref: master
-            type: git
         webcompat:
             name: "Web Compat"
             project-regex: webcompat-addon$
@@ -105,18 +93,6 @@ taskgraph:
             default-repository: https://github.com/mozilla-extensions/firefox-voice
             default-ref: prod
             type: git
-        dohresolverusagestudy:
-            name: "DoH Resolver Usage Study"
-            project-regex: doh-resolver-usage-study$
-            default-repository: https://github.com/mozilla-extensions/doh-resolver-usage-study
-            default-ref: master
-            type: git
-        dnssecinterferencestudy:
-            name: "DNSSEC Interference Study"
-            project-regex: dnssec-interference-study$
-            default-repository: https://github.com/mozilla-extensions/dnssec-interference
-            default-ref: master
-            type: git
         newsdisinformationstudy:
             name: "Princeton News Disinfo Study"
             project-regex: newsdisinformationstudy$
@@ -129,35 +105,11 @@ taskgraph:
             default-repository: https://github.com/mozilla-rally/rally-core-addon
             default-ref: release
             type: git
-        telemetrytestingextension:
-            name: "Telemetry testing extension"
-            project-regex: telemetrytestingextension$
-            default-repository: https://github.com/mozilla-extensions/dynamic-probe-telemetry-extension
-            default-ref: main
-            type: git
         searchdefaultaddon:
             name: "Reset Search Default extension"
             project-regex: searchdefaultaddon$
             default-repository: https://github.com/mozilla-extensions/restore-search-defaults
             default-ref: main
-            type: git
-        quicksuggestweather:
-            name: "Firefox Quick Suggest Weather"
-            project-regex:  firefox-quick-suggest-weather$
-            default-repository: git@github.com:mozilla-extensions/firefox-quick-suggest-weather
-            default-ref: master
-            type: git
-        quicksuggestadm:
-            name: "Firefox Quick Suggest Adm"
-            project-regex:  firefox-quick-suggest-adm$
-            default-repository: git@github.com:mozilla-extensions/firefox-quick-suggest-adm
-            default-ref: master
-            type: git
-        quicksuggestcalculator:
-            name: "Firefox Quick Suggest Calculator"
-            project-regex:  firefox-quick-suggest-calculator$
-            default-repository: https://github.com/mozilla-extensions/firefox-quick-suggest-calculator.git
-            default-ref: master
             type: git
         balrogdryrun:
             name: "Balrog Dry Run"
@@ -221,7 +173,6 @@ scriptworker:
     signing-format:
         by-xpi-type:
             mozillaonline-privileged: privileged_webextension
-            normandy-privileged: privileged_webextension
             privileged: privileged_webextension
             system: system_addon
 
@@ -257,19 +208,6 @@ release-promotion:
                     - "hectorz+mozillaonline-priv-webext-ship@mozilla.com"
                     - "mkaply+mozillaonline-priv-webext-ship@mozilla.com"
                     - "awagner+mozillaonline-priv-webext-ship@mozilla.com"
-        # configure normandy-privileged webextension email addresses for
-        # notifications
-        normandy-privileged:
-            by-phase:
-                build:
-                    - "aki+normandy-priv-webext-build@mozilla.com"
-                    - "mcooper+normandy-priv-webext-build@mozilla.com"
-                promote:
-                    - "aki+normandy-priv-webext-promote@mozilla.com"
-                    - "mcooper+normandy-priv-webext-promote@mozilla.com"
-                ship:
-                    - "aki+normandy-priv-webext-ship@mozilla.com"
-                    - "mcooper+normandy-priv-webext-ship@mozilla.com"
         # configure privileged webextension email addresses for notifications
         privileged:
             by-phase:

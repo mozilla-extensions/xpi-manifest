@@ -1,9 +1,0 @@
----
-description: Login Study
-repo-prefix: loginstudy
-active: true
-private-repo: true
-artifacts:
-  - web-ext-artifacts/login-study.xpi
-addon-type: normandy-privileged
-install-type: yarn
