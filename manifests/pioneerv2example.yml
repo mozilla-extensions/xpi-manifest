@@ -1,9 +1,0 @@
----
-description: Pioneer v2 Example
-repo-prefix: pioneerv2example
-active: true
-private-repo: true
-artifacts:
-  - web-ext-artifacts/pioneer-v2-example.xpi
-addon-type: privileged
-install-type: npm
