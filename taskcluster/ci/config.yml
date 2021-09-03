@@ -51,12 +51,6 @@ taskgraph:
             default-repository: https://github.com/mozilla-extensions/searchengine-devtools
             default-ref: main
             type: git
-        httpsupgradestudyv2:
-            name: "HTTPS Upgrade Study (v2)"
-            project-regex: https-upgrade-study-v2$
-            default-repository: git@github.com:mozilla-extensions/https-upgrade-study-v2
-            default-ref: master
-            type: git
         cpmanager:
             name: "MozillaOnline cpmanager"
             project-regex: cpmanager$
@@ -69,22 +63,10 @@ taskgraph:
             default-repository: git@github.com:mozilla-extensions/cehomepage
             default-ref: master
             type: git
-        pioneerv2example:
-            name: "Pioneer v2 Example"
-            project-regex: pioneerv2example$
-            default-repository: git@github.com:mozilla-extensions/pioneer-v2-example
-            default-ref: master
-            type: git
         chinanewtab:
             name: "MozillaOnline China New Tab"
             project-regex: china-newtab$
             default-repository: https://github.com/mozilla-extensions/china-newtab
-            default-ref: master
-            type: git
-        loginstudy:
-            name: "Login Study"
-            project-regex: login-study$
-            default-repository: git@github.com:mozilla-extensions/login-study
             default-ref: master
             type: git
         webcompat:
@@ -97,18 +79,6 @@ taskgraph:
             name: "Secure-Proxy"
             project-regex: secure-proxy$
             default-repository: https://github.com/mozilla-extensions/secure-proxy
-            default-ref: master
-            type: git
-        firefoxvoice:
-            name: "Firefox Voice"
-            project-regex: firefox-voice$
-            default-repository: https://github.com/mozilla-extensions/firefox-voice
-            default-ref: prod
-            type: git
-        dohresolverusagestudy:
-            name: "DoH Resolver Usage Study"
-            project-regex: doh-resolver-usage-study$
-            default-repository: https://github.com/mozilla-extensions/doh-resolver-usage-study
             default-ref: master
             type: git
         dnssecinterferencestudy:
@@ -140,24 +110,6 @@ taskgraph:
             project-regex: searchdefaultaddon$
             default-repository: https://github.com/mozilla-extensions/restore-search-defaults
             default-ref: main
-            type: git
-        quicksuggestweather:
-            name: "Firefox Quick Suggest Weather"
-            project-regex:  firefox-quick-suggest-weather$
-            default-repository: git@github.com:mozilla-extensions/firefox-quick-suggest-weather
-            default-ref: master
-            type: git
-        quicksuggestadm:
-            name: "Firefox Quick Suggest Adm"
-            project-regex:  firefox-quick-suggest-adm$
-            default-repository: git@github.com:mozilla-extensions/firefox-quick-suggest-adm
-            default-ref: master
-            type: git
-        quicksuggestcalculator:
-            name: "Firefox Quick Suggest Calculator"
-            project-regex:  firefox-quick-suggest-calculator$
-            default-repository: https://github.com/mozilla-extensions/firefox-quick-suggest-calculator.git
-            default-ref: master
             type: git
         balrogdryrun:
             name: "Balrog Dry Run"
