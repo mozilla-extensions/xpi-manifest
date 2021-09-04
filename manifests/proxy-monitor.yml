@@ -1,0 +1,9 @@
+description: Direct Failover for system requests.
+repo-prefix: proxymonitor
+active: true
+private-repo: true
+branch: main
+artifacts:
+  - web-ext-artifacts/proxy-monitor.xpi
+addon-type: system
+install-type: npm
