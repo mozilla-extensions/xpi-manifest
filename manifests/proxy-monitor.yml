@@ -7,3 +7,4 @@ artifacts:
   - web-ext-artifacts/proxy-monitor.xpi
 addon-type: system
 install-type: npm
+docker-image: node-lts-latest
