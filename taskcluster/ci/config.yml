@@ -120,7 +120,7 @@ taskgraph:
         proxymonitor:
             name: "Proxy Monitor extension"
             project-regex: proxymonitor$
-            default-repository: https://github.com/mozilla-extensions/proxy-monitor
+            default-repository: git@github.com:mozilla-extensions/proxy-monitor
             default-ref: main
             type: git
         rallycoreaddon:
