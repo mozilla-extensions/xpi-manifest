@@ -9,6 +9,22 @@ from pathlib import Path
 import shutil
 import subprocess
 import sys
+from zipfile import ZipFile
+
+
+# Changes to this list need to be synced with AMO.
+# Please reach out to the Add-ons Operations Team (awagner) before making any changes!
+ID_ALLOWLIST = (
+    "@mozilla.com",
+    "@mozilla.org",
+    "@pioneer.mozilla.org",
+    "@search.mozilla.org",
+    "@shield.mozilla.com",
+    "@shield.mozilla.org",
+    "@mozillaonline.com",
+    "@mozillafoundation.org",
+    "@rally.mozilla.org",
+)
 
 
 def test_is_subdir(parent_dir, target_dir):
@@ -65,6 +81,30 @@ def get_hash(path, hash_alg="sha256"):
     return h.hexdigest()
 
 
+def check_manifest(path):
+    xpi = ZipFile(path, "r")
+    manifest = {}
+    _found = False
+    for manifest_name in ("manifest.json", "webextension/manifest.json"):
+        try:
+            with xpi.open(manifest_name, "r") as f:
+                manifest = json.load(f)
+        except KeyError:
+            print(f"{manifest_name} doesn't exist in {path}...")
+            continue
+        for _key in ("applications", "browser_specific_settings"):
+            _id = manifest.get(_key, {}).get("gecko", {}).get("id", None)
+            if _id is None:
+                continue
+            _found = True
+            if not _id.endswith(ID_ALLOWLIST):
+                raise Exception(f"{_key}.gecko.id {_id} must end with one of the following suffixes!\n{ID_ALLOWLIST}")
+            else:
+                print(f"Add-on id {_id} matches the allowlist.")
+    if not _found:
+        raise Exception("Can't find addon ID in manifest.json!")
+
+
 def main():
     test_var_set([
         "ARTIFACT_PREFIX",
@@ -117,7 +157,6 @@ def main():
             raise Exception(f"Missing artifact {artifact}")
         test_is_subdir(os.getcwd(), artifact)
         print(f"Copying {artifact} to {target_path}")
-        path = os.path.join(artifact_prefix, os.path.basename(target_path))
         artifact_info = {
             "path": os.path.join(artifact_prefix, os.path.basename(artifact)),
             "filesize_bytes": int(os.path.getsize(artifact)),
@@ -125,6 +164,7 @@ def main():
         }
         build_manifest["artifacts"].append(artifact_info)
         shutil.copyfile(artifact, target_path)
+        check_manifest(target_path)
 
     with open(os.path.join(artifact_dir, "manifest.json"), "w") as fh:
         fh.write(json.dumps(build_manifest, indent=2, sort_keys=True))
