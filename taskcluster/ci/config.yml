@@ -13,7 +13,7 @@ taskgraph:
             # string: the name of the repo, for humans
             name: "XPI manifest"
             # regex: to match the base name of the repo
-            project-regex: xpi-manifest
+            project-regex: xpi-manifest$
             # string: the repo url. Use `git@github.com:org/repo` for private
             #         repositories.
             default-repository: https://github.com/mozilla-extensions/xpi-manifest
@@ -21,10 +21,16 @@ taskgraph:
             default-ref: master
             # enum: hg or git; should be `git`
             type: git
-        template:
-            name: "template repo test"
-            project-regex: test-xpi-public$
-            default-repository: https://github.com/escapewindow/test-xpi-public
+        stagingpublic:
+            name: "Releng staging repo test"
+            project-regex: staging-xpi-public$
+            default-repository: https://github.com/mozilla-releng/staging-xpi-public
+            default-ref: master
+            type: git
+        stagingprivate:
+            name: "Releng staging private repo test"
+            project-regex: staging-xpi-private$
+            default-repository: git@github.com:mozilla-releng/staging-xpi-private
             default-ref: master
             type: git
         normandydevtools:
@@ -138,7 +144,7 @@ taskgraph:
         searchdefaultaddon:
             name: "Reset Search Default extension"
             project-regex: searchdefaultaddon$
-            default-repository: git@github.com:mozilla-extensions/restore-search-defaults
+            default-repository: https://github.com/mozilla-extensions/restore-search-defaults
             default-ref: main
             type: git
         quicksuggestweather:
@@ -159,12 +165,19 @@ taskgraph:
             default-repository: https://github.com/mozilla-extensions/firefox-quick-suggest-calculator.git
             default-ref: master
             type: git
-        bergamotbrowserextension:
-            name: "Bergamot Browser Extension"
-            project-regex: bergamot-browser-extension$
-            default-repository: https://github.com/mozilla-extensions/bergamot-browser-extension
+        balrogdryrun:
+            name: "Balrog Dry Run"
+            project-regex:  balrog-dryrun$
+            default-repository: https://github.com/mozilla-extensions/balrog-dryrun.git
             default-ref: main
             type: git
+        addonssearchdetection:
+            name: "Add-ons Search Detection extension"
+            project-regex: addonssearchdetection$
+            default-repository: https://github.com/mozilla-extensions/addons-search-detection
+            default-ref: main
+            type: git
+
 
     cached-task-prefix: xpi
 
@@ -185,6 +198,11 @@ workers:
             implementation: scriptworker-signing
             os: scriptworker
             worker-type: xpi-t-signing
+        github:
+            provisioner: scriptworker-k8s
+            implementation: scriptworker-github
+            os: scriptworker
+            worker-type: 'xpi-{level}-github'
         signing:
             provisioner: scriptworker-k8s
             implementation: scriptworker-signing
@@ -223,6 +241,8 @@ release-promotion:
                 - dep-signing
         promote:
             target-tasks-method: promote_xpi
+        ship:
+            target-tasks-method: ship_xpi
     notifications:
         # configure mozillaonline-privileged webextension email addresses for
         # notifications
@@ -238,18 +258,24 @@ release-promotion:
                     - "hectorz+mozillaonline-priv-webext-promote@mozilla.com"
                     - "mkaply+mozillaonline-priv-webext-promote@mozilla.com"
                     - "awagner+mozillaonline-priv-webext-promote@mozilla.com"
+                ship:
+                    - "aki+mozillaonline-priv-webext-ship@mozilla.com"
+                    - "hectorz+mozillaonline-priv-webext-ship@mozilla.com"
+                    - "mkaply+mozillaonline-priv-webext-ship@mozilla.com"
+                    - "awagner+mozillaonline-priv-webext-ship@mozilla.com"
         # configure normandy-privileged webextension email addresses for
         # notifications
         normandy-privileged:
             by-phase:
                 build:
                     - "aki+normandy-priv-webext-build@mozilla.com"
-                    - "rdalal+normandy-priv-webext-build@mozilla.com"
                     - "mcooper+normandy-priv-webext-build@mozilla.com"
                 promote:
                     - "aki+normandy-priv-webext-promote@mozilla.com"
-                    - "rdalal+normandy-priv-webext-promote@mozilla.com"
                     - "mcooper+normandy-priv-webext-promote@mozilla.com"
+                ship:
+                    - "aki+normandy-priv-webext-ship@mozilla.com"
+                    - "mcooper+normandy-priv-webext-ship@mozilla.com"
         # configure privileged webextension email addresses for notifications
         privileged:
             by-phase:
@@ -257,14 +283,20 @@ release-promotion:
                     - "privileged-addon-reviewers+shipit-build@mozilla.com"
                 promote:
                     - "privileged-addon-reviewers+shipit-promote@mozilla.com"
+                ship:
+                    - "privileged-addon-reviewers+shipit-ship@mozilla.com"
         # configure system addons email addresses for notifications
         system:
             by-phase:
                 build:
                     - "aki+system-addons-build@mozilla.com"
-                    - "rdalal+system-addons-build@mozilla.com"
-                    - "mcooper+system-addons-build@mozilla.com"
+                    - "awagner+system-addons-build@mozilla.com"
+                    - "pkewisch+system-addons-build@mozilla.com"
                 promote:
                     - "aki+system-addons-promote@mozilla.com"
-                    - "rdalal+system-addons-promote@mozilla.com"
-                    - "mcooper+system-addons-promote@mozilla.com"
+                    - "awagner+system-addons-promote@mozilla.com"
+                    - "pkewisch+system-addons-promote@mozilla.com"
+                ship:
+                    - "aki+system-addons-ship@mozilla.com"
+                    - "awagner+system-addons-ship@mozilla.com"
+                    - "pkewisch+system-addons-ship@mozilla.com"

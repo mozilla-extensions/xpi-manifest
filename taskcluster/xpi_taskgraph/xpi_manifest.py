@@ -1,10 +1,7 @@
-# -*- coding: utf-8 -*-
-
 # This Source Code Form is subject to the terms of the Mozilla Public
 # License, v. 2.0. If a copy of the MPL was not distributed with this
 # file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
-from __future__ import absolute_import, print_function, unicode_literals
 
 from copy import deepcopy
 import glob
@@ -28,20 +25,23 @@ MANIFEST_DIR = os.path.join(BASE_DIR, "manifests")
 
 base_schema = Schema(
     {
-        Required("manifest_name"): basestring,
-        Optional("description"): basestring,
-        Required("repo-prefix"): basestring,
-        Optional("directory"): basestring,
+        Required("manifest_name"): str,
+        Optional("description"): str,
+        Required("repo-prefix"): str,
+        Optional("directory"): str,
         Optional("active"): bool,
-        Optional("additional-emails"): [basestring],
+        Optional("additional-emails"): [str],
         Optional("private-repo"): bool,
-        Optional("branch"): basestring,
-        Required("artifacts"): [basestring],
-        Required("addon-type"): Any("mozillaonline-privileged",
-                                    "normandy-privileged",
-                                    "privileged",
-                                    "system"),
+        Optional("branch"): str,
+        Optional("docker-image"): str,
+        Required("artifacts"): [str],
+        Required("addon-type"): Any(
+            "mozillaonline-privileged", "normandy-privileged", "privileged", "system"
+        ),
         Optional("install-type"): Any("npm", "yarn"),
+        Optional("enable-github-release"): bool,
+        Optional("release-tag"): str,
+        Optional("release-name"): str,
     }
 )
 

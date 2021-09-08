@@ -4,7 +4,7 @@
 
 ### Build
 
-In the build phase, we generate a release build, a dep-signing (development signing) task, and a test task. Additionally, there's a notify task that runs at the start of the graph, and a second notify task that runs after the signing task runs.
+In the build phase, we generate a release build, a dep-signing (development signing) task, and a test task. Additionally, there are  `release-notify-started` and `release-notify-completed` tasks that notify via email.
 
 We trigger the build graph to generate a release build for QA to test.
 
@@ -15,6 +15,14 @@ In the promote phase, we release-sign the build generated in the build graph. Be
 The promote phase requires multiple signoffs to schedule in shipit. See [Signoffs](#Signoffs).
 
 In the future, we could add additional tasks here, or additional phases, as needed. These could, for example, push to S3, push to XPIHub, push to bouncer, push to AMO, push to balrog, version bump the xpi.
+
+## Ship
+
+In the ship phase, we mark the release as shipped.  If `enable-github-release` is True in the manifest we will upload a new release to the projects github page with the signed .xpi file as part of the release.
+
+Similar to the promote phase, the ship phase requires a signoff to schedule in shipit. See [Signoffs](#Signoffs).
+
+Just like the Build and Promote phases, there are also `release-notify-started` and `release-notify-completed` tasks that notify via email.
 
 ## Configuring email notifications
 
@@ -58,10 +66,14 @@ If we need a new release build:
 
   - Once the build is complete, it will need to be signed off by two of the groups listed below; via the Promote button.
   - The relevant groups are automatically notified.
-    - You will be also notified if you are listed in the additional-emails section for your xpi in the [xpi manifest](https://github.com/mozilla-extensions/xpi-manifest/blob/master/xpi-manifest.yml)
+    - You will be also notified if you are listed in the additional-emails section for your xpi in the [xpi manifest](https://github.com/mozilla-extensions/xpi-manifest/blob/master/manifests/)
   - When we have the quorum of signoffs, we'll schedule the promote graph, and we'll get a release-signed xpi.
   - Again, the promote button becomes a link to the build graph, wait until they are all finished. The signed xpi can be found as an artifact on the `release-signing-...` task.
-
+  - Once the promote phase is complete, the next phase is to Ship which will need to be signed off by one of two of the groups listed below; via the Ship button.
+  - The relevant groups are automatically notified.
+    - You will be also notified if you are listed in the additional-emails section for your xpi in the [xpi manifest](https://github.com/mozilla-extensions/xpi-manifest/blob/master/manifests/)
+  - When we have the quorum of signoffs, we'll schedule the ship graph, and we'll upload the release-signed xpi to github.
+  - Again, the ship button becomes a link to the build graph, wait until they are all finished.
 If you need to expedite the release:
 
   - Try pinging the relevant teams via the #addons-pipeline channel on Slack.
@@ -72,6 +84,6 @@ If you need to expedite the release:
 Add-on Review Team | Add-on Review team | privileged | One of each (Add-on Review Team and Privileged webextension admin) is required to sign off on `privileged` xpis.
 Privileged webextension admin | Add-on Review team (+releng as backups) | privileged | One of each (Add-on Review Team and Privileged webextension admin) is required to sign off on `privileged` xpis.
 Normandy privileged admin | Normandy review team (+releng as backups) | normandy-privileged | Two are required to sign off on `normandy-privileged` xpis.
-System addon admin | `:rdalal` and `:mythmon` (+releng as backups) | system | Two of these are required to sign off on `system` xpis.
+System addon admin | Add-on Review team (+releng as backups) | system | Two of these are required to sign off on `system` xpis.
 MozillaOnline privileged webextension team | mozilla-online team (+releng as backups) | mozillaonline-privileged | One of each (team and admin) need to sign off on `mozillaonline-privileged` xpis.
 MozillaOnline privileged webextension admin | `:theone` and `:mkaply` (+releng as backups) | mozillaonline-privileged | One of each (team and admin) need to sign off on `mozillaonline-privileged` xpis.

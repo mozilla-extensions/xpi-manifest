@@ -1,0 +1,11 @@
+---
+description: Balrog dry run to test the system add-on release process.
+repo-prefix: balrogdryrun
+active: true
+private-repo: false
+branch: main
+artifacts:
+  - web-ext-artifacts/balrog-dryrun.xpi
+addon-type: system
+install-type: npm
+enable-github-release: False

@@ -16,9 +16,6 @@ additional-emails: []
 #            the xpi package.json lives. Optional. Defaults to the
 #            root of the repository.
 directory: one
-# string: docker-image. Optional. Defaults to node-14 as found
-#         in taskcluster/ci/[build|test]/kind.yml .
-docker-image: node-14
 # string: branch name. Optional. Defaults to the default-ref in
 #         taskcluster.ci.config.taskgraph.repositories .
 branch: master
@@ -36,10 +33,10 @@ addon-type: normandy-privileged
 install-type: npm
 # boolean: true == release artifact to github,
 #          false == manually release artifact
-enable-github-release: False
-# string: tag to use when releasing to github.
-#         Optional. Defaults to {version} from the addon repo.
-# release-tag: {version}
-# string: name to use when releasing to github.
-#         Optional. Defaults to: {xpi_name}-{version}-build{build_number}
-# release-name: {xpi_name}-{version}-build{build_number}
+enable-github-release: True
+# string: branch name. Optional. Defaults to {version} from the
+#         addon repo.
+release-tag: 3.1.4
+# string: branch name. Optional. Defaults to:
+#         {xpi_name}-{version}-build{build_number}
+release-name: stagingrelease

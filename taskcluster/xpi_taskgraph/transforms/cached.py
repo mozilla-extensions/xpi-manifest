@@ -5,7 +5,6 @@
 Build the cached_task digest to prevent rerunning tasks if the code hasn't changed.
 """
 
-from __future__ import absolute_import, print_function, unicode_literals
 
 import hashlib
 import json
@@ -23,18 +22,24 @@ transforms = TransformSequence()
 
 BASE_DIR = os.getcwd()
 
+
 @transforms.add
 def add_resources(config, tasks):
     for task in tasks:
         resources = set(task.pop("resources", []))
-        resources.add(os.path.join(MANIFEST_DIR, "{}.yml".format(task["extra"]["xpi-name"])))
+        resources.add(
+            os.path.join(MANIFEST_DIR, "{}.yml".format(task["extra"]["xpi-name"]))
+        )
         resources = list(resources)
         attributes = task.setdefault("attributes", {})
         if attributes.get("resources") is not None:
             if resources and attributes["resources"] != resources:
                 raise Exception(
                     "setting {} {} task.attributes.resources to {}: it's already set to {}!".format(
-                        config.kind, task.get("name"), resources, attributes["resources"],
+                        config.kind,
+                        task.get("name"),
+                        resources,
+                        attributes["resources"],
                     )
                 )
         attributes["resources"] = resources
@@ -51,20 +56,24 @@ def build_cache(config, tasks):
         if task.get("cache", True) and not taskgraph.fast:
             digest_data = []
             digest_data.append(
-                json.dumps(task.get("attributes", {}).get("digest-extra", {}), indent=2, sort_keys=True)
+                json.dumps(
+                    task.get("attributes", {}).get("digest-extra", {}),
+                    indent=2,
+                    sort_keys=True,
+                )
             )
             resources = task["attributes"]["resources"]
             for resource in resources:
                 path = os.path.join(BASE_DIR, resource)
                 if os.path.isdir(resource):
-                    digest_data.append(hash_paths(path, ['']))
+                    digest_data.append(hash_paths(path, [""]))
                 elif os.path.isfile(resource):
                     digest_data.append(hash_path(path))
                 else:
-                    raise Exception("Unknown resource {}".format(resource))
+                    raise Exception(f"Unknown resource {resource}")
             cache_name = task["name"].replace(":", "-")
             task["cache"] = {
-                "type": "xpi-manifest.v1.{}".format(config.kind),
+                "type": f"xpi-manifest.v1.{config.kind}",
                 "name": cache_name,
                 "digest-data": digest_data,
             }

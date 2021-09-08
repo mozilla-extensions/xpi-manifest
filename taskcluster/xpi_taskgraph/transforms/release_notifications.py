@@ -5,7 +5,6 @@
 Add notifications via taskcluster-notify for release tasks
 """
 
-from __future__ import absolute_import, print_function, unicode_literals
 
 from taskgraph.transforms.base import TransformSequence
 from taskgraph.util.keyed_by import evaluate_keyed_by
@@ -22,6 +21,8 @@ def add_notifications(config, jobs):
     xpi_name = config.params.get("xpi_name")
     xpi_revision = config.params.get("xpi_revision")
     shipping_phase = config.params.get("shipping_phase")
+    additional_shipit_emails = config.params.get("additional_shipit_emails", [])
+
     if not all([xpi_name, xpi_revision, shipping_phase]):
         return
     manifest = get_manifest()
@@ -38,40 +39,34 @@ def add_notifications(config, jobs):
             job.setdefault("dependencies", {}).update({"signing": dep.label})
         if job.get("attributes", {}).get("shipping-phase") != shipping_phase:
             continue
-        job['label'] = '{}-{}'.format(config.kind, shipping_phase)
+        job["label"] = f"{config.kind}-{shipping_phase}"
         xpi_config = manifest[xpi_name]
-        xpi_type = xpi_config['addon-type']
+        xpi_type = xpi_config["addon-type"]
 
-        emails = evaluate_keyed_by(
-            config.graph_config['release-promotion']['notifications'][xpi_type],
-            'email', dict(phase=shipping_phase, )
-        ) + xpi_config.get("additional-emails", [])
+        emails = (
+            evaluate_keyed_by(
+                config.graph_config["release-promotion"]["notifications"][xpi_type],
+                "email",
+                dict(phase=shipping_phase),
+            )
+            + xpi_config.get("additional-emails", [])
+            + additional_shipit_emails
+        )
         notifications = evaluate_keyed_by(
-            job.pop('notifications'),
-            'notification config', dict(phase=shipping_phase, )
+            job.pop("notifications"), "notification config", dict(phase=shipping_phase)
         )
-        format_kwargs = dict(
-            config=config.__dict__,
-        )
-        subject = notifications['subject'].format(**format_kwargs)
-        message = notifications['message'].format(**format_kwargs)
+        format_kwargs = dict(config=config.__dict__)
+        subject = notifications["subject"].format(**format_kwargs)
+        message = notifications["message"].format(**format_kwargs)
 
         # We only send mail on success to avoid messages like 'blah is in the
         # candidates dir' when cancelling graphs, dummy job failure, etc
-        job.setdefault('routes', []).extend(
-            ['notify.email.{}.on-completed'.format(email) for email in emails]
+        job.setdefault("routes", []).extend(
+            [f"notify.email.{email}.on-completed" for email in emails]
         )
 
-        job.setdefault('extra', {}).update(
-            {
-               'notify': {
-                   'email': {
-                        'subject': subject,
-                    }
-                }
-            }
-        )
+        job.setdefault("extra", {}).update({"notify": {"email": {"subject": subject}}})
         if message:
-            job['extra']['notify']['email']['content'] = message
+            job["extra"]["notify"]["email"]["content"] = message
 
         yield job
