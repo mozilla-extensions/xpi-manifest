@@ -25,9 +25,8 @@ artifacts:
 # enum: `system` means system add-on.
 #       `privileged` means AMO or self-hosted privileged add-on.
 #       `mozillaonline-privileged` means Mozilla China add-on.
-#       `normandy-privileged` means normandy add-on.
 #       Required.
-addon-type: normandy-privileged
+addon-type: privileged
 # enum: `npm` for `npm install` or `yarn` for
 #       `yarn install --frozen-lockfile`. Optional. Defaults to `yarn`.
 install-type: npm
