@@ -179,7 +179,6 @@ scriptworker:
     signing-format:
         by-xpi-type:
             mozillaonline-privileged: privileged_webextension
-            normandy-privileged: privileged_webextension
             privileged: privileged_webextension
             system: system_addon
 
@@ -215,19 +214,6 @@ release-promotion:
                     - "hectorz+mozillaonline-priv-webext-ship@mozilla.com"
                     - "mkaply+mozillaonline-priv-webext-ship@mozilla.com"
                     - "awagner+mozillaonline-priv-webext-ship@mozilla.com"
-        # configure normandy-privileged webextension email addresses for
-        # notifications
-        normandy-privileged:
-            by-phase:
-                build:
-                    - "aki+normandy-priv-webext-build@mozilla.com"
-                    - "mcooper+normandy-priv-webext-build@mozilla.com"
-                promote:
-                    - "aki+normandy-priv-webext-promote@mozilla.com"
-                    - "mcooper+normandy-priv-webext-promote@mozilla.com"
-                ship:
-                    - "aki+normandy-priv-webext-ship@mozilla.com"
-                    - "mcooper+normandy-priv-webext-ship@mozilla.com"
         # configure privileged webextension email addresses for notifications
         privileged:
             by-phase:
