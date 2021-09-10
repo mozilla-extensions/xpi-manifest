@@ -171,7 +171,7 @@ If you need extra npm's installed or a different version of node, it will be doc
 ```
 {
     ...
-    "docker-image": "node-15",
+    "docker-image": "node-lts-latest",
     ...
 }
 ```
@@ -179,6 +179,6 @@ To do this for release automation, you can edit your `manifest.yml` file and add
 ```
 active: true
 install-type: npm
-docker-image: node-15
+docker-image: node-lts-latest
 ...
 ```
