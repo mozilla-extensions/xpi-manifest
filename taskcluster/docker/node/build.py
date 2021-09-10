@@ -89,7 +89,7 @@ def main():
         "name": xpi_name,
         "addon-type": xpi_type,
         "repo": os.environ[head_repo_env_var],
-        "revision": revision.decode("utf-8").rstrip(),
+        "revision": str(revision.rstrip()),
         "directory": os.path.relpath(base_src_dir, os.getcwd()),
         "version": package_info["version"],
         "artifacts": [],

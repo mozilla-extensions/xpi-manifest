@@ -63,8 +63,8 @@ def build_worker_definition(config, jobs):
 
         worker_definition = {
             "artifact-map": _build_artifact_map(job),
-            "git-tag": config.params["head_tag"].decode("utf-8"),
-            "git-revision": config.params["xpi_revision"].decode("utf-8"),
+            "git-tag": config.params["head_tag"],
+            "git-revision": config.params["xpi_revision"],
             "github-project": repo,
             "is-prerelease": False,
         }

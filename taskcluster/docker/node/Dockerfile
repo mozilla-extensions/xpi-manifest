@@ -6,12 +6,14 @@ ARG           NODE_VERSION
 FROM          node:$NODE_VERSION
 MAINTAINER    Aki Sasaki <aki@mozilla.com>
 
-RUN echo "deb http://deb.debian.org/debian testing main" >> /etc/apt/sources.list
+COPY py3-fix.sh /usr/local/bin/py3-fix.sh
+RUN /bin/bash /usr/local/bin/py3-fix.sh $NODE_VERSION
+
 RUN apt-get update -qq \
     && apt-get install -y zip \
-    && apt-get install -y python3 \
-    && apt-get install -y python3-venv \
-    && apt-get install -y python3-pip \
+    python3 \
+    python3-venv \
+    python3-pip \
     && apt-get clean
 
 # Add worker user
