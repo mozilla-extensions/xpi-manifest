@@ -13,7 +13,7 @@ taskgraph:
             # string: the name of the repo, for humans
             name: "XPI manifest"
             # regex: to match the base name of the repo
-            project-regex: xpi-manifest$
+            project-regex: xpi-manifest(.git)?$
             # string: the repo url. Use `git@github.com:org/repo` for private
             #         repositories.
             default-repository: https://github.com/mozilla-extensions/xpi-manifest
@@ -192,43 +192,52 @@ release-promotion:
         # configure mozillaonline-privileged webextension email addresses for
         # notifications
         mozillaonline-privileged:
-            by-phase:
-                build:
-                    - "aki+mozillaonline-priv-webext-build@mozilla.com"
-                    - "hectorz+mozillaonline-priv-webext-build@mozilla.com"
-                    - "mkaply+mozillaonline-priv-webext-build@mozilla.com"
-                    - "awagner+mozillaonline-priv-webext-build@mozilla.com"
-                promote:
-                    - "aki+mozillaonline-priv-webext-promote@mozilla.com"
-                    - "hectorz+mozillaonline-priv-webext-promote@mozilla.com"
-                    - "mkaply+mozillaonline-priv-webext-promote@mozilla.com"
-                    - "awagner+mozillaonline-priv-webext-promote@mozilla.com"
-                ship:
-                    - "aki+mozillaonline-priv-webext-ship@mozilla.com"
-                    - "hectorz+mozillaonline-priv-webext-ship@mozilla.com"
-                    - "mkaply+mozillaonline-priv-webext-ship@mozilla.com"
-                    - "awagner+mozillaonline-priv-webext-ship@mozilla.com"
+            by-level:
+                '3':
+                    by-phase:
+                        build:
+                            - "aki+mozillaonline-priv-webext-build@mozilla.com"
+                            - "hectorz+mozillaonline-priv-webext-build@mozilla.com"
+                            - "mkaply+mozillaonline-priv-webext-build@mozilla.com"
+                            - "awagner+mozillaonline-priv-webext-build@mozilla.com"
+                        promote:
+                            - "aki+mozillaonline-priv-webext-promote@mozilla.com"
+                            - "hectorz+mozillaonline-priv-webext-promote@mozilla.com"
+                            - "mkaply+mozillaonline-priv-webext-promote@mozilla.com"
+                            - "awagner+mozillaonline-priv-webext-promote@mozilla.com"
+                        ship:
+                            - "aki+mozillaonline-priv-webext-ship@mozilla.com"
+                            - "hectorz+mozillaonline-priv-webext-ship@mozilla.com"
+                            - "mkaply+mozillaonline-priv-webext-ship@mozilla.com"
+                            - "awagner+mozillaonline-priv-webext-ship@mozilla.com"
+                default: []
         # configure privileged webextension email addresses for notifications
         privileged:
-            by-phase:
-                build:
-                    - "privileged-addon-reviewers+shipit-build@mozilla.com"
-                promote:
-                    - "privileged-addon-reviewers+shipit-promote@mozilla.com"
-                ship:
-                    - "privileged-addon-reviewers+shipit-ship@mozilla.com"
+            by-level:
+                '3':
+                    by-phase:
+                        build:
+                            - "privileged-addon-reviewers+shipit-build@mozilla.com"
+                        promote:
+                            - "privileged-addon-reviewers+shipit-promote@mozilla.com"
+                        ship:
+                            - "privileged-addon-reviewers+shipit-ship@mozilla.com"
+                default: []
         # configure system addons email addresses for notifications
         system:
-            by-phase:
-                build:
-                    - "aki+system-addons-build@mozilla.com"
-                    - "awagner+system-addons-build@mozilla.com"
-                    - "pkewisch+system-addons-build@mozilla.com"
-                promote:
-                    - "aki+system-addons-promote@mozilla.com"
-                    - "awagner+system-addons-promote@mozilla.com"
-                    - "pkewisch+system-addons-promote@mozilla.com"
-                ship:
-                    - "aki+system-addons-ship@mozilla.com"
-                    - "awagner+system-addons-ship@mozilla.com"
-                    - "pkewisch+system-addons-ship@mozilla.com"
+            by-level:
+                '3':
+                    by-phase:
+                        build:
+                            - "aki+system-addons-build@mozilla.com"
+                            - "awagner+system-addons-build@mozilla.com"
+                            - "pkewisch+system-addons-build@mozilla.com"
+                        promote:
+                            - "aki+system-addons-promote@mozilla.com"
+                            - "awagner+system-addons-promote@mozilla.com"
+                            - "pkewisch+system-addons-promote@mozilla.com"
+                        ship:
+                            - "aki+system-addons-ship@mozilla.com"
+                            - "awagner+system-addons-ship@mozilla.com"
+                            - "pkewisch+system-addons-ship@mozilla.com"
+                default: []
