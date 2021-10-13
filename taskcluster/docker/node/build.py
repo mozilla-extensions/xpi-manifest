@@ -72,7 +72,7 @@ def write_package_info(package_info):
 
 def get_buildid():
     now = datetime.utcnow()
-    return now.strftime("%Y%m%d%H%M%S")
+    return now.strftime("%Y%m%d.%H%M%S")
 
 
 def get_buildid_version(version):
