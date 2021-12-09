@@ -75,7 +75,10 @@ def main():
             print("No `test` target in package.json; noop")
 
     for command in commands:
-        run_command(["yarn", command])
+        if os.environ.get("XPI_INSTALL_TYPE", "yarn") == "yarn":
+            run_command(["yarn", command])
+        else:
+            run_command(["npm", "run", command])
 
 
 __name__ == '__main__' and main()
