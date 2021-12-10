@@ -30,8 +30,9 @@ artifacts:
 #       `mozillaonline-privileged` means Mozilla China add-on.
 #       Required.
 addon-type: privileged
-# enum: `npm` for `npm install` or `yarn` for
-#       `yarn install --frozen-lockfile`. Optional. Defaults to `yarn`.
+# enum: `npm` or `yarn`
+#       sets the package manager used to install dependencies and execute package scripts (e.g. build and test).
+#       Optional. Defaults to `yarn`.
 install-type: npm
 # boolean: true == release artifact to github,
 #          false == manually release artifact

@@ -54,6 +54,8 @@ def test_tasks_from_manifest(config, tasks):
         else:
             artifact_prefix = "public/build"
         env["ARTIFACT_PREFIX"] = artifact_prefix
+        if xpi_config.get("install-type"):
+            env["XPI_INSTALL_TYPE"] = xpi_config["install-type"]
         paths = []
         for artifact in xpi_config["artifacts"]:
             artifact_name = f"{artifact_prefix}/{os.path.basename(artifact)}"
