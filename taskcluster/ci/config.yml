@@ -21,6 +21,12 @@ taskgraph:
             default-ref: master
             # enum: hg or git; should be `git`
             type: git
+        staging-xpi:
+            name: "XPI manifest"
+            project-regex: staging-xpi-manifest(.git)?$
+            default-repository: https://github.com/mozilla-releng/staging-xpi-manifest
+            default-ref: master
+            type: git
         stagingpublic:
             name: "Releng staging repo test"
             project-regex: staging-xpi-public$
