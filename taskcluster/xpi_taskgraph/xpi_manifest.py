@@ -12,7 +12,6 @@ from datetime import datetime
 
 from taskgraph.config import load_graph_config
 from taskgraph.util.schema import validate_schema
-from taskgraph.util.vcs import calculate_head_rev, get_repo_path, get_repository_type
 from taskgraph.util import yaml
 from taskgraph.util.memoize import memoize
 from taskgraph.util.readonlydict import ReadOnlyDict
