@@ -129,6 +129,12 @@ taskgraph:
             default-repository: https://github.com/mozilla-extensions/addons-search-detection
             default-ref: main
             type: git
+        searchengineusagestudy:
+            name: "Rally Search Engine Usage study extension"
+            project-regex: searchengineusagestudys$
+            default-repository: git@github.com:mozilla-extensions/search-engine-usage-study
+            default-ref: release
+            type: git
 
 
     cached-task-prefix: xpi

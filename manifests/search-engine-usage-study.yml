@@ -1,0 +1,9 @@
+description: Rally Search Engine Usage study extension
+repo-prefix: searchengineusagestudy
+active: true
+private-repo: true
+branch: release
+artifacts:
+  - web-ext-artifacts/search_engine_usage_study.xpi
+addon-type: privileged
+install-type: npm
