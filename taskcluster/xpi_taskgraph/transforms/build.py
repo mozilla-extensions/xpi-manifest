@@ -9,6 +9,7 @@ kind.
 from copy import deepcopy
 import os
 
+from taskgraph.config import load_graph_config
 from taskgraph.transforms.base import TransformSequence
 from xpi_taskgraph.xpi_manifest import get_manifest
 
@@ -51,6 +52,15 @@ def tasks_from_manifest(config, jobs):
                     "github_clone_secret"
                 ]
                 artifact_prefix = "xpi/build"
+                repo_url = config.graph_config["taskgraph"]["repositories"][
+                    xpi_config["repo-prefix"]
+                ]["default-repository"]
+                if repo_url.startswith("https"):
+                    raise Exception(
+                        f"{xpi_config['manifest_name']} is a private repo but {repo_url} is a public url!\n"
+                        "Use the git@github.com:ORG/REPO url format.\n"
+                        "(See https://github.com/mozilla-extensions/xpi-manifest/blob/master/docs/adding-a-new-xpi.md#enabling-releases)"
+                    )
             else:
                 artifact_prefix = "public/build"
             env["ARTIFACT_PREFIX"] = artifact_prefix
