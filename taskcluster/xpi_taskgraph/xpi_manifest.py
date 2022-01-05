@@ -12,7 +12,6 @@ from datetime import datetime
 
 from taskgraph.config import load_graph_config
 from taskgraph.util.schema import validate_schema
-from taskgraph.util.vcs import calculate_head_rev, get_repo_path, get_repository_type
 from taskgraph.util import yaml
 from taskgraph.util.memoize import memoize
 from taskgraph.util.readonlydict import ReadOnlyDict
@@ -35,9 +34,7 @@ base_schema = Schema(
         Optional("branch"): str,
         Optional("docker-image"): str,
         Required("artifacts"): [str],
-        Required("addon-type"): Any(
-            "mozillaonline-privileged", "privileged", "system"
-        ),
+        Required("addon-type"): Any("mozillaonline-privileged", "privileged", "system"),
         Optional("install-type"): Any("npm", "yarn"),
         Optional("enable-github-release"): bool,
         Optional("release-tag"): str,
