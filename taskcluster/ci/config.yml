@@ -105,12 +105,6 @@ taskgraph:
             default-repository: https://github.com/mozilla-rally/rally-core-addon
             default-ref: release
             type: git
-        telemetrytestingextension:
-            name: "Telemetry testing extension"
-            project-regex: telemetrytestingextension$
-            default-repository: https://github.com/mozilla-extensions/dynamic-probe-telemetry-extension
-            default-ref: main
-            type: git
         searchdefaultaddon:
             name: "Reset Search Default extension"
             project-regex: searchdefaultaddon$
