@@ -1,9 +1,0 @@
-description: Extension asks users to reset their default search for some extensions
-repo-prefix: searchdefaultaddon
-active: true
-private-repo: false
-branch: main
-artifacts:
-  - web-ext-artifacts/reset-search-defaults.xpi
-addon-type: system
-install-type: npm
