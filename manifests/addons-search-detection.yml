@@ -1,9 +1,0 @@
-description: Add-ons Search Detection by the add-ons team
-repo-prefix: addonssearchdetection
-active: true
-private-repo: false
-branch: main
-artifacts:
-  - web-ext-artifacts/addons-search-detection.xpi
-addon-type: system
-install-type: yarn
