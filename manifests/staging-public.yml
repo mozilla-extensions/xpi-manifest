@@ -26,7 +26,7 @@ artifacts:
 #       `privileged` means AMO or self-hosted privileged add-on.
 #       `mozillaonline-privileged` means Mozilla China add-on.
 #       Required.
-addon-type: privileged
+addon-type: system
 # enum: `npm` for `npm install` or `yarn` for
 #       `yarn install --frozen-lockfile`. Optional. Defaults to `yarn`.
 install-type: npm
