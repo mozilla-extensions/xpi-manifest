@@ -9,7 +9,6 @@ kind.
 from copy import deepcopy
 import os
 
-from taskgraph.config import load_graph_config
 from taskgraph.transforms.base import TransformSequence
 from xpi_taskgraph.xpi_manifest import get_manifest
 
@@ -36,7 +35,7 @@ def tasks_from_manifest(config, jobs):
             checkout = run.setdefault("checkout", {})
             checkout_config = checkout.setdefault(xpi_config["repo-prefix"], {})
             env["REPO_PREFIX"] = xpi_config["repo-prefix"]
-            checkout_config["path"] = "/builds/worker/checkouts/src"
+            checkout_config["path"] = "/builds/worker/checkouts/vcs"
             if "branch" in xpi_config:
                 checkout_config["head_ref"] = xpi_config["branch"]
             if "directory" in xpi_config:
