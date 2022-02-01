@@ -76,7 +76,7 @@ def add_beetmover_worker_config(config, tasks):
                             "locale": "multi",
                         },
                     ],
-                    "action-scope": "direct-push-to-bucket",
+                    "action-scope": "push-to-nightly",
                     "bucket-scope": task["bucket-scope"],
                     "release-properties": {
                         "app-name": "xpi",

@@ -2,8 +2,8 @@
 # License, v. 2.0. If a copy of the MPL was not distributed with this
 # file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
-
 from datetime import datetime
+from os.path import basename
 
 from taskgraph.transforms.task import payload_builder
 from taskgraph.util.schema import taskref_or_string
@@ -144,7 +144,9 @@ def build_scriptworker_beetmover_payload(config, task, task_def):
     for map_ in artifact_map:
         map_["locale"] = "multi"
         for path_config in map_["paths"].values():
-            path_config["checksums_path"] = ""
+            for destination in path_config["destinations"]:
+                path_config["checksums_path"] = basename(destination)
+                path_config["update_balrog_manifest"] = True
     if worker["release-properties"].get("hash-type"):
         hash_type = worker["release-properties"]["hash-type"]
     else:
