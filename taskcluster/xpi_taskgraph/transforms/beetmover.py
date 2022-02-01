@@ -3,7 +3,7 @@
 # file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
 
-from os.path import basename
+from os.path import basename, splitext
 
 from taskgraph.task import Task
 from taskgraph.transforms.base import TransformSequence
@@ -45,12 +45,13 @@ def add_beetmover_worker_config(config, tasks):
             xpi_version = config.params["version"]
             xpi_destinations = []
             for artifact in xpi_manifest["artifacts"]:
-                artifact_name = basename(artifact)
+                artifact_name = splitext(basename(artifact))[0]
                 xpi_destination = (
                     "pub/system-addons/{xpi_name}/"
-                    "{xpi_name}%mozilla.org-{xpi_version}-{build_id}.xpi"
+                    "{artifact_name}_mozilla.org-{xpi_version}-{build_id}.xpi"
                 ).format(
-                    xpi_name=artifact_name,
+                    xpi_name=xpi_name,
+                    artifact_name=artifact_name,
                     xpi_version=xpi_version,
                     build_id=config.params["moz_build_date"],
                 )
