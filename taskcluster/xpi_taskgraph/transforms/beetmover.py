@@ -19,6 +19,7 @@ schema = Schema(
         Required("attributes"): dict,
         Required("bucket-scope"): dict,
         Required("run-on-tasks-for"): [str],
+        Required("only-for-addon-types"): [str],
     },
 )
 transforms = TransformSequence()
@@ -38,7 +39,9 @@ def add_beetmover_worker_config(config, tasks):
         xpi_name = config.params["xpi_name"]
         xpi_manifest = manifest[xpi_name]
         xpi_addon_type = xpi_manifest["addon-type"]
-        if xpi_addon_type == "system":
+        for task in tasks:
+            if xpi_addon_type not in task["only-for-addon-types"]:
+                continue
             xpi_version = config.params["version"]
             xpi_destination = (
                 "pub/system-addons/{xpi_name}/"
@@ -53,52 +56,51 @@ def add_beetmover_worker_config(config, tasks):
             task_description = (
                 "Upload the signed {xpi_name} XPI package to {xpi_destination}"
             ).format(xpi_name=xpi_name, xpi_destination=xpi_destination)
-            for task in tasks:
-                resolve_keyed_by(
-                    task,
-                    "bucket-scope",
-                    item_name=task_label,
-                    **{"level": config.params["level"]},
-                )
-                dep = task["primary-dependency"]
-                task_ref = {"task-reference": "<release-signing>"}
-                branch = basename(config.params["head_ref"])
-                paths = list(dep.attributes["xpis"].values())
-                artifact_map_paths = {
-                    path: {"destinations": xpi_destinations} for path in paths
-                }
-                worker = {
-                    "upstream-artifacts": [
-                        {
-                            "taskId": task_ref,
-                            "taskType": "signing",
-                            "paths": paths,
-                            "locale": "multi",
-                        },
-                    ],
-                    "action-scope": "push-to-nightly",
-                    "bucket-scope": task["bucket-scope"],
-                    "release-properties": {
-                        "app-name": "xpi",
-                        "app-version": xpi_version,
-                        "branch": branch,
-                        "build-id": config.params["moz_build_date"],
+            resolve_keyed_by(
+                task,
+                "bucket-scope",
+                item_name=task_label,
+                **{"level": config.params["level"]},
+            )
+            dep = task["primary-dependency"]
+            task_ref = {"task-reference": "<release-signing>"}
+            branch = basename(config.params["head_ref"])
+            paths = list(dep.attributes["xpis"].values())
+            artifact_map_paths = {
+                path: {"destinations": xpi_destinations} for path in paths
+            }
+            worker = {
+                "upstream-artifacts": [
+                    {
+                        "taskId": task_ref,
+                        "taskType": "signing",
+                        "paths": paths,
+                        "locale": "multi",
                     },
-                    "artifact-map": [
-                        {
-                            "taskId": task_ref,
-                            "paths": artifact_map_paths,
-                        },
-                    ],
-                }
-                task = {
-                    "label": task_label,
-                    "name": task_label,
-                    "description": task_description,
-                    "dependencies": {"release-signing": dep.label},
-                    "worker-type": task["worker-type"],
-                    "worker": worker,
-                    "attributes": task["attributes"],
-                    "run-on-tasks-for": task["run-on-tasks-for"],
-                }
-                yield task
+                ],
+                "action-scope": "push-to-nightly",
+                "bucket-scope": task["bucket-scope"],
+                "release-properties": {
+                    "app-name": "xpi",
+                    "app-version": xpi_version,
+                    "branch": branch,
+                    "build-id": config.params["moz_build_date"],
+                },
+                "artifact-map": [
+                    {
+                        "taskId": task_ref,
+                        "paths": artifact_map_paths,
+                    },
+                ],
+            }
+            task = {
+                "label": task_label,
+                "name": task_label,
+                "description": task_description,
+                "dependencies": {"release-signing": dep.label},
+                "worker-type": task["worker-type"],
+                "worker": worker,
+                "attributes": task["attributes"],
+                "run-on-tasks-for": task["run-on-tasks-for"],
+            }
+            yield task

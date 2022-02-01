@@ -13,6 +13,7 @@ kind-dependencies:
 
 job-template:
     run-on-tasks-for: ["action"]
+    only-for-addon-types: ["system"]
     worker-type: beetmover
     attributes:
         shipping-phase: ship
