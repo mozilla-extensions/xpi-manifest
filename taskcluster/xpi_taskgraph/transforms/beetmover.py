@@ -51,7 +51,7 @@ def add_beetmover_worker_config(config, tasks):
             xpi_destinations = [xpi_destination]
             task_label = f"beetmover-{xpi_name}"
             task_description = (
-                "Upload the signed {xpi_name} " "XPI package to {xpi_destination}"
+                "Upload the signed {xpi_name} XPI package to {xpi_destination}"
             ).format(xpi_name=xpi_name, xpi_destination=xpi_destination)
             for task in tasks:
                 resolve_keyed_by(
