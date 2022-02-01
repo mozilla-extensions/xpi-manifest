@@ -43,18 +43,21 @@ def add_beetmover_worker_config(config, tasks):
             if xpi_addon_type not in task["only-for-addon-types"]:
                 continue
             xpi_version = config.params["version"]
-            xpi_destination = (
-                "pub/system-addons/{xpi_name}/"
-                "{xpi_name}%mozilla.org-{xpi_version}-{build_id}.xpi"
-            ).format(
-                xpi_name=xpi_name,
-                xpi_version=xpi_version,
-                build_id=config.params["moz_build_date"],
-            )
-            xpi_destinations = [xpi_destination]
+            xpi_destinations = []
+            for artifact in xpi_manifest["artifacts"]:
+                artifact_name = basename(artifact)
+                xpi_destination = (
+                    "pub/system-addons/{xpi_name}/"
+                    "{xpi_name}%mozilla.org-{xpi_version}-{build_id}.xpi"
+                ).format(
+                    xpi_name=artifact_name,
+                    xpi_version=xpi_version,
+                    build_id=config.params["moz_build_date"],
+                )
+                xpi_destinations.append(xpi_destination)
             task_label = f"beetmover-{xpi_name}"
             task_description = (
-                "Upload the signed {xpi_name} XPI package to {xpi_destination}"
+                "Upload signed XPI artifacts to pub/system-addons"
             ).format(xpi_name=xpi_name, xpi_destination=xpi_destination)
             resolve_keyed_by(
                 task,
