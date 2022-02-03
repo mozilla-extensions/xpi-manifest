@@ -2,10 +2,12 @@
 # License, v. 2.0. If a copy of the MPL was not distributed with this
 # file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
-from voluptuous import Required
+from datetime import datetime
+from os.path import basename
 
-from taskgraph.util.schema import taskref_or_string
 from taskgraph.transforms.task import payload_builder
+from taskgraph.util.schema import taskref_or_string
+from voluptuous import Any, Optional, Required
 
 
 @payload_builder(
@@ -100,3 +102,80 @@ def build_github_release_payload(config, task, task_def):
             "{}:github:action:{}".format(scope_prefix, worker["action"]),
         ]
     )
+
+
+@payload_builder(
+    "scriptworker-beetmover",
+    schema={
+        Required("action-scope"): str,
+        Required("bucket-scope"): str,
+        Required("artifact-map"): [
+            {
+                Required("paths"): {
+                    Any(str): {
+                        Required("destinations"): [str],
+                    },
+                },
+                Required("taskId"): taskref_or_string,
+            }
+        ],
+        Required("release-properties"): {
+            Required("app-name"): str,
+            Required("app-version"): str,
+            Required("branch"): str,
+            Required("build-id"): str,
+            Optional("hash-type"): str,
+            Optional("platform"): str,
+        },
+        Required("upstream-artifacts"): [
+            {
+                Required("locale"): str,
+                Required("taskId"): taskref_or_string,
+                Required("taskType"): str,
+                Required("paths"): [str],
+            }
+        ],
+    },
+)
+def build_scriptworker_beetmover_payload(config, task, task_def):
+    worker = task["worker"]
+    task_def["tags"]["worker-implementation"] = "scriptworker"
+    artifact_map = worker["artifact-map"]
+    for map_ in artifact_map:
+        map_["locale"] = "multi"
+        for path_config in map_["paths"].values():
+            for destination in path_config["destinations"]:
+                path_config["checksums_path"] = basename(destination)
+                path_config["update_balrog_manifest"] = True
+    if worker["release-properties"].get("hash-type"):
+        hash_type = worker["release-properties"]["hash-type"]
+    else:
+        hash_type = "sha512"
+    if worker["release-properties"].get("platform"):
+        platform = worker["release-properties"]["platform"]
+    else:
+        platform = "xpi"
+    release_properties = {
+        "appName": worker["release-properties"]["app-name"],
+        "appVersion": worker["release-properties"]["app-version"],
+        "branch": worker["release-properties"]["branch"],
+        "buildid": worker["release-properties"]["build-id"],
+        "hashType": hash_type,
+        "platform": platform,
+    }
+    prefix = "project:xpi:beetmover:"
+    task_def["scopes"] = [
+        "{prefix}bucket:{bucket_scope}".format(
+            prefix=prefix, bucket_scope=worker["bucket-scope"]
+        ),
+        "{prefix}action:{action_scope}".format(
+            prefix=prefix, action_scope=worker["action-scope"]
+        ),
+    ]
+    task_def["payload"] = {
+        "maxRunTime": 600,
+        "artifactMap": artifact_map,
+        "releaseProperties": release_properties,
+        "upstreamArtifacts": worker["upstream-artifacts"],
+        "upload_date": int(datetime.now().timestamp()),
+    }

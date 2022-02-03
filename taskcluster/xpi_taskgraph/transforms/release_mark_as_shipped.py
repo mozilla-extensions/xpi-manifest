@@ -5,19 +5,14 @@
 
 from taskgraph.transforms.base import TransformSequence
 from taskgraph.util.schema import resolve_keyed_by
+from xpi_taskgraph.xpi_manifest import get_manifest
 
 transforms = TransformSequence()
 
 
 @transforms.add
-def pop_primary_dependency(config, jobs):
-    for job in jobs:
-        job.pop("primary-dependency")
-        yield job
-
-
-@transforms.add
 def make_task_description(config, jobs):
+    manifest = get_manifest()
     for job in jobs:
         if not (
             config.params.get("version")
@@ -28,7 +23,12 @@ def make_task_description(config, jobs):
         resolve_keyed_by(
             job, "scopes", item_name=job["name"], **{"level": config.params["level"]}
         )
-
+        dep = job.pop("primary-dependency")
+        xpi_name = config.params["xpi_name"]
+        xpi_manifest = manifest[xpi_name]
+        xpi_addon_type = xpi_manifest.get("addon-type")
+        if xpi_name == "system":
+            job["dependencies"] = {"beetmover": dep.label}
         job["worker"][
             "release-name"
         ] = "{xpi_name}-{version}-build{build_number}".format(
@@ -36,5 +36,4 @@ def make_task_description(config, jobs):
             version=config.params["version"],
             build_number=config.params["build_number"],
         )
-
         yield job

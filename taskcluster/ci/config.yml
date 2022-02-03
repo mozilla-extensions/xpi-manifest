@@ -142,6 +142,11 @@ workers:
             implementation: scriptworker-github
             os: scriptworker
             worker-type: 'xpi-{level}-github'
+        beetmover:
+            provisioner: scriptworker-k8s
+            implementation: scriptworker-beetmover
+            os: scriptworker
+            worker-type: 'xpi-{level}-beetmover'
         signing:
             provisioner: scriptworker-k8s
             implementation: scriptworker-signing
