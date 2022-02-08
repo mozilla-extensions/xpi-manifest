@@ -7,4 +7,3 @@ artifacts:
     - web-ext-artifacts/dnssec-interference-study.xpi
 addon-type: privileged
 install-type: npm
-enable-github-release: False
