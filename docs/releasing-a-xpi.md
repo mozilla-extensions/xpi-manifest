@@ -86,3 +86,4 @@ Privileged webextension admin | Add-on Review team (+releng as backups) | privil
 System addon admin | Add-on Review team (+releng as backups) | system | Two of these are required to sign off on `system` xpis.
 MozillaOnline privileged webextension team | mozilla-online team (+releng as backups) | mozillaonline-privileged | One of each (team and admin) need to sign off on `mozillaonline-privileged` xpis.
 MozillaOnline privileged webextension admin | `:theone` and `:mkaply` (+releng as backups) | mozillaonline-privileged | One of each (team and admin) need to sign off on `mozillaonline-privileged` xpis.
+Normandy privileged signoff | (currently only releng) | normandy-privileged | Two are required to sign off on `normandy-privileged` xpis. `normandy-privileged` is deprecated.
