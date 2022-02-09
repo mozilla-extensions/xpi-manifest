@@ -173,6 +173,8 @@ scriptworker:
             mozillaonline-privileged: privileged_webextension
             privileged: privileged_webextension
             system: system_addon
+            # normandy-privileged is deprecated
+            normandy-privileged: privileged_webextension
 
 release-promotion:
     flavors:
@@ -239,3 +241,7 @@ release-promotion:
                             - "awagner+system-addons-ship@mozilla.com"
                             - "pkewisch+system-addons-ship@mozilla.com"
                 default: []
+        # configure normandy-privileged webextension email addresses for
+        # notifications. normandy-privileged is deprecated.
+        normandy-privileged:
+            - "aki+normandy-priv@mozilla.com"
