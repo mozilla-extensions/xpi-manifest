@@ -146,7 +146,6 @@ def build_scriptworker_beetmover_payload(config, task, task_def):
         for path_config in map_["paths"].values():
             for destination in path_config["destinations"]:
                 path_config["checksums_path"] = basename(destination)
-                path_config["update_balrog_manifest"] = True
     if worker["release-properties"].get("hash-type"):
         hash_type = worker["release-properties"]["hash-type"]
     else:
@@ -179,3 +178,36 @@ def build_scriptworker_beetmover_payload(config, task, task_def):
         "upstreamArtifacts": worker["upstream-artifacts"],
         "upload_date": int(datetime.now().timestamp()),
     }
+
+
+@payload_builder(
+    "scriptworker-balrog",
+    schema={
+        Required("action"): str,
+        Required("channel"): str,
+        Required("server"): str,
+        Required("upstream-artifacts"): [
+            {
+                Required("taskId"): taskref_or_string,
+                Required("taskType"): str,
+                Required("paths"): [str],
+            }
+        ], 
+    }
+)
+def build_scriptworker_balrog_payload(config, task, task_def):
+    worker = task["worker"]
+    task_def["tags"]["worker-implementation"] = "scriptworker"
+    task_def["payload"] = {
+        "maxRunTime": 600,
+        "upstreamArtifacts": worker["upstream-artifacts"],
+    }
+    prefix = "project:xpi:balrog:"
+    task_def["scopes"] = [
+        "{prefix}action:{action}".format(
+            prefix=prefix, action=worker["action"]
+        ),
+        "{prefix}server:{server}".format(
+            prefix=prefix, server=worker["server"]
+        ),
+    ]
