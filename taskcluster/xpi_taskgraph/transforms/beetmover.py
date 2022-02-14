@@ -3,7 +3,7 @@
 # file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
 
-from os.path import basename, splitext
+from os.path import basename
 
 from taskgraph.task import Task
 from taskgraph.transforms.base import TransformSequence
@@ -32,34 +32,41 @@ def add_beetmover_worker_config(config, tasks):
         config.params.get("version")
         and config.params.get("xpi_name")
         and config.params.get("head_ref")
-        and config.params.get("moz_build_date")
+        and config.params.get("build_number")
         and config.params.get("level")
     ):
         manifest = get_manifest()
         xpi_name = config.params["xpi_name"]
         xpi_manifest = manifest[xpi_name]
         xpi_addon_type = xpi_manifest["addon-type"]
+        build_number = config.params["build_number"]
+        xpi_version = config.params["version"]
+        release_name = (
+            "{xpi_name}-{xpi_version}-build{build_number}"
+        ).format(
+            xpi_name=xpi_name,
+            xpi_version=xpi_version,
+            build_number=build_number,
+        )
         for task in tasks:
             if xpi_addon_type not in task["only-for-addon-types"]:
                 continue
-            xpi_version = config.params["version"]
             xpi_destinations = []
             for artifact in xpi_manifest["artifacts"]:
-                artifact_name = splitext(basename(artifact))[0]
+                artifact_name = basename(artifact)
                 xpi_destination = (
-                    "pub/system-addons/{xpi_name}/"
-                    "{artifact_name}_mozilla.org-{xpi_version}-{build_id}.xpi"
+                    "pub/system-addons/{xpi_name}/{release_name}/{artifact_name}"
                 ).format(
                     xpi_name=xpi_name,
                     artifact_name=artifact_name,
-                    xpi_version=xpi_version,
-                    build_id=config.params["moz_build_date"],
+                    release_name=release_name,
                 )
                 xpi_destinations.append(xpi_destination)
             task_label = f"beetmover-{xpi_name}"
             task_description = (
-                "Upload signed XPI artifacts to pub/system-addons"
-            ).format(xpi_name=xpi_name, xpi_destination=xpi_destination)
+                "Upload signed XPI artifacts to "
+                "pub/system-addons/{xpi_name}/{release_name}"
+            ).format(xpi_name=xpi_name, release_name=release_name)
             resolve_keyed_by(
                 task,
                 "bucket-scope",
@@ -82,13 +89,13 @@ def add_beetmover_worker_config(config, tasks):
                         "locale": "multi",
                     },
                 ],
-                "action-scope": "push-to-nightly",
+                "action-scope": "push-to-system-addons",
                 "bucket-scope": task["bucket-scope"],
                 "release-properties": {
                     "app-name": "xpi",
                     "app-version": xpi_version,
                     "branch": branch,
-                    "build-id": config.params["moz_build_date"],
+                    "build-id": release_name,
                 },
                 "artifact-map": [
                     {
