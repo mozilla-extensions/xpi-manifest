@@ -9,7 +9,7 @@ transforms:
     - taskgraph.transforms.task:transforms
 
 kind-dependencies:
-    - beetmover
+    - release-signing
 
 job-template:
     name: release-mark-as-shipped
