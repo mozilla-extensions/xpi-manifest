@@ -184,7 +184,6 @@ def build_scriptworker_beetmover_payload(config, task, task_def):
     "scriptworker-balrog",
     schema={
         Required("action"): str,
-        Required("channel"): str,
         Required("server"): str,
         Required("upstream-artifacts"): [
             {

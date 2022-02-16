@@ -17,6 +17,5 @@ job-template:
             by-level:
                 '3': "release"
                 default: "staging"
-        channel: release
     attributes:
         shipping-phase: ship
