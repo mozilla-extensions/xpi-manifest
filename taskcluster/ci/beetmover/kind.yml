@@ -11,13 +11,14 @@ transforms:
 kind-dependencies:
     - release-signing
 
+only-for-addon-types: ["system"]
+
 job-template:
     run-on-tasks-for: ["action"]
-    only-for-addon-types: ["system"]
     worker-type: beetmover
     attributes:
         shipping-phase: ship
     bucket-scope:
         by-level:
-            '3': "release"
+            "3": "release"
             default: "dep"

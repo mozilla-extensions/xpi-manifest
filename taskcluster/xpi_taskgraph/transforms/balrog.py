@@ -3,8 +3,6 @@
 # file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
 
-from os.path import basename
-
 from taskgraph.task import Task
 from taskgraph.transforms.base import TransformSequence
 from taskgraph.util.schema import resolve_keyed_by
@@ -19,7 +17,6 @@ schema = Schema(
         Required("attributes"): dict,
         Required("run-on-tasks-for"): [str],
         Required("balrog"): dict,
-        Required("only-for-addon-types"): [str],
     },
 )
 transforms = TransformSequence()
@@ -41,9 +38,7 @@ def add_balrog_worker_config(config, tasks):
         xpi_addon_type = xpi_manifest["addon-type"]
         xpi_version = config.params["version"]
         build_number = config.params["build_number"]
-        release_name = (
-            "{xpi_name}-{xpi_version}-build{build_number}"
-        ).format(
+        release_name = "{xpi_name}-{xpi_version}-build{build_number}".format(
             xpi_name=xpi_name,
             xpi_version=xpi_version,
             build_number=build_number,
@@ -55,8 +50,6 @@ def add_balrog_worker_config(config, tasks):
             "pub/system-addons/{xpi_name}/{release_name}/"
         ).format(xpi_name=xpi_name, release_name=release_name)
         for task in tasks:
-            if xpi_addon_type not in task["only-for-addon-types"]:
-                continue
             dep = task["primary-dependency"]
             task_ref = {"task-reference": "<beetmover>"}
             paths = [
@@ -80,6 +73,7 @@ def add_balrog_worker_config(config, tasks):
                 item_name=task_label,
                 **{"level": config.params["level"]},
             )
+            task.setdefault("attributes", {})["addon-type"] = xpi_addon_type
             task = {
                 "label": task_label,
                 "name": task_label,

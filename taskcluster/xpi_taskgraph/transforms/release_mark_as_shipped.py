@@ -10,13 +10,6 @@ transforms = TransformSequence()
 
 
 @transforms.add
-def pop_primary_dependency(config, jobs):
-    for job in jobs:
-        job.pop("primary-dependency")
-        yield job
-
-
-@transforms.add
 def make_task_description(config, jobs):
     for job in jobs:
         if not (
@@ -28,7 +21,15 @@ def make_task_description(config, jobs):
         resolve_keyed_by(
             job, "scopes", item_name=job["name"], **{"level": config.params["level"]}
         )
-
+        primary_dep = job.pop("primary-dependency")
+        deps = job.pop("dependent-tasks")
+        job["dependencies"] = {
+            dep_key: dep.label
+            for dep_key, dep in deps.items()
+        }
+        copy_of_attributes = primary_dep.attributes.copy()
+        job.setdefault("attributes", {}).update(copy_of_attributes)
+        job.setdefault("run-on-tasks-for", copy_of_attributes['run_on_tasks_for'])
         job["worker"][
             "release-name"
         ] = "{xpi_name}-{version}-build{build_number}".format(

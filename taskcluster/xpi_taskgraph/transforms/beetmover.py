@@ -19,7 +19,6 @@ schema = Schema(
         Required("attributes"): dict,
         Required("bucket-scope"): dict,
         Required("run-on-tasks-for"): [str],
-        Required("only-for-addon-types"): [str],
     },
 )
 transforms = TransformSequence()
@@ -41,16 +40,12 @@ def add_beetmover_worker_config(config, tasks):
         xpi_addon_type = xpi_manifest["addon-type"]
         build_number = config.params["build_number"]
         xpi_version = config.params["version"]
-        release_name = (
-            "{xpi_name}-{xpi_version}-build{build_number}"
-        ).format(
+        release_name = ("{xpi_name}-{xpi_version}-build{build_number}").format(
             xpi_name=xpi_name,
             xpi_version=xpi_version,
             build_number=build_number,
         )
         for task in tasks:
-            if xpi_addon_type not in task["only-for-addon-types"]:
-                continue
             xpi_destinations = []
             for artifact in xpi_manifest["artifacts"]:
                 artifact_name = basename(artifact)
@@ -104,6 +99,7 @@ def add_beetmover_worker_config(config, tasks):
                     },
                 ],
             }
+            task.setdefault("attributes", {})["addon-type"] = xpi_addon_type
             task = {
                 "label": task_label,
                 "name": task_label,

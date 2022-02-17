@@ -8,14 +8,15 @@ transforms:
 kind-dependencies:
     - beetmover
 
+only-for-addon-types: ["system"]
+
 job-template:
     run-on-tasks-for: ["action"]
-    only-for-addon-types: ["system"]
     worker-type: balrog
     balrog:
         server:
             by-level:
-                '3': "release"
+                "3": "release"
                 default: "staging"
     attributes:
         shipping-phase: ship

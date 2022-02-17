@@ -25,6 +25,7 @@ def loader(kind, path, config, params, loaded_tasks):
     pass configuration down to the specified transforms used.
     """
     only_attributes = config.get("only-for-attributes")
+    only_addon_types = config.get("only-for-addon-types")
     job_template = config.get("job-template")
 
     for task in loaded_tasks:
@@ -35,6 +36,11 @@ def loader(kind, path, config, params, loaded_tasks):
             config_attrs = set(only_attributes)
             if not config_attrs & set(task.attributes):
                 # make sure any attribute exists
+                continue
+
+        if only_addon_types:
+            addon_type = task.attributes.get("addon-type")
+            if not addon_type in only_addon_types:
                 continue
 
         job = {"primary-dependency": task}
