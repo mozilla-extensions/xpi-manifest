@@ -25,14 +25,16 @@ transforms.add_validate(schema)
 
 @transforms.add
 def add_balrog_worker_config(config, tasks):
-    if (
-        config.params.get("version")
-        and config.params.get("xpi_name")
-        and config.params.get("head_ref")
-        and config.params.get("build_number")
-        and config.params.get("level")
-    ):
-        manifest = get_manifest()
+    manifest = get_manifest()
+    for task in tasks:
+        if not (
+            config.params.get("version")
+            and config.params.get("xpi_name")
+            and config.params.get("head_ref")
+            and config.params.get("build_number")
+            and config.params.get("level")
+        ):
+            continue
         xpi_name = config.params["xpi_name"]
         xpi_manifest = manifest[xpi_name]
         xpi_addon_type = xpi_manifest["addon-type"]
@@ -49,39 +51,38 @@ def add_balrog_worker_config(config, tasks):
             "XPI artifacts uploaded to "
             "pub/system-addons/{xpi_name}/{release_name}/"
         ).format(xpi_name=xpi_name, release_name=release_name)
-        for task in tasks:
-            dep = task["primary-dependency"]
-            task_ref = {"task-reference": "<beetmover>"}
-            paths = [
-                "public/manifest.json",
-                "public/target.checksums",
-            ]
-            worker = {
-                "action": "submit-system-addons",
-                "server": task["balrog"]["server"],
-                "upstream-artifacts": [
-                    {
-                        "taskId": task_ref,
-                        "taskType": "beetmover",
-                        "paths": paths,
-                    },
-                ],
-            }
-            resolve_keyed_by(
-                worker,
-                "server",
-                item_name=task_label,
-                **{"level": config.params["level"]},
-            )
-            task.setdefault("attributes", {})["addon-type"] = xpi_addon_type
-            task = {
-                "label": task_label,
-                "name": task_label,
-                "description": task_description,
-                "dependencies": {"beetmover": dep.label},
-                "worker-type": task["worker-type"],
-                "worker": worker,
-                "attributes": task["attributes"],
-                "run-on-tasks-for": task["run-on-tasks-for"],
-            }
-            yield task
+        dep = task["primary-dependency"]
+        task_ref = {"task-reference": "<beetmover>"}
+        paths = [
+            "public/manifest.json",
+            "public/target.checksums",
+        ]
+        worker = {
+            "action": "submit-system-addons",
+            "server": task["balrog"]["server"],
+            "upstream-artifacts": [
+                {
+                    "taskId": task_ref,
+                    "taskType": "beetmover",
+                    "paths": paths,
+                },
+            ],
+        }
+        resolve_keyed_by(
+            worker,
+            "server",
+            item_name=task_label,
+            **{"level": config.params["level"]},
+        )
+        task.setdefault("attributes", {})["addon-type"] = xpi_addon_type
+        task = {
+            "label": task_label,
+            "name": task_label,
+            "description": task_description,
+            "dependencies": {"beetmover": dep.label},
+            "worker-type": task["worker-type"],
+            "worker": worker,
+            "attributes": task["attributes"],
+            "run-on-tasks-for": task["run-on-tasks-for"],
+        }
+        yield task
