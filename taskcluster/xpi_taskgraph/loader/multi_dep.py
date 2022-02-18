@@ -66,6 +66,19 @@ def loader(kind, path, config, params, loaded_tasks):
         job["primary-dependency"] = get_primary_dep(config, dep_tasks_per_unique_key)
         if job_template:
             job.update(copy.deepcopy(job_template))
+        primary_dep = job.pop("primary-dependency")
+        deps = job.pop("dependent-tasks")
+        job["dependencies"] = {
+            dep_key: dep.label
+            for dep_key, dep in deps.items()
+        }
+        copy_of_attributes = primary_dep.attributes.copy()
+        job["attributes"] = {
+            **copy_of_attributes,
+            **job["attributes"],
+            **{"kind": kind},
+        }
+        job.setdefault("run-on-tasks-for", copy_of_attributes['run_on_tasks_for'])
         yield job
 
 
