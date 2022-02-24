@@ -21,7 +21,6 @@ schema = Schema(
         Required("run-on-tasks-for"): [str],
     },
 )
-transforms = TransformSequence()
 transforms.add_validate(schema)
 
 

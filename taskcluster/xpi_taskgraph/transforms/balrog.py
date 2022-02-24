@@ -19,7 +19,6 @@ schema = Schema(
         Required("balrog"): dict,
     },
 )
-transforms = TransformSequence()
 transforms.add_validate(schema)
 
 
