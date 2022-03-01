@@ -18,6 +18,19 @@ KNOWN_FORMATS = ("privileged_webextension", "system_addon")
 
 
 @transforms.add
+def prune_release_signing_tasks(config, tasks):
+    for task in tasks:
+        if config.kind != "release-signing" or (
+            config.params.get("version")
+            and config.params.get("xpi_name")
+            and config.params.get("head_ref")
+            and config.params.get("build_number")
+            and config.params.get("level")
+        ):
+            yield task
+
+
+@transforms.add
 def define_signing_flags(config, tasks):
     for task in tasks:
         dep = task["primary-dependency"]
