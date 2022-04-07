@@ -57,7 +57,7 @@ tasks:
                         then: '${push.branch}'
                         else:
                             $if: 'tasks_for == "action"'
-                            then: 'refs/heads/master'  # TODO fix
+                            then: 'refs/heads/main'  # TODO fix
             head_sha:
                 $if: 'tasks_for == "github-push"'
                 then: '${event.after}'
