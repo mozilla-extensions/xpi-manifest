@@ -4,9 +4,9 @@ reporting: checks-v1
 policy:
     pullRequests: collaborators
 tasks:
-    $if: 'tasks_for in ["github-pull-request", "github-push", "action", "cron"]'
-    then:
-        - $let:
+    - $if: 'tasks_for in ["github-pull-request", "github-push", "action", "cron"]'
+      then:
+          $let:
             trustDomain: xpi
             # Github events have this stuff in different places...
             ownerEmail:
