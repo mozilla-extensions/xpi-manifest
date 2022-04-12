@@ -8,3 +8,4 @@ artifacts:
   - web-ext-artifacts/firefox_translations.xpi
 addon-type: privileged
 install-type: npm
+enable-github-release: true
