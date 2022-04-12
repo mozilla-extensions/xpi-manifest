@@ -3,7 +3,7 @@ repo-prefix: firefoxtranslations
 active: true
 private-repo: false
 additional-emails: ["anatal-all@mozilla.com"]
-branch: release
+branch: main
 artifacts:
   - web-ext-artifacts/firefox_translations.xpi
 addon-type: privileged
