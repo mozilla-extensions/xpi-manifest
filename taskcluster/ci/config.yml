@@ -121,7 +121,7 @@ taskgraph:
             name: "Firefox Translations"
             project-regex: firefox-translations$
             default-repository: https://github.com/mozilla-extensions/firefox-translations
-            default-ref: release
+            default-ref: main
             type: git
 
     cached-task-prefix: xpi
