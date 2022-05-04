@@ -6,9 +6,6 @@ ARG           NODE_VERSION
 FROM          node:$NODE_VERSION
 MAINTAINER    Aki Sasaki <aki@mozilla.com>
 
-COPY py3-fix.sh /usr/local/bin/py3-fix.sh
-RUN /bin/bash /usr/local/bin/py3-fix.sh $NODE_VERSION
-
 RUN apt-get update -qq \
     && apt-get install -y zip \
     python3 \
