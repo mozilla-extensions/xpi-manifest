@@ -44,10 +44,10 @@ We'll use ship-it for this. This isn't quite ready yet. You'll need LDAP perms a
   - Look at the `XPI Releases` to see if the release is already configured.
   - If we want to configure a new release, choose `New XPI Release`.
     - If your extension is privileged, you must be added to the XPI_PRIVILEGED_BUILD_GROUP user list. Contact the addon-pipeline team.
-    - If you don't see your extension listed, you probably skipped [this section of the "adding a new xpi" docs](https://github.com/mozilla-extensions/xpi-manifest/blob/master/docs/adding-a-new-xpi.md#enabling-releases).
-  - Choose a `xpi-manifest` repository revision. You probably want the latest. We may make this default to the latest revision on `xpi-manifest/master` at some point.
+    - If you don't see your extension listed, you probably skipped [this section of the "adding a new xpi" docs](https://github.com/mozilla-extensions/xpi-manifest/blob/main/docs/adding-a-new-xpi.md#enabling-releases).
+  - Choose a `xpi-manifest` repository revision. You probably want the latest. We may make this default to the latest revision on `xpi-manifest/main` at some point.
   - Choose a xpi to build.
-  - Choose a source repo revision. You probably want the latest. This revision currently needs to be a recent revision on the release branch (generally `master`).
+  - Choose a source repo revision. You probably want the latest. This revision currently needs to be a recent revision on the release branch (generally `main`).
   - Click `Start tracking it`.
   - Click `Doo Eet`. This will create the release, but not schedule it.
   - Click the `Build` on the progress bar for the appropriate row (this will be labeled with the XPI name, version, build number).
@@ -66,12 +66,12 @@ If we need a new release build:
 
   - Once the build is complete, it will need to be signed off by two of the groups listed below; via the Promote button.
   - The relevant groups are automatically notified.
-    - You will be also notified if you are listed in the additional-emails section for your xpi in the [xpi manifest](https://github.com/mozilla-extensions/xpi-manifest/blob/master/manifests/)
+    - You will be also notified if you are listed in the additional-emails section for your xpi in the [xpi manifest](https://github.com/mozilla-extensions/xpi-manifest/blob/main/manifests/)
   - When we have the quorum of signoffs, we'll schedule the promote graph, and we'll get a release-signed xpi.
   - Again, the promote button becomes a link to the build graph, wait until they are all finished. The signed xpi can be found as an artifact on the `release-signing-...` task.
   - Once the promote phase is complete, the next phase is to Ship which will need to be signed off by one of two of the groups listed below; via the Ship button.
   - The relevant groups are automatically notified.
-    - You will be also notified if you are listed in the additional-emails section for your xpi in the [xpi manifest](https://github.com/mozilla-extensions/xpi-manifest/blob/master/manifests/)
+    - You will be also notified if you are listed in the additional-emails section for your xpi in the [xpi manifest](https://github.com/mozilla-extensions/xpi-manifest/blob/main/manifests/)
   - When we have the quorum of signoffs, we'll schedule the ship graph, and we'll upload the release-signed xpi to github.
   - Again, the ship button becomes a link to the build graph, wait until they are all finished.
 If you need to expedite the release:
