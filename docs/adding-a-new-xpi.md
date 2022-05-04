@@ -4,14 +4,14 @@ Here are instructions for how to include your addon (XPI) in the official `mozil
 
 ## Creating the official repo
 
-First, create a repository under the `mozilla-extensions` github organization. Next, copy in the `.taskcluster.yml` from https://github.com/mozilla-extensions/xpi-template/blob/master/.taskcluster.yml .
+First, create a repository under the `mozilla-extensions` github organization. Next, copy in the `.taskcluster.yml` from https://github.com/mozilla-extensions/xpi-template/blob/main/.taskcluster.yml .
 
 Other files we need are
 
-    CODE_OF_CONDUCT.md ([example](https://github.com/mozilla-extensions/xpi-template/blob/master/CODE_OF_CONDUCT.md))
-    LICENSE ([example](https://github.com/mozilla-extensions/xpi-template/blob/master/LICENSE))
+    CODE_OF_CONDUCT.md ([example](https://github.com/mozilla-extensions/xpi-template/blob/main/CODE_OF_CONDUCT.md))
+    LICENSE ([example](https://github.com/mozilla-extensions/xpi-template/blob/main/LICENSE))
 
-though other files may be helpful as well, e.g. `README.md` ([example](https://github.com/mozilla-extensions/xpi-template/blob/master/README.md)), `.gitignore`([example](https://github.com/mozilla-extensions/xpi-template/blob/master/.gitignore)), `eslintrc.js`.
+though other files may be helpful as well, e.g. `README.md` ([example](https://github.com/mozilla-extensions/xpi-template/blob/master/README.md)), `.gitignore`([example](https://github.com/mozilla-extensions/xpi-template/blob/main/.gitignore)), `eslintrc.js`.
 
 ### Existing repos
 
@@ -22,7 +22,7 @@ Then copy over the above files into your repo. You can either do this by cloning
 # in your repo clone
 git remote add template https://github.com/mozilla-extensions/xpi-template
 git fetch template
-git merge --allow-unrelated-histories template/master
+git merge --allow-unrelated-histories template/main
 # fix conflicts, commit result
 ```
 
