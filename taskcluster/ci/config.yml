@@ -123,6 +123,12 @@ taskgraph:
             default-repository: https://github.com/mozilla-extensions/firefox-translations
             default-ref: main
             type: git
+        aboutsync:
+            name: "About Sync"
+            project-regex: aboutsync$
+            default-repository: https://github.com/mozilla-extensions/aboutsync
+            default-ref: main
+            type: git
 
     cached-task-prefix: xpi
 
