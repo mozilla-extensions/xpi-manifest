@@ -200,6 +200,7 @@ release-promotion:
             rebuild-kinds:
                 - build
                 - test
+                - addons-linter
                 - dep-signing
         promote:
             target-tasks-method: promote_xpi

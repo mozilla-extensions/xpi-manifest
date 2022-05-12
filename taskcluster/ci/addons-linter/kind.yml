@@ -13,16 +13,22 @@ transforms:
     - taskgraph.transforms.task:transforms
 
 job-template:
-    description: Test XPI
+    description: Run addons-linter
     worker-type: b-linux
+    # We only want to execute addons-linter on privileged extensions (for now).
+    only-for-formats: ["privileged"]
     worker:
-        docker-image: {in-tree: node-16}
+        docker-image:
+            in-tree: node-16
         max-run-time: 7200
     run:
         using: run-task
+        cache-dotcache: false
         use-caches: false
         cwd: '{checkout}'
-        cache-dotcache: false
+        # TODO: We should enable MV3 when we are ready to accept MV3 add-ons.
+        # This should be done by replacing `2` with `3` in the command below.
         command: >-
-            python3 /usr/local/bin/test.py
+            curl -sSL --fail --retry 3 -o {xpi_file} "$XPI_URL" &&
+            npx -y addons-linter@5.4.0 --privileged --boring --disable-xpi-autoclose --max-manifest-version=2 {xpi_file}
     run-on-tasks-for: [action]
