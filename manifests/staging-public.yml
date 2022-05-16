@@ -18,7 +18,7 @@ additional-emails: []
 directory: one
 # string: branch name. Optional. Defaults to the default-ref in
 #         taskcluster.ci.config.taskgraph.repositories .
-branch: master
+branch: main
 # list of strings: A list of paths of xpis generated. Required.
 artifacts:
   - multipreffer-one.xpi
