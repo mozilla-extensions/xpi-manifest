@@ -31,7 +31,7 @@ taskgraph:
             name: "Releng staging repo test"
             project-regex: staging-xpi-public$
             default-repository: https://github.com/mozilla-releng/staging-xpi-public
-            default-ref: master
+            default-ref: main
             type: git
         stagingprivate:
             name: "Releng staging private repo test"
