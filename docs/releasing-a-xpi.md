@@ -48,8 +48,9 @@ We'll use ship-it for this. This isn't quite ready yet. You'll need LDAP perms a
   - Choose a `xpi-manifest` repository revision. You probably want the latest. We may make this default to the latest revision on `xpi-manifest/main` at some point.
   - Choose a xpi to build.
   - Choose a source repo revision. You probably want the latest. This revision currently needs to be a recent revision on the release branch (generally `main`).
-  - Click `Start tracking it`.
-  - Click `Doo Eet`. This will create the release, but not schedule it.
+  - Click `Create Release`.
+  - Click `Submit`. This will create the release, but not schedule it.
+  - Move to the `XPI Releases` page from the main menu.
   - Click the `Build` on the progress bar for the appropriate row (this will be labeled with the XPI name, version, build number).
   - Once the build graph is scheduled, the `Build` will be a link to the build graph.
   - Once the build graph is created, the first half of the progress bar will be green, monitor the build graph for all the jobs to go green, or check email if you're getting notifications.
