@@ -43,7 +43,7 @@ def test_tasks_from_manifest(config, tasks):
             checkout_config["head_rev"] = xpi_revision
         if "docker-image" in xpi_config:
             task["worker"]["docker-image"]["in-tree"] = xpi_config["docker-image"]
-        task["label"] = f"test-{xpi_name}"
+        task["label"] = f"{config.kind}-{xpi_name}"
         if xpi_config.get("private-repo"):
             checkout_config["ssh_secret_name"] = config.graph_config[
                 "github_clone_secret"
@@ -55,11 +55,15 @@ def test_tasks_from_manifest(config, tasks):
         env["ARTIFACT_PREFIX"] = artifact_prefix
         if xpi_config.get("install-type"):
             env["XPI_INSTALL_TYPE"] = xpi_config["install-type"]
-        paths = []
-        for artifact in xpi_config["artifacts"]:
-            artifact_name = f"{artifact_prefix}/{os.path.basename(artifact)}"
-            paths.append(artifact_name)
-        upstreamArtifacts = [{"taskId": "<build>", "paths": paths}]
-        env["XPI_UPSTREAM_URLS"] = json.dumps(upstreamArtifacts)
+
+        if task.get("only-for-formats"):
+            if xpi_config.get("addon-type") not in task.pop("only-for-formats"):
+                continue
+
+            xpi_file = f"{xpi_name}.xpi"
+            env["XPI_URL"] = {
+                "artifact-reference": f"<build/{artifact_prefix}/{xpi_file}>"
+            }
+            run["command"] = run["command"].format(xpi_file=xpi_file)
 
         yield task
