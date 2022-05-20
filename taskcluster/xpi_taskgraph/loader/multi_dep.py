@@ -45,6 +45,18 @@ def group_by_addon_type(config, tasks):
     return groups
 
 
+@group_by("xpi-name")
+def group_by_xpi_name(config, tasks):
+    groups = {}
+    kind_dependencies = config.get("kind-dependencies")
+    for task in tasks:
+        if task.kind not in kind_dependencies:
+            continue
+        xpi_name = task.task.get("extra").get("xpi-name")
+        groups.setdefault(xpi_name, []).append(task)
+    return groups
+
+
 def group_tasks(config, tasks):
     group_by_fn = GROUP_BY_MAP[config["group-by"]]
     groups = group_by_fn(config, tasks)
@@ -62,15 +74,14 @@ def loader(kind, path, config, params, loaded_tasks):
             dep.kind if kinds_occurrences[dep.kind] == 1 else dep.label: dep
             for dep in dep_tasks
         }
-        job = {"dependent-tasks": dep_tasks_per_unique_key}
-        job["primary-dependency"] = get_primary_dep(config, dep_tasks_per_unique_key)
+
+        primary_dep = get_primary_dep(config, dep_tasks_per_unique_key)
+
+        job = {"primary-dependency": primary_dep}
         if job_template:
             job.update(copy.deepcopy(job_template))
-        primary_dep = job.pop("primary-dependency")
-        deps = job.pop("dependent-tasks")
         job["dependencies"] = {
-            dep_key: dep.label
-            for dep_key, dep in deps.items()
+            dep_key: dep.label for dep_key, dep in dep_tasks_per_unique_key.items()
         }
         copy_of_attributes = primary_dep.attributes.copy()
         job["attributes"] = {
@@ -79,6 +90,7 @@ def loader(kind, path, config, params, loaded_tasks):
             **{"kind": kind},
         }
         job.setdefault("run-on-tasks-for", copy_of_attributes['run_on_tasks_for'])
+
         yield job
 
 
@@ -88,7 +100,7 @@ def get_primary_dep(config, dep_tasks):
         primary_dependencies = [primary_dependencies]
     if not primary_dependencies:
         assert len(dep_tasks) == 1, "Must define a primary-dependency!"
-        return dep_tasks.values()[0]
+        return list(dep_tasks.values())[0]
     primary_dep = None
     for primary_kind in primary_dependencies:
         for dep_kind in dep_tasks:
@@ -96,7 +108,7 @@ def get_primary_dep(config, dep_tasks):
                 assert (
                     primary_dep is None
                 ), "Too many primary dependent tasks in dep_tasks: {}!".format(
-                    [t.label for t in dep_tasks],
+                    [dep_tasks[key].label for key in dep_tasks],
                 )
                 primary_dep = dep_tasks[dep_kind]
     if primary_dep is None:
