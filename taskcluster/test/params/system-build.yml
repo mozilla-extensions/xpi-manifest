@@ -1,0 +1,29 @@
+additional_shipit_emails: []
+base_repository: https://github.com/mozilla-extensions/xpi-manifest
+build_date: 1651689423
+build_number: 1
+do_not_optimize: []
+existing_tasks:
+  build-docker-image-node-16: aSz03dtqQ8yqS6gYoIqHrQ
+  build-docker-image-node-latest: YZlztRdfRXSGbQWRpkGdNg
+  build-docker-image-node-lts-latest: J-J5NfadRla4gP4E1jImxw
+filters:
+- target_tasks_method
+head_ref: refs/heads/main
+head_repository: https://github.com/mozilla-extensions/xpi-manifest
+head_rev: 9516cc012addf2b508d9fb515de43c1730954fb3
+head_tag: ''
+level: '3'
+moz_build_date: '20220504183703'
+optimize_target_tasks: true
+owner: aki@mozilla.com
+project: xpi-manifest
+pushdate: 0
+pushlog_id: '0'
+repository_type: git
+shipping_phase: build
+target_tasks_method: build_xpi
+tasks_for: action
+version: 100.2.1
+xpi_name: webcompat-release-hotfix
+xpi_revision: 2ef699d856e80cb292002c24d1d64e627745b3ff

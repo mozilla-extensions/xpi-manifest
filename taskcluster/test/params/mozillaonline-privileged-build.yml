@@ -1,0 +1,30 @@
+additional_shipit_emails: []
+base_repository: https://github.com/mozilla-extensions/xpi-manifest
+build_date: 1649800681
+build_number: 1
+do_not_optimize: []
+existing_tasks:
+  build-docker-image-node-14: Oo_o5aiEROSerpOoCmXXxw
+  build-docker-image-node-16: E8VMjzYMTUmVxdaqo89SWQ
+  build-docker-image-node-latest: YAbxrh4-S3eF0Fws9SXUoA
+  build-docker-image-node-lts-latest: AN2PYQXYQBaAOBFRLHfRyA
+filters:
+- target_tasks_method
+head_ref: refs/heads/main
+head_repository: https://github.com/mozilla-extensions/xpi-manifest
+head_rev: dc80846d664fda8108ae25d06bb9de70cc852293
+head_tag: ''
+level: '3'
+moz_build_date: '20220412215801'
+optimize_target_tasks: true
+owner: aki@mozilla.com
+project: xpi-manifest
+pushdate: 0
+pushlog_id: '0'
+repository_type: git
+shipping_phase: build
+target_tasks_method: build_xpi
+tasks_for: action
+version: 5.100.0
+xpi_name: cpmanager
+xpi_revision: 31bffc8543e0673ef4569f4cd11172eb97f27aa2
