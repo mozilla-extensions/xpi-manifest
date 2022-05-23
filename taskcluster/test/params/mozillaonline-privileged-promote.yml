@@ -1,0 +1,70 @@
+additional_shipit_emails:
+- yliu@mozilla.com
+- bzhao@mozilla.com
+- mkaply@mozilla.com
+base_repository: https://github.com/mozilla-extensions/xpi-manifest
+build_date: 1649800681
+build_number: 1
+do_not_optimize: []
+existing_tasks:
+  build-balrog-dryrun: cU7aYLoMSSq6Z2QRlzc30A
+  build-cehomepage: Zl2nELUCTQKzHHFVNiNlWg
+  build-china-newtab: bg-PHBlzRZutBrCFt07y2g
+  build-cpmanager: LcfWWUhyQ12U_VwTuK9AFw
+  build-dnssec-interference-study: VbAn4dpLTEm8o_cIi8sAGg
+  build-docker-image-node-14: Oo_o5aiEROSerpOoCmXXxw
+  build-docker-image-node-16: E8VMjzYMTUmVxdaqo89SWQ
+  build-docker-image-node-latest: YAbxrh4-S3eF0Fws9SXUoA
+  build-docker-image-node-lts-latest: AN2PYQXYQBaAOBFRLHfRyA
+  build-firefox-translations: YQ_t2yIORLqZG93dyn0tOA
+  build-normandy-devtools: dAfyVHdyRxy5m1-W4XJDJQ
+  build-normandy-devtools-1.x: QW9Z5vlpSGi_jdeot0A1Ww
+  build-proxy-monitor: QGDQ8pwqTPaVVhCrYYRMYg
+  build-rally-core-addon: ILipvD-PT0Si7T0DiKLBGQ
+  build-remote-settings-devtools: CZs5A5-ZQeynir9I-juxxg
+  build-search-engine-usage-study: Cql_6bqyRtKkxzAmEzTg0A
+  build-searchengine-devtools: bSll0HBqQuecFx20t7SbZg
+  build-secure-proxy: E70nxig2TfyWOYtOEzyzKQ
+  build-staging-public: d42fGmxMQuOy50jrCSP7og
+  build-webcompat: bX-IYegoQ3aOmfarbAORbQ
+  build-webcompat-release-hotfix: NP7OzLQpQjmNkZo0vnsKeg
+  dep-signing-balrog-dryrun: bmTJTlfjSse1meXsxKN-WQ
+  dep-signing-cehomepage: NnVWeWQ7S6WUEDIdOHbJAQ
+  dep-signing-china-newtab: ShielMEaRiSNMQCCapqCdg
+  dep-signing-cpmanager: R27f-mMhReWtKfVuqCnSwg
+  dep-signing-dnssec-interference-study: A1XpMrN8TLSzyBXmeAZ6vA
+  dep-signing-firefox-translations: Lpx4mnAAQBybXkOeWITWVQ
+  dep-signing-normandy-devtools: ZyeJtXw2Rl2uCLb4kFZoUw
+  dep-signing-normandy-devtools-1.x: MZ10w9EQSRuwiVVmofNClg
+  dep-signing-proxy-monitor: c9MHYKNNQl-XDPOrclfjew
+  dep-signing-rally-core-addon: WdcUHrg3SoWLY5Nc-BYosg
+  dep-signing-remote-settings-devtools: bkv2zjcURRiAs0tL9KLURw
+  dep-signing-search-engine-usage-study: OfeHeT52QmG5h703ooHFPQ
+  dep-signing-searchengine-devtools: IlHOA9beTFKFQCrepNOfPg
+  dep-signing-secure-proxy: TppIaU7hSDWsEBepDkQLSA
+  dep-signing-staging-public: AcLF5fbVT_yF3KV8BHu33g
+  dep-signing-webcompat: WZacJh4NRSurl2qRh0zK8w
+  dep-signing-webcompat-release-hotfix: Ebk4Ww5pRgWcq_EB5yrweA
+  release-notify-completed-build: ZSpjKnhdQQuIGBxPmrl73g
+  release-notify-started-build: MLfO0w9nQ82JiZpc1WZFRg
+  test-cpmanager: QFDgOL7HSRe-dnR3HD2qUA
+filters:
+- target_tasks_method
+head_ref: refs/heads/main
+head_repository: https://github.com/mozilla-extensions/xpi-manifest
+head_rev: dc80846d664fda8108ae25d06bb9de70cc852293
+head_tag: ''
+level: '3'
+moz_build_date: '20220412215801'
+optimize_target_tasks: true
+owner: aki@mozilla.com
+project: xpi-manifest
+pushdate: 0
+pushlog_id: '0'
+repository_type: git
+shipping_phase: promote
+target_tasks_method: promote_xpi
+tasks_for: action
+version: 5.100.0
+xpi_name: cpmanager
+xpi_revision: 31bffc8543e0673ef4569f4cd11172eb97f27aa2
