@@ -59,11 +59,15 @@ def test_tasks_from_manifest(config, tasks):
         if task.get("only-for-formats"):
             if xpi_config.get("addon-type") not in task.pop("only-for-formats"):
                 continue
+            # This `xpis` dict is created in `transforms/build.py`.
+            artifacts = list(task["attributes"]["xpis"].values())
+            # We take the name of the XPI from the list of artifacts because
+            # `xpi_name` might not be used for generated XPI filenames. Also,
+            # we only support the first artifact.
+            artifact = artifacts[0]
+            xpi_file = os.path.basename(artifact)
 
-            xpi_file = f"{xpi_name}.xpi"
-            env["XPI_URL"] = {
-                "artifact-reference": f"<build/{artifact_prefix}/{xpi_file}>"
-            }
+            env["XPI_URL"] = {"artifact-reference": f"<build/{artifact}>"}
             run["command"] = run["command"].format(xpi_file=xpi_file)
 
         yield task
