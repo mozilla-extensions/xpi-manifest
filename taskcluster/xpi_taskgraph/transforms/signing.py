@@ -54,8 +54,10 @@ def define_signing_flags(config, tasks):
 @transforms.add
 def build_signing_task(config, tasks):
     for task in tasks:
-        dep = task["primary-dependency"]
-        task["dependencies"] = {"build": dep.label}
+        dep = task.pop("primary-dependency")
+        # When the `multi_dep` loader is used, it should already define the task dependencies.
+        if "dependencies" not in task:
+            task["dependencies"] = {"build": dep.label}
         if not dep.task["payload"]["env"]["ARTIFACT_PREFIX"].startswith("public"):
             scopes = task.setdefault("scopes", [])
             scopes.append(
@@ -85,7 +87,6 @@ def build_signing_task(config, tasks):
         ]
         task.setdefault("extra", {})["xpi-name"] = dep.task["extra"]["xpi-name"]
         task["extra"]["artifact_prefix"] = dep.task["payload"]["env"]["ARTIFACT_PREFIX"]
-        del task["primary-dependency"]
         yield task
 
 
