@@ -224,13 +224,10 @@ release-promotion:
                         build:
                             - "aki+system-addons-build@mozilla.com"
                             - "awagner+system-addons-build@mozilla.com"
-                            - "pkewisch+system-addons-build@mozilla.com"
                         promote:
                             - "aki+system-addons-promote@mozilla.com"
                             - "awagner+system-addons-promote@mozilla.com"
-                            - "pkewisch+system-addons-promote@mozilla.com"
                         ship:
                             - "aki+system-addons-ship@mozilla.com"
                             - "awagner+system-addons-ship@mozilla.com"
-                            - "pkewisch+system-addons-ship@mozilla.com"
                 default: []
