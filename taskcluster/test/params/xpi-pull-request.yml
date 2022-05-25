@@ -1,0 +1,20 @@
+base_repository: https://github.com/mozilla-extensions/xpi-manifest
+build_date: 1618349795
+do_not_optimize: []
+existing_tasks: {}
+filters:
+- target_tasks_method
+head_ref: release_phase
+head_repository: https://github.com/jmaher/xpi-manifest
+head_rev: df6de68beb5f958f4497cdaf6af550c0b361431b
+head_tag: ''
+level: '1'
+moz_build_date: '20210413213635'
+optimize_target_tasks: true
+owner: jmaher@users.noreply.github.com
+project: xpi-manifest
+pushdate: 0
+pushlog_id: '0'
+repository_type: git
+target_tasks_method: default
+tasks_for: github-pull-request

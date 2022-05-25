@@ -1,0 +1,24 @@
+# This Source Code Form is subject to the terms of the Mozilla Public
+# License, v. 2.0. If a copy of the MPL was not distributed with this
+# file, You can obtain one at http://mozilla.org/MPL/2.0/.
+---
+loader: xpi_taskgraph.loader.single_dep:loader
+
+transforms:
+    - xpi_taskgraph.transforms.beetmover:transforms
+    - taskgraph.transforms.task:transforms
+
+kind-dependencies:
+    - release-signing
+
+only-for-addon-types: ["system"]
+
+job-template:
+    run-on-tasks-for: ["action"]
+    worker-type: beetmover
+    attributes:
+        shipping-phase: ship
+    bucket-scope:
+        by-level:
+            "3": "release"
+            default: "dep"

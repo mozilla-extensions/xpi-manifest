@@ -18,6 +18,19 @@ KNOWN_FORMATS = ("privileged_webextension", "system_addon")
 
 
 @transforms.add
+def prune_release_signing_tasks(config, tasks):
+    for task in tasks:
+        if config.kind != "release-signing" or (
+            config.params.get("version")
+            and config.params.get("xpi_name")
+            and config.params.get("head_ref")
+            and config.params.get("build_number")
+            and config.params.get("level")
+        ):
+            yield task
+
+
+@transforms.add
 def define_signing_flags(config, tasks):
     for task in tasks:
         dep = task["primary-dependency"]
@@ -41,8 +54,10 @@ def define_signing_flags(config, tasks):
 @transforms.add
 def build_signing_task(config, tasks):
     for task in tasks:
-        dep = task["primary-dependency"]
-        task["dependencies"] = {"build": dep.label}
+        dep = task.pop("primary-dependency")
+        # When the `multi_dep` loader is used, it should already define the task dependencies.
+        if "dependencies" not in task:
+            task["dependencies"] = {"build": dep.label}
         if not dep.task["payload"]["env"]["ARTIFACT_PREFIX"].startswith("public"):
             scopes = task.setdefault("scopes", [])
             scopes.append(
@@ -72,7 +87,6 @@ def build_signing_task(config, tasks):
         ]
         task.setdefault("extra", {})["xpi-name"] = dep.task["extra"]["xpi-name"]
         task["extra"]["artifact_prefix"] = dep.task["payload"]["env"]["ARTIFACT_PREFIX"]
-        del task["primary-dependency"]
         yield task
 
 

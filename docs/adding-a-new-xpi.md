@@ -39,6 +39,7 @@ First, we need to make sure we meet the following requirements:
 Then we'll follow these steps:
 
 - Create a [ci-config patch like this](https://hg.mozilla.org/ci/ci-configuration/rev/232957b859b7078c6348e7c1004d8dac9111d8a7)
+- Create another [ci-config patch, like this](https://phabricator.services.mozilla.com/D146125)
 - Enable the taskcluster integration once that patch is reviewed and landed
 - Inform SecOps of a new service, using [this form](https://github.com/mozilla-services/foxsec/issues/new?assignees=&labels=&template=01_NewService.md). If you don't have access, please contact SecOps in Slack `#secops-public`.
 - We'll still need to follow the rest of this doc, as well as the [Releasing a XPI](releasing-a-xpi.md) doc to fully set up the repository.

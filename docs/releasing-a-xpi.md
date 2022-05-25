@@ -44,12 +44,13 @@ We'll use ship-it for this. This isn't quite ready yet. You'll need LDAP perms a
   - Look at the `XPI Releases` to see if the release is already configured.
   - If we want to configure a new release, choose `New XPI Release`.
     - If your extension is privileged, you must be added to the XPI_PRIVILEGED_BUILD_GROUP user list. Contact the addon-pipeline team.
-    - If you don't see your extension listed, you probably skipped [this section of the "adding a new xpi" docs](https://github.com/mozilla-extensions/xpi-manifest/blob/master/docs/adding-a-new-xpi.md#enabling-releases).
-  - Choose a `xpi-manifest` repository revision. You probably want the latest. We may make this default to the latest revision on `xpi-manifest/master` at some point.
+    - If you don't see your extension listed, you probably skipped [this section of the "adding a new xpi" docs](https://github.com/mozilla-extensions/xpi-manifest/blob/main/docs/adding-a-new-xpi.md#enabling-releases).
+  - Choose a `xpi-manifest` repository revision. You probably want the latest. We may make this default to the latest revision on `xpi-manifest/main` at some point.
   - Choose a xpi to build.
-  - Choose a source repo revision. You probably want the latest. This revision currently needs to be a recent revision on the release branch (generally `master`).
-  - Click `Start tracking it`.
-  - Click `Doo Eet`. This will create the release, but not schedule it.
+  - Choose a source repo revision. You probably want the latest. This revision currently needs to be a recent revision on the release branch (generally `main`).
+  - Click `Create Release`.
+  - Click `Submit`. This will create the release, but not schedule it.
+  - Move to the `XPI Releases` page from the main menu.
   - Click the `Build` on the progress bar for the appropriate row (this will be labeled with the XPI name, version, build number).
   - Once the build graph is scheduled, the `Build` will be a link to the build graph.
   - Once the build graph is created, the first half of the progress bar will be green, monitor the build graph for all the jobs to go green, or check email if you're getting notifications.
@@ -66,12 +67,12 @@ If we need a new release build:
 
   - Once the build is complete, it will need to be signed off by two of the groups listed below; via the Promote button.
   - The relevant groups are automatically notified.
-    - You will be also notified if you are listed in the additional-emails section for your xpi in the [xpi manifest](https://github.com/mozilla-extensions/xpi-manifest/blob/master/manifests/)
+    - You will be also notified if you are listed in the additional-emails section for your xpi in the [xpi manifest](https://github.com/mozilla-extensions/xpi-manifest/blob/main/manifests/)
   - When we have the quorum of signoffs, we'll schedule the promote graph, and we'll get a release-signed xpi.
   - Again, the promote button becomes a link to the build graph, wait until they are all finished. The signed xpi can be found as an artifact on the `release-signing-...` task.
   - Once the promote phase is complete, the next phase is to Ship which will need to be signed off by one of two of the groups listed below; via the Ship button.
   - The relevant groups are automatically notified.
-    - You will be also notified if you are listed in the additional-emails section for your xpi in the [xpi manifest](https://github.com/mozilla-extensions/xpi-manifest/blob/master/manifests/)
+    - You will be also notified if you are listed in the additional-emails section for your xpi in the [xpi manifest](https://github.com/mozilla-extensions/xpi-manifest/blob/main/manifests/)
   - When we have the quorum of signoffs, we'll schedule the ship graph, and we'll upload the release-signed xpi to github.
   - Again, the ship button becomes a link to the build graph, wait until they are all finished.
 If you need to expedite the release:
@@ -86,3 +87,4 @@ Privileged webextension admin | Add-on Review team (+releng as backups) | privil
 System addon admin | Add-on Review team (+releng as backups) | system | Two of these are required to sign off on `system` xpis.
 MozillaOnline privileged webextension team | mozilla-online team (+releng as backups) | mozillaonline-privileged | One of each (team and admin) need to sign off on `mozillaonline-privileged` xpis.
 MozillaOnline privileged webextension admin | `:theone` and `:mkaply` (+releng as backups) | mozillaonline-privileged | One of each (team and admin) need to sign off on `mozillaonline-privileged` xpis.
+Normandy privileged signoff | (currently only releng) | normandy-privileged | Two are required to sign off on `normandy-privileged` xpis. `normandy-privileged` is deprecated.

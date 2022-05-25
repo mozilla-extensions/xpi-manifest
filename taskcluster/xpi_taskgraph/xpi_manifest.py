@@ -34,7 +34,10 @@ base_schema = Schema(
         Optional("branch"): str,
         Optional("docker-image"): str,
         Required("artifacts"): [str],
-        Required("addon-type"): Any("mozillaonline-privileged", "privileged", "system"),
+        # normandy-privileged is deprecated
+        Required("addon-type"): Any(
+            "mozillaonline-privileged", "normandy-privileged", "privileged", "system"
+        ),
         Optional("install-type"): Any("npm", "yarn"),
         Optional("enable-github-release"): bool,
         Optional("release-tag"): str,

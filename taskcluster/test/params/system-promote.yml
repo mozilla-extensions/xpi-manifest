@@ -1,0 +1,68 @@
+additional_shipit_emails:
+- asasaki@mozilla.com
+- pkewisch@mozilla.com
+base_repository: https://github.com/mozilla-extensions/xpi-manifest
+build_date: 1651689423
+build_number: 1
+do_not_optimize: []
+existing_tasks:
+  build-balrog-dryrun: TXpuIXJbSjqzFAFAFxTAhQ
+  build-cehomepage: KX_4rkzRSnSMJagG3TfMVQ
+  build-china-newtab: J0VlwEx4QrCYmnFsKnErFg
+  build-cpmanager: PGSTZ8gGRrWfLp1qAcmzog
+  build-dnssec-interference-study: cbg32CBbSju70evGfFFLeA
+  build-docker-image-node-16: aSz03dtqQ8yqS6gYoIqHrQ
+  build-docker-image-node-latest: YZlztRdfRXSGbQWRpkGdNg
+  build-docker-image-node-lts-latest: J-J5NfadRla4gP4E1jImxw
+  build-firefox-translations: MV5QBsa5RD63IS3QpADk8g
+  build-normandy-devtools: c_7TDXGvQUWxe5sMi4hcRA
+  build-normandy-devtools-1.x: Iu9fh-NeT_6qYXqtjap5xw
+  build-proxy-monitor: NM_SQEDXRwiVNgDmBGX1Nw
+  build-rally-core-addon: UJW1j7lCRcafScHnh8K4nw
+  build-remote-settings-devtools: RAfffrrGTgK8gUfbENOW3g
+  build-search-engine-usage-study: Mq4sMW8gScStlvVEIh3Rxw
+  build-searchengine-devtools: XNQqqlENQ7CEDOLuAtO3nQ
+  build-secure-proxy: Z0kLRD2PQuOXm129Xdopfg
+  build-staging-public: UGAcgJDhTZyBUlrOrhsFag
+  build-webcompat: XwQ0oLmUSCu6gt7uAABujQ
+  build-webcompat-release-hotfix: Bh4TJaysQ9-2XHpzbdaKoA
+  dep-signing-balrog-dryrun: R5hfpnUNTiqx2Ib-onQHHQ
+  dep-signing-cehomepage: E4lmL9zPQXGKEIgDrZG07A
+  dep-signing-china-newtab: Z1wdj_KTTVW5uPg5nnkKhg
+  dep-signing-cpmanager: S1SBIBScQniIJso4e7M94Q
+  dep-signing-dnssec-interference-study: Z1u67cXRQ96nn8xz0akHcA
+  dep-signing-firefox-translations: VAFu8gNcSUabRSginwWq4A
+  dep-signing-normandy-devtools: WnIKJHI9TDici6BFZvTkYw
+  dep-signing-normandy-devtools-1.x: ZNswk5wHQ1qnR3GZK6uriQ
+  dep-signing-proxy-monitor: RLmLG6pCQES4-MnUMINR1Q
+  dep-signing-rally-core-addon: O1MkJDryQzadIYSqMm5poQ
+  dep-signing-remote-settings-devtools: A1S7-1BqSg-fDh4D_ovdYQ
+  dep-signing-search-engine-usage-study: IrXFzCqSRguekkjPP2tYYw
+  dep-signing-searchengine-devtools: dfZNRxa3SIC6NEEnvFiESA
+  dep-signing-secure-proxy: YAHpQkBzRWyXoTY4IFUDMw
+  dep-signing-staging-public: XzTSraGXQvC5ElrcCcIxMA
+  dep-signing-webcompat: E-PKV-URSDOnC6c6rIPJSQ
+  dep-signing-webcompat-release-hotfix: QaXtxKT_Sy-EURxNLvtLaw
+  release-notify-completed-build: DGNwQ2MgRp6dx2Hfcvhxsg
+  release-notify-started-build: LJunyfiCRNS9hy40fZ5YAg
+  test-webcompat-release-hotfix: Uv3tsTn5SMqc-pRoLdzauA
+filters:
+- target_tasks_method
+head_ref: refs/heads/main
+head_repository: https://github.com/mozilla-extensions/xpi-manifest
+head_rev: 9516cc012addf2b508d9fb515de43c1730954fb3
+head_tag: ''
+level: '3'
+moz_build_date: '20220504183703'
+optimize_target_tasks: true
+owner: aki@mozilla.com
+project: xpi-manifest
+pushdate: 0
+pushlog_id: '0'
+repository_type: git
+shipping_phase: promote
+target_tasks_method: promote_xpi
+tasks_for: action
+version: 100.2.1
+xpi_name: webcompat-release-hotfix
+xpi_revision: 2ef699d856e80cb292002c24d1d64e627745b3ff

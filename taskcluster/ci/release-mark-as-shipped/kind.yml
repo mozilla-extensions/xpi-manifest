@@ -2,14 +2,20 @@
 # License, v. 2.0. If a copy of the MPL was not distributed with this
 # file, You can obtain one at http://mozilla.org/MPL/2.0/.
 ---
-loader: xpi_taskgraph.loader.single_dep:loader
+loader: xpi_taskgraph.loader.multi_dep:loader
 
 transforms:
     - xpi_taskgraph.transforms.release_mark_as_shipped:transforms
     - taskgraph.transforms.task:transforms
 
+primary-dependency: release-signing
+
 kind-dependencies:
     - release-signing
+    - beetmover
+    - balrog
+
+group-by: addon-type
 
 job-template:
     name: release-mark-as-shipped

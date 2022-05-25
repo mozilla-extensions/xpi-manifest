@@ -1,0 +1,12 @@
+---
+description: About Sync
+repo-prefix: aboutsync
+active: true
+private-repo: false
+branch: main
+additional-emails: ["mhammond@mozilla.com", "skhamis@mozilla.com"]
+artifacts:
+  - web-ext-artifacts/aboutsync.xpi
+addon-type: privileged
+install-type: npm
+enable-github-release: true

@@ -19,10 +19,6 @@ jobs:
         definition: node
         args:
             NODE_VERSION: "lts"
-    node-14:
-        definition: node
-        args:
-            NODE_VERSION: "14.17.6"
     node-16:
         definition: node
         args:

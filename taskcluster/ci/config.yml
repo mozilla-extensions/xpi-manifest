@@ -31,7 +31,7 @@ taskgraph:
             name: "Releng staging repo test"
             project-regex: staging-xpi-public$
             default-repository: https://github.com/mozilla-releng/staging-xpi-public
-            default-ref: master
+            default-ref: main
             type: git
         stagingprivate:
             name: "Releng staging private repo test"
@@ -117,6 +117,18 @@ taskgraph:
             default-repository: git@github.com:mozilla-extensions/search-engine-usage-study
             default-ref: release
             type: git
+        firefoxtranslations:
+            name: "Firefox Translations"
+            project-regex: firefox-translations$
+            default-repository: https://github.com/mozilla-extensions/firefox-translations
+            default-ref: main
+            type: git
+        aboutsync:
+            name: "About Sync"
+            project-regex: aboutsync$
+            default-repository: https://github.com/mozilla-extensions/aboutsync
+            default-ref: main
+            type: git
 
     cached-task-prefix: xpi
 
@@ -142,6 +154,16 @@ workers:
             implementation: scriptworker-github
             os: scriptworker
             worker-type: 'xpi-{level}-github'
+        beetmover:
+            provisioner: scriptworker-k8s
+            implementation: scriptworker-beetmover
+            os: scriptworker
+            worker-type: 'xpi-{level}-beetmover'
+        balrog:
+            provisioner: scriptworker-k8s
+            implementation: scriptworker-balrog
+            os: scriptworker
+            worker-type: 'xpi-{level}-balrog'
         signing:
             provisioner: scriptworker-k8s
             implementation: scriptworker-signing
@@ -168,6 +190,8 @@ scriptworker:
             mozillaonline-privileged: privileged_webextension
             privileged: privileged_webextension
             system: system_addon
+            # normandy-privileged is deprecated
+            normandy-privileged: privileged_webextension
 
 release-promotion:
     flavors:
@@ -176,6 +200,7 @@ release-promotion:
             rebuild-kinds:
                 - build
                 - test
+                - addons-linter
                 - dep-signing
         promote:
             target-tasks-method: promote_xpi
@@ -231,3 +256,7 @@ release-promotion:
                             - "aki+system-addons-ship@mozilla.com"
                             - "awagner+system-addons-ship@mozilla.com"
                 default: []
+        # configure normandy-privileged webextension email addresses for
+        # notifications. normandy-privileged is deprecated.
+        normandy-privileged:
+            - "aki+normandy-priv@mozilla.com"

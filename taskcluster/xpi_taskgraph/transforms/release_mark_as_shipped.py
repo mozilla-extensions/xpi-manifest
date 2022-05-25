@@ -10,13 +10,6 @@ transforms = TransformSequence()
 
 
 @transforms.add
-def pop_primary_dependency(config, jobs):
-    for job in jobs:
-        job.pop("primary-dependency")
-        yield job
-
-
-@transforms.add
 def make_task_description(config, jobs):
     for job in jobs:
         if not (
@@ -25,10 +18,11 @@ def make_task_description(config, jobs):
             and config.params.get("build_number")
         ):
             continue
+        if "primary-dependency" in job:
+            job.pop("primary-dependency")
         resolve_keyed_by(
             job, "scopes", item_name=job["name"], **{"level": config.params["level"]}
         )
-
         job["worker"][
             "release-name"
         ] = "{xpi_name}-{version}-build{build_number}".format(
@@ -36,5 +30,4 @@ def make_task_description(config, jobs):
             version=config.params["version"],
             build_number=config.params["build_number"],
         )
-
         yield job

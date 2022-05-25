@@ -1,0 +1,69 @@
+additional_shipit_emails:
+- asasaki@mozilla.com
+base_repository: https://github.com/mozilla-extensions/xpi-manifest
+build_date: 1644879800
+build_number: 2
+do_not_optimize: []
+existing_tasks:
+  build-balrog-dryrun: C02KbbqKRMaT4ZcVxKyaJA
+  build-cehomepage: ChGEooLZSmqPYd9K0Mom3Q
+  build-china-newtab: ESj2nKdQQIynKNpreRFTyQ
+  build-cpmanager: DJbuESh4Q0-JPkpiLGf_fw
+  build-dnssec-interference-study: fA7lvOBSRuula89Rk94XQg
+  build-docker-image-node-14: Pp3nAajARZOha_YKTSOFYw
+  build-docker-image-node-16: D7OStpbFT6Ou_TbeAUs11g
+  build-docker-image-node-latest: NjwuFJiSQtiyDzAx3fHggw
+  build-docker-image-node-lts-latest: RNIMEIcZQgmAq9GNWgctLQ
+  build-normandy-devtools: PfmLmI63SxW0VdnHT9O3ng
+  build-normandy-devtools-1.x: KUhxL-cKSZSQwqEDTIkgTQ
+  build-proxy-monitor: flogmWAAS_-EyJahF3GWXg
+  build-rally-core-addon: cpr3xHEmQmCYPU4o_9wJXQ
+  build-remote-settings-devtools: Uotf3QWcRMm9jJTEIRW0Zw
+  build-search-engine-usage-study: BmVou1XfTzyIST7hhWJ6tg
+  build-searchengine-devtools: a5dEglkCR22yTQCwPJaVdg
+  build-secure-proxy: GJJXqU53THaeCtByKDS6nA
+  build-staging-public: E0rny0DMSXSTvqvKKhBqUw
+  build-webcompat: Ku46-oXiRk2isIs-werD9g
+  build-webcompat-release-hotfix: IzuXbQuKSBumslg660bqmQ
+  dep-signing-balrog-dryrun: bkQ8aqhoTRe42O0LzsFnJA
+  dep-signing-cehomepage: Y8nEw-EARXmto6a_Y-k7OA
+  dep-signing-china-newtab: UMD8dHlaSiWFIhLnvwHDhg
+  dep-signing-cpmanager: T0RZOiQPSnK345oN9TTrzg
+  dep-signing-dnssec-interference-study: ZFic_Ii0TRKza66lsunHpg
+  dep-signing-normandy-devtools: BAtH-S7OTECCOL1LqNxXQw
+  dep-signing-normandy-devtools-1.x: GI8uzdkdT22nhh-pYvZ0_w
+  dep-signing-proxy-monitor: cp1cU2w7QT-tiz8BUbgCqg
+  dep-signing-rally-core-addon: TUjzooiCQ6iPiwz_OAEJvA
+  dep-signing-remote-settings-devtools: YmBacc5MRvKsEvJgB_hrPg
+  dep-signing-search-engine-usage-study: XgMFMV9VQxmK80IDGioU1g
+  dep-signing-searchengine-devtools: agoQwLh8S9SKeN2OkBnP1Q
+  dep-signing-secure-proxy: eorLfP8_TfSchO_c3tb1pw
+  dep-signing-staging-public: TPkYid4mTzuG4gZDb6eAWg
+  dep-signing-webcompat: FmtPxj5ET2a0AHiBVYNJTw
+  dep-signing-webcompat-release-hotfix: V3-N-wDdT7y4p3V8fYkkog
+  release-notify-completed-build: ThW5z2aaRnWBmTmNucgQqA
+  release-notify-completed-promote: Luay5OEbRwyYU5WIUUogJw
+  release-notify-started-build: Qrzb3rsNREayGS3fR_aQEA
+  release-notify-started-promote: OQ33DmBNT6q_T1pV7-jQxg
+  release-signing-dnssec-interference-study: WC2o6_0MTzaA3fY37o69Ow
+  test-dnssec-interference-study: cN2YJ0FSRsuR7XGfn8zfgA
+filters:
+- target_tasks_method
+head_ref: refs/heads/main
+head_repository: https://github.com/mozilla-extensions/xpi-manifest
+head_rev: 2a73610bb8d5700e405031518d8de76eae0137a4
+head_tag: ''
+level: '3'
+moz_build_date: '20220214230320'
+optimize_target_tasks: true
+owner: gabrielbusta@gmail.com
+project: xpi-manifest
+pushdate: 0
+pushlog_id: '0'
+repository_type: git
+shipping_phase: ship
+target_tasks_method: ship_xpi
+tasks_for: action
+version: 2.0.2
+xpi_name: dnssec-interference-study
+xpi_revision: 083ef8a8083febe6a0bf5a442b5ca324b3790082
