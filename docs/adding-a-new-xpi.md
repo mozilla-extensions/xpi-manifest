@@ -11,7 +11,7 @@ Other files we need are
     CODE_OF_CONDUCT.md ([example](https://github.com/mozilla-extensions/xpi-template/blob/main/CODE_OF_CONDUCT.md))
     LICENSE ([example](https://github.com/mozilla-extensions/xpi-template/blob/main/LICENSE))
 
-though other files may be helpful as well, e.g. `README.md` ([example](https://github.com/mozilla-extensions/xpi-template/blob/master/README.md)), `.gitignore`([example](https://github.com/mozilla-extensions/xpi-template/blob/main/.gitignore)), `eslintrc.js`.
+though other files may be helpful as well, e.g. `README.md` ([example](https://github.com/mozilla-extensions/xpi-template/blob/main/README.md)), `.gitignore`([example](https://github.com/mozilla-extensions/xpi-template/blob/main/.gitignore)), `eslintrc.js`.
 
 ### Existing repos
 
