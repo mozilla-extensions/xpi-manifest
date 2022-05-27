@@ -30,5 +30,5 @@ job-template:
         # This should be done by replacing `2` with `3` in the command below.
         command: >-
             curl -sSL --fail --retry 3 -o {xpi_file} "$XPI_URL" &&
-            npx -y addons-linter@5.4.1 --privileged --boring --disable-xpi-autoclose --max-manifest-version=2 {xpi_file}
+            npx -y addons-linter --privileged --boring --disable-xpi-autoclose --max-manifest-version=2 {xpi_file}
     run-on-tasks-for: [action]
