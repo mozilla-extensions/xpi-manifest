@@ -36,6 +36,7 @@ addon-type: privileged
 install-type: npm
 # boolean: true == release artifact to github,
 #          false == manually release artifact
+#          Note: the mozilla-extensions/bots team must have write access to the repo for this to work.
 enable-github-release: False
 # string: tag to use when releasing to github.
 #         Optional. Defaults to {version} from the addon repo.
