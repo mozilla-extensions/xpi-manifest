@@ -74,7 +74,7 @@ def build_worker_definition(config, jobs):
             "version": config.params["version"],
             "build_number": config.params["build_number"],
         }
-        tag_name = manifest_config.get("release-tag", "{version}").format(
+        tag_name = manifest_config.get("release-tag", "{version}-build{build_number}").format(
             **release_variables
         )
         worker_definition["git-tag"] = tag_name
