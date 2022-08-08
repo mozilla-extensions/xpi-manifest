@@ -1,7 +1,7 @@
 description: Rally Search Engine Usage study extension
 repo-prefix: searchengineusagestudy
 active: true
-private-repo: true
+private-repo: false
 branch: release
 artifacts:
   - web-ext-artifacts/search_engine_usage_study.xpi
