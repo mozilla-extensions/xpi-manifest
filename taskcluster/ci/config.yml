@@ -114,7 +114,7 @@ taskgraph:
         searchengineusagestudy:
             name: "Rally Search Engine Usage study extension"
             project-regex: searchengineusagestudys$
-            default-repository: git@github.com:mozilla-extensions/search-engine-usage-study
+            default-repository: https://github.com/mozilla-extensions/search-engine-usage-study.git
             default-ref: release
             type: git
         firefoxtranslations:
