@@ -1,0 +1,12 @@
+---
+description: Firefox CI Quitter
+repo-prefix: quitter
+active: true
+private-repo: false
+branch: main
+additional-emails: ["jmaher@mozilla.com", "marco@mozilla.com"]
+artifacts:
+  - web-ext-artifacts/quitter.xpi
+addon-type: privileged
+install-type: npm
+enable-github-release: false
