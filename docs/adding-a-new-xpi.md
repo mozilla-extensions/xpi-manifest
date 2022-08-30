@@ -46,7 +46,7 @@ Then we'll follow these steps:
 
 ### Branch protection
 
-We will use the specified branch(es) as the branch for releasing XPIs. It's important to set [branch protection](https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/defining-the-mergeability-of-pull-requests/about-protected-branches) for any release branch, and get code review for the source. [SecOps](https://mana.mozilla.org/wiki/x/8QX-Ag) will be auditing the repositories in the `mozilla-extensions` organization for compliance.
+We will use the specified branch(es) as the branch for releasing XPIs. It's important to set [branch protection](https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/defining-the-mergeability-of-pull-requests/about-protected-branches) for any release branch, and get code review for the source. SecOps will be auditing the repositories in the `mozilla-extensions` organization for compliance.
 
 The github repository rules are [here](https://wiki.mozilla.org/GitHub/Repository_Security).
 
