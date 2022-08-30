@@ -129,6 +129,12 @@ taskgraph:
             default-repository: https://github.com/mozilla-extensions/aboutsync
             default-ref: main
             type: git
+        quitter:
+            name: "Firefox Quitter"
+            project-regex: quitter$
+            default-repository: https://github.com/mozilla-extensions/quitter
+            default-ref: main
+            type: git
 
     cached-task-prefix: xpi
 
