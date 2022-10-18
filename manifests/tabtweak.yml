@@ -1,0 +1,9 @@
+---
+description: MozillaOnline Tab Tweak
+repo-prefix: tabtweak
+active: true
+private-repo: false
+artifacts:
+  - web-ext-artifacts/tabtweak.xpi
+addon-type: mozillaonline-privileged
+install-type: npm
