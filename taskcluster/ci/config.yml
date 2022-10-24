@@ -39,12 +39,6 @@ taskgraph:
             default-repository: git@github.com:mozilla-releng/staging-xpi-private
             default-ref: master
             type: git
-        normandydevtools:
-            name: "Normandy Devtools"
-            project-regex: normandy-devtools$
-            default-repository: https://github.com/mozilla-extensions/normandy-devtools
-            default-ref: main
-            type: git
         remotesettingsdevtools:
             name: "Remote Settings Devtools"
             project-regex: remote-settings-devtools$
