@@ -93,12 +93,6 @@ taskgraph:
             default-repository: https://github.com/mozilla-extensions/dnssec-interference
             default-ref: master
             type: git
-        proxymonitor:
-            name: "Proxy Monitor extension"
-            project-regex: proxymonitor$
-            default-repository: git@github.com:mozilla-extensions/proxy-monitor
-            default-ref: main
-            type: git
         rallycoreaddon:
             name: "Rally Core Add-on"
             project-regex: rallycoreaddon$
