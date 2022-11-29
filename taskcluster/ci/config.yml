@@ -214,17 +214,17 @@ release-promotion:
                 '3':
                     by-phase:
                         build:
-                            - "aki+mozillaonline-priv-webext-build@mozilla.com"
+                            - "gabriel+mozillaonline-priv-webext-build@mozilla.com"
                             - "hectorz+mozillaonline-priv-webext-build@mozilla.com"
                             - "mkaply+mozillaonline-priv-webext-build@mozilla.com"
                             - "awagner+mozillaonline-priv-webext-build@mozilla.com"
                         promote:
-                            - "aki+mozillaonline-priv-webext-promote@mozilla.com"
+                            - "gabriel+mozillaonline-priv-webext-promote@mozilla.com"
                             - "hectorz+mozillaonline-priv-webext-promote@mozilla.com"
                             - "mkaply+mozillaonline-priv-webext-promote@mozilla.com"
                             - "awagner+mozillaonline-priv-webext-promote@mozilla.com"
                         ship:
-                            - "aki+mozillaonline-priv-webext-ship@mozilla.com"
+                            - "gabriel+mozillaonline-priv-webext-ship@mozilla.com"
                             - "hectorz+mozillaonline-priv-webext-ship@mozilla.com"
                             - "mkaply+mozillaonline-priv-webext-ship@mozilla.com"
                             - "awagner+mozillaonline-priv-webext-ship@mozilla.com"
@@ -247,16 +247,16 @@ release-promotion:
                 '3':
                     by-phase:
                         build:
-                            - "aki+system-addons-build@mozilla.com"
+                            - "gabriel+system-addons-build@mozilla.com"
                             - "awagner+system-addons-build@mozilla.com"
                         promote:
-                            - "aki+system-addons-promote@mozilla.com"
+                            - "gabriel+system-addons-promote@mozilla.com"
                             - "awagner+system-addons-promote@mozilla.com"
                         ship:
-                            - "aki+system-addons-ship@mozilla.com"
+                            - "gabriel+system-addons-ship@mozilla.com"
                             - "awagner+system-addons-ship@mozilla.com"
                 default: []
         # configure normandy-privileged webextension email addresses for
         # notifications. normandy-privileged is deprecated.
         normandy-privileged:
-            - "aki+normandy-priv@mozilla.com"
+            - "gabriel+normandy-priv@mozilla.com"
