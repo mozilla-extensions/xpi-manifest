@@ -2,15 +2,14 @@
 # License, v. 2.0. If a copy of the MPL was not distributed with this
 # file, You can obtain one at http://mozilla.org/MPL/2.0/.
 """
-Apply some defaults and minor modifications to the jobs defined in the build
+Apply some defaults and minor modifications to the tasks defined in the build
 kind.
 """
 
 
 from taskgraph.transforms.base import TransformSequence
-from taskgraph.util.schema import resolve_keyed_by
 from taskgraph.util.keyed_by import evaluate_keyed_by
-
+from taskgraph.util.schema import resolve_keyed_by
 
 transforms = TransformSequence()
 
@@ -35,7 +34,7 @@ def define_signing_flags(config, tasks):
     for task in tasks:
         dep = task["primary-dependency"]
         # Current kind will be prepended later in the transform chain.
-        task["name"] = _get_dependent_job_name_without_its_kind(dep)
+        task["name"] = _get_dependent_task_name_without_its_kind(dep)
         attributes = dep.attributes.copy()
         if task.get("attributes"):
             attributes.update(task["attributes"])
@@ -90,5 +89,5 @@ def build_signing_task(config, tasks):
         yield task
 
 
-def _get_dependent_job_name_without_its_kind(dependent_job):
-    return dependent_job.label[len(dependent_job.kind) + 1 :]
+def _get_dependent_task_name_without_its_kind(dependent_task):
+    return dependent_task.label[len(dependent_task.kind) + 1 :]

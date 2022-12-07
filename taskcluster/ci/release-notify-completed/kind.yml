@@ -13,7 +13,7 @@ kind-dependencies:
     - release-signing
     - release-mark-as-shipped
 
-job-template:
+task-template:
     name: release-notify-completed
     description: Sends email to the notify list telling release was completed.
     run-on-tasks-for: ["action"]

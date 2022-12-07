@@ -14,7 +14,7 @@ transforms:
     - taskgraph.transforms.cached_tasks:transforms
     - taskgraph.transforms.task:transforms
 
-job-template:
+task-template:
     description: Development-sign XPI
     index:
         type: dep-signing

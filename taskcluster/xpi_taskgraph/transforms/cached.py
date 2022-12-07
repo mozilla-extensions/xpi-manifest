@@ -6,16 +6,12 @@ Build the cached_task digest to prevent rerunning tasks if the code hasn't chang
 """
 
 
-import hashlib
 import json
 import os
-import subprocess
 
 import taskgraph
 from taskgraph.transforms.base import TransformSequence
 from taskgraph.util.hash import hash_path, hash_paths
-from taskgraph.util.memoize import memoize
-
 from xpi_taskgraph.xpi_manifest import MANIFEST_DIR
 
 transforms = TransformSequence()
@@ -82,8 +78,8 @@ def build_cache(config, tasks):
 
 
 @transforms.add
-def set_label(config, jobs):
-    """Set the job label, which the `cached_tasks` transform needs"""
-    for job in jobs:
-        job.setdefault("label", "{}-{}".format(config.kind, job.pop("name")))
-        yield job
+def set_label(config, tasks):
+    """Set the task label, which the `cached_tasks` transform needs"""
+    for task in tasks:
+        task.setdefault("label", "{}-{}".format(config.kind, task.pop("name")))
+        yield task
