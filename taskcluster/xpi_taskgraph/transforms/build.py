@@ -2,34 +2,33 @@
 # License, v. 2.0. If a copy of the MPL was not distributed with this
 # file, You can obtain one at http://mozilla.org/MPL/2.0/.
 """
-Apply some defaults and minor modifications to the jobs defined in the build
+Apply some defaults and minor modifications to the tasks defined in the build
 kind.
 """
 
-from copy import deepcopy
 import os
+from copy import deepcopy
 
 from taskgraph.transforms.base import TransformSequence
 from xpi_taskgraph.xpi_manifest import get_manifest
-
 
 transforms = TransformSequence()
 
 
 @transforms.add
-def tasks_from_manifest(config, jobs):
+def tasks_from_manifest(config, tasks):
     manifest = get_manifest()
     xpi_name = config.params.get("xpi_name")
     xpi_revision = None
     if xpi_name:
         xpi_revision = config.params.get("xpi_revision")
-    for job in jobs:
+    for task_raw in tasks:
         for xpi_config in manifest.values():
             if not xpi_config.get("active"):
                 continue
             if xpi_name and xpi_config["manifest_name"] != xpi_name:
                 continue
-            task = deepcopy(job)
+            task = deepcopy(task_raw)
             env = task.setdefault("worker", {}).setdefault("env", {})
             run = task.setdefault("run", {})
             checkout = run.setdefault("checkout", {})

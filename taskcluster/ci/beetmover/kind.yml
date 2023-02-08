@@ -13,7 +13,7 @@ kind-dependencies:
 
 only-for-addon-types: ["system"]
 
-job-template:
+task-template:
     run-on-tasks-for: ["action"]
     worker-type: beetmover
     attributes:

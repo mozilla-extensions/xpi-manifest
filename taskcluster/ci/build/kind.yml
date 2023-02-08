@@ -11,7 +11,7 @@ transforms:
     - taskgraph.transforms.job:transforms
     - taskgraph.transforms.task:transforms
 
-job-defaults:
+task-defaults:
     description: Build XPI from source code.
     worker-type: b-linux
     worker:
@@ -21,7 +21,7 @@ job-defaults:
     run:
         use-caches: false
 
-jobs:
+tasks:
     release:
         attributes:
             shipping-phase: build

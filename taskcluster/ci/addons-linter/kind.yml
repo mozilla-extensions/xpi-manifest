@@ -12,7 +12,7 @@ transforms:
     - taskgraph.transforms.job:transforms
     - taskgraph.transforms.task:transforms
 
-job-template:
+task-template:
     description: Run addons-linter
     worker-type: b-linux
     # We only want to execute addons-linter on privileged extensions (for now).

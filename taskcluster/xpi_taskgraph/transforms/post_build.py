@@ -2,16 +2,14 @@
 # License, v. 2.0. If a copy of the MPL was not distributed with this
 # file, You can obtain one at http://mozilla.org/MPL/2.0/.
 """
-Apply some defaults and minor modifications to the jobs defined in the build
+Apply some defaults and minor modifications to the tasks defined in the build
 kind.
 """
 
-import json
 import os
 
 from taskgraph.transforms.base import TransformSequence
 from xpi_taskgraph.xpi_manifest import get_manifest
-
 
 transforms = TransformSequence()
 

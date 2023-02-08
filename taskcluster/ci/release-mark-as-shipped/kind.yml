@@ -17,7 +17,7 @@ kind-dependencies:
 
 group-by: addon-type
 
-job-template:
+task-template:
     name: release-mark-as-shipped
     description: mark release as shipped in Ship-It
     run-on-tasks-for: ["action"]

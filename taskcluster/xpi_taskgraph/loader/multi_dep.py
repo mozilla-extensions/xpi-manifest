@@ -6,7 +6,6 @@
 import copy
 
 from taskgraph.task import Task
-from taskgraph.util.attributes import sorted_unique_list
 from taskgraph.util.schema import Schema
 from voluptuous import Required
 
@@ -66,7 +65,7 @@ def group_tasks(config, tasks):
 
 
 def loader(kind, path, config, params, loaded_tasks):
-    job_template = config.get("job-template")
+    task_template = config.get("task-template")
     for dep_tasks in group_tasks(config, loaded_tasks):
         kinds = [dep.kind for dep in dep_tasks]
         kinds_occurrences = {kind: kinds.count(kind) for kind in kinds}
@@ -77,21 +76,21 @@ def loader(kind, path, config, params, loaded_tasks):
 
         primary_dep = get_primary_dep(config, dep_tasks_per_unique_key)
 
-        job = {"primary-dependency": primary_dep}
-        if job_template:
-            job.update(copy.deepcopy(job_template))
-        job["dependencies"] = {
+        task = {"primary-dependency": primary_dep}
+        if task_template:
+            task.update(copy.deepcopy(task_template))
+        task["dependencies"] = {
             dep_key: dep.label for dep_key, dep in dep_tasks_per_unique_key.items()
         }
         copy_of_attributes = primary_dep.attributes.copy()
-        job["attributes"] = {
+        task["attributes"] = {
             **copy_of_attributes,
-            **job["attributes"],
+            **task["attributes"],
             **{"kind": kind},
         }
-        job.setdefault("run-on-tasks-for", copy_of_attributes['run_on_tasks_for'])
+        task.setdefault("run-on-tasks-for", copy_of_attributes["run_on_tasks_for"])
 
-        yield job
+        yield task
 
 
 def get_primary_dep(config, dep_tasks):

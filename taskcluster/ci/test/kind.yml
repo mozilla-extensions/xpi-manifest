@@ -12,7 +12,7 @@ transforms:
     - taskgraph.transforms.job:transforms
     - taskgraph.transforms.task:transforms
 
-job-template:
+task-template:
     description: Test XPI
     worker-type: b-linux
     worker:

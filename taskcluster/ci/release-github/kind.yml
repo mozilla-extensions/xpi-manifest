@@ -11,7 +11,7 @@ transforms:
 kind-dependencies:
     - release-signing
 
-job-template:
+task-template:
     name: release-github
     description: upload release artifacts to github and publish
     run-on-tasks-for: ["action"]
