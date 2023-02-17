@@ -4,7 +4,6 @@
 
 ARG           NODE_VERSION
 FROM          node:$NODE_VERSION
-MAINTAINER    Aki Sasaki <aki@mozilla.com>
 
 RUN apt-get update -qq \
     && apt-get install -y zip \
