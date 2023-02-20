@@ -6,7 +6,8 @@ ARG           NODE_VERSION
 FROM          node:$NODE_VERSION
 
 RUN apt-get update -qq \
-    && apt-get install -y zip \
+    && apt-get install -y \
+    zip \
     python3 \
     python3-venv \
     python3-pip \
