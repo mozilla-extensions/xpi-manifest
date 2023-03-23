@@ -73,17 +73,34 @@ def write_package_info(package_info):
 
 def get_buildid():
     now = datetime.utcnow()
-    return now.strftime("%Y%m%d.%H%M%S")
+    # note the `-` (hyphen) in `%-H`
+    # this removes the leading zero
+    # from the hour (leading zeros are not allowed)
+    return now.strftime("%Y%m%d.%-H%M%S")
 
 
 def get_buildid_version(version):
-    """Version schema check+append a `buildid{buildid}` to ensure unique version."""
-    # XXX is there a more precise schema we should verify ourselves against?
-    if len(version.split(".")) not in (1, 2, 3):
-        raise Exception("{version} has too many version parts!")
-    if "buildid" in version:
-        raise Exception("{version} already has a buildid specified!")
-    buildid_version = f"{version}buildid{get_buildid()}"
+    """Checks the version schema and append a `buildid` (date.time) to ensure a unique version.
+    The in-tree web-extension manifest specifies the `major.minor` part.
+    The format of the version field is:
+        <number>.<number>.<number>.<number>
+        where <number> is 0 to 999999999 (an integer with up to 9 digits)
+        with no leading zeros.
+    """
+    # Enforce a limit of `major.minor` for extension developers in the CI.
+    # Parsing the version's parts into integers throws a ValueError if
+    # there are letters in any of the parts. Letters are not allowed.
+    parts = [int(part) for part in version.split(".")]
+    if len(parts) not in (1, 2):
+        raise Exception(
+            "{version} has an invalid number of version parts! The pipeline supports a `major.minor` version format in the extension's manifest"
+        )
+    for index, part in enumerate(parts):
+        if part < 0 or part > 999999999:
+            raise Exception(
+                f"Element number {index + 1} in the version {version} is invalid: {part} is not between 0 and 999999999"
+            )
+    buildid_version = f"{version}.{get_buildid()}"
     print(f"Buildid version is {buildid_version}")
     return buildid_version
 
@@ -126,7 +143,7 @@ def mkdir(path):
 def get_hash(path, hash_alg="sha256"):
     h = hashlib.new(hash_alg)
     with open(path, "rb") as fh:
-        for chunk in iter(functools.partial(fh.read, 4096), b''):
+        for chunk in iter(functools.partial(fh.read, 4096), b""):
             h.update(chunk)
     return h.hexdigest()
 
@@ -148,20 +165,26 @@ def check_manifest(path, buildid_version):
                 continue
             _found = True
             if not _id.endswith(ID_ALLOWLIST):
-                raise Exception(f"{_key}.gecko.id {_id} must end with one of the following suffixes!\n{ID_ALLOWLIST}")
+                raise Exception(
+                    f"{_key}.gecko.id {_id} must end with one of the following suffixes!\n{ID_ALLOWLIST}"
+                )
             else:
                 print(f"Add-on id {_id} matches the allowlist.")
         if manifest["version"] != buildid_version:
-            raise Exception(f"{manifest['version']} doesn't match buildid version {buildid_version}!")
+            raise Exception(
+                f"{manifest['version']} doesn't match buildid version {buildid_version}!"
+            )
     if not _found:
         raise Exception("Can't find addon ID in manifest.json!")
 
 
 def main():
-    test_var_set([
-        "ARTIFACT_PREFIX",
-        "XPI_NAME",
-    ])
+    test_var_set(
+        [
+            "ARTIFACT_PREFIX",
+            "XPI_NAME",
+        ]
+    )
 
     artifact_prefix = os.environ["ARTIFACT_PREFIX"]
     xpi_name = os.environ["XPI_NAME"]
@@ -202,10 +225,10 @@ def main():
         run_command(["npm", "install"])
         run_command(["npm", "run", "build"])
 
-    if 'XPI_ARTIFACTS' in os.environ:
+    if "XPI_ARTIFACTS" in os.environ:
         xpi_artifacts = os.environ["XPI_ARTIFACTS"].split(";")
     else:
-        xpi_artifacts = glob.glob('*.xpi') + glob.glob("**/*.xpi")
+        xpi_artifacts = glob.glob("*.xpi") + glob.glob("**/*.xpi")
 
     all_paths = []
     for artifact in xpi_artifacts:
@@ -230,4 +253,4 @@ def main():
         fh.write(json.dumps(build_manifest, indent=2, sort_keys=True))
 
 
-__name__ == '__main__' and main()
+__name__ == "__main__" and main()
