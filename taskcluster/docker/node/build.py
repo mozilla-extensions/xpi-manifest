@@ -24,6 +24,7 @@ ID_ALLOWLIST = (
     "@shield.mozilla.org",
     "@mozillaonline.com",
     "@mozillafoundation.org",
+    "@rally.mozilla.org",
     # A temporary special case for aboutsync, which has a "legacy" ID.
     "aboutsync@mhammond.github.com",
 )
