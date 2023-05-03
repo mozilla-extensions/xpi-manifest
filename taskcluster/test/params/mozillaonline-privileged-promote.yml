@@ -20,7 +20,9 @@ existing_tasks:
   build-normandy-devtools: dAfyVHdyRxy5m1-W4XJDJQ
   build-normandy-devtools-1.x: QW9Z5vlpSGi_jdeot0A1Ww
   build-proxy-monitor: QGDQ8pwqTPaVVhCrYYRMYg
+  build-rally-core-addon: ILipvD-PT0Si7T0DiKLBGQ
   build-remote-settings-devtools: CZs5A5-ZQeynir9I-juxxg
+  build-search-engine-usage-study: Cql_6bqyRtKkxzAmEzTg0A
   build-searchengine-devtools: bSll0HBqQuecFx20t7SbZg
   build-secure-proxy: E70nxig2TfyWOYtOEzyzKQ
   build-staging-public: d42fGmxMQuOy50jrCSP7og
@@ -35,7 +37,9 @@ existing_tasks:
   dep-signing-normandy-devtools: ZyeJtXw2Rl2uCLb4kFZoUw
   dep-signing-normandy-devtools-1.x: MZ10w9EQSRuwiVVmofNClg
   dep-signing-proxy-monitor: c9MHYKNNQl-XDPOrclfjew
+  dep-signing-rally-core-addon: WdcUHrg3SoWLY5Nc-BYosg
   dep-signing-remote-settings-devtools: bkv2zjcURRiAs0tL9KLURw
+  dep-signing-search-engine-usage-study: OfeHeT52QmG5h703ooHFPQ
   dep-signing-searchengine-devtools: IlHOA9beTFKFQCrepNOfPg
   dep-signing-secure-proxy: TppIaU7hSDWsEBepDkQLSA
   dep-signing-staging-public: AcLF5fbVT_yF3KV8BHu33g

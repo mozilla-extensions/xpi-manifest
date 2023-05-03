@@ -1,0 +1,10 @@
+description: Rally Core Add-on
+repo-prefix: rallycoreaddon
+active: true
+private-repo: false
+branch: release
+artifacts:
+  - web-ext-artifacts/rally_core.xpi
+addon-type: privileged
+install-type: npm
+enable-github-release: true
