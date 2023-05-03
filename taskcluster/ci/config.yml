@@ -93,23 +93,11 @@ taskgraph:
             default-repository: https://github.com/mozilla-extensions/dnssec-interference
             default-ref: master
             type: git
-        rallycoreaddon:
-            name: "Rally Core Add-on"
-            project-regex: rallycoreaddon$
-            default-repository: https://github.com/mozilla-rally/rally-core-addon
-            default-ref: release
-            type: git
         balrogdryrun:
             name: "Balrog Dry Run"
             project-regex:  balrog-dryrun$
             default-repository: https://github.com/mozilla-extensions/balrog-dryrun.git
             default-ref: main
-            type: git
-        searchengineusagestudy:
-            name: "Rally Search Engine Usage study extension"
-            project-regex: searchengineusagestudys$
-            default-repository: https://github.com/mozilla-extensions/search-engine-usage-study.git
-            default-ref: release
             type: git
         firefoxtranslations:
             name: "Firefox Translations"
