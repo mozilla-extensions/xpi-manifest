@@ -117,10 +117,10 @@ taskgraph:
             default-repository: https://github.com/mozilla-extensions/quitter
             default-ref: main
             type: git
-        addonsrestricteddomain:
-            name: "Add-ons Restricted Domain"
-            project-regex: addons-restricted-domain$
-            default-repository: git@github.com:mozilla-extensions/addons-restricted-domain
+        addonsrestricteddomains:
+            name: "Add-ons Restricted Domains"
+            project-regex: addons-restricted-domains$
+            default-repository: git@github.com:mozilla-extensions/addons-restricted-domains
             default-ref: main
             type: git
 
