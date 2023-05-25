@@ -1,7 +1,7 @@
 description: Add-ons Restricted Domains by the Add-ons team
 repo-prefix: addonsrestricteddomains
 active: true
-private-repo: true
+private-repo: false
 branch: main
 artifacts:
   - web-ext-artifacts/addons-restricted-domains.xpi
