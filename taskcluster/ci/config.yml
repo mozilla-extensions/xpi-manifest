@@ -120,7 +120,7 @@ taskgraph:
         addonsrestricteddomains:
             name: "Add-ons Restricted Domains"
             project-regex: addons-restricted-domains$
-            default-repository: git@github.com:mozilla-extensions/addons-restricted-domains
+            default-repository: https://github.com/mozilla-extensions/addons-restricted-domains
             default-ref: main
             type: git
 
