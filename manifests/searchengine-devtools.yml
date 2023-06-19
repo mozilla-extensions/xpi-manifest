@@ -9,3 +9,4 @@ artifacts:
 addon-type: privileged
 install-type: npm
 additional-emails: ["standard8@mozilla.com", "dharvey@mozilla.com"]
+enable-github-release: true
