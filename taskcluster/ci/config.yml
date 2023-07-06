@@ -192,6 +192,7 @@ release-promotion:
         build:
             target-tasks-method: build_xpi
             rebuild-kinds:
+                - docker-image
                 - build
                 - test
                 - addons-linter
