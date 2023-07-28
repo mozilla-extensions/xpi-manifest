@@ -1,0 +1,12 @@
+---
+description: nimbus-devtools
+repo-prefix: nimbusdevtools
+active: true
+private-repo: false
+branch: main
+additional-emails: ["brennie@mozilla.com"]
+artifacts:
+  - web-ext-artifacts/nimbus-devtools.xpi
+addon-type: privileged
+install-type: npm
+enable-github-release: false
