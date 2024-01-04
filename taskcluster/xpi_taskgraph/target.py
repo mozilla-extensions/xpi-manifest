@@ -3,11 +3,11 @@
 # file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
 
-from taskgraph.target_tasks import _target_task as target_task
+from taskgraph.target_tasks import register_target_task
 from taskgraph.target_tasks import standard_filter
 
 
-@target_task("ship_xpi")
+@register_target_task("ship_xpi")
 def target_tasks_ship_xpi(full_task_graph, parameters, graph_config):
     """Select the set of tasks required for releasing a xpi."""
 
@@ -17,7 +17,7 @@ def target_tasks_ship_xpi(full_task_graph, parameters, graph_config):
     return [l for l, t in full_task_graph.tasks.items() if filter(t, parameters)]
 
 
-@target_task("promote_xpi")
+@register_target_task("promote_xpi")
 def target_tasks_promote_xpi(full_task_graph, parameters, graph_config):
     """Select the set of tasks required for promoting a xpi."""
 
@@ -27,7 +27,7 @@ def target_tasks_promote_xpi(full_task_graph, parameters, graph_config):
     return [l for l, t in full_task_graph.tasks.items() if filter(t, parameters)]
 
 
-@target_task("build_xpi")
+@register_target_task("build_xpi")
 def target_tasks_build_xpi(full_task_graph, parameters, graph_config):
     """Select the set of tasks required for promoting a xpi."""
 
