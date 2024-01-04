@@ -130,8 +130,6 @@ taskgraph:
             default-ref: main
             type: git
 
-    cached-task-prefix: xpi
-
 workers:
     aliases:
         b-linux:
