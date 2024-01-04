@@ -18,7 +18,7 @@ from taskgraph.util.readonlydict import ReadOnlyDict
 from voluptuous import ALLOW_EXTRA, Optional, Required, Schema, Any
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(__file__)))
-ROOT = os.path.join(BASE_DIR, "taskcluster", "ci")
+ROOT = os.path.join(BASE_DIR, "taskcluster")
 MANIFEST_DIR = os.path.join(BASE_DIR, "manifests")
 
 
