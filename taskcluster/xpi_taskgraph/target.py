@@ -4,7 +4,6 @@
 
 
 from taskgraph.target_tasks import register_target_task
-from taskgraph.target_tasks import standard_filter
 
 
 @register_target_task("ship_xpi")
