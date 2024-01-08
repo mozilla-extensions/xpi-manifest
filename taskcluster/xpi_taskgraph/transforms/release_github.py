@@ -13,8 +13,7 @@ from taskgraph.transforms.base import TransformSequence
 from taskgraph.util.schema import resolve_keyed_by
 from xpi_taskgraph.xpi_manifest import get_manifest
 
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(__file__)))
-ROOT = os.path.join(BASE_DIR, "ci")
+ROOT = os.path.dirname(os.path.dirname(os.path.dirname(__file__)))  # /taskcluster
 
 transforms = TransformSequence()
 
