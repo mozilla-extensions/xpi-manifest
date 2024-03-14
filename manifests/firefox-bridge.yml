@@ -1,0 +1,10 @@
+description: Firefox Bridge by the Desktop Integrations team
+repo-prefix: firefoxbridge
+active: true
+private-repo: false
+branch: main
+artifacts:
+  - dist/firefox-bridge.xpi
+addon-type: privileged
+install-type: npm
+enable-github-release: true
