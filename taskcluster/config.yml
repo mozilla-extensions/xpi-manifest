@@ -129,6 +129,12 @@ taskgraph:
             default-repository: https://github.com/mozilla-extensions/nimbus-devtools
             default-ref: main
             type: git
+        firefoxbridge:
+            name: "Firefox Bridge"
+            project-regex: firefox-bridge$
+            default-repository: https://github.com/mozilla-extensions/firefox-bridge
+            default-ref: main
+            type: git
 
 workers:
     aliases:
