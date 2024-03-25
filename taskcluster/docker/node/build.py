@@ -26,6 +26,8 @@ ID_ALLOWLIST = (
     "@mozillafoundation.org",
     # A temporary special case for aboutsync, which has a "legacy" ID.
     "aboutsync@mhammond.github.com",
+    # Allow https://github.com/mozilla-extensions/privileged-test-xpi.
+    "test@tests.mozilla.org",
 )
 
 
