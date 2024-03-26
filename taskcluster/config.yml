@@ -135,6 +135,12 @@ taskgraph:
             default-repository: https://github.com/mozilla-extensions/firefox-bridge
             default-ref: main
             type: git
+        privilegedtestxpi:
+            name: "Privileged Test XPI"
+            project-regex: privileged-test-xpi$
+            default-repository: https://github.com/mozilla-extensions/privileged-test-xpi
+            default-ref: main
+            type: git
 
 workers:
     aliases:

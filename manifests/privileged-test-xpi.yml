@@ -1,0 +1,10 @@
+description: Privileged Test XPI
+repo-prefix: privilegedtestxpi
+active: true
+private-repo: false
+branch: main
+artifacts:
+  - web-ext-artifacts/privileged.xpi
+addon-type: privileged
+install-type: npm
+enable-github-release: true
