@@ -141,6 +141,12 @@ taskgraph:
             default-repository: https://github.com/mozilla-extensions/privileged-test-xpi
             default-ref: main
             type: git
+        devtoolsadbextension:
+            name: "Devtools ADB Extension"
+            project-regex: devtools-adb-extension$
+            default-repository: https://github.com/mozilla-extensions/devtools-adb-extension
+            default-ref: master
+            type: git
 
 workers:
     aliases:

@@ -1,0 +1,11 @@
+description: Devtools ADB Extension for win32
+repo-prefix: devtoolsadbextension
+active: true
+private-repo: false
+branch: xpi-template
+directory: extension/win32/
+artifacts:
+  - adb-extension-win32.xpi
+addon-type: privileged
+install-type: npm
+enable-github-release: true

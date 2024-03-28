@@ -1,0 +1,11 @@
+description: Devtools ADB Extension for linux
+repo-prefix: devtoolsadbextension
+active: true
+private-repo: false
+branch: xpi-template
+directory: extension/linux/
+artifacts:
+  - adb-extension-linux.xpi
+addon-type: privileged
+install-type: npm
+enable-github-release: true

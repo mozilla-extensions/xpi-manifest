@@ -1,0 +1,11 @@
+description: Devtools ADB Extension for linux64
+repo-prefix: devtoolsadbextension
+active: true
+private-repo: false
+branch: xpi-template
+directory: extension/linux64/
+artifacts:
+  - adb-extension-linux64.xpi
+addon-type: privileged
+install-type: npm
+enable-github-release: true
