@@ -1,8 +1,0 @@
-description: Secure-Proxy
-repo-prefix: secureproxy
-active: true
-private-repo: false
-artifacts:
-  - dist/secure-proxy.xpi
-addon-type: privileged
-install-type: npm
