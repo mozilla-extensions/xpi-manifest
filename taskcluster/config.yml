@@ -81,12 +81,6 @@ taskgraph:
             default-repository: https://github.com/mozilla-extensions/webcompat-addon
             default-ref: master
             type: git
-        secureproxy:
-            name: "Secure-Proxy"
-            project-regex: secure-proxy$
-            default-repository: https://github.com/mozilla-extensions/secure-proxy
-            default-ref: master
-            type: git
         dnssecinterferencestudy:
             name: "DNSSEC Interference Study"
             project-regex: dnssec-interference-study$
@@ -99,12 +93,6 @@ taskgraph:
             default-repository: https://github.com/mozilla-extensions/balrog-dryrun.git
             default-ref: main
             type: git
-        firefoxtranslations:
-            name: "Firefox Translations"
-            project-regex: firefox-translations$
-            default-repository: https://github.com/mozilla-extensions/firefox-translations
-            default-ref: main
-            type: git
         aboutsync:
             name: "About Sync"
             project-regex: aboutsync$
@@ -115,12 +103,6 @@ taskgraph:
             name: "Firefox Quitter"
             project-regex: quitter$
             default-repository: https://github.com/mozilla-extensions/quitter
-            default-ref: main
-            type: git
-        addonsrestricteddomains:
-            name: "Add-ons Restricted Domains"
-            project-regex: addons-restricted-domains$
-            default-repository: https://github.com/mozilla-extensions/addons-restricted-domains
             default-ref: main
             type: git
         nimbusdevtools:
