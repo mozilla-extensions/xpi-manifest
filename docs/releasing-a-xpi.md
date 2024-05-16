@@ -18,7 +18,7 @@ In the future, we could add additional tasks here, or additional phases, as need
 
 ## Ship
 
-In the ship phase, we mark the release as shipped.  If `enable-github-release` is True in the manifest we will upload a new release to the projects github page with the signed .xpi file as part of the release.
+In the ship phase, we mark the release as shipped.  If `enable-github-release` is True in the manifest we will upload a new release to the projects github page with the signed .xpi file as part of the release. Note that this will only succeed if the `mozilla-extensions/bots` team has _write_ access to the repository.
 
 Similar to the promote phase, the ship phase requires a signoff to schedule in shipit. See [Signoffs](#Signoffs).
 
