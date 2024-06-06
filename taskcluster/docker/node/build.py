@@ -73,23 +73,6 @@ def write_package_info(package_info):
     assert get_package_info() == package_info
 
 
-def get_buildid():
-    now = datetime.utcnow()
-    return now.strftime("%Y%m%d.%H%M%S")
-
-
-def get_buildid_version(version):
-    """Version schema check+append a `buildid{buildid}` to ensure unique version."""
-    # XXX is there a more precise schema we should verify ourselves against?
-    if len(version.split(".")) not in (1, 2, 3):
-        raise Exception("{version} has too many version parts!")
-    if "buildid" in version:
-        raise Exception("{version} already has a buildid specified!")
-    buildid_version = f"{version}buildid{get_buildid()}"
-    print(f"Buildid version is {buildid_version}")
-    return buildid_version
-
-
 def find_manifests():
     manifest_list = []
     for dir_name, subdir_list, file_list in os.walk("."):
@@ -100,19 +83,6 @@ def find_manifests():
         if "manifest.json" in file_list:
             manifest_list.append(f"{dir_name}/manifest.json")
     return manifest_list
-
-
-def find_update_manifest_json(buildid_version):
-    """We also have manifest.json files; let's update them as well."""
-    for manifest in find_manifests():
-        print(f"Updating {manifest} version...")
-        with open(manifest) as fh:
-            contents = json.load(fh)
-        old_version = contents["version"]
-        contents["version"] = buildid_version
-        with open(manifest, "w") as fh:
-            json.dump(contents, fh)
-        print(f"    was {old_version}, now {buildid_version}")
 
 
 def cd(path):
@@ -133,7 +103,31 @@ def get_hash(path, hash_alg="sha256"):
     return h.hexdigest()
 
 
-def check_manifest(path, buildid_version):
+def is_version_mv3_compliant(version):
+    # Split the version string by dots
+    parts = version.split(".")
+
+    # Check if there are 1 to 4 parts
+    if len(parts) < 1 or len(parts) > 4:
+        return False
+
+    for part in parts:
+        # Check if the part is a number
+        if not part.isdigit():
+            return False
+        # Check that the part doesn't have leading zeros (unless it's "0")
+        if part[0] == "0" and part != "0":
+            return False
+        # Convert part to integer to check the digit count
+        num = int(part)
+        # Check if the integer has more than 9 digits
+        if num > 999999999:
+            return False
+
+    return True
+
+
+def check_manifest(path, package_version):
     xpi = ZipFile(path, "r")
     manifest = {}
     _found = False
@@ -153,8 +147,19 @@ def check_manifest(path, buildid_version):
                 raise Exception(f"{_key}.gecko.id {_id} must end with one of the following suffixes!\n{ID_ALLOWLIST}")
             else:
                 print(f"Add-on id {_id} matches the allowlist.")
-        if manifest["version"] != buildid_version:
-            raise Exception(f"{manifest['version']} doesn't match buildid version {buildid_version}!")
+        if manifest["version"] != package_version:
+            raise Exception(
+                f"The version in `{manifest_name}` ({manifest['version']}) doesn't match the version in `package.json` ({package_version})!"
+            )
+        if not is_version_mv3_compliant(manifest["version"]):
+            raise Exception(
+                (
+                    f"The version in {manifest_name} is {manifest['version']}, which is not MV3 compliant. "
+                    "The value must be a string with 1 to 4 numbers separated by dots (e.g., 1.2.3.4). "
+                    "Each number can have up to 9 digits and leading zeros before another digit are not allowed "
+                    "(e.g., 2.01 is forbidden, but 0.2, 2.0.1, and 2.1 are allowed)."
+                )
+            )
     if not _found:
         raise Exception("Can't find addon ID in manifest.json!")
 
@@ -178,14 +183,6 @@ def main():
     package_info = get_package_info()
 
     revision = get_output(["git", "rev-parse", "HEAD"])
-    orig_version = package_info["version"]
-    buildid_version = get_buildid_version(orig_version)
-
-    # Make sure we use the buildid_version during the build
-    package_info["version"] = buildid_version
-    print(f"Updating package.json version from {orig_version} to {buildid_version}...")
-    write_package_info(package_info)
-    find_update_manifest_json(buildid_version)
 
     build_manifest = {
         "name": xpi_name,
@@ -193,7 +190,7 @@ def main():
         "repo": os.environ[head_repo_env_var],
         "revision": str(revision.rstrip()),
         "directory": os.path.relpath(base_src_dir, os.getcwd()),
-        "version": buildid_version,
+        "version": package_info["version"],
         "artifacts": [],
     }
 
@@ -226,7 +223,7 @@ def main():
         }
         build_manifest["artifacts"].append(artifact_info)
         shutil.copyfile(artifact, target_path)
-        check_manifest(target_path, buildid_version)
+        check_manifest(target_path, package_info["version"])
 
     with open(os.path.join(artifact_dir, "manifest.json"), "w") as fh:
         fh.write(json.dumps(build_manifest, indent=2, sort_keys=True))
