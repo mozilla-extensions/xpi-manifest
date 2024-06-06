@@ -17,7 +17,7 @@ additional-emails: []
 #            root of the repository.
 directory: one
 # string: docker-image. Optional. Defaults to node-16 as found
-#         in taskcluster/ci/[build|test]/kind.yml .
+#         in taskcluster/kinds/[build|test]/kind.yml .
 docker-image: node-16
 # string: branch name. Optional. Defaults to the default-ref in
 #         taskcluster.ci.config.taskgraph.repositories .

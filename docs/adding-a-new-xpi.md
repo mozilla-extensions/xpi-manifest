@@ -129,7 +129,7 @@ Once Taskcluster CI automation is enabled, you will see a decision task (and rel
 
 To enable releases for your new repo, go to the [`xpi-manifest`](https://github.com/mozilla-extensions/xpi-manifest) repository.
 
-1. Add the source repository to [`taskgraph.repositories`](https://github.com/mozilla-extensions/xpi-manifest/blob/main/taskcluster/ci/config.yml#L8-L23) in the `xpi-manifest` repository's [taskcluster/ci/config.yml](../taskcluster/ci/config.yml). If this is the first xpi in your source repo, you need to add it. Public repos will look like this:
+1. Add the source repository to [`taskgraph.repositories`](https://github.com/mozilla-extensions/xpi-manifest/blob/main/taskcluster/config.yml#L8-L23) in the `xpi-manifest` repository's [taskcluster/config.yml](../taskcluster/config.yml). If this is the first xpi in your source repo, you need to add it. Public repos will look like this:
 
     ```yaml
         normandydevtools:  # This needs to not have any _ or -
@@ -155,7 +155,7 @@ To enable releases for your new repo, go to the [`xpi-manifest`](https://github.
         type: git
     ```
 
-2. Add the xpi to the [xpi manifest directory](../manifests/). Copy [manifests/template-example.yml.template](https://github.com/mozilla-extensions/xpi-manifest/blob/main/manifests/template-example.yml.template) to `manifests/{name}.yml`, where `{name}` is the name of your addon. Then edit: the `repo-prefix` will refer to the repository key name under `taskgraph.repositories` in the `xpi-manifest` repository's `taskcluster/ci/config.yml`.
+2. Add the xpi to the [xpi manifest directory](../manifests/). Copy [manifests/template-example.yml.template](https://github.com/mozilla-extensions/xpi-manifest/blob/main/manifests/template-example.yml.template) to `manifests/{name}.yml`, where `{name}` is the name of your addon. Then edit: the `repo-prefix` will refer to the repository key name under `taskgraph.repositories` in the `xpi-manifest` repository's `taskcluster/config.yml`.
 
 The PR should run sanity checks on pull request and push; make sure the decision task and the build for your addon goes green.
 
@@ -168,7 +168,7 @@ After you are satisfied with your testing, see [Releasing a XPI](releasing-a-xpi
 ## custom tooling needs
 If you need extra npm's installed or a different version of node, it will be documented here.  What we currently have available is a way to specify a custom docker image:
 
- in `package.json` you can specify a `docker-image` ([existing choices](https://github.com/mozilla-extensions/xpi-manifest/blob/main/taskcluster/ci/docker-image/kind.yml) or add a new one):
+ in `package.json` you can specify a `docker-image` ([existing choices](https://github.com/mozilla-extensions/xpi-manifest/blob/main/taskcluster/kinds/docker-image/kind.yml) or add a new one):
 ```
 {
     ...
