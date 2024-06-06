@@ -67,12 +67,6 @@ def get_package_info():
     return contents
 
 
-def write_package_info(package_info):
-    with open("package.json", "w") as fh:
-        json.dump(package_info, fh)
-    assert get_package_info() == package_info
-
-
 def find_manifests():
     manifest_list = []
     for dir_name, subdir_list, file_list in os.walk("."):
@@ -83,6 +77,19 @@ def find_manifests():
         if "manifest.json" in file_list:
             manifest_list.append(f"{dir_name}/manifest.json")
     return manifest_list
+
+
+def find_update_manifest_json(package_version):
+    """We also have manifest.json files; let's update them as well."""
+    for manifest in find_manifests():
+        print(f"Updating {manifest} version...")
+        with open(manifest) as fh:
+            contents = json.load(fh)
+        old_version = contents["version"]
+        contents["version"] = package_version
+        with open(manifest, "w") as fh:
+            json.dump(contents, fh)
+        print(f"    was {old_version}, now {package_version}")
 
 
 def cd(path):
@@ -101,30 +108,6 @@ def get_hash(path, hash_alg="sha256"):
         for chunk in iter(functools.partial(fh.read, 4096), b''):
             h.update(chunk)
     return h.hexdigest()
-
-
-def is_version_mv3_compliant(version):
-    # Split the version string by dots
-    parts = version.split(".")
-
-    # Check if there are 1 to 4 parts
-    if len(parts) < 1 or len(parts) > 4:
-        return False
-
-    for part in parts:
-        # Check if the part is a number
-        if not part.isdigit():
-            return False
-        # Check that the part doesn't have leading zeros (unless it's "0")
-        if part[0] == "0" and part != "0":
-            return False
-        # Convert part to integer to check the digit count
-        num = int(part)
-        # Check if the integer has more than 9 digits
-        if num > 999999999:
-            return False
-
-    return True
 
 
 def check_manifest(path, package_version):
@@ -151,17 +134,32 @@ def check_manifest(path, package_version):
             raise Exception(
                 f"The version in `{manifest_name}` ({manifest['version']}) doesn't match the version in `package.json` ({package_version})!"
             )
-        if not is_version_mv3_compliant(manifest["version"]):
-            raise Exception(
-                (
-                    f"The version in {manifest_name} is {manifest['version']}, which is not MV3 compliant. "
-                    "The value must be a string with 1 to 4 numbers separated by dots (e.g., 1.2.3.4). "
-                    "Each number can have up to 9 digits and leading zeros before another digit are not allowed "
-                    "(e.g., 2.01 is forbidden, but 0.2, 2.0.1, and 2.1 are allowed)."
-                )
-            )
     if not _found:
         raise Exception("Can't find addon ID in manifest.json!")
+
+
+def is_version_mv3_compliant(version):
+    # Split the version string by dots
+    parts = version.split(".")
+
+    # Check if there are 1 to 4 parts
+    if len(parts) < 1 or len(parts) > 4:
+        return False
+
+    for part in parts:
+        # Check if the part is a number
+        if not part.isdigit():
+            return False
+        # Check that the part doesn't have leading zeros (unless it's "0")
+        if part[0] == "0" and part != "0":
+            return False
+        # Convert part to integer to check the digit count
+        num = int(part)
+        # Check if the integer has more than 9 digits
+        if num > 999999999:
+            return False
+
+    return True
 
 
 def main():
@@ -183,6 +181,18 @@ def main():
     package_info = get_package_info()
 
     revision = get_output(["git", "rev-parse", "HEAD"])
+
+    if not is_version_mv3_compliant(package_info["version"]):
+        raise Exception(
+            (
+                f"The version in `package.json` is {package_info['version']}, which is not MV3 compliant. "
+                "The value must be a string with 1 to 4 numbers separated by dots (e.g., 1.2.3.4). "
+                "Each number can have up to 9 digits and leading zeros before another digit are not allowed "
+                "(e.g., 2.01 is forbidden, but 0.2, 2.0.1, and 2.1 are allowed)."
+            )
+        )
+
+    find_update_manifest_json(package_info["version"])
 
     build_manifest = {
         "name": xpi_name,
