@@ -7,9 +7,8 @@ Here are instructions for how to include your addon (XPI) in the official `mozil
 First, create a repository under the `mozilla-extensions` github organization. Next, copy in the `.taskcluster.yml` from https://github.com/mozilla-extensions/xpi-template/blob/main/.taskcluster.yml .
 
 Other files we need are
-
-    CODE_OF_CONDUCT.md ([example](https://github.com/mozilla-extensions/xpi-template/blob/main/CODE_OF_CONDUCT.md))
-    LICENSE ([example](https://github.com/mozilla-extensions/xpi-template/blob/main/LICENSE))
+* CODE_OF_CONDUCT.md ([example](https://github.com/mozilla-extensions/xpi-template/blob/main/CODE_OF_CONDUCT.md))
+* LICENSE ([example](https://github.com/mozilla-extensions/xpi-template/blob/main/LICENSE))
 
 though other files may be helpful as well, e.g. `README.md` ([example](https://github.com/mozilla-extensions/xpi-template/blob/main/README.md)), `.gitignore`([example](https://github.com/mozilla-extensions/xpi-template/blob/main/.gitignore)), `eslintrc.js`.
 
