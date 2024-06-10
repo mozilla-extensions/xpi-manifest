@@ -2,7 +2,7 @@
 # string: Longer description of the xpi, for humans. Optional.
 description: Test template repo with on-push/on-pr automation
 # Alphanumeric string that corresponds to a key in
-# taskcluster.ci.config.taskgraph.repositories . Required.
+# taskcluster.config.taskgraph.repositories . Required.
 repo-prefix: stagingpublic
 # boolean: enable releases of this xpi or disable them. Optional.
 #          Defaults to `true`.
@@ -17,10 +17,10 @@ additional-emails: []
 #            root of the repository.
 directory: one
 # string: docker-image. Optional. Defaults to node-16 as found
-#         in taskcluster/ci/[build|test]/kind.yml .
+#         in taskcluster/kinds/[build|test]/kind.yml .
 docker-image: node-16
 # string: branch name. Optional. Defaults to the default-ref in
-#         taskcluster.ci.config.taskgraph.repositories .
+#         taskcluster.config.taskgraph.repositories .
 branch: master
 # list of strings: A list of paths of xpis generated. Required.
 artifacts:

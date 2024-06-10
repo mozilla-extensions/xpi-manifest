@@ -26,7 +26,7 @@ Just like the Build and Promote phases, there are also `release-notify-started` 
 
 ## Configuring email notifications
 
-These are configured per addon-type (privileged webextension vs system addon) and per phase (build or promote), in the `xpi-manifest` repository's [`taskcluster/ci/config.yml`](../taskcluster/ci/config.yml), under `release-promotion.notifications`.
+These are configured per addon-type (privileged webextension vs system addon) and per phase (build or promote), in the `xpi-manifest` repository's [`taskcluster/config.yml`](../taskcluster/config.yml), under `release-promotion.notifications`.
 
 LDAP-controlled mail lists are preferred over individual emails. You may want to add a +comment (e.g. `email+system-addon-release-builds@m.c` for easier filtering.
 
