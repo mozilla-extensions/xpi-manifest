@@ -35,6 +35,8 @@ def build_worker_definition(config, tasks):
             config.params.get("version")
             and config.params.get("xpi_name")
             and config.params.get("build_number")
+            # Don't create Github releases if we're using a fork of `xpi-manifest`
+            and config.params["project"] == "xpi-manifest"
         ):
             continue
 
