@@ -123,6 +123,12 @@ taskgraph:
             default-repository: https://github.com/mozilla-extensions/privileged-test-xpi
             default-ref: main
             type: git
+        fingerprintingprotectiondebugger:
+            name: "Fingerprinting Protection Debugger"
+            project-regex: fingerprinting-protection-debugger$
+            default-repository: https://github.com/mozilla-extensions/fingerprinting-protection-debugger
+            default-ref: main
+            type: git
 
 workers:
     aliases:

@@ -1,0 +1,13 @@
+---
+description: Fingerprinting Protection Debugger Addon
+repo-prefix: fingerprinting-protection-debugger
+active: true
+private-repo: false
+additional-emails: ["fkilic@mozilla.com", "fbraun@mozilla.com", "tom@mozilla.com", "tihuang@mozilla.com"]
+branch: main
+# list of strings: A list of paths of xpis generated. Required.
+artifacts:
+  - fingerprinting-protection-debugger.xpi
+addon-type: privileged
+install-type: npm
+enable-github-release: true
