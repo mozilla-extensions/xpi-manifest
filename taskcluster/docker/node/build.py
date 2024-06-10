@@ -83,7 +83,7 @@ def get_buildid():
 
 def get_buildid_version(version):
     """Check the version's formating and append `date.time` as a buildid to ensure a unique version.
-    The addon's in-tree extension/manifest.json file specifies `major.minor.0`.
+    The addon's in-tree `package.json` file specifies `major.minor.0`.
     The format of the resulting version field is:
         <number>.<number>.%Y%m%d.%-H%M%S
     """
