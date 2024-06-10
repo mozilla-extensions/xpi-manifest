@@ -198,7 +198,7 @@ def check_manifest(path, buildid_version):
             raise Exception(
                 f"{manifest['version']} doesn't match buildid version {buildid_version}!"
             )
-        if not is_version_mv3_compliant(manifest["version"]):
+        if manifest["manifest_version"] == 3 and not is_version_mv3_compliant(manifest["version"]):
             raise Exception(
                 (
                     f"The version in {manifest_name} is {manifest['version']}, which is not MV3 compliant. "
