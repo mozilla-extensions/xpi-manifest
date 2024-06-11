@@ -26,9 +26,7 @@ task-template:
         cache-dotcache: false
         use-caches: false
         cwd: '{checkout}'
-        # TODO: We should enable MV3 when we are ready to accept MV3 add-ons.
-        # This should be done by replacing `2` with `3` in the command below.
         command: >-
             curl -sSL --fail --retry 3 -o {xpi_file} "$XPI_URL" &&
-            npx -y addons-linter --privileged --boring --disable-xpi-autoclose --max-manifest-version=2 {xpi_file}
+            npx -y addons-linter --privileged --boring --disable-xpi-autoclose --max-manifest-version=3 {xpi_file}
     run-on-tasks-for: [action]
