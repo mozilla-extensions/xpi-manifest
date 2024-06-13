@@ -96,8 +96,8 @@ def get_buildid_version(version):
     if len(parts) == 3:
         # Print a noisy warning if we override an element in the extension's version field.
         if parts[2] != "0":
-            msg = f"! WARNING: THE 3RD ELEMENT IN THE VERSION {version} IS {parts[2]} NOT 0. THIS VALUE WILL BE OVERRIDEN BY THE PIPELINE !"
-            print(f"{'!' * len(msg)}\n\n{msg}\n\n{'!' * len(msg)}")
+            msg = f"! THE 3RD ELEMENT IN THE VERSION {version} IS {parts[2]} NOT 0. THIS VALUE IS OVERRIDEN BY THE PIPELINE TO CREATE A UNIQUE VERSION !"
+            raise ValueError(f"\n{'!' * len(msg)}\n\n{msg}\n\n{'!' * len(msg)}")
         parts = parts[:2]
         version = ".".join(parts)
     buildid_version = f"{version}.{get_buildid()}"
