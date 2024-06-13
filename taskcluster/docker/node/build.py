@@ -198,7 +198,9 @@ def check_manifest(path, buildid_version):
             raise Exception(
                 f"{manifest['version']} doesn't match buildid version {buildid_version}!"
             )
-        if manifest["manifest_version"] == 3 and not is_version_mv3_compliant(manifest["version"]):
+        if manifest["manifest_version"] == 3 and not is_version_mv3_compliant(
+            manifest["version"]
+        ):
             raise Exception(
                 (
                     f"The version in {manifest_name} is {manifest['version']}, which is not MV3 compliant. "
@@ -233,6 +235,11 @@ def main():
 
     revision = get_output(["git", "rev-parse", "HEAD"])
     orig_version = package_info["version"]
+    # The function `get_buildid_version` appends the current date and time as a build ID to ensure a unique version compatible with MV3.
+    # The addon's in-tree `package.json` file specifies the version as `major.minor.0`.
+    # The pipeline overrides the third part of the version string (0) with the first part of the build ID.
+    # We must specify the third part in the addon's `package.json` file to conform with the semantic versioning specification, which requires a version to have three parts.
+    # The resulting version generated for the addon's manifest is: <major>.<minor>.<build_id>, where <build_id> is %Y%m%d.%-H%M%S
     buildid_version = get_buildid_version(orig_version)
 
     # Make sure we use the buildid_version during the build
