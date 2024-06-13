@@ -75,17 +75,32 @@ def write_package_info(package_info):
 
 def get_buildid():
     now = datetime.utcnow()
-    return now.strftime("%Y%m%d.%H%M%S")
+    # note the `-` (hyphen) in `%-H`
+    # this removes the leading zero
+    # from the hour (leading zeros are not allowed)
+    return now.strftime("%Y%m%d.%-H%M%S")
 
 
 def get_buildid_version(version):
-    """Version schema check+append a `buildid{buildid}` to ensure unique version."""
-    # XXX is there a more precise schema we should verify ourselves against?
-    if len(version.split(".")) not in (1, 2, 3):
-        raise Exception("{version} has too many version parts!")
-    if "buildid" in version:
-        raise Exception("{version} already has a buildid specified!")
-    buildid_version = f"{version}buildid{get_buildid()}"
+    """Check the version's formating and append `date.time` as a buildid to ensure a unique version.
+    The addon's in-tree `package.json` file specifies `major.minor.0`.
+    The format of the resulting version field is:
+        <number>.<number>.%Y%m%d.%-H%M%S
+    """
+    parts = version.split(".")
+    if len(parts) not in (1, 2, 3):
+        raise Exception(
+            f"{version} has an invalid number of version parts! The pipeline supports a `major.minor.0` version format in the extension's manifest"
+        )
+    # Append (or override) the last two parts of the version with a timestamp to ensure a unique version that is compliant with MV3.
+    if len(parts) == 3:
+        # Print a noisy warning if we override an element in the extension's version field.
+        if parts[2] != "0":
+            msg = f"! THE 3RD ELEMENT IN THE VERSION {version} IS {parts[2]} NOT 0. THIS VALUE IS OVERRIDEN BY THE PIPELINE TO CREATE A UNIQUE VERSION !"
+            raise ValueError(f"\n{'!' * len(msg)}\n\n{msg}\n\n{'!' * len(msg)}")
+        parts = parts[:2]
+        version = ".".join(parts)
+    buildid_version = f"{version}.{get_buildid()}"
     print(f"Buildid version is {buildid_version}")
     return buildid_version
 
@@ -128,9 +143,33 @@ def mkdir(path):
 def get_hash(path, hash_alg="sha256"):
     h = hashlib.new(hash_alg)
     with open(path, "rb") as fh:
-        for chunk in iter(functools.partial(fh.read, 4096), b''):
+        for chunk in iter(functools.partial(fh.read, 4096), b""):
             h.update(chunk)
     return h.hexdigest()
+
+
+def is_version_mv3_compliant(version):
+    # Split the version string by dots
+    parts = version.split(".")
+
+    # Check if there are 1 to 4 parts
+    if len(parts) < 1 or len(parts) > 4:
+        return False
+
+    for part in parts:
+        # Check if the part is a number
+        if not part.isdigit():
+            return False
+        # Check that the part doesn't have leading zeros (unless it's "0")
+        if part[0] == "0" and part != "0":
+            return False
+        # Convert part to integer to check the digit count
+        num = int(part)
+        # Check if the integer has more than 9 digits
+        if num > 999999999:
+            return False
+
+    return True
 
 
 def check_manifest(path, buildid_version):
@@ -150,20 +189,37 @@ def check_manifest(path, buildid_version):
                 continue
             _found = True
             if not _id.endswith(ID_ALLOWLIST):
-                raise Exception(f"{_key}.gecko.id {_id} must end with one of the following suffixes!\n{ID_ALLOWLIST}")
+                raise Exception(
+                    f"{_key}.gecko.id {_id} must end with one of the following suffixes!\n{ID_ALLOWLIST}"
+                )
             else:
                 print(f"Add-on id {_id} matches the allowlist.")
         if manifest["version"] != buildid_version:
-            raise Exception(f"{manifest['version']} doesn't match buildid version {buildid_version}!")
+            raise Exception(
+                f"{manifest['version']} doesn't match buildid version {buildid_version}!"
+            )
+        if manifest["manifest_version"] == 3 and not is_version_mv3_compliant(
+            manifest["version"]
+        ):
+            raise Exception(
+                (
+                    f"The version in {manifest_name} is {manifest['version']}, which is not MV3 compliant. "
+                    "The value must be a string with 1 to 4 numbers separated by dots (e.g., 1.2.3.4). "
+                    "Each number can have up to 9 digits and leading zeros before another digit are not allowed "
+                    "(e.g., 2.01 is forbidden, but 0.2, 2.0.1, and 2.1 are allowed)."
+                )
+            )
     if not _found:
         raise Exception("Can't find addon ID in manifest.json!")
 
 
 def main():
-    test_var_set([
-        "ARTIFACT_PREFIX",
-        "XPI_NAME",
-    ])
+    test_var_set(
+        [
+            "ARTIFACT_PREFIX",
+            "XPI_NAME",
+        ]
+    )
 
     artifact_prefix = os.environ["ARTIFACT_PREFIX"]
     xpi_name = os.environ["XPI_NAME"]
@@ -179,6 +235,11 @@ def main():
 
     revision = get_output(["git", "rev-parse", "HEAD"])
     orig_version = package_info["version"]
+    # The function `get_buildid_version` appends the current date and time as a build ID to ensure a unique version compatible with MV3.
+    # The addon's in-tree `package.json` file specifies the version as `major.minor.0`.
+    # The pipeline overrides the third part of the version string (0) with the first part of the build ID.
+    # We must specify the third part in the addon's `package.json` file to conform with the semantic versioning specification, which requires a version to have three parts.
+    # The resulting version generated for the addon's manifest is: <major>.<minor>.<build_id>, where <build_id> is %Y%m%d.%-H%M%S
     buildid_version = get_buildid_version(orig_version)
 
     # Make sure we use the buildid_version during the build
@@ -204,10 +265,10 @@ def main():
         run_command(["npm", "install"])
         run_command(["npm", "run", "build"])
 
-    if 'XPI_ARTIFACTS' in os.environ:
+    if "XPI_ARTIFACTS" in os.environ:
         xpi_artifacts = os.environ["XPI_ARTIFACTS"].split(";")
     else:
-        xpi_artifacts = glob.glob('*.xpi') + glob.glob("**/*.xpi")
+        xpi_artifacts = glob.glob("*.xpi") + glob.glob("**/*.xpi")
 
     all_paths = []
     for artifact in xpi_artifacts:
@@ -232,4 +293,4 @@ def main():
         fh.write(json.dumps(build_manifest, indent=2, sort_keys=True))
 
 
-__name__ == '__main__' and main()
+__name__ == "__main__" and main()
