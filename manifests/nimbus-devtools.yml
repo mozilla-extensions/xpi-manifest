@@ -9,4 +9,4 @@ artifacts:
   - web-ext-artifacts/nimbus-devtools.xpi
 addon-type: privileged
 install-type: npm
-enable-github-release: false
+enable-github-release: true
