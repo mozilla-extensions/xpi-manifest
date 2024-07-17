@@ -23,3 +23,11 @@ tasks:
         definition: node
         args:
             NODE_VERSION: "16.8.0"
+    node-18:
+        definition: node
+        args:
+            NODE_VERSION: "18.20.4"
+    node-20:
+        definition: node
+        args:
+            NODE_VERSION: "20.15.1"
