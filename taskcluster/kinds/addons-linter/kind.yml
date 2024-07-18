@@ -19,7 +19,7 @@ task-template:
     only-for-formats: ["privileged"]
     worker:
         docker-image:
-            in-tree: node-16
+            in-tree: node-20
         max-run-time: 7200
     run:
         using: run-task
