@@ -5,8 +5,9 @@ policy:
     pullRequests: collaborators
 tasks:
     - $if: >
-          tasks_for in ["action", "cron", "github-push"]
+          tasks_for in ["action", "cron"]
           || (tasks_for == "github-pull-request" && event.action in ["opened", "reopened", "synchronize"])
+          || (tasks_for == "github-push" && event.ref == "refs/heads/main")
       then:
           $let:
             trustDomain: xpi
