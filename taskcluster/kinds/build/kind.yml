@@ -15,7 +15,7 @@ task-defaults:
     description: Build XPI from source code.
     worker-type: b-linux
     worker:
-        docker-image: {in-tree: node-16}
+        docker-image: {in-tree: node-20}
         max-run-time: 7200
         chain-of-trust: true
     run:

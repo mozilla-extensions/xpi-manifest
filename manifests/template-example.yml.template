@@ -16,9 +16,9 @@ additional-emails: []
 #            the xpi package.json lives. Optional. Defaults to the
 #            root of the repository.
 directory: one
-# string: docker-image. Optional. Defaults to node-16 as found
+# string: docker-image. Optional. Defaults to node-20 as found
 #         in taskcluster/kinds/[build|test]/kind.yml .
-docker-image: node-16
+docker-image: node-20
 # string: branch name. Optional. Defaults to the default-ref in
 #         taskcluster.config.taskgraph.repositories .
 branch: master
