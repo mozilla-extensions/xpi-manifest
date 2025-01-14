@@ -13,7 +13,7 @@ from taskgraph.util.schema import resolve_keyed_by
 
 transforms = TransformSequence()
 
-KNOWN_FORMATS = ("privileged_webextension", "system_addon")
+KNOWN_FORMATS = ("privileged_webextension", "system_addon", "stage_privileged_webextension", "stage_system_addon", "gcp_prod_privileged_webextension", "gcp_prod_system_addon")
 
 
 @transforms.add
