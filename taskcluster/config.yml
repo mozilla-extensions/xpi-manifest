@@ -185,11 +185,11 @@ scriptworker:
     scope-prefix: project:xpi:releng
     signing-format:
         by-xpi-type:
-            mozillaonline-privileged: privileged_webextension
-            privileged: privileged_webextension
-            system: system_addon
+            mozillaonline-privileged: gcp_prod_privileged_webextension
+            privileged: gcp_prod_privileged_webextension
+            system: gcp_prod_system_addon
             # normandy-privileged is deprecated
-            normandy-privileged: privileged_webextension
+            normandy-privileged: gcp_prod_privileged_webextension
 
 release-promotion:
     flavors:
