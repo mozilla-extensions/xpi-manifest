@@ -129,6 +129,12 @@ taskgraph:
             default-repository: https://github.com/mozilla-extensions/fingerprinting-protection-debugger
             default-ref: main
             type: git
+        autofilldevtools:
+            name: "Autofill Devtools"
+            project-regex: autofill-devtools$
+            default-repository: https://github.com/mozilla-extensions/autofill-devtools
+            default-ref: main
+            type: git
 
 workers:
     aliases:
