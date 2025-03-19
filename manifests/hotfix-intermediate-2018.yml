@@ -1,0 +1,11 @@
+---
+description: hotfix-intermediate-2018
+repo-prefix: hotfixintermediate2018
+active: true
+private-repo: false
+branch: main
+artifacts:
+  - web-ext-artifacts/hotfix-intermediate-2018.xpi
+addon-type: system
+install-type: npm
+enable-github-release: true

@@ -129,6 +129,12 @@ taskgraph:
             default-repository: https://github.com/mozilla-extensions/fingerprinting-protection-debugger
             default-ref: main
             type: git
+        hotfixintermediate2018:
+            name: "hotfix-intermediate-2018"
+            project-regex: hotfix-intermediate-2018$
+            default-repository: https://github.com/mozilla-extensions/hotfix-intermediate-2018
+            default-ref: main
+            type: git
 
 workers:
     aliases:
