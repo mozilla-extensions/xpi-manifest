@@ -2,17 +2,19 @@
 # License, v. 2.0. If a copy of the MPL was not distributed with this
 # file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
+from functools import partial
 
 from taskgraph.actions.registry import register_callback_action
-
-from taskgraph.util.taskcluster import get_artifact
-from taskgraph.taskgraph import TaskGraph
+from taskgraph.config import GraphConfig
 from taskgraph.decision import taskgraph_decision
 from taskgraph.parameters import Parameters
+from taskgraph.taskgraph import TaskGraph
+from taskgraph.util.taskcluster import get_artifact
 from taskgraph.util.taskgraph import (
     find_decision_task,
     find_existing_tasks_from_previous_kinds,
 )
+
 from xpi_taskgraph.xpi_manifest import get_manifest
 
 RELEASE_PROMOTION_PROJECTS = (
@@ -20,23 +22,24 @@ RELEASE_PROMOTION_PROJECTS = (
     "https://github.com/mozilla-releng/staging-xpi-manifest",
 )
 
-XPI_MANIFEST = get_manifest()
-
 
 def is_release_promotion_available(parameters):
     return parameters["head_repository"] in RELEASE_PROMOTION_PROJECTS
 
 
-@register_callback_action(
-    name="release-promotion",
-    title="Promote a XPI",
-    symbol="${input.release_promotion_flavor}_${input.xpi_name}",
-    description="Promote a XPI.",
-    permission="release-promotion",
-    order=500,
-    context=[],
-    available=is_release_promotion_available,
-    schema=lambda graph_config: {
+def build_schema(system: bool, graph_config: GraphConfig):
+    manifests = get_manifest()
+    xpi_names = [
+        xpi
+        for xpi, manifest in manifests.items()
+        if (manifest["addon-type"] == "system") is system
+    ]
+
+    promotion_flavors = list(graph_config["release-promotion"]["flavors"].keys())
+    if system:
+        promotion_flavors.remove("promote")
+
+    return {
         "type": "object",
         "properties": {
             "build_number": {
@@ -63,7 +66,7 @@ def is_release_promotion_available(parameters):
                 "title": "The XPI to promote",
                 "default": "FILLMEIN",
                 "description": ("The XPI to promote."),
-                "enum": sorted(XPI_MANIFEST.keys()),
+                "enum": xpi_names,
             },
             "revision": {
                 "type": "string",
@@ -74,13 +77,12 @@ def is_release_promotion_available(parameters):
                 "type": "string",
                 "description": "The flavor of release promotion to perform.",
                 "default": "build",
-                "enum": sorted(graph_config["release-promotion"]["flavors"].keys()),
+                "enum": promotion_flavors,
             },
             "rebuild_kinds": {
                 "type": "array",
                 "description": (
-                    "Optional: an array of kinds to ignore from the previous "
-                    "graph(s)."
+                    "Optional: an array of kinds to ignore from the previous graph(s)."
                 ),
                 "default": graph_config["release-promotion"].get("rebuild-kinds", []),
                 "items": {"type": "string"},
@@ -109,7 +111,30 @@ def is_release_promotion_available(parameters):
             },
         },
         "required": ["release_promotion_flavor", "xpi_name", "build_number"],
-    },
+    }
+
+
+@register_callback_action(
+    name="release-promotion",
+    title="Promote an XPI",
+    symbol="${input.release_promotion_flavor}_${input.xpi_name}",
+    description="Promote a XPI.",
+    permission="release-promotion",
+    order=500,
+    context=[],
+    available=is_release_promotion_available,
+    schema=partial(build_schema, False),
+)
+@register_callback_action(
+    name="release-promotion-system",
+    title="Promote a System Addon",
+    symbol="${input.release_promotion_flavor}_${input.xpi_name}",
+    description="Promote a System Addon.",
+    permission="release-promotion",
+    order=500,
+    context=[],
+    available=is_release_promotion_available,
+    schema=partial(build_schema, True),
 )
 def release_promotion_action(parameters, graph_config, input, task_group_id, task_id):
     release_promotion_flavor = input["release_promotion_flavor"]
