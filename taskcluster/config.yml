@@ -135,6 +135,12 @@ taskgraph:
             default-repository: https://github.com/mozilla-extensions/hotfix-intermediate-2018
             default-ref: main
             type: git
+        newtab:
+            name: "Firefox Newtab"
+            project-regex: newtab-trainhop$
+            default-repository: https://github.com/mozilla-extensions/newtab-trainhop
+            default-ref: main 
+            type: git
 
 workers:
     aliases:
