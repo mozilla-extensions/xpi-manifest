@@ -1,0 +1,12 @@
+---
+description: Temporary test for Firefox Newtab
+repo-prefix: newtab
+active: true
+private-repo: false
+additional-emails: [mconley@mozilla.com]
+# list of strings: A list of paths of xpis generated. Required.
+artifacts:
+  - web-ext-artifacts/newtab-may2025-trainhop-test.xpi
+addon-type: system
+install-type: npm
+enable-github-release: False
