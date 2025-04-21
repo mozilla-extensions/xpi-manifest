@@ -3,6 +3,7 @@ description: Temporary test for Firefox Newtab
 repo-prefix: newtab
 active: true
 private-repo: false
+branch: main
 additional-emails: [mconley@mozilla.com]
 # list of strings: A list of paths of xpis generated. Required.
 artifacts:
