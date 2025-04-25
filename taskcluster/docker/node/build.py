@@ -265,7 +265,30 @@ def main():
         "artifacts": [],
     }
 
-    if os.environ.get("XPI_INSTALL_TYPE", "yarn") == "yarn":
+    install_type = os.environ.get("XPI_INSTALL_TYPE")
+    if install_type == "mach":
+        vcs_path = os.environ["VCS_PATH"]
+        # Keep objdir outside of topsrcdir so it isn't part of the checkout cache
+        objdir = "/builds/worker/objdir"
+        env = os.environ.copy()
+        env.update({
+            "MOZCONFIG": "browser/config/mozconfigs/linux64/browser-extensions",
+            "MOZBUILD_STATE_PATH": "/builds/worker/.mozbuild",
+            "MOZ_OBJDIR": os.path.relpath(objdir, vcs_path),
+        })
+        mach = f"{vcs_path}/mach"
+        run_command(
+            [sys.executable, mach, "build"],
+            env=env,
+        )
+
+        dest = os.environ['XPI_ARTIFACTS']
+        os.makedirs(os.path.dirname(dest), exist_ok=True)
+        shutil.copyfile(
+            f"{objdir}/dist/xpi-stage/{xpi_name}@mozilla.org.xpi",
+            dest
+        )
+    elif install_type == "yarn":
         run_command(["yarn", "install", "--frozen-lockfile"])
         run_command(["yarn", "build"])
     else:
