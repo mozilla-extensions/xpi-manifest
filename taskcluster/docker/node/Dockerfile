@@ -23,6 +23,8 @@ RUN mkdir -p /builds && \
     mkdir /builds/worker/artifacts && \
     chown -R worker:worker /builds/worker
 
+WORKDIR /builds/worker
+
 # %include-run-task
 
 COPY build.py /usr/local/bin/build.py
