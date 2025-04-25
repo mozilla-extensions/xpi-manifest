@@ -103,7 +103,7 @@ def find_manifests():
             yield f"{dir_name}/package.json"
 
 
-def find_and_update_version() -> str:
+def get_and_update_version() -> str:
     """Find the original version number, change it to include a buildid,
     then update all references to the version.
 
@@ -129,6 +129,10 @@ def find_and_update_version() -> str:
                 f"{orig_version} != {contents['version']}!"
             )
 
+        assert new_version
+        contents["version"] = new_version
+
+        print(f"Writing new version to {manifest}")
         with open(manifest, "w") as fh:
             json.dump(contents, fh)
 
@@ -234,7 +238,7 @@ def main():
     revision = get_output(["git", "rev-parse", "HEAD"])
 
     # Make sure we update the version to include a buildid.
-    version = find_and_update_version()
+    buildid_version = get_and_update_version()
 
     build_manifest = {
         "name": xpi_name,
@@ -242,11 +246,32 @@ def main():
         "repo": os.environ[head_repo_env_var],
         "revision": str(revision.rstrip()),
         "directory": os.path.relpath(base_src_dir, os.getcwd()),
-        "version": version,
+        "version": buildid_version,
         "artifacts": [],
     }
 
-    if os.environ.get("XPI_INSTALL_TYPE", "yarn") == "yarn":
+    install_type = os.environ.get("XPI_INSTALL_TYPE")
+    if install_type == "mach":
+        vcs_path = os.environ["VCS_PATH"]
+        env = os.environ.copy()
+        env.update({
+            "MOZCONFIG": "browser/config/mozconfigs/linux64/browser-extensions",
+            "MOZBUILD_STATE_PATH": "/builds/worker/.mozbuild",
+            "MOZ_OBJDIR": "objdir",
+        })
+        mach = f"{vcs_path}/mach"
+        run_command(
+            [sys.executable, mach, "build"],
+            env=env,
+        )
+
+        dest = os.environ['XPI_ARTIFACTS']
+        os.makedirs(os.path.dirname(dest), exist_ok=True)
+        shutil.copyfile(
+            f"{vcs_path}/objdir/dist/xpi-stage/{xpi_name}@mozilla.org.xpi",
+            dest
+        )
+    elif install_type == "yarn":
         run_command(["yarn", "install", "--frozen-lockfile"])
         run_command(["yarn", "build"])
     else:
@@ -275,7 +300,7 @@ def main():
         }
         build_manifest["artifacts"].append(artifact_info)
         shutil.copyfile(artifact, target_path)
-        check_manifest(target_path, version)
+        check_manifest(target_path, buildid_version)
 
     with open(os.path.join(artifact_dir, "manifest.json"), "w") as fh:
         fh.write(json.dumps(build_manifest, indent=2, sort_keys=True))

@@ -35,7 +35,7 @@ base_schema = Schema(
         Required("addon-type"): Any(
             "mozillaonline-privileged", "normandy-privileged", "privileged", "system"
         ),
-        Optional("install-type"): Any("npm", "yarn"),
+        Optional("install-type"): Any("mach", "npm", "yarn"),
         Optional("enable-github-release"): bool,
         Optional("release-tag"): str,
         Optional("release-name"): str,
