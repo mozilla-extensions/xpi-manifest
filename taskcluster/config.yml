@@ -4,6 +4,7 @@ trust-domain: xpi
 task-priority: lowest
 
 taskgraph:
+    decision-parameters: xpi_taskgraph.parameters:decision_parameters
     register: xpi_taskgraph:register
     repositories:
         # This is the manifest repo
