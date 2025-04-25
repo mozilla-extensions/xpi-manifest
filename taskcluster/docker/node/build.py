@@ -1,15 +1,15 @@
 #!/usr/bin/env python
 
-from datetime import datetime
 import functools
 import glob
 import hashlib
 import json
 import os
-from pathlib import Path
 import shutil
 import subprocess
 import sys
+from datetime import datetime
+from pathlib import Path
 from zipfile import ZipFile
 
 
@@ -92,7 +92,7 @@ def get_buildid_version(version):
 
 
 def find_manifests():
-    for dir_name, subdir_list, file_list in os.walk("."):
+    for dir_name, subdir_list, file_list in os.walk(os.getcwd()):
         for dir_ in subdir_list:
             if dir_ in (".git", "node_modules"):
                 subdir_list.remove(dir_)
@@ -157,16 +157,6 @@ def get_and_update_version() -> str:
         )
 
     return new_version
-
-
-def cd(path):
-    print(f"Changing directory to {path} ...")
-    os.chdir(path)
-
-
-def mkdir(path):
-    print(f"mkdir {path}")
-    os.makedirs(path, exist_ok=True)
 
 
 def get_hash(path, hash_alg="sha256"):
@@ -310,4 +300,5 @@ def main():
         fh.write(json.dumps(build_manifest, indent=2, sort_keys=True))
 
 
-__name__ == "__main__" and main()
+if __name__ == "__main__":
+    sys.exit(main())
