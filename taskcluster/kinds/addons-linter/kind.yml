@@ -23,7 +23,6 @@ task-template:
         max-run-time: 7200
     run:
         using: run-task
-        cache-dotcache: false
         use-caches: false
         cwd: '{checkout}'
         command: >-

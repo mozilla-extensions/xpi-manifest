@@ -5,17 +5,14 @@
 
 from copy import deepcopy
 import glob
-import json
 import os
-import time
-from datetime import datetime
+from functools import lru_cache
 
 from taskgraph.config import load_graph_config
 from taskgraph.util.schema import validate_schema
 from taskgraph.util import yaml
-from taskgraph.util.memoize import memoize
 from taskgraph.util.readonlydict import ReadOnlyDict
-from voluptuous import ALLOW_EXTRA, Optional, Required, Schema, Any
+from voluptuous import Optional, Required, Schema, Any
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(__file__)))
 ROOT = os.path.join(BASE_DIR, "taskcluster")
@@ -60,7 +57,7 @@ def check_manifest(xpi_config, graph_config):
         )
 
 
-@memoize
+@lru_cache(maxsize=None)
 def get_manifest():
     manifest_paths = glob.glob(os.path.join(MANIFEST_DIR, "*.yml"))
     all_manifests = {}
