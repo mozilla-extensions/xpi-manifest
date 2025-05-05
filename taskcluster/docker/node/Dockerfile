@@ -5,6 +5,8 @@
 ARG           NODE_VERSION
 FROM          node:$NODE_VERSION
 
+VOLUME /builds/worker/checkouts
+
 RUN apt-get update -qq \
     && apt-get install -y \
     zip \
@@ -14,11 +16,11 @@ RUN apt-get update -qq \
     && apt-get clean
 
 # Add worker user
-RUN mkdir /builds && \
+RUN mkdir -p /builds && \
     useradd -d /builds/worker -s /bin/bash -m worker -g 1000 -o -u 1000 && \
     groupadd -g 1000 -o worker && \
     mkdir /builds/worker/artifacts && \
-    chown worker:worker /builds/worker/artifacts
+    chown -R worker:worker /builds/worker
 
 # %include-run-task
 
@@ -28,9 +30,6 @@ COPY test.py /usr/local/bin/test.py
 ENV SHELL=/bin/bash \
     HOME=/builds/worker \
     PATH=/builds/worker/.local/bin:$PATH
-
-VOLUME /builds/worker/checkouts
-VOLUME /builds/worker/.cache
 
 # Set a default command useful for debugging
 CMD ["/bin/bash", "--login"]

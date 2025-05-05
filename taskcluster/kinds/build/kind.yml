@@ -32,7 +32,6 @@ tasks:
         run:
             using: run-task
             cwd: '{checkout}'
-            cache-dotcache: false
             command: >-
                 python3 /usr/local/bin/build.py
         run-on-tasks-for: [github-push, github-pull-request, action]

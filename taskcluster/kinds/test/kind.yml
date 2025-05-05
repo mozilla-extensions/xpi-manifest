@@ -22,7 +22,6 @@ task-template:
         using: run-task
         use-caches: false
         cwd: '{checkout}'
-        cache-dotcache: false
         command: >-
             python3 /usr/local/bin/test.py
     run-on-tasks-for: [action]
