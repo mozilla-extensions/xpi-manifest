@@ -6,6 +6,7 @@ ARG           NODE_VERSION
 FROM          node:$NODE_VERSION
 
 VOLUME /builds/worker/checkouts
+VOLUME /builds/worker/.cache
 
 RUN apt-get update -qq \
     && apt-get install -y \
