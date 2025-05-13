@@ -59,26 +59,37 @@ def get_hash(path, hash_alg="sha256"):
 
 
 def main():
-    if os.environ.get("XPI_INSTALL_TYPE", "yarn") == "yarn":
-        run_command(["yarn", "install", "--frozen-lockfile"])
-    else:
-        run_command(["npm", "install"])
+    install_type = os.environ.get("XPI_INSTALL_TYPE", "yarn")
+
+    match install_type:
+        case "yarn":
+            run_command(["yarn", "install", "--frozen-lockfile"])
+        case "npm":
+            run_command(["npm", "install"])
 
     commands = []
     if len(sys.argv) != 1:
         commands = sys.argv[1:]
-    else:
+    elif install_type != "mach":
         package_info = get_package_info()
         if "test" in package_info.get("scripts", {}):
             commands = ["test"]
-        else:
-            print("No `test` target in package.json; noop")
+
+    if not commands:        
+        print("Could not determine test command; noop")
+
+    cmd_prefix = []
+    match install_type:
+        case "yarn":
+            cmd_prefix = ["yarn"]
+        case "npm":
+            cmd_prefix = ["npm", "run"]
+        case "mach":
+            cmd_prefix = ["./mach"]
 
     for command in commands:
-        if os.environ.get("XPI_INSTALL_TYPE", "yarn") == "yarn":
-            run_command(["yarn", command])
-        else:
-            run_command(["npm", "run", command])
+        run_command(cmd_prefix + [command])
 
 
-__name__ == '__main__' and main()
+if __name__ == '__main__':
+    sys.exit(main())
