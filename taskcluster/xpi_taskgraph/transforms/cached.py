@@ -12,7 +12,7 @@ import os
 import taskgraph
 from taskgraph.transforms.base import TransformSequence
 from taskgraph.util.hash import hash_path, hash_paths
-from xpi_taskgraph.xpi_manifest import MANIFEST_DIR
+from xpi_taskgraph.xpi_manifest import MANIFEST_DIR, ROOT
 
 transforms = TransformSequence()
 
@@ -23,9 +23,10 @@ BASE_DIR = os.getcwd()
 def add_resources(config, tasks):
     for task in tasks:
         resources = set(task.pop("resources", []))
-        resources.add(
-            os.path.join(MANIFEST_DIR, "{}.yml".format(task["extra"]["xpi-name"]))
-        )
+        resources.update({
+            os.path.join(MANIFEST_DIR, "{}.yml".format(task["extra"]["xpi-name"])),
+            os.path.join(ROOT, "config.yml"),
+        })
         resources = list(resources)
         attributes = task.setdefault("attributes", {})
         if attributes.get("resources") is not None:

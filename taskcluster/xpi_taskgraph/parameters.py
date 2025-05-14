@@ -16,3 +16,8 @@ xpi_schema = {
 }
 
 extend_parameters_schema(xpi_schema)
+
+
+def decision_parameters(graph_config, parameters):
+    # Change this to only build a specific xpi during testing.
+    parameters["xpi_name"] = None

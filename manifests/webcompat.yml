@@ -3,8 +3,9 @@ repo-prefix: webcompat
 active: true
 private-repo: false
 branch: main
+directory: browser/extensions/webcompat
 artifacts:
   - web-ext-artifacts/webcompat.xpi
 addon-type: system
-install-type: npm
-enable-github-release: true
+install-type: mach
+enable-github-release: false
