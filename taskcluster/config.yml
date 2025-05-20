@@ -82,12 +82,6 @@ taskgraph:
             default-repository: https://github.com/mozilla-firefox/firefox
             default-ref: main
             type: git
-        dnssecinterferencestudy:
-            name: "DNSSEC Interference Study"
-            project-regex: dnssec-interference-study$
-            default-repository: https://github.com/mozilla-extensions/dnssec-interference
-            default-ref: master
-            type: git
         balrogdryrun:
             name: "Balrog Dry Run"
             project-regex:  balrog-dryrun$
