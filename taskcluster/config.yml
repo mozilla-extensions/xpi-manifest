@@ -132,9 +132,9 @@ taskgraph:
             type: git
         newtab:
             name: "Firefox Newtab"
-            project-regex: newtab-trainhop$
-            default-repository: https://github.com/mozilla-extensions/newtab-trainhop
-            default-ref: main 
+            project-regex: newtab$
+            default-repository: https://github.com/mozilla-firefox/firefox
+            default-ref: main
             type: git
 
 workers:
