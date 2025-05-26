@@ -110,22 +110,23 @@ def get_and_update_version() -> str:
     """
     orig_version = None
     new_version = None
-    has_package_json = os.path.isfile("package.json")
+    use_package_json = False
 
     # If there's a package.json file, the version there will overwrite
     # everything else to preserve backwards compatibility. Otherwise, we grab
     # the version from the manifest.json file(s). If there are more than one,
     # their versions must be internally consistent.
-    if has_package_json:
+    if os.path.isfile("package.json"):
         with open("package.json") as fh:
             package_info = json.load(fh)
 
-        orig_version = package_info["version"]
-        new_version = get_buildid_version(orig_version)
-        package_info["version"] = new_version
+        if orig_version := package_info.get("version"):
+            use_package_json = True
+            new_version = get_buildid_version(orig_version)
+            package_info["version"] = new_version
 
-        with open("package.json", "w") as fh:
-            json.dump(package_info, fh)
+            with open("package.json", "w") as fh:
+                json.dump(package_info, fh)
 
     for manifest in find_manifests():
         with open(manifest) as fh:
@@ -138,7 +139,7 @@ def get_and_update_version() -> str:
             orig_version = contents["version"]
             new_version = get_buildid_version(orig_version)
 
-        elif not has_package_json and contents["version"] != orig_version:
+        elif not use_package_json and contents["version"] != orig_version:
             raise Exception(
                 "Version mismatch between some manifest.json files, "
                 f"{orig_version} != {contents['version']}!"
