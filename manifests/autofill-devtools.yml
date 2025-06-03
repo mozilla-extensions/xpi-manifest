@@ -1,0 +1,12 @@
+---
+description: Autofill Devtools
+repo-prefix: autofilldevtools
+branch: main
+active: true
+private-repo: false
+artifacts:
+  - web-ext-artifacts/autofill-devtools.xpi
+addon-type: privileged
+install-type: npm
+additional-emails: ["autofill@lists.mozilla.org", "dlee@mozilla.com"]
+enable-github-release: true
