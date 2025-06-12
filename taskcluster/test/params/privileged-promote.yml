@@ -1,7 +1,5 @@
 additional_shipit_emails:
-- pkewisch@mozilla.com
-- awagner@mozilla.com
-- rhelmer@mozilla.com
+- user@example.com
 base_repository: https://github.com/mozilla-extensions/xpi-manifest
 build_date: 1649693032
 build_number: 2
