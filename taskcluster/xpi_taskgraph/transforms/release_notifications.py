@@ -47,7 +47,7 @@ def add_notifications(config, tasks):
         )
         if not emails:
             continue
-        emails = (
+        emails = set(
             emails + additional_shipit_emails + xpi_config.get("additional-emails", [])
         )
         notifications = evaluate_keyed_by(
@@ -60,7 +60,7 @@ def add_notifications(config, tasks):
         # We only send mail on success to avoid messages like 'blah is in the
         # candidates dir' when cancelling graphs, dummy task failure, etc
         task.setdefault("routes", []).extend(
-            [f"notify.email.{email}.on-completed" for email in emails]
+            sorted(f"notify.email.{email}.on-completed" for email in emails)
         )
 
         task.setdefault("extra", {}).update({"notify": {"email": {"subject": subject}}})
