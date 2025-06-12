@@ -16,7 +16,7 @@ head_tag: ''
 level: '3'
 moz_build_date: '20220504183703'
 optimize_target_tasks: true
-owner: aki@mozilla.com
+owner: user@example.com
 project: xpi-manifest
 pushdate: 0
 pushlog_id: '0'
@@ -25,5 +25,5 @@ shipping_phase: build
 target_tasks_method: build_xpi
 tasks_for: action
 version: 100.2.1
-xpi_name: webcompat-release-hotfix
+xpi_name: newtab
 xpi_revision: 2ef699d856e80cb292002c24d1d64e627745b3ff

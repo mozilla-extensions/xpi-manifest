@@ -226,17 +226,14 @@ release-promotion:
                 '3':
                     by-phase:
                         build:
-                            - "gabriel+mozillaonline-priv-webext-build@mozilla.com"
                             - "hectorz+mozillaonline-priv-webext-build@mozilla.com"
                             - "mkaply+mozillaonline-priv-webext-build@mozilla.com"
                             - "awagner+mozillaonline-priv-webext-build@mozilla.com"
                         promote:
-                            - "gabriel+mozillaonline-priv-webext-promote@mozilla.com"
                             - "hectorz+mozillaonline-priv-webext-promote@mozilla.com"
                             - "mkaply+mozillaonline-priv-webext-promote@mozilla.com"
                             - "awagner+mozillaonline-priv-webext-promote@mozilla.com"
                         ship:
-                            - "gabriel+mozillaonline-priv-webext-ship@mozilla.com"
                             - "hectorz+mozillaonline-priv-webext-ship@mozilla.com"
                             - "mkaply+mozillaonline-priv-webext-ship@mozilla.com"
                             - "awagner+mozillaonline-priv-webext-ship@mozilla.com"
@@ -259,16 +256,12 @@ release-promotion:
                 '3':
                     by-phase:
                         build:
-                            - "gabriel+system-addons-build@mozilla.com"
                             - "awagner+system-addons-build@mozilla.com"
                         promote:
-                            - "gabriel+system-addons-promote@mozilla.com"
                             - "awagner+system-addons-promote@mozilla.com"
                         ship:
-                            - "gabriel+system-addons-ship@mozilla.com"
                             - "awagner+system-addons-ship@mozilla.com"
                 default: []
         # configure normandy-privileged webextension email addresses for
         # notifications. normandy-privileged is deprecated.
-        normandy-privileged:
-            - "gabriel+normandy-priv@mozilla.com"
+        normandy-privileged: []

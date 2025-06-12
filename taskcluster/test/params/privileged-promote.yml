@@ -1,7 +1,5 @@
 additional_shipit_emails:
-- pkewisch@mozilla.com
-- awagner@mozilla.com
-- rhelmer@mozilla.com
+- user@example.com
 base_repository: https://github.com/mozilla-extensions/xpi-manifest
 build_date: 1649693032
 build_number: 2
@@ -24,7 +22,6 @@ existing_tasks:
   build-secure-proxy: E70nxig2TfyWOYtOEzyzKQ
   build-staging-public: d42fGmxMQuOy50jrCSP7og
   build-webcompat: bX-IYegoQ3aOmfarbAORbQ
-  build-webcompat-release-hotfix: NP7OzLQpQjmNkZo0vnsKeg
   dep-signing-balrog-dryrun: bmTJTlfjSse1meXsxKN-WQ
   dep-signing-cehomepage: NnVWeWQ7S6WUEDIdOHbJAQ
   dep-signing-china-newtab: ShielMEaRiSNMQCCapqCdg
@@ -38,7 +35,6 @@ existing_tasks:
   dep-signing-secure-proxy: TppIaU7hSDWsEBepDkQLSA
   dep-signing-staging-public: AcLF5fbVT_yF3KV8BHu33g
   dep-signing-webcompat: WZacJh4NRSurl2qRh0zK8w
-  dep-signing-webcompat-release-hotfix: Ebk4Ww5pRgWcq_EB5yrweA
   release-notify-completed-build: YqEqlsMqTzO_IBo47QzI3A
   release-notify-started-build: SJ-4TYl6QLaREtBsMrQpBQ
 filters:
