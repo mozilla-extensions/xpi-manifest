@@ -25,5 +25,5 @@ shipping_phase: build
 target_tasks_method: build_xpi
 tasks_for: action
 version: 100.2.1
-xpi_name: webcompat-release-hotfix
+xpi_name: newtab
 xpi_revision: 2ef699d856e80cb292002c24d1d64e627745b3ff
