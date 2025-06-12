@@ -22,7 +22,6 @@ existing_tasks:
   build-secure-proxy: GJJXqU53THaeCtByKDS6nA
   build-staging-public: E0rny0DMSXSTvqvKKhBqUw
   build-webcompat: Ku46-oXiRk2isIs-werD9g
-  build-webcompat-release-hotfix: IzuXbQuKSBumslg660bqmQ
   dep-signing-balrog-dryrun: bkQ8aqhoTRe42O0LzsFnJA
   dep-signing-cehomepage: Y8nEw-EARXmto6a_Y-k7OA
   dep-signing-china-newtab: UMD8dHlaSiWFIhLnvwHDhg
@@ -36,7 +35,6 @@ existing_tasks:
   dep-signing-secure-proxy: eorLfP8_TfSchO_c3tb1pw
   dep-signing-staging-public: TPkYid4mTzuG4gZDb6eAWg
   dep-signing-webcompat: FmtPxj5ET2a0AHiBVYNJTw
-  dep-signing-webcompat-release-hotfix: V3-N-wDdT7y4p3V8fYkkog
   release-notify-completed-build: ThW5z2aaRnWBmTmNucgQqA
   release-notify-completed-promote: Luay5OEbRwyYU5WIUUogJw
   release-notify-started-build: Qrzb3rsNREayGS3fR_aQEA
