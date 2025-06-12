@@ -1,7 +1,5 @@
 additional_shipit_emails:
-- yliu@mozilla.com
-- bzhao@mozilla.com
-- mkaply@mozilla.com
+- user@example.com
 base_repository: https://github.com/mozilla-extensions/xpi-manifest
 build_date: 1649800681
 build_number: 1
@@ -51,7 +49,7 @@ head_tag: ''
 level: '3'
 moz_build_date: '20220412215801'
 optimize_target_tasks: true
-owner: aki@mozilla.com
+owner: user@example.com
 project: xpi-manifest
 pushdate: 0
 pushlog_id: '0'
