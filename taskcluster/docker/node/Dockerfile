@@ -6,7 +6,6 @@ ARG           NODE_VERSION
 FROM          node:$NODE_VERSION
 
 VOLUME /builds/worker/checkouts
-VOLUME /builds/worker/objdir
 VOLUME /builds/worker/.cache
 
 RUN apt-get update -qq \
@@ -22,6 +21,7 @@ RUN mkdir -p /builds && \
     useradd -d /builds/worker -s /bin/bash -m worker -g 1000 -o -u 1000 && \
     groupadd -g 1000 -o worker && \
     mkdir /builds/worker/artifacts && \
+    mkdir /builds/worker/objdir && \
     chown -R worker:worker /builds/worker
 
 WORKDIR /builds/worker
