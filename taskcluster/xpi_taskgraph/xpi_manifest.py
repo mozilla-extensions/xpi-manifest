@@ -37,6 +37,7 @@ base_schema = Schema(
         ),
         Optional("install-type"): Any("mach", "npm", "yarn"),
         Optional("enable-github-release"): bool,
+        Optional("enable-test"): bool,
         Optional("release-tag"): str,
         Optional("release-name"): str,
     }
