@@ -9,3 +9,4 @@ artifacts:
 addon-type: system
 install-type: mach
 enable-github-release: false
+enable-test: false

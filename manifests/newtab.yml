@@ -11,3 +11,4 @@ artifacts:
 addon-type: system
 install-type: mach
 enable-github-release: False
+enable-test: False
