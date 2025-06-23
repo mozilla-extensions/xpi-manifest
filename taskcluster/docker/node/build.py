@@ -277,6 +277,9 @@ def main():
             "MOZBUILD_STATE_PATH": "/builds/worker/.mozbuild",
             "MOZ_OBJDIR": os.path.relpath(objdir, vcs_path),
         })
+        # The build config is set up to build all extensions, and setting
+        # XPI_NAME confuses the build system.
+        del env["XPI_NAME"]
         mach = f"{vcs_path}/mach"
         run_command(
             [sys.executable, mach, "build"],
