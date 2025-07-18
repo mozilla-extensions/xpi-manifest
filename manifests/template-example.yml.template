@@ -34,6 +34,9 @@ addon-type: privileged
 #       sets the package manager used to install dependencies and execute package scripts (e.g. build and test).
 #       Optional. Defaults to `yarn`.
 install-type: npm
+# boolean: true == create a balrog release
+#          false == don't create a balrog release
+enable-balrog: False
 # boolean: true == release artifact to github,
 #          false == manually release artifact
 #          Note: the mozilla-extensions/bots team must have write access to the repo for this to work.

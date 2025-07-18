@@ -8,4 +8,5 @@ artifacts:
   - web-ext-artifacts/hotfix-intermediate-2018.xpi
 addon-type: system
 install-type: npm
+enable-balrog: true
 enable-github-release: true

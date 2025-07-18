@@ -8,5 +8,6 @@ artifacts:
   - web-ext-artifacts/webcompat.xpi
 addon-type: system
 install-type: mach
+enable-balrog: true
 enable-github-release: false
 enable-test: false

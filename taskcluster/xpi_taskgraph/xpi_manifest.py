@@ -36,6 +36,7 @@ base_schema = Schema(
             "mozillaonline-privileged", "normandy-privileged", "privileged", "system"
         ),
         Optional("install-type"): Any("mach", "npm", "yarn"),
+        Optional("enable-balrog"): bool,
         Optional("enable-github-release"): bool,
         Optional("enable-test"): bool,
         Optional("release-tag"): str,

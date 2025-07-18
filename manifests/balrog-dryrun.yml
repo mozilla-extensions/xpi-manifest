@@ -8,4 +8,5 @@ artifacts:
   - web-ext-artifacts/balrog-dryrun.xpi
 addon-type: system
 install-type: npm
+enable-balrog: true
 enable-github-release: False
