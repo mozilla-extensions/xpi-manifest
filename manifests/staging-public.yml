@@ -30,6 +30,9 @@ addon-type: system
 # enum: `npm` for `npm install` or `yarn` for
 #       `yarn install --frozen-lockfile`. Optional. Defaults to `yarn`.
 install-type: npm
+# boolean: true == create a balrog release
+#          false == don't create a balrog release
+enable-balrog: False
 # boolean: true == release artifact to github,
 #          false == manually release artifact
 enable-github-release: True

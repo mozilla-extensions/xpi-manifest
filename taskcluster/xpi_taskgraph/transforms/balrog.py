@@ -25,6 +25,7 @@ transforms.add_validate(schema)
 @transforms.add
 def add_balrog_worker_config(config, tasks):
     manifest = get_manifest()
+
     for task in tasks:
         if not (
             config.params.get("version")
@@ -36,6 +37,11 @@ def add_balrog_worker_config(config, tasks):
             continue
         xpi_name = config.params["xpi_name"]
         xpi_manifest = manifest[xpi_name]
+
+        # if this isn't enabled in the manifest, no need to create balrog task
+        if not xpi_manifest.get("enable-balrog", False):
+            continue
+
         xpi_addon_type = xpi_manifest["addon-type"]
         xpi_version = config.params["version"]
         build_number = config.params["build_number"]
