@@ -57,5 +57,5 @@ shipping_phase: ship
 target_tasks_method: ship_xpi
 tasks_for: action
 version: 1.4.4
-xpi_name: rally-core-addon
+xpi_name: aboutsync
 xpi_revision: ff05b95fa1e953cc20f048f4b92e519aa542351d
