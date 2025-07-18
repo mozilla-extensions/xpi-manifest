@@ -30,6 +30,8 @@ def resolve_keys(config, tasks):
 
 @transforms.add
 def build_worker_definition(config, tasks):
+    manifest = get_manifest()
+
     for task in tasks:
         if not (
             config.params.get("version")
@@ -45,8 +47,12 @@ def build_worker_definition(config, tasks):
         )
 
         # translate input xpi_name to get manifest and graph info
-        manifest = get_manifest()
         manifest_config = manifest[config.params["xpi_name"]]
+
+        # if this is false in the manifest, no need to create github-release task
+        if not manifest_config.get("enable-github-release", False):
+            continue
+
         repo_prefix = manifest_config["repo-prefix"]
         graph_config = load_graph_config(ROOT)
         repo_url = graph_config["taskgraph"]["repositories"][repo_prefix][
@@ -57,10 +63,6 @@ def build_worker_definition(config, tasks):
         # repo: mozilla-releng/staging-xpi-public
         repo = repo_url.split("github.com")[-1]
         repo = repo.strip(":/")
-
-        # if this is false in the manifest, no need to create github-release task
-        if not manifest_config.get("enable-github-release", False):
-            continue
 
         worker_definition = {
             "artifact-map": _build_artifact_map(task),
