@@ -1,0 +1,13 @@
+description: Data Leak Blocker
+repo-prefix: dataleakblocker
+active: true
+private-repo: false
+branch: main
+directory: browser/extensions/data-leak-blocker
+artifacts:
+  - web-ext-artifacts/data-leak-blocker.xpi
+addon-type: system
+install-type: mach
+enable-balrog: true
+enable-github-release: false
+enable-test: false

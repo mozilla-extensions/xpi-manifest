@@ -142,6 +142,12 @@ taskgraph:
             default-repository: https://github.com/mozilla-extensions/autofill-devtools
             default-ref: main
             type: git
+        dataleakblocker:
+            name: "Data Leak Blocker"
+            project-regex: data-leak-blocker$
+            default-repository: https://github.com/mozilla-firefox/firefox
+            default-ref: main
+            type: git
 
 workers:
     aliases:
