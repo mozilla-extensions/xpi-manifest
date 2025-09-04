@@ -226,15 +226,12 @@ release-promotion:
                 '3':
                     by-phase:
                         build:
-                            - "hectorz+mozillaonline-priv-webext-build@mozilla.com"
                             - "mkaply+mozillaonline-priv-webext-build@mozilla.com"
                             - "awagner+mozillaonline-priv-webext-build@mozilla.com"
                         promote:
-                            - "hectorz+mozillaonline-priv-webext-promote@mozilla.com"
                             - "mkaply+mozillaonline-priv-webext-promote@mozilla.com"
                             - "awagner+mozillaonline-priv-webext-promote@mozilla.com"
                         ship:
-                            - "hectorz+mozillaonline-priv-webext-ship@mozilla.com"
                             - "mkaply+mozillaonline-priv-webext-ship@mozilla.com"
                             - "awagner+mozillaonline-priv-webext-ship@mozilla.com"
                 default: []
