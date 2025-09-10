@@ -288,10 +288,10 @@ def main():
 
         dest = os.environ['XPI_ARTIFACTS']
         os.makedirs(os.path.dirname(dest), exist_ok=True)
-        shutil.copyfile(
-            f"{objdir}/dist/xpi-stage/{xpi_name}@mozilla.org.xpi",
-            dest
-        )
+        stage_xpi = glob.glob(f"{objdir}/dist/xpi-stage/{xpi_name}@*.xpi")
+        if len(stage_xpi) != 1:
+            raise Exception(f"Expected exactly one {xpi_name}@*.xpi, but found {stage_xpi}")
+        shutil.copyfile(stage_xpi[0], dest)
     elif install_type == "yarn":
         run_command(["yarn", "install", "--frozen-lockfile"])
         run_command(["yarn", "build"])
