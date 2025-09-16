@@ -1,0 +1,9 @@
+---
+description: IPP Add-On Activator
+repo-prefix: ippaddonactivator
+active: true
+private-repo: false
+artifacts:
+  - web-ext-artifacts/ipp-addon-activator.xpi
+addon-type: system
+install-type: npm
