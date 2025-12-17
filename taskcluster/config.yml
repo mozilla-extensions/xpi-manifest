@@ -142,12 +142,6 @@ taskgraph:
             default-repository: https://github.com/mozilla-firefox/firefox
             default-ref: main
             type: git
-        ippaddonactivator:
-            name: "IPP Add-on Activator"
-            project-regex: ipp-addon-activator$
-            default-repository: https://github.com/mozilla-extensions/ipp-addon-activator
-            default-ref: main
-            type: git
 
 workers:
     aliases:
