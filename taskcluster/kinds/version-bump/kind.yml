@@ -1,0 +1,24 @@
+# This Source Code Form is subject to the terms of the Mozilla Public
+# License, v. 2.0. If a copy of the MPL was not distributed with this
+# file, You can obtain one at http://mozilla.org/MPL/2.0/.
+---
+loader: xpi_taskgraph.loader.single_dep:loader
+
+transforms:
+    - xpi_taskgraph.transforms.version_bump:transforms
+    - taskgraph.transforms.task:transforms
+
+kind-dependencies:
+    - beetmover
+
+only-for-addon-types: ["system"]
+
+task-template:
+    run-on-tasks-for: ["action"]
+    worker-type: lando
+    lando-repo:
+        by-level:
+            "3": firefox-main
+            default: staging-firefox-main
+    attributes:
+        shipping-phase: ship
