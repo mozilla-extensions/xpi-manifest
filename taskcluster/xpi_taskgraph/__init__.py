@@ -13,7 +13,6 @@ def register(graph_config):
     """
     _import_modules(
         [
-            "loader",
             "parameters",
             "release_promotion",
             "routes",

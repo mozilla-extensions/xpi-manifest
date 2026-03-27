@@ -10,6 +10,7 @@ import os
 
 from taskgraph.config import load_graph_config
 from taskgraph.transforms.base import TransformSequence
+from taskgraph.util.dependencies import get_primary_dependency
 from taskgraph.util.schema import resolve_keyed_by
 from xpi_taskgraph.xpi_manifest import get_manifest
 
@@ -64,8 +65,9 @@ def build_worker_definition(config, tasks):
         repo = repo_url.split("github.com")[-1]
         repo = repo.strip(":/")
 
+        dep = get_primary_dependency(config, task)
         worker_definition = {
-            "artifact-map": _build_artifact_map(task),
+            "artifact-map": _build_artifact_map(dep),
             "git-tag": config.params["head_tag"],
             "git-revision": config.params["xpi_revision"],
             "github-project": repo,
@@ -86,7 +88,6 @@ def build_worker_definition(config, tasks):
         ).format(**release_variables)
         task["worker"]["release-name"] = release_name
 
-        dep = task["primary-dependency"]
         worker_definition["upstream-artifacts"] = [
             {
                 "taskId": {"task-reference": "<release-signing>"},
@@ -109,14 +110,11 @@ def build_worker_definition(config, tasks):
                 )
 
         task["worker"].update(worker_definition)
-        task["dependencies"] = {"release-signing": dep.label}
-        del task["primary-dependency"]
         yield task
 
 
-def _build_artifact_map(task):
+def _build_artifact_map(dep):
     artifact_map = []
-    dep = task["primary-dependency"]
 
     artifacts = {"paths": {}, "taskId": {"task-reference": "<release-signing>"}}
     for path in dep.attributes["xpis"].values():

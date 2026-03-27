@@ -7,6 +7,7 @@ kind.
 """
 
 from taskgraph.transforms.base import TransformSequence
+from taskgraph.util.dependencies import get_primary_dependency
 from taskgraph.util.keyed_by import evaluate_keyed_by
 from taskgraph.util.schema import resolve_keyed_by
 
@@ -36,13 +37,9 @@ def prune_release_signing_tasks(config, tasks):
 @transforms.add
 def define_signing_flags(config, tasks):
     for task in tasks:
-        dep = task["primary-dependency"]
+        dep = get_primary_dependency(config, task)
         # Current kind will be prepended later in the transform chain.
         task["name"] = _get_dependent_task_name_without_its_kind(dep)
-        attributes = dep.attributes.copy()
-        if task.get("attributes"):
-            attributes.update(task["attributes"])
-        task["attributes"] = attributes
         task["attributes"]["signed"] = True
         if "run_on_tasks_for" in task["attributes"]:
             task.setdefault("run-on-tasks-for", task["attributes"]["run_on_tasks_for"])
@@ -57,10 +54,7 @@ def define_signing_flags(config, tasks):
 @transforms.add
 def build_signing_task(config, tasks):
     for task in tasks:
-        dep = task.pop("primary-dependency")
-        # When the `multi_dep` loader is used, it should already define the task dependencies.
-        if "dependencies" not in task:
-            task["dependencies"] = {"build": dep.label}
+        dep = get_primary_dependency(config, task)
         if not dep.task["payload"]["env"]["ARTIFACT_PREFIX"].startswith("public"):
             scopes = task.setdefault("scopes", [])
             scopes.append(

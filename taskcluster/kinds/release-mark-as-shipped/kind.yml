@@ -2,35 +2,35 @@
 # License, v. 2.0. If a copy of the MPL was not distributed with this
 # file, You can obtain one at http://mozilla.org/MPL/2.0/.
 ---
-loader: xpi_taskgraph.loader.multi_dep:loader
+loader: taskgraph.loader.transform:loader
 
 transforms:
+    - taskgraph.transforms.from_deps
     - xpi_taskgraph.transforms.release_mark_as_shipped:transforms
     - taskgraph.transforms.task:transforms
-
-primary-dependency: release-signing
 
 kind-dependencies:
     - release-signing
     - beetmover
     - balrog
 
-group-by: addon-type
-
-task-template:
-    name: release-mark-as-shipped
-    description: mark release as shipped in Ship-It
-    run-on-tasks-for: ["action"]
-    worker-type: shipit
-    worker:
-        implementation: shipit-shipped
-    scopes:
-        by-level:
-            "3":
-                - project:xpi:releng:ship-it:server:production
-                - project:xpi:releng:ship-it:action:mark-as-shipped
-            default:
-                - project:xpi:releng:ship-it:server:staging
-                - project:xpi:releng:ship-it:action:mark-as-shipped
-    attributes:
-        shipping-phase: ship
+tasks:
+    release-mark-as-shipped:
+        from-deps:
+            group-by: {attribute: xpi-name}
+            copy-attributes: true
+        description: mark release as shipped in Ship-It
+        run-on-tasks-for: ["action"]
+        worker-type: shipit
+        worker:
+            implementation: shipit-shipped
+        scopes:
+            by-level:
+                "3":
+                    - project:xpi:releng:ship-it:server:production
+                    - project:xpi:releng:ship-it:action:mark-as-shipped
+                default:
+                    - project:xpi:releng:ship-it:server:staging
+                    - project:xpi:releng:ship-it:action:mark-as-shipped
+        attributes:
+            shipping-phase: ship

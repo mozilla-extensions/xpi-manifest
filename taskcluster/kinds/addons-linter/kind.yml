@@ -2,30 +2,34 @@
 # License, v. 2.0. If a copy of the MPL was not distributed with this
 # file, You can obtain one at http://mozilla.org/MPL/2.0/.
 ---
-loader: xpi_taskgraph.loader.single_dep:loader
+loader: taskgraph.loader.transform:loader
 
 kind-dependencies:
     - build
 
 transforms:
+    - taskgraph.transforms.from_deps
     - xpi_taskgraph.transforms.post_build:transforms
     - taskgraph.transforms.run:transforms
     - taskgraph.transforms.task:transforms
 
-task-template:
-    description: Run addons-linter
-    worker-type: b-linux
-    # We only want to execute addons-linter on privileged extensions (for now).
-    only-for-formats: ["privileged"]
-    worker:
-        docker-image:
-            in-tree: node-20
-        max-run-time: 7200
-    run:
-        using: run-task
-        use-caches: false
-        cwd: '{checkout}'
-        command: >-
-            curl -sSL --fail --retry 3 -o {xpi_file} "$XPI_URL" &&
-            npx -y addons-linter --privileged --boring --disable-xpi-autoclose --max-manifest-version=3 {xpi_file}
-    run-on-tasks-for: [action]
+tasks:
+    addons-linter:
+        from-deps:
+            copy-attributes: true
+        description: Run addons-linter
+        worker-type: b-linux
+        # We only want to execute addons-linter on privileged extensions (for now).
+        only-for-formats: ["privileged"]
+        worker:
+            docker-image:
+                in-tree: node-20
+            max-run-time: 7200
+        run:
+            using: run-task
+            use-caches: false
+            cwd: '{checkout}'
+            command: >-
+                curl -sSL --fail --retry 3 -o {xpi_file} "$XPI_URL" &&
+                npx -y addons-linter --privileged --boring --disable-xpi-autoclose --max-manifest-version=3 {xpi_file}
+        run-on-tasks-for: [action]

@@ -18,8 +18,6 @@ def make_task_description(config, tasks):
             and config.params.get("build_number")
         ):
             continue
-        if "primary-dependency" in task:
-            task.pop("primary-dependency")
         resolve_keyed_by(
             task, "scopes", item_name=task["name"], **{"level": config.params["level"]}
         )

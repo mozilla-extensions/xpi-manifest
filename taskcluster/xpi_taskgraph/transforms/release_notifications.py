@@ -25,15 +25,9 @@ def add_notifications(config, tasks):
     manifest = get_manifest()
 
     for task in tasks:
-        if "primary-dependency" in task:
-            dep = task.pop("primary-dependency")
-            if dep.task.get("extra", {}).get("xpi-name") != xpi_name:
+        if "xpi-name" in task.get("attributes", {}):
+            if task["attributes"]["xpi-name"] != xpi_name:
                 continue
-            attributes = dep.attributes.copy()
-            if task.get("attributes"):
-                attributes.update(task["attributes"])
-            task["attributes"] = attributes
-            task.setdefault("dependencies", {}).update({"signing": dep.label})
         if task.get("attributes", {}).get("shipping-phase") != shipping_phase:
             continue
         task["label"] = f"{config.kind}-{shipping_phase}"
