@@ -6,10 +6,10 @@
 import copy
 
 from taskgraph.task import Task
-from taskgraph.util.schema import Schema
+from taskgraph.util.schema import LegacySchema
 from voluptuous import Required
 
-schema = Schema(
+schema = LegacySchema(
     {
         Required("primary-dependency"): Task,
         Required("dependent-tasks"): {str: Task},

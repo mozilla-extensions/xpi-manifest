@@ -6,10 +6,10 @@
 import copy
 
 from taskgraph.task import Task
-from taskgraph.util.schema import Schema
+from taskgraph.util.schema import LegacySchema
 from voluptuous import Required
 
-schema = Schema({Required("primary-dependency", "primary dependency task"): Task})
+schema = LegacySchema({Required("primary-dependency", "primary dependency task"): Task})
 
 
 def loader(kind, path, config, params, loaded_tasks):
