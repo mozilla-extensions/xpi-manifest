@@ -1,22 +1,25 @@
 ---
-loader: xpi_taskgraph.loader.single_dep:loader
+loader: taskgraph.loader.transform:loader
 
 transforms:
+    - taskgraph.transforms.from_deps
     - xpi_taskgraph.transforms.balrog:transforms
     - taskgraph.transforms.task:transforms
 
 kind-dependencies:
     - beetmover
 
-only-for-addon-types: ["system"]
-
-task-template:
-    run-on-tasks-for: ["action"]
-    worker-type: balrog
+tasks:
     balrog:
-        server:
-            by-level:
-                "3": "release"
-                default: "staging"
-    attributes:
-        shipping-phase: ship
+        from-deps:
+            with-attributes: {addon-type: [system]}
+            copy-attributes: true
+        run-on-tasks-for: ["action"]
+        worker-type: balrog
+        balrog:
+            server:
+                by-level:
+                    "3": "release"
+                    default: "staging"
+        attributes:
+            shipping-phase: ship

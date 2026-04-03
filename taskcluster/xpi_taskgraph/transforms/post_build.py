@@ -9,6 +9,7 @@ kind.
 import os
 
 from taskgraph.transforms.base import TransformSequence
+from taskgraph.util.dependencies import get_primary_dependency
 from xpi_taskgraph.xpi_manifest import get_manifest
 
 transforms = TransformSequence()
@@ -18,10 +19,8 @@ transforms = TransformSequence()
 def test_tasks_from_manifest(config, tasks):
     manifest = get_manifest()
     for task in tasks:
-        dep = task.pop("primary-dependency")
-        task["attributes"] = dep.attributes.copy()
-        task["dependencies"] = {"build": dep.label}
-        xpi_name = dep.task["extra"]["xpi-name"]
+        dep = get_primary_dependency(config, task)
+        xpi_name = dep.attributes["xpi-name"]
         xpi_revision = config.params.get("xpi_revision")
         task.setdefault("extra", {})["xpi-name"] = xpi_name
 

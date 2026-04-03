@@ -2,9 +2,10 @@
 # License, v. 2.0. If a copy of the MPL was not distributed with this
 # file, You can obtain one at http://mozilla.org/MPL/2.0/.
 ---
-loader: xpi_taskgraph.loader.single_dep:loader
+loader: taskgraph.loader.transform:loader
 
 transforms:
+    - taskgraph.transforms.from_deps
     - xpi_taskgraph.transforms.release_notifications:transforms
     - taskgraph.transforms.task:transforms
 
@@ -13,21 +14,23 @@ kind-dependencies:
     - release-signing
     - release-mark-as-shipped
 
-task-template:
-    name: release-notify-completed
-    description: Sends email to the notify list telling release was completed.
-    run-on-tasks-for: ["action"]
-    worker-type: succeed
-    worker:
-        implementation: succeed
-    notifications:
-        by-phase:
-            build:
-                subject: "{config[params][xpi_name]} release build completed"
-                message: "{config[params][xpi_name]} release build is completed on revision {config[params][xpi_revision]}"
-            promote:
-                subject: "{config[params][xpi_name]} release promotion completed"
-                message: "{config[params][xpi_name]} release promotion is completed on revision {config[params][xpi_revision]}"
-            ship:
-                subject: "{config[params][xpi_name]} release shipped"
-                message: "{config[params][xpi_name]} release is shipped on revision {config[params][xpi_revision]}"
+tasks:
+    release-notify-completed:
+        from-deps:
+            copy-attributes: true
+        description: Sends email to the notify list telling release was completed.
+        run-on-tasks-for: ["action"]
+        worker-type: succeed
+        worker:
+            implementation: succeed
+        notifications:
+            by-phase:
+                build:
+                    subject: "{config[params][xpi_name]} release build completed"
+                    message: "{config[params][xpi_name]} release build is completed on revision {config[params][xpi_revision]}"
+                promote:
+                    subject: "{config[params][xpi_name]} release promotion completed"
+                    message: "{config[params][xpi_name]} release promotion is completed on revision {config[params][xpi_revision]}"
+                ship:
+                    subject: "{config[params][xpi_name]} release shipped"
+                    message: "{config[params][xpi_name]} release is shipped on revision {config[params][xpi_revision]}"

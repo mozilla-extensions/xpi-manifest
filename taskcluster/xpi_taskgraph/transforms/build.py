@@ -65,6 +65,7 @@ def tasks_from_manifest(config, tasks):
             if xpi_config.get("install-type"):
                 env["XPI_INSTALL_TYPE"] = xpi_config["install-type"]
             task.setdefault("attributes", {})["addon-type"] = xpi_config["addon-type"]
+            task["attributes"]["xpi-name"] = xpi_config["manifest_name"]
             task.setdefault("attributes", {})["xpis"] = {}
 
             if "docker-image" in xpi_config:

@@ -2,33 +2,35 @@
 # License, v. 2.0. If a copy of the MPL was not distributed with this
 # file, You can obtain one at http://mozilla.org/MPL/2.0/.
 ---
-loader: xpi_taskgraph.loader.multi_dep:loader
+loader: taskgraph.loader.transform:loader
 
 kind-dependencies:
     - build
     - addons-linter
 
-primary-dependency: build
-group-by: xpi-name
-
 transforms:
+    - taskgraph.transforms.from_deps
     - xpi_taskgraph.transforms.signing:transforms
     - taskgraph.transforms.task:transforms
 
-task-template:
-    description: Release-sign XPI
-    index:
-        type: release-signing
-    attributes:
-        shipping-phase: promote
-    run-on-tasks-for: [action]
-    worker-type:
-        by-level:
-            '3': signing
-            default: dep-signing
-    worker:
-        signing-type:
+tasks:
+    release-signing:
+        from-deps:
+            group-by: {attribute: xpi-name}
+            copy-attributes: true
+        description: Release-sign XPI
+        index:
+            type: release-signing
+        attributes:
+            shipping-phase: promote
+        run-on-tasks-for: [action]
+        worker-type:
             by-level:
-                '3': release-signing
+                '3': signing
                 default: dep-signing
-        max-run-time: 3600
+        worker:
+            signing-type:
+                by-level:
+                    '3': release-signing
+                    default: dep-signing
+            max-run-time: 3600

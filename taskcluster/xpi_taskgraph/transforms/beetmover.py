@@ -5,21 +5,21 @@
 
 from os.path import basename
 
-from taskgraph.task import Task
 from taskgraph.transforms.base import TransformSequence
+from taskgraph.util.dependencies import get_primary_dependency
 from taskgraph.util.schema import resolve_keyed_by
-from voluptuous import Required, Schema
+from voluptuous import ALLOW_EXTRA, Required, Schema
 from xpi_taskgraph.xpi_manifest import get_manifest
 
 transforms = TransformSequence()
 schema = Schema(
     {
-        Required("primary-dependency"): Task,
         Required("worker-type"): str,
         Required("attributes"): dict,
         Required("bucket-scope"): dict,
         Required("run-on-tasks-for"): [str],
     },
+    extra=ALLOW_EXTRA,
 )
 transforms.add_validate(schema)
 
@@ -68,7 +68,7 @@ def add_beetmover_worker_config(config, tasks):
             item_name=task_label,
             **{"level": config.params["level"]},
         )
-        dep = task["primary-dependency"]
+        dep = get_primary_dependency(config, task)
         task_ref = {"task-reference": "<release-signing>"}
         branch = basename(config.params["head_ref"])
         paths = list(dep.attributes["xpis"].values())

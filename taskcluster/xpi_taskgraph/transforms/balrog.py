@@ -3,21 +3,21 @@
 # file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
 
-from taskgraph.task import Task
 from taskgraph.transforms.base import TransformSequence
+from taskgraph.util.dependencies import get_primary_dependency
 from taskgraph.util.schema import resolve_keyed_by
-from voluptuous import Required, Schema
+from voluptuous import ALLOW_EXTRA, Required, Schema
 from xpi_taskgraph.xpi_manifest import get_manifest
 
 transforms = TransformSequence()
 schema = Schema(
     {
-        Required("primary-dependency"): Task,
         Required("worker-type"): str,
         Required("attributes"): dict,
         Required("run-on-tasks-for"): [str],
         Required("balrog"): dict,
     },
+    extra=ALLOW_EXTRA,
 )
 transforms.add_validate(schema)
 
@@ -56,7 +56,7 @@ def add_balrog_worker_config(config, tasks):
             "XPI artifacts uploaded to "
             "pub/system-addons/{xpi_name}/{release_name}/"
         ).format(xpi_name=xpi_name, release_name=release_name)
-        dep = task["primary-dependency"]
+        dep = get_primary_dependency(config, task)
         task_ref = {"task-reference": "<beetmover>"}
         paths = [
             "public/manifest.json",
