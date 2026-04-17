@@ -12,3 +12,4 @@ addon-type: system
 install-type: mach
 enable-github-release: False
 enable-test: False
+enable-version-bump: True

@@ -210,3 +210,39 @@ def build_scriptworker_balrog_payload(config, task, task_def):
             prefix=prefix, server=worker["server"]
         ),
     ]
+
+
+@payload_builder(
+    "scriptworker-lando",
+    schema={
+        Required("lando-repo"): str,
+        Required("actions"): [
+            {
+                Required("version-bump"): {
+                    Required("file"): str,
+                    Required("next-version"): str,
+                },
+            }
+        ],
+    },
+)
+def build_scriptworker_lando_payload(config, task, task_def):
+    worker = task["worker"]
+    task_def["tags"]["worker-implementation"] = "scriptworker"
+    task_def["payload"] = {
+        "lando_repo": worker["lando-repo"],
+        "actions": [],
+    }
+    actions = task_def["payload"]["actions"]
+    for action in worker["actions"]:
+        if info := action.get("version-bump"):
+            task_def["payload"]["version_bump_info"] = {
+                "files": [info["file"]],
+                "next_version": info["next-version"],
+            }
+            actions.append("version_bump")
+
+    scopes = set(task_def.get("scopes", []))
+    scopes.add(f"project:releng:lando:repo:{worker['lando-repo']}")
+    scopes.update(f"project:releng:lando:action:{a}" for a in actions)
+    task_def["scopes"] = sorted(scopes)
