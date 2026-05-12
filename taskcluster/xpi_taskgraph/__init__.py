@@ -5,12 +5,15 @@
 
 from importlib import import_module
 
+import mozilla_taskgraph
+
 
 def register(graph_config):
     """
     Import all modules that are siblings of this one, triggering decorators in
     the process.
     """
+    mozilla_taskgraph.register(graph_config)
     _import_modules(
         [
             "parameters",

@@ -173,6 +173,7 @@ tasks:
                               XPI_HEAD_REF: '${head_branch}'
                               XPI_HEAD_REV: '${head_sha}'
                               XPI_REPOSITORY_TYPE: git
+                              XPI_PIP_REQUIREMENTS: taskcluster/requirements.txt
                               REPOSITORIES: {$json: {xpi: "XPI Manifest"}}
                               HG_STORE_PATH: /builds/worker/checkouts/hg-store
                             - $if: 'tasks_for in ["github-pull-request"]'
