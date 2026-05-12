@@ -4,6 +4,7 @@
 
 from functools import partial
 
+from mozilla_version.version import BaseVersion
 from taskgraph.actions.registry import register_callback_action
 from taskgraph.config import GraphConfig
 from taskgraph.decision import taskgraph_decision
@@ -194,6 +195,10 @@ def release_promotion_action(parameters, graph_config, input, task_group_id, tas
 
     if input.get("version"):
         parameters["version"] = input["version"]
+        parameters["next_version"] = str(
+            BaseVersion.parse(input["version"]).bump("minor_number")
+        )
+        parameters["app_version"] = input["version"]
 
     parameters["additional_shipit_emails"] = input.get("additional_shipit_emails", [])
 

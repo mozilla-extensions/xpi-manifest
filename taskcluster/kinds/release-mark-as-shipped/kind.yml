@@ -13,6 +13,7 @@ kind-dependencies:
     - release-signing
     - beetmover
     - balrog
+    - version-bump
 
 tasks:
     release-mark-as-shipped:

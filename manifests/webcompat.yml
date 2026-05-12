@@ -11,3 +11,4 @@ install-type: mach
 enable-balrog: true
 enable-github-release: false
 enable-test: false
+enable-version-bump: true

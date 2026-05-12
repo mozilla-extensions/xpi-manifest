@@ -39,6 +39,7 @@ base_schema = Schema(
         Optional("enable-balrog"): bool,
         Optional("enable-github-release"): bool,
         Optional("enable-test"): bool,
+        Optional("enable-version-bump"): bool,
         Optional("release-tag"): str,
         Optional("release-name"): str,
     }
