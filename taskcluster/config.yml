@@ -76,6 +76,12 @@ taskgraph:
             default-repository: https://github.com/mozilla-extensions/tabtweak
             default-ref: master
             type: git
+        ippactivator:
+            name: "IPP Activator"
+            project-regex: ipp-activator$
+            default-repository: https://github.com/mozilla-firefox/firefox
+            default-ref: main
+            type: git
         webcompat:
             name: "Web Compat"
             project-regex: webcompat-addon$

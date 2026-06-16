@@ -1,0 +1,14 @@
+description: IP Protection Activator
+repo-prefix: ippactivator
+active: true
+private-repo: false
+branch: main
+directory: browser/extensions/ipp-activator
+artifacts:
+  - web-ext-artifacts/ipp-activator.xpi
+addon-type: system
+install-type: mach
+enable-balrog: true
+enable-github-release: false
+enable-test: false
+enable-version-bump: true
