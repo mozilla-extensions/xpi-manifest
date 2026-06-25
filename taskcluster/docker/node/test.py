@@ -65,7 +65,7 @@ def main():
         case "yarn":
             run_command(["yarn", "install", "--frozen-lockfile"])
         case "npm":
-            run_command(["npm", "install"])
+            run_command(["npm", "clean-install"])
 
     commands = []
     if len(sys.argv) != 1:

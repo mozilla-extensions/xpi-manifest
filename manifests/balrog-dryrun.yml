@@ -7,6 +7,6 @@ branch: main
 artifacts:
   - web-ext-artifacts/balrog-dryrun.xpi
 addon-type: system
-install-type: npm
+install-type: yarn
 enable-balrog: true
 enable-github-release: False
