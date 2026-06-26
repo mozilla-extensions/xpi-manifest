@@ -71,7 +71,7 @@ Once Taskcluster CI automation is enabled, you will see a decision task (and rel
 
   - Find all `package.json` files in the repository. The directory that `package.json` lives in is the package directory.
 
-    - Look for either `yarn.lock` or `package-lock.json` in the package directory. This determines whether the task will install dependencies via `yarn install --frozen-lockfile` or `npm install`.
+    - Look for either `yarn.lock` or `package-lock.json` in the package directory. This determines whether the task will install dependencies via `yarn install --frozen-lockfile` or `npm clean-install`.
 
     - The package directories must have unique names per repository. So a layout like
 
