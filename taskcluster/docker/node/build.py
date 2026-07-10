@@ -296,7 +296,7 @@ def main():
         run_command(["yarn", "install", "--frozen-lockfile"])
         run_command(["yarn", "build"])
     else:
-        run_command(["npm", "install"])
+        run_command(["npm", "clean-install"])
         run_command(["npm", "run", "build"])
 
     if "XPI_ARTIFACTS" in os.environ:
