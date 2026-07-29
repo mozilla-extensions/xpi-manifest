@@ -13,3 +13,5 @@ install-type: mach
 enable-github-release: False
 enable-test: False
 enable-version-bump: True
+build-env:
+  MOZ_BROWSER_NEWTAB_METRICS_FETCH: "1"

@@ -85,5 +85,6 @@ def tasks_from_manifest(config, tasks):
                 )
                 task["attributes"]["xpis"][artifact] = artifact_name
             env["XPI_ARTIFACTS"] = ";".join(xpi_config["artifacts"])
+            env.update(xpi_config.get("build-env", {}))
 
             yield task
