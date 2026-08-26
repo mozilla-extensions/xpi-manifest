@@ -8,7 +8,7 @@ import os
 import shutil
 import subprocess
 import sys
-from datetime import datetime
+import datetime
 from pathlib import Path
 from zipfile import ZipFile
 
@@ -60,18 +60,19 @@ def get_output(command, **kwargs):
 
 
 def get_buildid():
-    now = datetime.utcnow()
-    # note the `-` (hyphen) in `%-H`
-    # this removes the leading zero
-    # from the hour (leading zeros are not allowed)
-    return now.strftime("%Y%m%d.%-H%M%S")
+    now = datetime.datetime.now(tz=datetime.timezone.utc)
+    date = now.strftime("%Y%m%d")
+    # Convert to int to lose leading 0s
+    time = int(now.strftime("%H%M%S"), 10)
+    return f"{date}.{time}"
 
 
 def get_buildid_version(version):
     """Check the version's formating and append `date.time` as a buildid to ensure a unique version.
     The addon's in-tree manifest files specify `major.minor.0`.
     The format of the resulting version field is:
-        <number>.<number>.%Y%m%d.%-H%M%S
+        <number>.<number>.%Y%m%d.%H%M%S
+    with leading zeros dropped from the time portion.
     """
     parts = version.split(".")
     if len(parts) not in (1, 2, 3):
