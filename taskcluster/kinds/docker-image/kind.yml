@@ -27,3 +27,13 @@ tasks:
         definition: node
         args:
             NODE_VERSION: "20.15.1"
+    node-22:
+        definition: node
+        args:
+            NODE_VERSION: "22.14.0"
+    node-22-pnpm-bun:
+        parent: node-22
+        definition: node-pnpm-bun
+        args:
+            PNPM_VERSION: "10.7.1"
+            BUN_VERSION: "1.1.13"

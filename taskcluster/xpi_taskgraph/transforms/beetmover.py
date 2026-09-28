@@ -46,12 +46,16 @@ def add_beetmover_worker_config(config, tasks):
             xpi_version=xpi_version,
             build_number=build_number,
         )
+        archive_prefix = xpi_manifest.get(
+            "archive-prefix", "pub/system-addons"
+        )
         xpi_destinations = []
         for artifact in xpi_manifest["artifacts"]:
             artifact_name = basename(artifact)
             xpi_destination = (
-                "pub/system-addons/{xpi_name}/{release_name}/{artifact_name}"
+                "{archive_prefix}/{xpi_name}/{release_name}/{artifact_name}"
             ).format(
+                archive_prefix=archive_prefix,
                 xpi_name=xpi_name,
                 artifact_name=artifact_name,
                 release_name=release_name,

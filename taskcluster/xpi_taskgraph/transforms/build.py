@@ -6,6 +6,7 @@ Apply some defaults and minor modifications to the tasks defined in the build
 kind.
 """
 
+import json
 import os
 from copy import deepcopy
 
@@ -64,6 +65,12 @@ def tasks_from_manifest(config, tasks):
             env["ARTIFACT_PREFIX"] = artifact_prefix
             if xpi_config.get("install-type"):
                 env["XPI_INSTALL_TYPE"] = xpi_config["install-type"]
+            if xpi_config.get("build-commands"):
+                env["XPI_BUILD_COMMANDS"] = json.dumps(xpi_config["build-commands"])
+            if xpi_config.get("preserve-version"):
+                env["XPI_PRESERVE_VERSION"] = "1"
+            if xpi_config.get("version-file"):
+                env["XPI_VERSION_FILE"] = xpi_config["version-file"]
             task.setdefault("attributes", {})["addon-type"] = xpi_config["addon-type"]
             task["attributes"]["xpi-name"] = xpi_config["manifest_name"]
             task.setdefault("attributes", {})["xpis"] = {}
