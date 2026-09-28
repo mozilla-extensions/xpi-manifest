@@ -28,6 +28,7 @@ ID_ALLOWLIST = (
     "aboutsync@mhammond.github.com",
     # Allow https://github.com/mozilla-extensions/privileged-test-xpi.
     "test@tests.mozilla.org",
+    "tbpro-system-add-on@thunderbird.net"
 )
 
 
@@ -100,6 +101,11 @@ def find_manifests():
                 continue
         if "manifest.json" in file_list:
             yield f"{dir_name}/manifest.json"
+
+
+def get_version(version_file):
+    with open(version_file) as fh:
+        return json.load(fh)["version"]
 
 
 def get_and_update_version() -> str:
@@ -254,8 +260,10 @@ def main():
 
     revision = get_output(["git", "rev-parse", "HEAD"])
 
-    # Make sure we update the version to include a buildid.
-    buildid_version = get_and_update_version()
+    if os.environ.get("XPI_PRESERVE_VERSION") == "1":
+        buildid_version = get_version(os.environ["XPI_VERSION_FILE"])
+    else:
+        buildid_version = get_and_update_version()
 
     build_manifest = {
         "name": xpi_name,
@@ -296,6 +304,10 @@ def main():
     elif install_type == "yarn":
         run_command(["yarn", "install", "--frozen-lockfile"])
         run_command(["yarn", "build"])
+    elif install_type == "custom":
+        build_commands = json.loads(os.environ["XPI_BUILD_COMMANDS"])
+        for cmd in build_commands:
+            run_command(cmd)
     else:
         run_command(["npm", "clean-install"])
         run_command(["npm", "run", "build"])
