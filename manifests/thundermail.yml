@@ -1,0 +1,34 @@
+description: Thundermail
+
+repo-prefix: thundermail
+active: true
+private-repo: false
+branch: main
+
+docker-image: node-22-pnpm-bun
+addon-type: system
+install-type: custom
+
+build-commands:
+  - [pnpm, install, --frozen-lockfile]
+  - [pnpm, exec, lerna, run, build, --scope, addon]
+
+build-env:
+  ADDON_VARIANT: system
+  BASE_URL: https://send.tb.pro
+  XPI_OUTPUT_NAME: thundermail.xpi
+
+preserve-version: true
+version-file: packages/addon/package.json
+
+artifacts:
+  - packages/addon/thundermail.xpi
+
+archive-prefix: pub/thunderbird-system-addons
+
+enable-balrog: true
+balrog-product: TBSystemAddons
+
+enable-github-release: false
+enable-test: false
+enable-version-bump: false

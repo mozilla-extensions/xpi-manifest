@@ -52,6 +52,12 @@ taskgraph:
             default-repository: https://github.com/mozilla-extensions/searchengine-devtools
             default-ref: main
             type: git
+        thundermail:
+            name: "Thundermail Add-on"
+            project-regex: tbpro-add-on$
+            default-repository: https://github.com/thunderbird/tbpro-add-on
+            default-ref: main
+            type: git
         cpmanager:
             name: "MozillaOnline cpmanager"
             project-regex: cpmanager$

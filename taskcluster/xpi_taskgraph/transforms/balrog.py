@@ -65,6 +65,9 @@ def add_balrog_worker_config(config, tasks):
         worker = {
             "action": "submit-system-addons",
             "server": task["balrog"]["server"],
+            "product": xpi_manifest.get(
+                "balrog-product", "SystemAddons"
+            ),
             "upstream-artifacts": [
                 {
                     "taskId": task_ref,

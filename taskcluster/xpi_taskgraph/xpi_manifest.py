@@ -35,7 +35,13 @@ base_schema = Schema(
         Required("addon-type"): Any(
             "mozillaonline-privileged", "normandy-privileged", "privileged", "system"
         ),
-        Optional("install-type"): Any("mach", "npm", "yarn"),
+        Optional("install-type"): Any("mach", "npm", "yarn", "custom"),
+        Optional("build-commands"): [[str]],
+        Optional("preserve-version"): bool,
+        Optional("version-file"): str,
+        Optional("archive-prefix"): str,
+        Optional("balrog-product"): str,
+        Optional("build-commands"): [[str]],
         Optional("build-env"): {str: str},
         Optional("enable-balrog"): bool,
         Optional("enable-github-release"): bool,
