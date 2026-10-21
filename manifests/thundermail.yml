@@ -4,6 +4,7 @@ repo-prefix: thundermail
 active: true
 private-repo: false
 branch: main
+directory: packages/addon
 
 docker-image: node-22-pnpm-bun
 addon-type: system
