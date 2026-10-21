@@ -38,7 +38,7 @@ def tasks_from_manifest(config, tasks):
             checkout_config["path"] = "/builds/worker/checkouts/vcs"
             if "branch" in xpi_config:
                 checkout_config["head_ref"] = xpi_config["branch"]
-            if "directory" in xpi_config:
+            if "directory" in xpi_config and xpi_config.get("install-type") != "custom":
                 run["cwd"] = "{checkout}/%s" % xpi_config["directory"]
             if xpi_revision:
                 checkout_config["head_rev"] = xpi_revision
