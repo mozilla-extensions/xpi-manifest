@@ -144,6 +144,7 @@ def build_scriptworker_beetmover_payload(config, task, task_def):
     schema={
         Required("action"): str,
         Required("server"): str,
+        Optional("product"): str,
         Required("upstream-artifacts"): [
             {
                 Required("taskId"): taskref_or_string,
@@ -160,6 +161,8 @@ def build_scriptworker_balrog_payload(config, task, task_def):
         "maxRunTime": 600,
         "upstreamArtifacts": worker["upstream-artifacts"],
     }
+    if "product" in worker:
+        task_def["payload"]["product"] = worker["product"]
     prefix = "project:xpi:balrog:"
     task_def["scopes"] = [
         "{prefix}action:{action}".format(
