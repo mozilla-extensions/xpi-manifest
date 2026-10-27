@@ -1,0 +1,5 @@
+# Regenerate requirements.txt after editing this file with:
+#   uv pip compile --generate-hashes taskcluster/requirements.in -o taskcluster/requirements.txt
+# Add --upgrade to bump all pins to their latest versions.
+mozilla-taskgraph
+mozilla-version
